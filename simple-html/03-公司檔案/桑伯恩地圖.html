@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>桑伯恩地圖 | 巴菲特股東信知識庫</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap');
+
+:root {
+  --bg: #faf8f5;
+  --fg: #2a2521;
+  --muted: #6c6258;
+  --accent: #8b3a2f;
+  --accent-2: #b87333;
+  --line: #e5e0d4;
+  --highlight: rgba(184, 115, 51, 0.15);
+  --code-bg: #f0ece3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1816;
+    --fg: #ebe6db;
+    --muted: #a09787;
+    --accent: #d4815a;
+    --accent-2: #e0a070;
+    --line: #3a352e;
+    --highlight: rgba(212, 129, 90, 0.18);
+    --code-bg: #2a2521;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 30px;
+  padding: 30px 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 20px 15px;
+  }
+  .sidebar { position: static; max-height: none; }
+}
+
+.sidebar {
+  position: sticky;
+  top: 30px;
+  align-self: start;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  font-size: 13px;
+  border-right: 1px solid var(--line);
+  padding-right: 15px;
+}
+
+.sidebar h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 14px;
+  margin: 12px 0 6px;
+  color: var(--accent);
+}
+
+.sidebar a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 2px 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.sidebar a:hover { color: var(--accent); }
+.sidebar a.current { color: var(--accent); font-weight: 700; }
+
+main { min-width: 0; }
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.breadcrumb a { color: var(--muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); }
+
+h1, h2, h3, h4 {
+  font-family: 'Noto Serif TC', serif;
+  color: var(--fg);
+  line-height: 1.4;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+}
+h1 { font-size: 28px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-top: 0.5em; }
+h2 { font-size: 22px; color: var(--accent); }
+h3 { font-size: 18px; color: var(--accent-2); }
+h4 { font-size: 16px; }
+
+p { margin: 0.8em 0; }
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+a:hover { background: var(--highlight); }
+
+.wikilink {
+  color: var(--accent);
+  background: var(--highlight);
+  padding: 2px 4px;
+  border-radius: 3px;
+  border-bottom: none;
+}
+.wikilink:hover { background: var(--accent-2); color: var(--bg); }
+.wikilink-broken {
+  color: var(--muted);
+  text-decoration: line-through;
+  border-bottom: none;
+}
+
+ul, ol { padding-left: 24px; }
+li { margin: 4px 0; }
+
+blockquote {
+  border-left: 4px solid var(--accent-2);
+  background: var(--highlight);
+  padding: 12px 16px;
+  margin: 16px 0;
+  color: var(--fg);
+  border-radius: 0 4px 4px 0;
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+
+code {
+  font-family: 'JetBrains Mono', Menlo, monospace;
+  background: var(--code-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 0.92em;
+}
+pre {
+  background: var(--code-bg);
+  padding: 14px;
+  overflow-x: auto;
+  border-radius: 4px;
+  font-size: 13px;
+  border-left: 3px solid var(--accent-2);
+}
+pre code { background: none; padding: 0; }
+
+table {
+  border-collapse: collapse;
+  margin: 16px 0;
+  width: 100%;
+  font-size: 14px;
+}
+th, td {
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  text-align: left;
+}
+th {
+  background: var(--code-bg);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 32px 0;
+}
+
+strong { color: var(--fg); font-weight: 700; }
+em { color: var(--muted); font-style: italic; }
+
+.backlinks {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+}
+.backlinks h3 {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 500;
+}
+.backlinks ul { list-style: none; padding-left: 0; }
+.backlinks li { display: inline-block; margin: 3px 5px 3px 0; }
+.backlinks a {
+  background: var(--code-bg);
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  border-bottom: none;
+  color: var(--muted);
+}
+.backlinks a:hover { color: var(--accent); background: var(--highlight); }
+
+footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="container">
+<aside class="sidebar">
+<h3><a href="../index.html" style="font-weight:700;color:var(--accent);">📚 首頁</a></h3>
+<h3>🗺️ 索引 MOC</h3><a href="../00-索引/MOC-按人物.html">MOC-按人物</a><a href="../00-索引/MOC-按公司.html">MOC-按公司</a><a href="../00-索引/MOC-按年份.html">MOC-按年份</a><a href="../00-索引/MOC-按概念.html">MOC-按概念</a><a href="../00-索引/MOC-總目錄.html">MOC-總目錄</a><a href="../00-索引/MOC-連結分析儀表板.html">MOC-連結分析儀表板</a><a href="../00-索引/連結補強紀錄.html">連結補強紀錄</a><h3>📜 合夥人信 (1957-1969)</h3><a href="../01-信件/合夥人時期_1957-1969/1957-合夥人信.html">1957-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1958-合夥人信.html">1958-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1959-合夥人信.html">1959-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1960-合夥人信.html">1960-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1961-合夥人信.html">1961-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1962-合夥人信.html">1962-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1963-合夥人信.html">1963-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1964-合夥人信.html">1964-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1965-合夥人信.html">1965-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1966-合夥人信.html">1966-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1967-合夥人信.html">1967-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1968-合夥人信.html">1968-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1969-合夥人信.html">1969-合夥人信</a><h3>📜 BH 股東信 (1977-2024)</h3><a href="../01-信件/伯克希爾時期_1977-2024/1967-伯克希爾股東信.html">1967-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1972-伯克希爾股東信.html">1972-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1976-伯克希爾股東信.html">1976-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1977-伯克希爾股東信.html">1977-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1978-伯克希爾股東信.html">1978-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1979-伯克希爾股東信.html">1979-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1980-伯克希爾股東信.html">1980-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1981-伯克希爾股東信.html">1981-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1982-伯克希爾股東信.html">1982-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1983-伯克希爾股東信.html">1983-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1984-伯克希爾股東信.html">1984-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1985-伯克希爾股東信.html">1985-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1986-伯克希爾股東信.html">1986-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1987-伯克希爾股東信.html">1987-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1988-伯克希爾股東信.html">1988-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1989-伯克希爾股東信.html">1989-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1990-伯克希爾股東信.html">1990-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1991-伯克希爾股東信.html">1991-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1992-伯克希爾股東信.html">1992-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1993-伯克希爾股東信.html">1993-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1994-伯克希爾股東信.html">1994-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1995-伯克希爾股東信.html">1995-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1996-伯克希爾股東信.html">1996-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1997-伯克希爾股東信.html">1997-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1998-伯克希爾股東信.html">1998-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1999-伯克希爾股東信.html">1999-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2000-伯克希爾股東信.html">2000-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2001-伯克希爾股東信.html">2001-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2002-伯克希爾股東信.html">2002-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2003-伯克希爾股東信.html">2003-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2004-伯克希爾股東信.html">2004-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2005-伯克希爾股東信.html">2005-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2006-伯克希爾股東信.html">2006-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2007-伯克希爾股東信.html">2007-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2008-伯克希爾股東信.html">2008-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2009-伯克希爾股東信.html">2009-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2010-伯克希爾股東信.html">2010-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2011-伯克希爾股東信.html">2011-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2012-伯克希爾股東信.html">2012-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2013-伯克希爾股東信.html">2013-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2014-伯克希爾股東信.html">2014-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2015-伯克希爾股東信.html">2015-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2016-伯克希爾股東信.html">2016-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2017-伯克希爾股東信.html">2017-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2018-伯克希爾股東信.html">2018-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2019-伯克希爾股東信.html">2019-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2020-伯克希爾股東信.html">2020-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2021-伯克希爾股東信.html">2021-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2022-伯克希爾股東信.html">2022-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2023-伯克希爾股東信.html">2023-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2024-伯克希爾股東信.html">2024-伯克希爾股東信</a><h3>💡 投資概念</h3><a href="../02-投資概念/二十孔卡.html">二十孔卡</a><a href="../02-投資概念/以合理價格買好公司.html">以合理價格買好公司</a><a href="../02-投資概念/內在價值.html">內在價值</a><a href="../02-投資概念/制度性盲從.html">制度性盲從</a><a href="../02-投資概念/失誤與認錯.html">失誤與認錯</a><a href="../02-投資概念/安全邊際.html">安全邊際</a><a href="../02-投資概念/市場先生.html">市場先生</a><a href="../02-投資概念/投資 vs 投機.html">投資 vs 投機</a><a href="../02-投資概念/效率市場理論的批判.html">效率市場理論的批判</a><a href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a><a href="../02-投資概念/機會成本.html">機會成本</a><a href="../02-投資概念/浮存金.html">浮存金</a><a href="../02-投資概念/特許經營權.html">特許經營權</a><a href="../02-投資概念/留存盈餘檢驗.html">留存盈餘檢驗</a><a href="../02-投資概念/管理層誘因設計.html">管理層誘因設計</a><a href="../02-投資概念/簡單甚於複雜.html">簡單甚於複雜</a><a href="../02-投資概念/經濟商譽.html">經濟商譽</a><a href="../02-投資概念/經理人選擇.html">經理人選擇</a><a href="../02-投資概念/美國順風.html">美國順風</a><a href="../02-投資概念/股東信本身的哲學.html">股東信本身的哲學</a><a href="../02-投資概念/股東待遇原則.html">股東待遇原則</a><a href="../02-投資概念/股東收益.html">股東收益</a><a href="../02-投資概念/股票即企業所有權.html">股票即企業所有權</a><a href="../02-投資概念/股票回購.html">股票回購</a><a href="../02-投資概念/能力圈.html">能力圈</a><a href="../02-投資概念/衍生性金融商品.html">衍生性金融商品</a><a href="../02-投資概念/複利.html">複利</a><a href="../02-投資概念/誠信與品格.html">誠信與品格</a><a href="../02-投資概念/護城河.html">護城河</a><a href="../02-投資概念/資本配置.html">資本配置</a><a href="../02-投資概念/透視盈餘.html">透視盈餘</a><a href="../02-投資概念/通貨膨脹.html">通貨膨脹</a><a href="../02-投資概念/長期持有.html">長期持有</a><a href="../02-投資概念/集中投資.html">集中投資</a><a href="../02-投資概念/雪茄煙蒂投資.html">雪茄煙蒂投資</a><h3>🏢 公司檔案</h3><a href="BNSF 鐵路.html">BNSF 鐵路</a><a href="GEICO 蓋可保險.html">GEICO 蓋可保險</a><a href="IBM.html">IBM</a><a href="NetJets.html">NetJets</a><a href="三井物產.html">三井物產</a><a href="三菱商事.html">三菱商事</a><a href="中國石油.html">中國石油</a><a href="丸紅.html">丸紅</a><a href="伊斯卡刀具.html">伊斯卡刀具</a><a href="伊藤忠商事.html">伊藤忠商事</a><a href="伯克希爾紡織.html">伯克希爾紡織</a><a href="伯克希爾能源.html">伯克希爾能源</a><a href="伯靈頓工業.html">伯靈頓工業</a><a href="住友商事.html">住友商事</a><a href="佳斯邁威.html">佳斯邁威</a><a href="克萊頓房屋.html">克萊頓房屋</a><a href="內布拉斯加家具城.html">內布拉斯加家具城</a><a href="卡夫亨氏.html">卡夫亨氏</a><a href="可口可樂.html">可口可樂</a><a href="吉列.html">吉列</a><a href="喜詩糖果.html">喜詩糖果</a><a href="國民賠償.html">國民賠償</a><a href="奶品皇后.html">奶品皇后</a><a href="好市多.html">好市多</a><a href="威斯科金融.html">威斯科金融</a><a href="嬌生.html">嬌生</a><a href="富國銀行.html">富國銀行</a><a href="寶僑.html">寶僑</a><a href="德克斯特鞋業.html">德克斯特鞋業</a><a href="所羅門兄弟.html">所羅門兄弟</a><a href="桑伯恩地圖.html" class="current">桑伯恩地圖</a><a href="樂購.html">樂購</a><a href="比亞迪.html">比亞迪</a><a href="水果牌.html">水果牌</a><a href="水牛城新聞報.html">水牛城新聞報</a><a href="沃爾瑪.html">沃爾瑪</a><a href="波仙珠寶.html">波仙珠寶</a><a href="派洛特旅行中心.html">派洛特旅行中心</a><a href="班傑明摩爾.html">班傑明摩爾</a><a href="登普斯特紡織.html">登普斯特紡織</a><a href="百威英博.html">百威英博</a><a href="穆迪.html">穆迪</a><a href="精密鑄件.html">精密鑄件</a><a href="美國航空.html">美國航空</a><a href="美國運通.html">美國運通</a><a href="美國銀行.html">美國銀行</a><a href="肖氏工業.html">肖氏工業</a><a href="能源未來控股.html">能源未來控股</a><a href="華盛頓郵報.html">華盛頓郵報</a><a href="藍籌印花.html">藍籌印花</a><a href="蘋果.html">蘋果</a><a href="西方石油.html">西方石油</a><a href="赫爾茲伯格鑽石.html">赫爾茲伯格鑽石</a><a href="路博潤.html">路博潤</a><a href="迪士尼.html">迪士尼</a><a href="通用再保險.html">通用再保險</a><a href="達維塔.html">達維塔</a><a href="雪佛龍.html">雪佛龍</a><a href="首都_ABC.html">首都_ABC</a><a href="馬蒙集團.html">馬蒙集團</a><a href="高盛.html">高盛</a><a href="麥當勞.html">麥當勞</a><h3>👥 人物</h3><a href="../04-人物檔案/東尼-奈斯利.html">東尼-奈斯利</a><a href="../04-人物檔案/查理-蒙格.html">查理-蒙格</a><a href="../04-人物檔案/泰德-韋施勒.html">泰德-韋施勒</a><a href="../04-人物檔案/班傑明-葛拉漢.html">班傑明-葛拉漢</a><a href="../04-人物檔案/葛瑞格-阿貝爾.html">葛瑞格-阿貝爾</a><a href="../04-人物檔案/阿吉特-賈恩.html">阿吉特-賈恩</a><a href="../04-人物檔案/陶德-康姆斯.html">陶德-康姆斯</a>
+</aside>
+<main>
+<div class="breadcrumb"><a href="../index.html">🏠 首頁</a> / <span>03-公司檔案</span> / <span>桑伯恩地圖</span></div>
+<h1>桑伯恩地圖(Sanborn Map Company)</h1>
+<h2>一句話定位</h2>
+<p><strong>巴菲特合夥人時期最被引用的「</strong>葛拉漢式 net-net<strong>」投資案例</strong>——一家賣保險用地圖的公司,巴菲特看到的卻是它的<strong>投資組合</strong>。</p>
+<h2>投資/收購大事年表</h2>
+<table>
+<thead><tr><th>年份</th><th>事件</th></tr></thead>
+<tbody><tr><td>1950s 末</td><td>合夥人事業大量買進</td></tr><tr><td><strong>1958-1960</strong></td><td>取得董事席位,<strong>主導發放投資組合給股東</strong></td></tr><tr><td>1960</td><td>完成資產分配,獲利退出</td></tr></tbody></table>
+<h2>為什麼這個故事這麼有名</h2>
+<h3>業務本質</h3>
+<p>桑伯恩地圖出版<strong>保險業用的城市地圖</strong>——</p>
+<p>過去保險公司需要這種詳細地圖來評估保單。</p>
+<p>但 1950s 後,<strong>這個業務逐漸式微</strong>。</p>
+<h3>隱藏的寶藏</h3>
+<p>然而,桑伯恩在多年的營運中<strong>累積了一個股票投資組合</strong>——</p>
+<p>這個組合的市值,<strong>遠遠超過公司全部市值</strong>!</p>
+<p>具體數字(語意化):</p>
+<ul><li>公司市值:約 470 萬美元</li><li>投資組合市值:約 700 萬美元</li><li><strong>股東買入時相當於免費取得地圖業務</strong></li></ul>
+<h3>巴菲特的策略</h3>
+<ul><li>累積桑伯恩股權至約 35%</li><li>取得董事席位</li><li><strong>推動公司將投資組合按股權比例分配給股東</strong></li><li>這是早期版的「<strong>股東行動主義</strong>」</li></ul>
+<h2>為什麼這是經典</h2>
+<p>這個案例完美演示了 <a href="../02-投資概念/安全邊際.html" class="wikilink">安全邊際</a> 的兩個層次:</p>
+<ul><li>第一層:<strong>買進的價格 < 投資組合市值</strong></li><li>第二層:<strong>地圖業務本身仍有價值,等於免費取得</strong></li></ul>
+<p>巴菲特在合夥人信中反覆用桑伯恩說明:<strong>「</strong>便宜的東西,即使<strong>業務在死</strong>,仍可能是好投資<strong>。」</strong></p>
+<h2>體現的投資概念</h2>
+<ul><li><a href="../02-投資概念/雪茄煙蒂投資.html" class="wikilink">雪茄煙蒂投資</a> — 教科書級</li><li><a href="../02-投資概念/安全邊際.html" class="wikilink">安全邊際</a> — 雙重 MoS</li><li><a href="../02-投資概念/經理人選擇.html" class="wikilink">經理人選擇</a> — 早期股東行動主義</li></ul>
+<h2>延伸閱讀</h2>
+<ul><li>概念:<a href="../02-投資概念/雪茄煙蒂投資.html" class="wikilink">雪茄煙蒂投資</a>、<a href="../02-投資概念/安全邊際.html" class="wikilink">安全邊際</a></li><li>對照公司:<a href="登普斯特紡織.html" class="wikilink">登普斯特紡織</a>(另一個合夥人時期成功)</li></ul>
+<div class="backlinks"><h3>↩️ 反向連結 (Backlinks):</h3><ul><li><a href="登普斯特紡織.html">登普斯特紡織</a></li><li><a href="../02-投資概念/雪茄煙蒂投資.html">雪茄煙蒂投資</a></li><li><a href="../00-索引/MOC-按公司.html">MOC-按公司</a></li><li><a href="../01-信件/合夥人時期_1957-1969/1959-合夥人信.html">1959-合夥人信</a></li><li><a href="../01-信件/合夥人時期_1957-1969/1961-合夥人信.html">1961-合夥人信</a></li><li><a href="../01-信件/合夥人時期_1957-1969/1960-合夥人信.html">1960-合夥人信</a></li><li><a href="../01-信件/合夥人時期_1957-1969/1958-合夥人信.html">1958-合夥人信</a></li></ul></div>
+<footer>
+🏗️ 巴菲特股東信知識庫 · 用 Python 簡易版產生 · 2026 · 
+原信件:<a href="https://www.berkshirehathaway.com/letters/letters.html" target="_blank">berkshirehathaway.com</a>
+</footer>
+</main>
+</div>
+</body>
+</html>
