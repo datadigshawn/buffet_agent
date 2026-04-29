@@ -4,3 +4,6 @@
 node_modules/
 quartz/
 public/
+__pycache__/
+*.pyc
+.pytest_cache/
