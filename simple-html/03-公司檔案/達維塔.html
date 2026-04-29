@@ -13,325 +13,151 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="巴菲特">
 <meta name="mobile-web-app-capable" content="yes">
-<title>達維塔 | 巴菲特股東信知識庫</title>
+<title>達維塔(DaVita Inc., DVA) | 巴菲特股東信知識庫</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap');
-
-:root {
-  --bg: #faf8f5;
-  --fg: #2a2521;
-  --muted: #6c6258;
-  --accent: #8b3a2f;
-  --accent-2: #b87333;
-  --line: #e5e0d4;
-  --highlight: rgba(184, 115, 51, 0.15);
-  --code-bg: #f0ece3;
+:root{--bg:#faf8f5;--fg:#2a2521;--muted:#6c6258;--accent:#8b3a2f;--accent-2:#b87333;--line:#e5e0d4;--highlight:rgba(184,115,51,0.15);--code-bg:#f0ece3;}
+@media (prefers-color-scheme: dark){:root{--bg:#1a1816;--fg:#ebe6db;--muted:#a09787;--accent:#d4815a;--accent-2:#e0a070;--line:#3a352e;--highlight:rgba(212,129,90,0.18);--code-bg:#2a2521;}}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'Noto Sans TC',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.75;font-size:16px;}
+.container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:30px;padding:30px 20px;}
+@media (max-width: 768px){.container{grid-template-columns:1fr;padding:20px 15px;}.sidebar{position:static;max-height:none;}}
+.sidebar{position:sticky;top:30px;align-self:start;max-height:calc(100vh - 60px);overflow-y:auto;font-size:13px;border-right:1px solid var(--line);padding-right:15px;}
+.sidebar h3{font-family:'Noto Serif TC',serif;font-size:14px;margin:12px 0 6px;color:var(--accent);}
+.sidebar a{display:block;color:var(--muted);text-decoration:none;padding:2px 0;font-size:12px;line-height:1.5;}
+.sidebar a:hover{color:var(--accent);}
+.sidebar a.current{color:var(--accent);font-weight:700;}
+main{min-width:0;}
+.breadcrumb{font-size:13px;color:var(--muted);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--line);}
+.breadcrumb a{color:var(--muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--accent);}
+h1,h2,h3,h4{font-family:'Noto Serif TC',serif;color:var(--fg);line-height:1.4;margin-top:1.6em;margin-bottom:0.6em;}
+h1{font-size:28px;border-bottom:2px solid var(--accent);padding-bottom:8px;margin-top:0.5em;}
+h2{font-size:22px;color:var(--accent);}
+h3{font-size:18px;color:var(--accent-2);}
+h4{font-size:16px;}
+p{margin:0.8em 0;}
+a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent);}
+a:hover{background:var(--highlight);}
+.wikilink{color:var(--accent);background:var(--highlight);padding:2px 4px;border-radius:3px;border-bottom:none;}
+.wikilink:hover{background:var(--accent-2);color:var(--bg);}
+.wikilink-broken{color:var(--muted);text-decoration:line-through;border-bottom:none;}
+ul,ol{padding-left:24px;}
+li{margin:4px 0;}
+blockquote{border-left:4px solid var(--accent-2);background:var(--highlight);padding:12px 16px;margin:16px 0;color:var(--fg);border-radius:0 4px 4px 0;}
+blockquote p:first-child{margin-top:0;}
+blockquote p:last-child{margin-bottom:0;}
+code{font-family:'JetBrains Mono',Menlo,monospace;background:var(--code-bg);padding:1px 6px;border-radius:3px;font-size:0.92em;}
+pre{background:var(--code-bg);padding:14px;overflow-x:auto;border-radius:4px;font-size:13px;border-left:3px solid var(--accent-2);}
+pre code{background:none;padding:0;}
+table{border-collapse:collapse;margin:16px 0;width:100%;font-size:14px;}
+th,td{border:1px solid var(--line);padding:8px 12px;text-align:left;}
+th{background:var(--code-bg);font-weight:700;color:var(--accent);}
+hr{border:none;border-top:1px solid var(--line);margin:32px 0;}
+strong{color:var(--fg);font-weight:700;}
+em{color:var(--muted);font-style:italic;}
+.backlinks{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;}
+.backlinks h3{font-size:14px;color:var(--muted);margin-bottom:10px;font-family:'Noto Sans TC',sans-serif;font-weight:500;}
+.backlinks ul{list-style:none;padding-left:0;}
+.backlinks li{display:inline-block;margin:3px 5px 3px 0;}
+.backlinks a{background:var(--code-bg);padding:3px 8px;border-radius:3px;font-size:12px;border-bottom:none;color:var(--muted);}
+.backlinks a:hover{color:var(--accent);background:var(--highlight);}
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--muted);}
+footer a{color:var(--muted);}
+/* mobile drawer nav (≤768px) */
+.nav-toggle,.nav-toggle-btn,.nav-backdrop{display:none;}
+@media (max-width: 768px){
+.nav-toggle-btn{display:flex;align-items:center;justify-content:center;position:fixed;top:12px;right:12px;z-index:110;width:44px;height:44px;border-radius:8px;background:var(--accent);color:var(--bg);font-size:22px;cursor:pointer;user-select:none;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+.nav-toggle-btn::before{content:"\2630";}
+.nav-toggle:checked ~ .nav-toggle-btn::before{content:"\2715";}
+.container{padding:60px 16px 20px;grid-template-columns:1fr;}
+.sidebar{position:fixed;top:0;left:0;width:82%;max-width:320px;height:100vh;background:var(--bg);z-index:105;transform:translateX(-100%);transition:transform 0.25s ease;padding:60px 18px 20px;padding-right:12px;border-right:1px solid var(--line);box-shadow:2px 0 12px rgba(0,0,0,0.2);max-height:none;overflow-y:auto;}
+.nav-toggle:checked ~ .container .sidebar{transform:translateX(0);}
+.nav-backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.nav-toggle:checked ~ .nav-backdrop{opacity:1;pointer-events:auto;}
+body.nav-open{overflow:hidden;}
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1816;
-    --fg: #ebe6db;
-    --muted: #a09787;
-    --accent: #d4815a;
-    --accent-2: #e0a070;
-    --line: #3a352e;
-    --highlight: rgba(212, 129, 90, 0.18);
-    --code-bg: #2a2521;
-  }
-}
-
-* { box-sizing: border-box; }
-
-html, body {
-  margin: 0; padding: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.75;
-  font-size: 16px;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 30px;
-  padding: 30px 20px;
-}
-
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-    padding: 20px 15px;
-  }
-  .sidebar { position: static; max-height: none; }
-}
-
-.sidebar {
-  position: sticky;
-  top: 30px;
-  align-self: start;
-  max-height: calc(100vh - 60px);
-  overflow-y: auto;
-  font-size: 13px;
-  border-right: 1px solid var(--line);
-  padding-right: 15px;
-}
-
-.sidebar h3 {
-  font-family: 'Noto Serif TC', serif;
-  font-size: 14px;
-  margin: 12px 0 6px;
-  color: var(--accent);
-}
-
-.sidebar a {
-  display: block;
-  color: var(--muted);
-  text-decoration: none;
-  padding: 2px 0;
-  font-size: 12px;
-  line-height: 1.5;
-}
-.sidebar a:hover { color: var(--accent); }
-.sidebar a.current { color: var(--accent); font-weight: 700; }
-
-main { min-width: 0; }
-
-.breadcrumb {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
-}
-.breadcrumb a { color: var(--muted); text-decoration: none; }
-.breadcrumb a:hover { color: var(--accent); }
-
-h1, h2, h3, h4 {
-  font-family: 'Noto Serif TC', serif;
-  color: var(--fg);
-  line-height: 1.4;
-  margin-top: 1.6em;
-  margin-bottom: 0.6em;
-}
-h1 { font-size: 28px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; margin-top: 0.5em; }
-h2 { font-size: 22px; color: var(--accent); }
-h3 { font-size: 18px; color: var(--accent-2); }
-h4 { font-size: 16px; }
-
-p { margin: 0.8em 0; }
-
-a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
-a:hover { background: var(--highlight); }
-
-.wikilink {
-  color: var(--accent);
-  background: var(--highlight);
-  padding: 2px 4px;
-  border-radius: 3px;
-  border-bottom: none;
-}
-.wikilink:hover { background: var(--accent-2); color: var(--bg); }
-.wikilink-broken {
-  color: var(--muted);
-  text-decoration: line-through;
-  border-bottom: none;
-}
-
-ul, ol { padding-left: 24px; }
-li { margin: 4px 0; }
-
-blockquote {
-  border-left: 4px solid var(--accent-2);
-  background: var(--highlight);
-  padding: 12px 16px;
-  margin: 16px 0;
-  color: var(--fg);
-  border-radius: 0 4px 4px 0;
-}
-blockquote p:first-child { margin-top: 0; }
-blockquote p:last-child { margin-bottom: 0; }
-
-code {
-  font-family: 'JetBrains Mono', Menlo, monospace;
-  background: var(--code-bg);
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-size: 0.92em;
-}
-pre {
-  background: var(--code-bg);
-  padding: 14px;
-  overflow-x: auto;
-  border-radius: 4px;
-  font-size: 13px;
-  border-left: 3px solid var(--accent-2);
-}
-pre code { background: none; padding: 0; }
-
-table {
-  border-collapse: collapse;
-  margin: 16px 0;
-  width: 100%;
-  font-size: 14px;
-}
-th, td {
-  border: 1px solid var(--line);
-  padding: 8px 12px;
-  text-align: left;
-}
-th {
-  background: var(--code-bg);
-  font-weight: 700;
-  color: var(--accent);
-}
-
-hr {
-  border: none;
-  border-top: 1px solid var(--line);
-  margin: 32px 0;
-}
-
-strong { color: var(--fg); font-weight: 700; }
-em { color: var(--muted); font-style: italic; }
-
-.backlinks {
-  margin-top: 60px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-  font-size: 14px;
-}
-.backlinks h3 {
-  font-size: 14px;
-  color: var(--muted);
-  margin-bottom: 10px;
-  font-family: 'Noto Sans TC', sans-serif;
-  font-weight: 500;
-}
-.backlinks ul { list-style: none; padding-left: 0; }
-.backlinks li { display: inline-block; margin: 3px 5px 3px 0; }
-.backlinks a {
-  background: var(--code-bg);
-  padding: 3px 8px;
-  border-radius: 3px;
-  font-size: 12px;
-  border-bottom: none;
-  color: var(--muted);
-}
-.backlinks a:hover { color: var(--accent); background: var(--highlight); }
-
-footer {
-  margin-top: 60px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-}
-footer a { color: var(--muted); }
-
-/* ===== mobile drawer nav (≤768px) ===== */
-.nav-toggle, .nav-toggle-btn, .nav-backdrop { display: none; }
-@media (max-width: 768px) {
-  .nav-toggle-btn {
-    display: flex; align-items: center; justify-content: center;
-    position: fixed; top: 12px; right: 12px; z-index: 110;
-    width: 44px; height: 44px; border-radius: 8px;
-    background: var(--accent); color: var(--bg);
-    font-size: 22px; cursor: pointer; user-select: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  }
-  .nav-toggle-btn::before { content: "³0"; }
-  .nav-toggle:checked ~ .nav-toggle-btn::before { content: "¹5"; }
-
-  .container { padding: 60px 16px 20px; grid-template-columns: 1fr; }
-
-  .sidebar {
-    position: fixed; top: 0; left: 0;
-    width: 82%; max-width: 320px; height: 100vh;
-    background: var(--bg); z-index: 105;
-    transform: translateX(-100%);
-    transition: transform 0.25s ease;
-    padding: 60px 18px 20px; padding-right: 12px;
-    border-right: 1px solid var(--line);
-    box-shadow: 2px 0 12px rgba(0,0,0,0.2);
-    max-height: none; overflow-y: auto;
-  }
-  .nav-toggle:checked ~ .container .sidebar { transform: translateX(0); }
-
-  .nav-backdrop {
-    display: block; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.4); z-index: 100;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.25s ease;
-  }
-  .nav-toggle:checked ~ .nav-backdrop { opacity: 1; pointer-events: auto; }
-
-  body.nav-open { overflow: hidden; }
-}
-
 </style>
 </head>
 <body>
-<!-- MOBILE_NAV -->
 <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="切換導覽">
 <label for="nav-toggle" class="nav-toggle-btn" aria-label="開關導覽"></label>
 <label for="nav-toggle" class="nav-backdrop" aria-hidden="true"></label>
 <div class="container">
 <aside class="sidebar">
-<h3><a href="../index.html" style="font-weight:700;color:var(--accent);">📚 首頁</a></h3>
-<h3>🗺️ 索引 MOC</h3><a href="../00-索引/MOC-按人物.html">MOC-按人物</a><a href="../00-索引/MOC-按公司.html">MOC-按公司</a><a href="../00-索引/MOC-按年份.html">MOC-按年份</a><a href="../00-索引/MOC-按概念.html">MOC-按概念</a><a href="../00-索引/MOC-總目錄.html">MOC-總目錄</a><a href="../00-索引/MOC-連結分析儀表板.html">MOC-連結分析儀表板</a><a href="../00-索引/連結補強紀錄.html">連結補強紀錄</a><h3>📜 合夥人信 (1957-1969)</h3><a href="../01-信件/合夥人時期_1957-1969/1957-合夥人信.html">1957-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1958-合夥人信.html">1958-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1959-合夥人信.html">1959-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1960-合夥人信.html">1960-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1961-合夥人信.html">1961-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1962-合夥人信.html">1962-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1963-合夥人信.html">1963-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1964-合夥人信.html">1964-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1965-合夥人信.html">1965-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1966-合夥人信.html">1966-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1967-合夥人信.html">1967-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1968-合夥人信.html">1968-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1969-合夥人信.html">1969-合夥人信</a><h3>📜 BH 股東信 (1977-2024)</h3><a href="../01-信件/伯克希爾時期_1977-2024/1967-伯克希爾股東信.html">1967-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1972-伯克希爾股東信.html">1972-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1976-伯克希爾股東信.html">1976-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1977-伯克希爾股東信.html">1977-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1978-伯克希爾股東信.html">1978-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1979-伯克希爾股東信.html">1979-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1980-伯克希爾股東信.html">1980-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1981-伯克希爾股東信.html">1981-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1982-伯克希爾股東信.html">1982-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1983-伯克希爾股東信.html">1983-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1984-伯克希爾股東信.html">1984-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1985-伯克希爾股東信.html">1985-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1986-伯克希爾股東信.html">1986-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1987-伯克希爾股東信.html">1987-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1988-伯克希爾股東信.html">1988-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1989-伯克希爾股東信.html">1989-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1990-伯克希爾股東信.html">1990-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1991-伯克希爾股東信.html">1991-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1992-伯克希爾股東信.html">1992-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1993-伯克希爾股東信.html">1993-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1994-伯克希爾股東信.html">1994-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1995-伯克希爾股東信.html">1995-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1996-伯克希爾股東信.html">1996-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1997-伯克希爾股東信.html">1997-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1998-伯克希爾股東信.html">1998-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1999-伯克希爾股東信.html">1999-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2000-伯克希爾股東信.html">2000-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2001-伯克希爾股東信.html">2001-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2002-伯克希爾股東信.html">2002-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2003-伯克希爾股東信.html">2003-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2004-伯克希爾股東信.html">2004-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2005-伯克希爾股東信.html">2005-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2006-伯克希爾股東信.html">2006-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2007-伯克希爾股東信.html">2007-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2008-伯克希爾股東信.html">2008-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2009-伯克希爾股東信.html">2009-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2010-伯克希爾股東信.html">2010-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2011-伯克希爾股東信.html">2011-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2012-伯克希爾股東信.html">2012-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2013-伯克希爾股東信.html">2013-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2014-伯克希爾股東信.html">2014-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2015-伯克希爾股東信.html">2015-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2016-伯克希爾股東信.html">2016-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2017-伯克希爾股東信.html">2017-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2018-伯克希爾股東信.html">2018-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2019-伯克希爾股東信.html">2019-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2020-伯克希爾股東信.html">2020-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2021-伯克希爾股東信.html">2021-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2022-伯克希爾股東信.html">2022-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2023-伯克希爾股東信.html">2023-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2024-伯克希爾股東信.html">2024-伯克希爾股東信</a><h3>💡 投資概念</h3><a href="../02-投資概念/二十孔卡.html">二十孔卡</a><a href="../02-投資概念/以合理價格買好公司.html">以合理價格買好公司</a><a href="../02-投資概念/內在價值.html">內在價值</a><a href="../02-投資概念/制度性盲從.html">制度性盲從</a><a href="../02-投資概念/失誤與認錯.html">失誤與認錯</a><a href="../02-投資概念/安全邊際.html">安全邊際</a><a href="../02-投資概念/市場先生.html">市場先生</a><a href="../02-投資概念/投資 vs 投機.html">投資 vs 投機</a><a href="../02-投資概念/效率市場理論的批判.html">效率市場理論的批判</a><a href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a><a href="../02-投資概念/機會成本.html">機會成本</a><a href="../02-投資概念/浮存金.html">浮存金</a><a href="../02-投資概念/特許經營權.html">特許經營權</a><a href="../02-投資概念/留存盈餘檢驗.html">留存盈餘檢驗</a><a href="../02-投資概念/管理層誘因設計.html">管理層誘因設計</a><a href="../02-投資概念/簡單甚於複雜.html">簡單甚於複雜</a><a href="../02-投資概念/經濟商譽.html">經濟商譽</a><a href="../02-投資概念/經理人選擇.html">經理人選擇</a><a href="../02-投資概念/美國順風.html">美國順風</a><a href="../02-投資概念/股東信本身的哲學.html">股東信本身的哲學</a><a href="../02-投資概念/股東待遇原則.html">股東待遇原則</a><a href="../02-投資概念/股東收益.html">股東收益</a><a href="../02-投資概念/股票即企業所有權.html">股票即企業所有權</a><a href="../02-投資概念/股票回購.html">股票回購</a><a href="../02-投資概念/能力圈.html">能力圈</a><a href="../02-投資概念/衍生性金融商品.html">衍生性金融商品</a><a href="../02-投資概念/複利.html">複利</a><a href="../02-投資概念/誠信與品格.html">誠信與品格</a><a href="../02-投資概念/護城河.html">護城河</a><a href="../02-投資概念/資本配置.html">資本配置</a><a href="../02-投資概念/透視盈餘.html">透視盈餘</a><a href="../02-投資概念/通貨膨脹.html">通貨膨脹</a><a href="../02-投資概念/長期持有.html">長期持有</a><a href="../02-投資概念/集中投資.html">集中投資</a><a href="../02-投資概念/雪茄煙蒂投資.html">雪茄煙蒂投資</a><h3>🏢 公司檔案</h3><a href="BNSF 鐵路.html">BNSF 鐵路</a><a href="GEICO 蓋可保險.html">GEICO 蓋可保險</a><a href="IBM.html">IBM</a><a href="NetJets.html">NetJets</a><a href="三井物產.html">三井物產</a><a href="三菱商事.html">三菱商事</a><a href="中國石油.html">中國石油</a><a href="丸紅.html">丸紅</a><a href="伊斯卡刀具.html">伊斯卡刀具</a><a href="伊藤忠商事.html">伊藤忠商事</a><a href="伯克希爾紡織.html">伯克希爾紡織</a><a href="伯克希爾能源.html">伯克希爾能源</a><a href="伯靈頓工業.html">伯靈頓工業</a><a href="住友商事.html">住友商事</a><a href="佳斯邁威.html">佳斯邁威</a><a href="克萊頓房屋.html">克萊頓房屋</a><a href="內布拉斯加家具城.html">內布拉斯加家具城</a><a href="卡夫亨氏.html">卡夫亨氏</a><a href="可口可樂.html">可口可樂</a><a href="吉列.html">吉列</a><a href="喜詩糖果.html">喜詩糖果</a><a href="國民賠償.html">國民賠償</a><a href="奶品皇后.html">奶品皇后</a><a href="好市多.html">好市多</a><a href="威斯科金融.html">威斯科金融</a><a href="嬌生.html">嬌生</a><a href="富國銀行.html">富國銀行</a><a href="寶僑.html">寶僑</a><a href="德克斯特鞋業.html">德克斯特鞋業</a><a href="所羅門兄弟.html">所羅門兄弟</a><a href="桑伯恩地圖.html">桑伯恩地圖</a><a href="樂購.html">樂購</a><a href="比亞迪.html">比亞迪</a><a href="水果牌.html">水果牌</a><a href="水牛城新聞報.html">水牛城新聞報</a><a href="沃爾瑪.html">沃爾瑪</a><a href="波仙珠寶.html">波仙珠寶</a><a href="派洛特旅行中心.html">派洛特旅行中心</a><a href="班傑明摩爾.html">班傑明摩爾</a><a href="登普斯特紡織.html">登普斯特紡織</a><a href="百威英博.html">百威英博</a><a href="穆迪.html">穆迪</a><a href="精密鑄件.html">精密鑄件</a><a href="美國航空.html">美國航空</a><a href="美國運通.html">美國運通</a><a href="美國銀行.html">美國銀行</a><a href="肖氏工業.html">肖氏工業</a><a href="能源未來控股.html">能源未來控股</a><a href="華盛頓郵報.html">華盛頓郵報</a><a href="藍籌印花.html">藍籌印花</a><a href="蘋果.html">蘋果</a><a href="西方石油.html">西方石油</a><a href="赫爾茲伯格鑽石.html">赫爾茲伯格鑽石</a><a href="路博潤.html">路博潤</a><a href="迪士尼.html">迪士尼</a><a href="通用再保險.html">通用再保險</a><a href="達維塔.html" class="current">達維塔</a><a href="雪佛龍.html">雪佛龍</a><a href="首都_ABC.html">首都_ABC</a><a href="馬蒙集團.html">馬蒙集團</a><a href="高盛.html">高盛</a><a href="麥當勞.html">麥當勞</a><h3>👥 人物</h3><a href="../04-人物檔案/東尼-奈斯利.html">東尼-奈斯利</a><a href="../04-人物檔案/查理-蒙格.html">查理-蒙格</a><a href="../04-人物檔案/泰德-韋施勒.html">泰德-韋施勒</a><a href="../04-人物檔案/班傑明-葛拉漢.html">班傑明-葛拉漢</a><a href="../04-人物檔案/葛瑞格-阿貝爾.html">葛瑞格-阿貝爾</a><a href="../04-人物檔案/阿吉特-賈恩.html">阿吉特-賈恩</a><a href="../04-人物檔案/陶德-康姆斯.html">陶德-康姆斯</a>
+<h3><a href="../index.html" style="font-weight:700;color:var(--accent);">📚 首頁</a></h3><h3>🗺️ 索引 MOC</h3><a href="../00-索引/MOC-按人物.html">MOC-按人物</a><a href="../00-索引/MOC-按公司.html">MOC-按公司</a><a href="../00-索引/MOC-按年份.html">MOC-按年份</a><a href="../00-索引/MOC-按概念.html">MOC-按概念</a><a href="../00-索引/MOC-總目錄.html">MOC-總目錄</a><a href="../00-索引/MOC-連結分析儀表板.html">MOC-連結分析儀表板</a><a href="../00-索引/連結補強紀錄.html">連結補強紀錄</a><h3>📜 合夥人信 (1957-1969)</h3><a href="../01-信件/合夥人時期_1957-1969/1957-合夥人信.html">1957-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1958-合夥人信.html">1958-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1959-合夥人信.html">1959-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1960-合夥人信.html">1960-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1961-合夥人信.html">1961-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1962-合夥人信.html">1962-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1963-合夥人信.html">1963-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1964-合夥人信.html">1964-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1965-合夥人信.html">1965-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1966-合夥人信.html">1966-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1967-合夥人信.html">1967-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1968-合夥人信.html">1968-合夥人信</a><a href="../01-信件/合夥人時期_1957-1969/1969-合夥人信.html">1969-合夥人信</a><h3>📜 BH 股東信 (1977-2024)</h3><a href="../01-信件/伯克希爾時期_1977-2024/1967-伯克希爾股東信.html">1967-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1972-伯克希爾股東信.html">1972-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1976-伯克希爾股東信.html">1976-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1977-伯克希爾股東信.html">1977-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1978-伯克希爾股東信.html">1978-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1979-伯克希爾股東信.html">1979-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1980-伯克希爾股東信.html">1980-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1981-伯克希爾股東信.html">1981-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1982-伯克希爾股東信.html">1982-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1983-伯克希爾股東信.html">1983-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1984-伯克希爾股東信.html">1984-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1985-伯克希爾股東信.html">1985-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1986-伯克希爾股東信.html">1986-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1987-伯克希爾股東信.html">1987-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1988-伯克希爾股東信.html">1988-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1989-伯克希爾股東信.html">1989-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1990-伯克希爾股東信.html">1990-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1991-伯克希爾股東信.html">1991-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1992-伯克希爾股東信.html">1992-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1993-伯克希爾股東信.html">1993-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1994-伯克希爾股東信.html">1994-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1995-伯克希爾股東信.html">1995-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1996-伯克希爾股東信.html">1996-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1997-伯克希爾股東信.html">1997-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1998-伯克希爾股東信.html">1998-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/1999-伯克希爾股東信.html">1999-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2000-伯克希爾股東信.html">2000-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2001-伯克希爾股東信.html">2001-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2002-伯克希爾股東信.html">2002-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2003-伯克希爾股東信.html">2003-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2004-伯克希爾股東信.html">2004-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2005-伯克希爾股東信.html">2005-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2006-伯克希爾股東信.html">2006-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2007-伯克希爾股東信.html">2007-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2008-伯克希爾股東信.html">2008-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2009-伯克希爾股東信.html">2009-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2010-伯克希爾股東信.html">2010-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2011-伯克希爾股東信.html">2011-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2012-伯克希爾股東信.html">2012-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2013-伯克希爾股東信.html">2013-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2014-伯克希爾股東信.html">2014-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2015-伯克希爾股東信.html">2015-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2016-伯克希爾股東信.html">2016-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2017-伯克希爾股東信.html">2017-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2018-伯克希爾股東信.html">2018-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2019-伯克希爾股東信.html">2019-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2020-伯克希爾股東信.html">2020-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2021-伯克希爾股東信.html">2021-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2022-伯克希爾股東信.html">2022-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2023-伯克希爾股東信.html">2023-伯克希爾股東信</a><a href="../01-信件/伯克希爾時期_1977-2024/2024-伯克希爾股東信.html">2024-伯克希爾股東信</a><h3>💡 投資概念</h3><a href="../02-投資概念/二十孔卡.html">二十孔卡</a><a href="../02-投資概念/以合理價格買好公司.html">以合理價格買好公司</a><a href="../02-投資概念/內在價值.html">內在價值</a><a href="../02-投資概念/制度性盲從.html">制度性盲從</a><a href="../02-投資概念/失誤與認錯.html">失誤與認錯</a><a href="../02-投資概念/安全邊際.html">安全邊際</a><a href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a><a href="../02-投資概念/巴菲特定性檢查清單.html">巴菲特定性檢查清單</a><a href="../02-投資概念/巴菲特量化篩選清單.html">巴菲特量化篩選清單</a><a href="../02-投資概念/市場先生.html">市場先生</a><a href="../02-投資概念/投資 vs 投機.html">投資 vs 投機</a><a href="../02-投資概念/效率市場理論的批判.html">效率市場理論的批判</a><a href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a><a href="../02-投資概念/機會成本.html">機會成本</a><a href="../02-投資概念/浮存金.html">浮存金</a><a href="../02-投資概念/特許經營權.html">特許經營權</a><a href="../02-投資概念/留存盈餘檢驗.html">留存盈餘檢驗</a><a href="../02-投資概念/管理層誘因設計.html">管理層誘因設計</a><a href="../02-投資概念/簡單甚於複雜.html">簡單甚於複雜</a><a href="../02-投資概念/經濟商譽.html">經濟商譽</a><a href="../02-投資概念/經理人選擇.html">經理人選擇</a><a href="../02-投資概念/美國順風.html">美國順風</a><a href="../02-投資概念/股東信本身的哲學.html">股東信本身的哲學</a><a href="../02-投資概念/股東待遇原則.html">股東待遇原則</a><a href="../02-投資概念/股東收益.html">股東收益</a><a href="../02-投資概念/股票即企業所有權.html">股票即企業所有權</a><a href="../02-投資概念/股票回購.html">股票回購</a><a href="../02-投資概念/能力圈.html">能力圈</a><a href="../02-投資概念/衍生性金融商品.html">衍生性金融商品</a><a href="../02-投資概念/複利.html">複利</a><a href="../02-投資概念/誠信與品格.html">誠信與品格</a><a href="../02-投資概念/護城河.html">護城河</a><a href="../02-投資概念/資本配置.html">資本配置</a><a href="../02-投資概念/透視盈餘.html">透視盈餘</a><a href="../02-投資概念/通貨膨脹.html">通貨膨脹</a><a href="../02-投資概念/長期持有.html">長期持有</a><a href="../02-投資概念/集中投資.html">集中投資</a><a href="../02-投資概念/雪茄煙蒂投資.html">雪茄煙蒂投資</a><h3>🏢 公司檔案</h3><a href="BNSF 鐵路.html">BNSF 鐵路</a><a href="GEICO 蓋可保險.html">GEICO 蓋可保險</a><a href="IBM.html">IBM</a><a href="NetJets.html">NetJets</a><a href="三井物產.html">三井物產</a><a href="三菱商事.html">三菱商事</a><a href="中國石油.html">中國石油</a><a href="丸紅.html">丸紅</a><a href="伊斯卡刀具.html">伊斯卡刀具</a><a href="伊藤忠商事.html">伊藤忠商事</a><a href="伯克希爾紡織.html">伯克希爾紡織</a><a href="伯克希爾能源.html">伯克希爾能源</a><a href="伯靈頓工業.html">伯靈頓工業</a><a href="住友商事.html">住友商事</a><a href="佳斯邁威.html">佳斯邁威</a><a href="克萊頓房屋.html">克萊頓房屋</a><a href="內布拉斯加家具城.html">內布拉斯加家具城</a><a href="卡夫亨氏.html">卡夫亨氏</a><a href="可口可樂.html">可口可樂</a><a href="吉列.html">吉列</a><a href="喜詩糖果.html">喜詩糖果</a><a href="國民賠償.html">國民賠償</a><a href="奶品皇后.html">奶品皇后</a><a href="好市多.html">好市多</a><a href="威斯科金融.html">威斯科金融</a><a href="嬌生.html">嬌生</a><a href="富國銀行.html">富國銀行</a><a href="寶僑.html">寶僑</a><a href="德克斯特鞋業.html">德克斯特鞋業</a><a href="所羅門兄弟.html">所羅門兄弟</a><a href="桑伯恩地圖.html">桑伯恩地圖</a><a href="樂購.html">樂購</a><a href="比亞迪.html">比亞迪</a><a href="水果牌.html">水果牌</a><a href="水牛城新聞報.html">水牛城新聞報</a><a href="沃爾瑪.html">沃爾瑪</a><a href="波仙珠寶.html">波仙珠寶</a><a href="派洛特旅行中心.html">派洛特旅行中心</a><a href="班傑明摩爾.html">班傑明摩爾</a><a href="登普斯特紡織.html">登普斯特紡織</a><a href="百威英博.html">百威英博</a><a href="穆迪.html">穆迪</a><a href="精密鑄件.html">精密鑄件</a><a href="美國航空.html">美國航空</a><a href="美國運通.html">美國運通</a><a href="美國銀行.html">美國銀行</a><a href="肖氏工業.html">肖氏工業</a><a href="能源未來控股.html">能源未來控股</a><a href="華盛頓郵報.html">華盛頓郵報</a><a href="藍籌印花.html">藍籌印花</a><a href="蘋果.html">蘋果</a><a href="西方石油.html">西方石油</a><a href="赫爾茲伯格鑽石.html">赫爾茲伯格鑽石</a><a href="路博潤.html">路博潤</a><a href="迪士尼.html">迪士尼</a><a href="通用再保險.html">通用再保險</a><a href="達維塔.html" class="current">達維塔</a><a href="雪佛龍.html">雪佛龍</a><a href="首都_ABC.html">首都_ABC</a><a href="馬蒙集團.html">馬蒙集團</a><a href="高盛.html">高盛</a><a href="麥當勞.html">麥當勞</a><h3>👥 人物</h3><a href="../04-人物檔案/東尼-奈斯利.html">東尼-奈斯利</a><a href="../04-人物檔案/查理-蒙格.html">查理-蒙格</a><a href="../04-人物檔案/泰德-韋施勒.html">泰德-韋施勒</a><a href="../04-人物檔案/班傑明-葛拉漢.html">班傑明-葛拉漢</a><a href="../04-人物檔案/葛瑞格-阿貝爾.html">葛瑞格-阿貝爾</a><a href="../04-人物檔案/阿吉特-賈恩.html">阿吉特-賈恩</a><a href="../04-人物檔案/陶德-康姆斯.html">陶德-康姆斯</a>
 </aside>
 <main>
 <div class="breadcrumb"><a href="../index.html">🏠 首頁</a> / <span>03-公司檔案</span> / <span>達維塔</span></div>
 <h1>達維塔(DaVita Inc., DVA)</h1>
 <h2>一句話定位</h2>
-<p><strong><a href="../04-人物檔案/泰德-韋施勒.html" class="wikilink">泰德·韋施勒</a> 加入伯克希爾後最具代表性的選股</strong>——美國最大的洗腎連鎖之一,展示「<strong>新世代投資經理人</strong>」的判斷能力。</p>
+<p><strong><a class="wikilink" href="../04-人物檔案/泰德-韋施勒.html">泰德·韋施勒</a> 加入伯克希爾後最具代表性的選股</strong>——美國最大的洗腎連鎖之一,展示「<strong>新世代投資經理人</strong>」的判斷能力。</p>
 <h2>投資/收購大事年表</h2>
 <table>
-<thead><tr><th>年份</th><th>事件</th></tr></thead>
-<tbody><tr><td><strong>2011</strong></td><td>韋施勒加入 BH,從 Peninsula Capital 帶來 DaVita 持股</td></tr><tr><td>2012-2024</td><td>長期持有,<strong>透過 DaVita 自身大量回購,BH 持股比例被動上升</strong></td></tr><tr><td>2024</td><td>BH 持股約 40%,但<strong>透過 standstill agreement 限制不超過某個比例</strong></td></tr></tbody></table>
+<thead>
+<tr>
+<th>年份</th>
+<th>事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2011</strong></td>
+<td>韋施勒加入 BH,從 Peninsula Capital 帶來 DaVita 持股</td>
+</tr>
+<tr>
+<td>2012-2024</td>
+<td>長期持有,<strong>透過 DaVita 自身大量回購,BH 持股比例被動上升</strong></td>
+</tr>
+<tr>
+<td>2024</td>
+<td>BH 持股約 40%,但<strong>透過 standstill agreement 限制不超過某個比例</strong></td>
+</tr>
+</tbody>
+</table>
 <h2>為什麼是達維塔</h2>
 <h3>一、結構性壟斷</h3>
-<p>美國洗腎產業由 DaVita + Fresenius 兩家主導(雙占)——</p>
-<ul><li>末期腎衰竭患者<strong>沒有近似替代品</strong>(只有洗腎或換腎)</li><li>Medicare 給付穩定</li><li>進入門檻極高(法規、醫療許可、土地)</li></ul>
+<p>美國洗腎產業由 DaVita + Fresenius 兩家主導(雙占)——
+- 末期腎衰竭患者<strong>沒有近似替代品</strong>(只有洗腎或換腎)
+- Medicare 給付穩定
+- 進入門檻極高(法規、醫療許可、土地)</p>
 <h3>二、回購機器</h3>
-<p>DaVita 多年大量回購自家股票——</p>
-<p><strong>BH 不需要加碼,持股比例就會持續上升</strong>(因為總股本減少)。</p>
-<p>這是「<strong>被動加碼</strong>」的經典範例。</p>
+<p>DaVita 多年大量回購自家股票——
+<strong>BH 不需要加碼,持股比例就會持續上升</strong>(因為總股本減少)。
+這是「<strong>被動加碼</strong>」的經典範例。</p>
 <h3>三、韋施勒的長期判斷</h3>
-<p>這個案例展示了 BH 投資哲學的可遷移性——</p>
-<p><strong>韋施勒用巴菲特的框架,選了一個巴菲特原本可能不會看的領域</strong>。</p>
+<p>這個案例展示了 BH 投資哲學的可遷移性——
+<strong>韋施勒用巴菲特的框架,選了一個巴菲特原本可能不會看的領域</strong>。</p>
 <h2>反思</h2>
-<p>DaVita 並非沒有風險:</p>
-<ul><li><strong>法規風險</strong>(Medicare 報銷率調整)</li><li><strong>道德爭議</strong>(營利性洗腎公司被批評過度治療)</li><li><strong>訴訟壓力</strong>(集體訴訟歷史)</li></ul>
+<p>DaVita 並非沒有風險:
+- <strong>法規風險</strong>(Medicare 報銷率調整)
+- <strong>道德爭議</strong>(營利性洗腎公司被批評過度治療)
+- <strong>訴訟壓力</strong>(集體訴訟歷史)</p>
 <p>但長期來看,<strong>結構性壟斷 + 持續回購 = 韋施勒選股風格的代表作</strong>。</p>
 <h2>體現的投資概念</h2>
-<ul><li><a href="../02-投資概念/長期持有.html" class="wikilink">長期持有</a> — 13+ 年沒動的核心</li><li><a href="../02-投資概念/股票回購.html" class="wikilink">股票回購</a> — DaVita 利用回購為股東創造價值的範例</li><li><a href="../02-投資概念/經理人選擇.html" class="wikilink">經理人選擇</a> — BH 信任 DaVita 的資本配置紀律</li></ul>
+<ul>
+<li><a class="wikilink" href="../02-投資概念/長期持有.html">長期持有</a> — 13+ 年沒動的核心</li>
+<li><a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a> — DaVita 利用回購為股東創造價值的範例</li>
+<li><a class="wikilink" href="../02-投資概念/經理人選擇.html">經理人選擇</a> — BH 信任 DaVita 的資本配置紀律</li>
+</ul>
 <h2>關鍵人物</h2>
-<ul><li><strong><a href="../04-人物檔案/泰德-韋施勒.html" class="wikilink">泰德-韋施勒</a></strong> — BH 端的主要決策者</li></ul>
+<ul>
+<li><strong><a class="wikilink" href="../04-人物檔案/泰德-韋施勒.html">泰德-韋施勒</a></strong> — BH 端的主要決策者</li>
+</ul>
 <h2>延伸閱讀</h2>
-<ul><li>人物:<a href="../04-人物檔案/泰德-韋施勒.html" class="wikilink">泰德-韋施勒</a></li><li>概念:<a href="../02-投資概念/長期持有.html" class="wikilink">長期持有</a>、<a href="../02-投資概念/股票回購.html" class="wikilink">股票回購</a></li></ul>
-<div class="backlinks"><h3>↩️ 反向連結 (Backlinks):</h3><ul><li><a href="../04-人物檔案/泰德-韋施勒.html">泰德-韋施勒</a></li><li><a href="../00-索引/MOC-按公司.html">MOC-按公司</a></li></ul></div>
-<footer>
-🏗️ 巴菲特股東信知識庫 · 用 Python 簡易版產生 · 2026 · 
-原信件:<a href="https://www.berkshirehathaway.com/letters/letters.html" target="_blank">berkshirehathaway.com</a>
-</footer>
+<ul>
+<li>人物:<a class="wikilink" href="../04-人物檔案/泰德-韋施勒.html">泰德-韋施勒</a></li>
+<li>概念:<a class="wikilink" href="../02-投資概念/長期持有.html">長期持有</a>、<a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
+</ul>
+<div class="backlinks"><h3>🔗 反向連結 (2)</h3><ul><li><a href="../00-索引/MOC-按公司.html">MOC-按公司</a></li><li><a href="../04-人物檔案/泰德-韋施勒.html">泰德-韋施勒</a></li></ul></div>
+<footer>🏗️ 巴菲特股東信知識庫 · 自動產生 · <a href="https://www.berkshirehathaway.com/letters/letters.html" target="_blank">原信件來源</a></footer>
 </main>
 </div>
 <script>
 (function(){
-  var t = document.getElementById('nav-toggle');
-  if (!t) return;
-  document.querySelectorAll('.sidebar a').forEach(function(a){
-    a.addEventListener('click', function(){ t.checked = false; });
-  });
-  t.addEventListener('change', function(){
-    document.body.classList.toggle('nav-open', t.checked);
-  });
+  var t=document.getElementById('nav-toggle');if(!t)return;
+  document.querySelectorAll('.sidebar a').forEach(function(a){a.addEventListener('click',function(){t.checked=false;});});
+  t.addEventListener('change',function(){document.body.classList.toggle('nav-open',t.checked);});
 })();
 </script>
 </body>

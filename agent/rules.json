@@ -1,0 +1,209 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-04-29",
+  "source_concept_note": "knowledge_base/02-投資概念/巴菲特量化篩選清單.md",
+  "scoring": {
+    "thresholds": {
+      "BUY": 80,
+      "HOLD": 60,
+      "WATCH": 40,
+      "AVOID": 0
+    },
+    "max_score": 110
+  },
+  "core_rules": [
+    {
+      "id": "R1",
+      "name": "ROE >= 15%",
+      "field": "roe",
+      "op": ">=",
+      "threshold": 0.15,
+      "weight": 15,
+      "source_concept": "經濟商譽",
+      "rationale": "高 ROE 是經濟商譽的代理指標,代表公司能用很少資本創造超額利潤"
+    },
+    {
+      "id": "R2",
+      "name": "毛利率 >= 30%",
+      "field": "gross_margin",
+      "op": ">=",
+      "threshold": 0.30,
+      "weight": 10,
+      "source_concept": "特許經營權",
+      "rationale": "高毛利反映定價權,是特許經營權的可觀測指標"
+    },
+    {
+      "id": "R3",
+      "name": "淨利率 >= 10%",
+      "field": "net_margin",
+      "op": ">=",
+      "threshold": 0.10,
+      "weight": 10,
+      "source_concept": "護城河",
+      "rationale": "淨利率高代表費用結構良好,護城河得以變現為股東回報"
+    },
+    {
+      "id": "R4",
+      "name": "EPS 5 年成長 >= 10% 年化",
+      "field": "earn_growth",
+      "op": ">=",
+      "threshold": 0.10,
+      "weight": 10,
+      "source_concept": "複利",
+      "rationale": "持續複利增長是長期持有的基礎"
+    },
+    {
+      "id": "R5",
+      "name": "Debt/Equity < 0.5",
+      "field": "debt_equity",
+      "op": "<",
+      "threshold": 0.5,
+      "weight": 15,
+      "source_concept": "槓桿與借貸",
+      "rationale": "低槓桿避免強制平倉風險,是巴菲特最看重的安全項",
+      "data_source_note": "stockTracker 目前未抓,Phase 3 補進 tracker.py"
+    },
+    {
+      "id": "R6",
+      "name": "FCF margin >= 15%",
+      "field": "fcf_margin",
+      "op": ">=",
+      "threshold": 0.15,
+      "weight": 10,
+      "source_concept": "股東收益",
+      "rationale": "高 FCF margin 代表盈餘能真正轉成現金回到股東口袋",
+      "data_source_note": "需從 cash flow statement 計算: (operating_cf - capex) / revenue"
+    },
+    {
+      "id": "R7",
+      "name": "回購率 > 0",
+      "field": "buyback_yield",
+      "op": ">",
+      "threshold": 0,
+      "weight": 5,
+      "source_concept": "股票回購",
+      "rationale": "有回購代表公司願意把現金還給股東(前提是價格合理)",
+      "data_source_note": "需從 SEC 10-Q 抓 shares_repurchased / market_cap"
+    },
+    {
+      "id": "R8",
+      "name": "估值合理 (PE < 25 OR PEG < 1.5)",
+      "field": "fwd_pe,peg",
+      "op": "or",
+      "conditions": [
+        {"field": "fwd_pe", "op": "<", "threshold": 25},
+        {"field": "peg", "op": "<", "threshold": 1.5}
+      ],
+      "weight": 10,
+      "source_concept": "安全邊際",
+      "rationale": "估值合理是進場的必要條件;雙條件 OR 兼顧價值股與成長股"
+    },
+    {
+      "id": "R9",
+      "name": "不在 52 週高點 (w52_pos < 0.80)",
+      "field": "w52_pos",
+      "op": "<",
+      "threshold": 0.80,
+      "weight": 5,
+      "source_concept": "市場先生",
+      "rationale": "避免在情緒高峰買進;52 週位置 80% 以下相對舒適"
+    },
+    {
+      "id": "R10",
+      "name": "Berkshire 持有",
+      "field": "berkshire_holds",
+      "op": "==",
+      "threshold": true,
+      "weight": 10,
+      "source_concept": "ground truth",
+      "rationale": "Berkshire 13F 持有 = 巴菲特本人已驗證",
+      "data_source_note": "從 stockTracker funds_13f.json 撈 Berkshire 持股清單"
+    }
+  ],
+  "hard_disqualifiers": [
+    {
+      "id": "D1",
+      "name": "槓桿過高",
+      "condition": "debt_equity > 2.0",
+      "source_concept": "槓桿與借貸",
+      "exception": "保險業/銀行業放寬至 5.0 (浮存金特性)"
+    },
+    {
+      "id": "D2",
+      "name": "衍生品大量曝險",
+      "condition": "derivative_notional / total_capital > 0.5",
+      "source_concept": "衍生性金融商品",
+      "data_source_note": "從 10-K 註解抓 derivative liabilities"
+    },
+    {
+      "id": "D3",
+      "name": "行業在能力圈外",
+      "condition": "sector in BLACKLIST",
+      "blacklist": ["Crypto", "SPAC", "Biotech-Speculative", "Quantum-Computing"],
+      "source_concept": "能力圈"
+    },
+    {
+      "id": "D4",
+      "name": "連續 3 年 EPS < 0",
+      "condition": "trailing_3y_eps < 0",
+      "source_concept": "雪茄煙蒂投資",
+      "rationale": "雪茄煙蒂陷阱反向: 持續虧損公司不該長期持有"
+    }
+  ],
+  "soft_bonuses": [
+    {
+      "id": "B1",
+      "name": "Berkshire 重倉",
+      "condition": "berkshire_position_pct > 0.01",
+      "points": 5,
+      "source_concept": "ground truth"
+    },
+    {
+      "id": "B2",
+      "name": "ROIC > 20% 連續 5 年",
+      "condition": "roic_5y_avg > 0.20",
+      "points": 5,
+      "source_concept": "經濟商譽",
+      "data_source_note": "需自計算: NOPAT / Invested Capital"
+    },
+    {
+      "id": "B3",
+      "name": "CEO 持股 / 淨值 > 5%",
+      "condition": "ceo_holding_ratio > 0.05",
+      "points": 3,
+      "source_concept": "經理人選擇",
+      "data_source_note": "SEC Form 4 + Form 5"
+    },
+    {
+      "id": "B4",
+      "name": "其他價值名家持有",
+      "condition": "value_investor_count >= 1",
+      "investors": ["Munger Trust", "Li Lu / Himalaya Capital", "Bill Ackman / Pershing", "Pabrai Funds"],
+      "points": 2,
+      "source_concept": "ground truth"
+    },
+    {
+      "id": "B5",
+      "name": "連續 10 年股利成長",
+      "condition": "div_growth_10y_streak >= 10",
+      "points": 3,
+      "source_concept": "複利"
+    }
+  ],
+  "fixture_tickers": {
+    "expected_buy_or_hold": [
+      {"ticker": "AAPL", "expected_score": 85, "expected_bias": "BUY"},
+      {"ticker": "KO", "expected_score": 78, "expected_bias": "HOLD"},
+      {"ticker": "AXP", "expected_score": 72, "expected_bias": "HOLD"},
+      {"ticker": "MCO", "expected_score": 88, "expected_bias": "BUY"},
+      {"ticker": "BAC", "expected_score": 70, "expected_bias": "HOLD"}
+    ],
+    "expected_avoid_or_out": [
+      {"ticker": "TSLA", "expected_bias": "OUT_OF_CIRCLE", "trigger": "D3"},
+      {"ticker": "COIN", "expected_bias": "OUT_OF_CIRCLE", "trigger": "D3"},
+      {"ticker": "GME", "expected_score": 25, "expected_bias": "AVOID"},
+      {"ticker": "AMC", "expected_bias": "OUT_OF_CIRCLE", "trigger": "D1+D4"},
+      {"ticker": "IBM", "expected_score": 45, "expected_bias": "WATCH"}
+    ]
+  }
+}

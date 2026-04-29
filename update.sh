@@ -5,14 +5,14 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 echo "📦 [1/4] 確保 Python 依賴..."
-python3 -m pip install -q -r scripts/requirements.txt
+/Users/apple/miniforge3/bin/python3 -m pip install -q -r scripts/requirements.txt
 
 echo "🔨 [2/4] 渲染 content/ → simple-html/ ..."
-python3 scripts/render.py --clean
+/Users/apple/miniforge3/bin/python3 scripts/render.py --clean
 
 echo "🔍 [3/4] 預覽於 http://localhost:8765 (Ctrl+C 結束預覽)..."
 echo "       新分頁打開 http://localhost:8765 確認後, 按 Enter 繼續推送..."
-python3 -m http.server -d simple-html 8765 &
+/Users/apple/miniforge3/bin/python3 -m http.server -d simple-html 8765 &
 SERVER_PID=$!
 trap "kill $SERVER_PID 2>/dev/null || true" EXIT
 read -r _
