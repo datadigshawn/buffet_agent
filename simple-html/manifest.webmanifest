@@ -1,0 +1,20 @@
+{
+  "name": "巴菲特股東信知識庫",
+  "short_name": "巴菲特",
+  "description": "巴菲特 1957-2024 共 68 年股東信與投資思想知識庫",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf8f5",
+  "theme_color": "#8b3a2f",
+  "lang": "zh-TW",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
