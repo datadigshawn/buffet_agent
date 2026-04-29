@@ -14,14 +14,21 @@ from __future__ import annotations
 import csv
 import json
 import logging
+import os
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Any
 
 log = logging.getLogger(__name__)
 
-# 預設路徑(可 override)
-STOCKTRACKER_DATA = Path("/Users/apple/Projects/stockTracker/data")
+# stockTracker 資料路徑 — 不存在則自動 fallback 到 yfinance
+# 可用 BUFFET_STOCKTRACKER_DATA 環境變數 override
+STOCKTRACKER_DATA = Path(
+    os.environ.get(
+        "BUFFET_STOCKTRACKER_DATA",
+        str(Path.home() / "Projects" / "stockTracker" / "data"),
+    )
+)
 CSV_PATH = STOCKTRACKER_DATA / "latest_prices.csv"
 F13F_PATH = STOCKTRACKER_DATA / "funds_13f.json"
 

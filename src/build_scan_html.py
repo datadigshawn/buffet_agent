@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from collections import Counter
@@ -30,7 +31,13 @@ from agent import verdict as v_mod  # noqa: E402
 OUT_DIR = ROOT / "simple-html"
 SCAN_DIR = OUT_DIR / "scan"
 WATCHLIST_JSON = ROOT / "config" / "watchlist.json"
-STOCKTRACKER_CSV = Path("/Users/apple/Projects/stockTracker/data/latest_prices.csv")
+# stockTracker CSV — 不存在則 fallback 到 watchlist.json
+STOCKTRACKER_CSV = Path(
+    os.environ.get(
+        "BUFFET_STOCKTRACKER_CSV",
+        str(Path.home() / "Projects" / "stockTracker" / "data" / "latest_prices.csv"),
+    )
+)
 
 WIKILINK_RE = re.compile(r"\[\[([^\[\]]+?)\]\]")
 
