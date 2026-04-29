@@ -1,0 +1,45 @@
+name: Weekly Buffett Scan
+
+on:
+  # 每週一 22:00 UTC = 美東 17/18:00 (收盤後)
+  schedule:
+    - cron: '0 22 * * 1'
+  # 也允許手動觸發
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install yfinance markdown python-frontmatter
+
+      - name: Run Buffett scan
+        run: python src/build_scan_html.py --quiet
+
+      - name: Commit & push
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add simple-html/scan.html simple-html/scan/
+          if git diff --staged --quiet; then
+            echo "No changes — skipping commit"
+          else
+            git commit -m "weekly Buffett scan — $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi

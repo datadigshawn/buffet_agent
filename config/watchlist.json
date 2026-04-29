@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "description": "Tickers for weekly Buffett scan. CI 用此檔;本機跑會優先用 stockTracker latest_prices.csv 中的 ticker (若可用)。",
+  "groups": {
+    "buffett_core": {
+      "label": "巴菲特核心持股 (Berkshire 13F)",
+      "tickers": ["AAPL", "KO", "AXP", "MCO", "BAC", "CVX", "OXY", "KHC", "DVA", "KR", "SIRI", "V", "MA"]
+    },
+    "stocktracker_tech": {
+      "label": "你的 stockTracker — 半導體/科技",
+      "tickers": ["TSM", "NVDA", "AVGO", "AMD", "ARM", "ASML", "LRCX", "AMAT", "KLAC", "MRVL", "ALAB", "ANET", "CRDO", "ORCL", "NOW", "MU", "PSTG", "WDC", "EQIX", "DLR", "PLTR", "GOOGL", "MSFT", "AMZN", "ARM"]
+    },
+    "stocktracker_energy_industrial": {
+      "label": "你的 stockTracker — 能源/工業",
+      "tickers": ["LMT", "RTX", "NOC", "ETN", "VRT", "GEV", "PWR", "NEE", "VST", "BE", "EOSE", "CEG", "SMR", "OKLO", "LEU", "CCJ", "UUUU", "FCX", "SCCO", "MP", "LYSDY"]
+    },
+    "stocktracker_other": {
+      "label": "你的 stockTracker — 其他",
+      "tickers": ["KTOS", "AVAV", "ONDS", "RCAT", "ISRG", "TEM", "BEAM", "LLY", "NVO", "IBM", "IONQ", "QBTS"]
+    },
+    "stocktracker_etf": {
+      "label": "ETF / 商品",
+      "tickers": ["QQQM", "VOO", "RSP", "EWW", "GLD", "GDX", "PSLV", "TAIL"]
+    },
+    "watch_for_validation": {
+      "label": "驗證/反例 (Buffett 公開避開)",
+      "tickers": ["TSLA", "GME", "AMC", "COIN", "MSTR"]
+    }
+  }
+}
