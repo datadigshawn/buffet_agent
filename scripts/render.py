@@ -82,7 +82,20 @@ em{color:var(--muted);font-style:italic;}
 .backlinks a{background:var(--code-bg);padding:3px 8px;border-radius:3px;font-size:12px;border-bottom:none;color:var(--muted);}
 .backlinks a:hover{color:var(--accent);background:var(--highlight);}
 footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--muted);}
-footer a{color:var(--muted);}"""
+footer a{color:var(--muted);}
+/* mobile drawer nav (≤768px) */
+.nav-toggle,.nav-toggle-btn,.nav-backdrop{display:none;}
+@media (max-width: 768px){
+.nav-toggle-btn{display:flex;align-items:center;justify-content:center;position:fixed;top:12px;right:12px;z-index:110;width:44px;height:44px;border-radius:8px;background:var(--accent);color:var(--bg);font-size:22px;cursor:pointer;user-select:none;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+.nav-toggle-btn::before{content:"\\2630";}
+.nav-toggle:checked ~ .nav-toggle-btn::before{content:"\\2715";}
+.container{padding:60px 16px 20px;grid-template-columns:1fr;}
+.sidebar{position:fixed;top:0;left:0;width:82%;max-width:320px;height:100vh;background:var(--bg);z-index:105;transform:translateX(-100%);transition:transform 0.25s ease;padding:60px 18px 20px;padding-right:12px;border-right:1px solid var(--line);box-shadow:2px 0 12px rgba(0,0,0,0.2);max-height:none;overflow-y:auto;}
+.nav-toggle:checked ~ .container .sidebar{transform:translateX(0);}
+.nav-backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.nav-toggle:checked ~ .nav-backdrop{opacity:1;pointer-events:auto;}
+body.nav-open{overflow:hidden;}
+}"""
 
 PWA_TAGS = """<!-- PWA -->
 <link rel="manifest" href="{prefix}manifest.webmanifest">
@@ -107,6 +120,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </style>
 </head>
 <body>
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="切換導覽">
+<label for="nav-toggle" class="nav-toggle-btn" aria-label="開關導覽"></label>
+<label for="nav-toggle" class="nav-backdrop" aria-hidden="true"></label>
 <div class="container">
 <aside class="sidebar">
 {sidebar}
@@ -118,6 +134,13 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 <footer>🏗️ 巴菲特股東信知識庫 · 自動產生 · <a href="https://www.berkshirehathaway.com/letters/letters.html" target="_blank">原信件來源</a></footer>
 </main>
 </div>
+<script>
+(function(){{
+  var t=document.getElementById('nav-toggle');if(!t)return;
+  document.querySelectorAll('.sidebar a').forEach(function(a){{a.addEventListener('click',function(){{t.checked=false;}});}});
+  t.addEventListener('change',function(){{document.body.classList.toggle('nav-open',t.checked);}});
+}})();
+</script>
 </body>
 </html>
 """
