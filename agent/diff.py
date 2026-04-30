@@ -11,6 +11,7 @@
   - thesis_broken:       已建立 thesis 的 ticker 條件被違反 (P0-2)
   - news_alert:          近 7 天新聞 sentiment / 重大事件異常 (P1-3)
   - regression_detected:  回測連 N 週 alpha < threshold (P2-2)
+  - insider_alert:        Form 4 內部人異常買賣 / 13D 活躍機構介入 (P1-3.5)
 
 不算變動的事(避免噪音):
   - 分數小幅升降(<5 分)但 bias 沒變
@@ -214,6 +215,44 @@ def news_alerts_from_verdicts(verdicts_dicts: list[dict]) -> list[Alert]:
             ticker=ticker, type="news_alert", severity=severity,
             summary=f"{ticker}: {label}",
             today={"news": news},
+        ))
+    return out
+
+
+def insider_alerts_from_verdicts(verdicts_dicts: list[dict]) -> list[Alert]:
+    """從每筆 verdict 的 insider 欄位產 insider 級別 alert (P1-3.5)。
+
+    觸發條件:insider.alert_type 不為 null。
+    severity:
+      - insider_selling_spike: high (CEO/CFO 大量賣 = yellow flag)
+      - activist_filing: high (13D 介入 = 重大事件)
+      - insider_buying_signal: medium (rare 但正面)
+    """
+    out: list[Alert] = []
+    for v in verdicts_dicts:
+        ins = (v or {}).get("insider")
+        if not ins:
+            continue
+        alert_type = ins.get("alert_type")
+        if not alert_type:
+            continue
+        ticker = v.get("ticker", "?")
+        severity = "medium" if alert_type == "insider_buying_signal" else "high"
+        if alert_type == "insider_selling_spike":
+            label = (
+                f"內部人賣出 ${ins.get('total_sell_value', 0)/1e6:.1f}M"
+                f" (C-level ${ins.get('exec_sell_value', 0)/1e6:.1f}M)"
+            )
+        elif alert_type == "insider_buying_signal":
+            label = f"內部人買入 ${ins.get('total_buy_value', 0)/1e6:.1f}M"
+        elif alert_type == "activist_filing":
+            label = f"13D 活躍機構介入 × {ins.get('sched_13d_count', 0)}"
+        else:
+            label = alert_type
+        out.append(Alert(
+            ticker=ticker, type="insider_alert", severity=severity,
+            summary=f"{ticker}: {label}",
+            today={"insider": ins},
         ))
     return out
 

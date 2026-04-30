@@ -87,6 +87,10 @@ SYSTEM_PROMPT = """你是巴菲特量化篩選 agent 的定性判斷 LLM。
   · BVPS 5y CAGR > 12% = Buffett 標準級複利機器
   · 留存效率 < 0.8 = 留存被消耗或大量買回 (Berkshire 重倉股例外)
   · 內建分級 A-D 是基於量化資料,LLM 自己的 management_grade 應該對齊或解釋差異
+- Insider:context 若有 `insider` 區塊就引用 — Buffett 公開講過會看 Form 4
+  · CEO/CFO 大量賣出 (insider_selling_spike) 是 yellow flag,行動建議要降信心
+  · 內部人買入 (insider_buying_signal) 是 rare 正面訊號 — 比新聞更重要
+  · 13D 出現 (activist_filing) 表示 5%+ 活躍機構介入,需要進一步研究
 - 新聞:context 若有 `news` 區塊(近 7 天文章 sentiment + 重大事件)就引用具體事件
   · sentiment_trend=falling 是警訊;rising 是動能訊號
   · alert_type=news_negative_spike → 行動建議要加風險提示
@@ -165,6 +169,25 @@ def _build_user_prompt(ticker: str, context: dict) -> str:
             parts.append(f"- 每股內在價值: ${iv:.2f}")
         if mos is not None:
             parts.append(f"- 安全邊際: {mos*100:+.1f}% ({'便宜' if mos > 0 else '偏貴'})")
+    # P1-3.5: Insider 交易訊號 (Form 4 + 13D/G + 8-K)
+    insider = context.get("insider")
+    if insider and insider.get("transactions_count", 0) > 0:
+        parts.append(f"\n## Insider 交易 (近 {insider.get('lookback_days', 60)} 天)")
+        parts.append(
+            f"- {insider['transactions_count']} 筆,"
+            f"賣 ${insider.get('total_sell_value',0)/1e6:.1f}M / "
+            f"買 ${insider.get('total_buy_value',0)/1e6:.1f}M"
+        )
+        if insider.get("exec_sell_value", 0) > 0:
+            parts.append(f"- C-level 賣出: ${insider['exec_sell_value']/1e6:.1f}M")
+        if insider.get("top_seller"):
+            t = insider["top_seller"]
+            parts.append(f"- 最大賣家: {t.get('name')} ({t.get('position')}) ${t.get('value',0)/1e6:.1f}M")
+        if insider.get("sched_13d_count", 0) > 0:
+            parts.append(f"- 🔥 13D 活躍機構介入: {insider['sched_13d_count']} 筆")
+        if insider.get("alert_type"):
+            parts.append(f"- ⚠️ alert: {insider['alert_type']}")
+
     # P1-3: 新聞訊號 + 重大事件
     news = context.get("news")
     if news and news.get("article_count_7d", 0) > 0:

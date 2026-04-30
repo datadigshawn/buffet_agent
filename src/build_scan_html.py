@@ -374,6 +374,8 @@ def _verdict_to_json(v, sources: list[str], thesis_state: str | None = None,
         "moat": v.moat.to_dict() if v.moat else None,
         # P1-3: 新聞訊號
         "news": v.news.to_dict() if v.news else None,
+        # P1-3.5: insider 交易訊號 (Form 4 + 13D/G + 8-K)
+        "insider": v.insider.to_dict() if v.insider else None,
         # LLM 定性 (C3) — 含 management_grade / moat_* / in_circle / recommendation
         "qualitative": v.qualitative.to_dict() if v.qualitative else None,
         # Top-level convenience field — 戰情室 lobby 卡用
@@ -509,6 +511,7 @@ def main() -> int:
     alerts = _diff.detect(yesterday_payload, today_payload)
     alerts.extend(_diff.thesis_broken_alerts(thesis_statuses))
     alerts.extend(_diff.news_alerts_from_verdicts(today_payload.get("verdicts", [])))
+    alerts.extend(_diff.insider_alerts_from_verdicts(today_payload.get("verdicts", [])))
     # P2-2: 讀近期回測結果,連續 underperform 觸發 regression alert
     backtest_path = JSON_OUT_DIR / "backtest.json"
     if backtest_path.exists():

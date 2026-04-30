@@ -18,6 +18,7 @@ from . import valuation as valuation_mod
 from . import management as management_mod
 from . import moat as moat_mod
 from . import news_signals as news_mod
+from . import insider_signals as insider_mod
 from .sources import sec as sec_api
 from .sources import news as news_src
 
@@ -38,6 +39,7 @@ class Verdict:
     management: management_mod.ManagementProfile | None = None
     moat: moat_mod.MoatProfile | None = None
     news: news_mod.NewsSignals | None = None
+    insider: insider_mod.InsiderSignals | None = None
     qualitative: llm_mod.QualitativeJudgment | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -63,6 +65,7 @@ class Verdict:
             "management": self.management.to_dict() if self.management else None,
             "moat": self.moat.to_dict() if self.moat else None,
             "news": self.news.to_dict() if self.news else None,
+            "insider": self.insider.to_dict() if self.insider else None,
             "qualitative": self.qualitative.to_dict() if self.qualitative else None,
         }
 
@@ -73,7 +76,8 @@ def _build_rationale_md(s: screener.Score, kb: dict,
                         valuation: valuation_mod.EnsembleValuation | None = None,
                         management: management_mod.ManagementProfile | None = None,
                         moat: moat_mod.MoatProfile | None = None,
-                        news: news_mod.NewsSignals | None = None) -> str:
+                        news: news_mod.NewsSignals | None = None,
+                        insider: insider_mod.InsiderSignals | None = None) -> str:
     parts = []
     parts.append(f"# 巴菲特 Agent — {s.ticker}\n")
     parts.append(f"**Bias**: {s.bias}  ·  **Score**: {s.total}/110 (base {s.base} + bonus {s.bonus})\n")
@@ -174,6 +178,44 @@ def _build_rationale_md(s: screener.Score, kb: dict,
             f"- 假設: stage 1 成長 {intrinsic.stage1_growth*100:.1f}%、"
             f"折現率 {intrinsic.discount_rate*100:.1f}%、{intrinsic.note}"
         )
+
+    # P1-3.5: Insider 交易訊號
+    if insider and insider.transactions_count > 0:
+        parts.append(f"\n## 🤵 Insider 交易訊號 (近 {insider.lookback_days} 天)\n")
+        parts.append(
+            f"- 交易筆數: {insider.transactions_count} "
+            f"(賣出 ${insider.total_sell_value/1e6:.1f}M / 買入 ${insider.total_buy_value/1e6:.1f}M)"
+        )
+        if insider.exec_sell_value > 0:
+            parts.append(f"- C-level 賣出: **${insider.exec_sell_value/1e6:.1f}M**")
+        if insider.top_seller:
+            t = insider.top_seller
+            parts.append(
+                f"- 最大賣家: **{t.get('name','?')}** ({t.get('position','')}) "
+                f"${t.get('value',0)/1e6:.2f}M @ {t.get('date','')}"
+            )
+        if insider.top_buyer:
+            t = insider.top_buyer
+            parts.append(
+                f"- 最大買家: {t.get('name','?')} ({t.get('position','')}) "
+                f"${t.get('value',0)/1e6:.2f}M @ {t.get('date','')}"
+            )
+        if insider.sched_13d_count > 0:
+            parts.append(
+                f"- 13D filings (5%+ 活躍機構): **{insider.sched_13d_count}** 筆 "
+                f"({', '.join(insider.recent_13d_dates[:3])})"
+            )
+        if insider.sched_13g_count > 0:
+            parts.append(f"- 13G filings (5%+ 被動機構): {insider.sched_13g_count} 筆")
+        if insider.form_8k_count > 0:
+            parts.append(f"- 8-K 重大事件公告: {insider.form_8k_count} 筆")
+        if insider.alert_type:
+            label = {
+                "insider_selling_spike": "🔴 內部人大量賣出",
+                "insider_buying_signal": "🟢 內部人買入訊號",
+                "activist_filing": "⚠️ 活躍股東介入 (13D)",
+            }.get(insider.alert_type, insider.alert_type)
+            parts.append(f"- ⚠️ Insider alert: **{label}**")
 
     # P1-3: 新聞訊號區塊
     if news and news.article_count_7d > 0:
@@ -377,11 +419,19 @@ def evaluate(ticker: str) -> Verdict:
         except Exception:  # noqa: BLE001
             pass
 
+    # P1-3.5: insider 交易訊號 (Form 4 + 13D/G + 8-K)
+    insider = None
+    if s.bias in ("BUY", "HOLD"):
+        try:
+            insider = insider_mod.evaluate(s.ticker, lookback_days=60)
+        except Exception:  # noqa: BLE001
+            pass
+
     # LLM 定性判斷:只對 BUY/HOLD 跑 (省成本),C1 階段 backend=none 永遠回空
     qualitative = None
     if s.bias in ("BUY", "HOLD"):
         try:
-            llm_context = _build_llm_context(s, kb, intrinsic, valuation, management, moat, news)
+            llm_context = _build_llm_context(s, kb, intrinsic, valuation, management, moat, news, insider)
             qualitative = llm_mod.judge(s.ticker, llm_context)
         except Exception:  # noqa: BLE001
             pass
@@ -405,12 +455,13 @@ def evaluate(ticker: str) -> Verdict:
         related_concepts=kb.get("concepts") or [],
         guidebook=kb.get("guidebook"),
         opposing_flags=flags,
-        rationale_md=_build_rationale_md(s, kb, intrinsic, qualitative, valuation, management, moat, news),
+        rationale_md=_build_rationale_md(s, kb, intrinsic, qualitative, valuation, management, moat, news, insider),
         intrinsic=intrinsic,
         valuation=valuation,
         management=management,
         moat=moat,
         news=news,
+        insider=insider,
         qualitative=qualitative,
     )
 
@@ -423,6 +474,7 @@ def _build_llm_context(
     management: management_mod.ManagementProfile | None = None,
     moat: moat_mod.MoatProfile | None = None,
     news: news_mod.NewsSignals | None = None,
+    insider: insider_mod.InsiderSignals | None = None,
 ) -> dict:
     """組裝給 LLM backend 的上下文 (C3 才會真用到)。"""
     d = s.data
@@ -447,6 +499,24 @@ def _build_llm_context(
         ),
         "related_concepts": [c.title for c in (kb.get("concepts") or [])],
     }
+    # P1-3.5: insider 交易訊號 (60 天)
+    if insider and insider.transactions_count > 0:
+        ctx["insider"] = {
+            "lookback_days": insider.lookback_days,
+            "transactions_count": insider.transactions_count,
+            "total_sell_value": insider.total_sell_value,
+            "total_buy_value": insider.total_buy_value,
+            "exec_sell_value": insider.exec_sell_value,
+            "exec_buy_value": insider.exec_buy_value,
+            "net_value": insider.net_value,
+            "top_seller": insider.top_seller,
+            "top_buyer": insider.top_buyer,
+            "alert_type": insider.alert_type,
+            "sched_13d_count": insider.sched_13d_count,
+            "sched_13g_count": insider.sched_13g_count,
+            "form_8k_count": insider.form_8k_count,
+        }
+
     # P1-3: 新聞訊號 + 重大事件清單 (LLM 應引用,不憑空猜)
     if news and news.article_count_7d > 0:
         ctx["news"] = {
