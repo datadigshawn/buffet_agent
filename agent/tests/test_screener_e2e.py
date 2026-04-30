@@ -39,4 +39,4 @@ def test_watchlist_runs_without_error():
     scores = screener.score_watchlist()
     assert len(scores) > 0
     for s in scores:
-        assert s.bias in {"BUY", "HOLD", "WATCH", "AVOID", "OUT_OF_CIRCLE"}
+        assert s.bias in {"BUY", "HOLD", "WATCH", "AVOID", "OUT_OF_CIRCLE", "INSUFFICIENT_DATA"}

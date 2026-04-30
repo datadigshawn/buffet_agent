@@ -4,8 +4,10 @@
 # Python 解析優先序:
 #   1. $PYTHON 環境變數 (例 PYTHON=/path/to/python ./update.sh)
 #   2. ./venv/bin/python
-#   3. /Users/apple/miniforge3/bin/python3 (此 Mac 預設)
-#   4. python3 from PATH
+#   3. /opt/homebrew/bin/python3 (Apple Silicon brew)
+#   4. /usr/local/bin/python3 (Intel brew)
+#   5. /Users/apple/miniforge3/bin/python3 (legacy fallback)
+#   6. python3 from PATH
 set -euo pipefail
 
 cd "$(dirname "$0")"
@@ -15,12 +17,16 @@ if [[ -n "${PYTHON:-}" ]] && [[ -x "$PYTHON" ]]; then
   PY="$PYTHON"
 elif [[ -x "./venv/bin/python" ]]; then
   PY="./venv/bin/python"
+elif [[ -x "/opt/homebrew/bin/python3" ]]; then
+  PY="/opt/homebrew/bin/python3"
+elif [[ -x "/usr/local/bin/python3" ]]; then
+  PY="/usr/local/bin/python3"
 elif [[ -x "/Users/apple/miniforge3/bin/python3" ]]; then
   PY="/Users/apple/miniforge3/bin/python3"
 elif command -v python3 >/dev/null 2>&1; then
   PY="$(command -v python3)"
 else
-  echo "❌ 找不到可用的 python3" >&2
+  echo "❌ 找不到可用的 python3。請建 venv 或 export PYTHON=/path/to/python3" >&2
   exit 1
 fi
 echo "🐍 using $PY"

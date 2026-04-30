@@ -7,9 +7,9 @@
 ## 1. Clone
 
 ```bash
-mkdir -p ~/Projects/agentS && cd ~/Projects/agentS
-git clone https://github.com/datadigshawn/buffet_agent.git
-cd buffet_agent
+mkdir -p ~/autobot/agent && cd ~/autobot/agent
+git clone https://github.com/datadigshawn/buffet_agent.git buffetAgent
+cd buffetAgent
 ```
 
 ## 2. Python 環境（推薦：venv，不污染系統）
@@ -24,7 +24,7 @@ pip install yfinance pytest    # agent 與 scan 需要
 要永久生效（之後每個 shell 自動啟用）：
 
 ```bash
-echo 'cd ~/Projects/agentS/buffet_agent && source venv/bin/activate' >> ~/.zshrc
+echo 'cd ~/autobot/agent/buffetAgent && source venv/bin/activate' >> ~/.zshrc
 ```
 
 或者用既有的 `python3` 直接裝：
@@ -47,17 +47,17 @@ python -m agent AAPL
 
 ## 4. （選用）連 stockTracker 的本機資料
 
-如果這台機器**也有** stockTracker repo 在不同路徑：
+本機 stockTracker 路徑為 `~/autobot/stockTracker/data`：
 
 ```bash
-export BUFFET_STOCKTRACKER_DATA=/path/to/stockTracker/data
+export BUFFET_STOCKTRACKER_DATA=~/autobot/stockTracker/data
 python -m agent --watchlist
 ```
 
 或寫進 `~/.zshrc`：
 
 ```bash
-echo 'export BUFFET_STOCKTRACKER_DATA=/path/to/stockTracker/data' >> ~/.zshrc
+echo 'export BUFFET_STOCKTRACKER_DATA=$HOME/autobot/stockTracker/data' >> ~/.zshrc
 ```
 
 **沒有 stockTracker 也沒關係** — agent 會自動退回 `config/watchlist.json` + yfinance。
@@ -94,9 +94,9 @@ sudo apt install gh
 把這串貼進 terminal：
 
 ```bash
-mkdir -p ~/Projects/agentS && cd ~/Projects/agentS
-git clone https://github.com/datadigshawn/buffet_agent.git
-cd buffet_agent
+mkdir -p ~/autobot/agent && cd ~/autobot/agent
+git clone https://github.com/datadigshawn/buffet_agent.git buffetAgent
+cd buffetAgent
 python3 -m venv venv
 source venv/bin/activate
 pip install -r scripts/requirements.txt yfinance pytest
@@ -144,7 +144,7 @@ Netlify 30 秒後自動部署 → 在手機看 <https://buffetagent.netlify.app>
 最佳實務：**先 pull 再改**。
 
 ```bash
-cd ~/Projects/agentS/buffet_agent
+cd ~/autobot/agent/buffetAgent
 git pull         # 必做
 # 開始改...
 git add . && git commit -m "..." && git push
@@ -157,7 +157,7 @@ git add . && git commit -m "..." && git push
 ### `ModuleNotFoundError: No module named 'agent'`
 
 ```bash
-cd ~/Projects/agentS/buffet_agent   # ⚠️ 必須在 repo 根目錄
+cd ~/autobot/agent/buffetAgent   # ⚠️ 必須在 repo 根目錄
 python -m agent AAPL
 ```
 

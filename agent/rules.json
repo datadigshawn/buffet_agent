@@ -185,11 +185,36 @@
     {
       "id": "B5",
       "name": "連續 10 年股利成長",
-      "condition": "div_growth_10y_streak >= 10",
+      "condition": "div_growth_streak >= 10",
       "points": 3,
       "source_concept": "複利"
+    },
+    {
+      "id": "B6",
+      "name": "ROE 10 年持續 >= 15%",
+      "condition": "roe_consistency_10y >= 0.8",
+      "points": 5,
+      "source_concept": "經濟商譽",
+      "rationale": "Buffett 真正看的是 ROE 的持續性,而不是某一年。過去 10 年中 80% 以上達 15% 才算護城河堅實。"
     }
   ],
+  "industry_overrides": {
+    "_doc": "依 td.industry_class 動態調整規則門檻。值是新的 threshold,只覆寫,weight 不動。Buffett 的銀行/保險/公用事業有不同合理範圍 — 銀行 ROE 8-12%、D/E 高是因存款是負債,不是壞債。",
+    "bank": {
+      "R1": {"threshold": 0.10, "rationale": "銀行 ROE 8-12% 是常態,不是缺陷"},
+      "R5": {"threshold": 1.5, "rationale": "存款計入 D/E 但非營業負債,放寬"},
+      "R3": {"threshold": 0.15, "rationale": "銀行淨利率反映 NIM,15% 是優質銀行水準"}
+    },
+    "insurance": {
+      "R1": {"threshold": 0.12},
+      "R5": {"threshold": 2.0, "rationale": "浮存金算負債但是無成本資金"},
+      "R3": {"threshold": 0.08, "rationale": "保險業淨利率反映承保紀律"}
+    },
+    "utility": {
+      "R1": {"threshold": 0.10, "rationale": "公用事業受監管 ROE,10% 即合格"},
+      "R5": {"threshold": 1.5, "rationale": "資本密集 + 監管允許高槓桿"}
+    }
+  },
   "fixture_tickers": {
     "expected_buy_or_hold": [
       {"ticker": "AAPL", "expected_score": 85, "expected_bias": "BUY"},

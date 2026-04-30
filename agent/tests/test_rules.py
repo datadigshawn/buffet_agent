@@ -19,7 +19,7 @@ def test_load_rules_structure():
     assert "scoring" in r
     assert len(r["core_rules"]) == 10
     assert len(r["hard_disqualifiers"]) == 4
-    assert len(r["soft_bonuses"]) == 5
+    assert len(r["soft_bonuses"]) == 6
 
 
 def test_r1_roe_passed():
@@ -147,3 +147,155 @@ def test_b4_other_value_investors():
     bonuses = rules_mod.evaluate_bonuses(td, rules)
     b4 = next(b for b in bonuses if b.rule_id == "B4")
     assert b4.earned is True
+
+
+def test_b2_roic_5y_avg_threshold():
+    rules = rules_mod.load_rules()
+    # >20% 過
+    td = _td(roic_5y_avg=0.25)
+    bonuses = rules_mod.evaluate_bonuses(td, rules)
+    b2 = next(b for b in bonuses if b.rule_id == "B2")
+    assert b2.earned is True
+    assert b2.points == 5
+    # 20% 邊界 (>20 不含等於)
+    td2 = _td(roic_5y_avg=0.20)
+    b2 = next(b for b in rules_mod.evaluate_bonuses(td2, rules) if b.rule_id == "B2")
+    assert b2.earned is False
+
+
+def test_b2_roic_missing_no_credit():
+    rules = rules_mod.load_rules()
+    td = _td(roic_5y_avg=None)
+    b2 = next(b for b in rules_mod.evaluate_bonuses(td, rules) if b.rule_id == "B2")
+    assert b2.earned is False
+    assert b2.points == 0
+
+
+def test_b5_dividend_growth_streak():
+    rules = rules_mod.load_rules()
+    # 10 年連續 → 過
+    td = _td(div_growth_streak=10)
+    b5 = next(b for b in rules_mod.evaluate_bonuses(td, rules) if b.rule_id == "B5")
+    assert b5.earned is True
+    # 9 年不過
+    td2 = _td(div_growth_streak=9)
+    b5 = next(b for b in rules_mod.evaluate_bonuses(td2, rules) if b.rule_id == "B5")
+    assert b5.earned is False
+
+
+# ---------- B4: industry_overrides ----------
+
+def test_classify_industry():
+    from agent.data_loader import classify_industry
+    assert classify_industry("Financial Services", "Banks—Diversified") == "bank"
+    assert classify_industry("Financial Services", "Insurance—Diversified") == "insurance"
+    assert classify_industry("Utilities", "Utilities—Regulated Electric") == "utility"
+    assert classify_industry("Technology", "Software—Application") == "general"
+    assert classify_industry(None, None) == "general"
+
+
+def test_r1_general_threshold_applies():
+    """非銀行 ticker 用預設 0.15 門檻。"""
+    rules = rules_mod.load_rules()
+    r1 = rules["core_rules"][0]
+    td = _td(roe=0.12, industry_class="general")
+    result = rules_mod.evaluate_rule(r1, td, rules)
+    assert result.passed is False
+    assert result.threshold == 0.15
+
+
+def test_r1_bank_uses_override_threshold():
+    """銀行 ROE 12% 在預設 15% 門檻下會 fail,但 bank override 0.10 應 pass。"""
+    rules = rules_mod.load_rules()
+    r1 = rules["core_rules"][0]
+    td = _td(roe=0.12, industry_class="bank")
+    result = rules_mod.evaluate_rule(r1, td, rules)
+    assert result.passed is True
+    assert result.threshold == 0.10
+    assert "industry=bank" in result.note
+
+
+def test_r5_bank_relaxed_de():
+    """銀行 D/E 1.2 在預設 0.5 門檻下 fail,但 bank 1.5 應 pass。"""
+    rules = rules_mod.load_rules()
+    r5 = next(r for r in rules["core_rules"] if r["id"] == "R5")
+    td = _td(debt_equity=1.2, industry_class="bank")
+    result = rules_mod.evaluate_rule(r5, td, rules)
+    assert result.passed is True
+    assert result.threshold == 1.5
+
+
+def test_r1_insurance_threshold():
+    rules = rules_mod.load_rules()
+    r1 = rules["core_rules"][0]
+    td = _td(roe=0.13, industry_class="insurance")
+    result = rules_mod.evaluate_rule(r1, td, rules)
+    assert result.passed is True  # >= 0.12
+    assert result.threshold == 0.12
+
+
+def test_b6_roe_consistency_threshold():
+    rules = rules_mod.load_rules()
+    # 0.8 含 → 過
+    td = _td(roe_consistency_10y=0.8)
+    b6 = next(b for b in rules_mod.evaluate_bonuses(td, rules) if b.rule_id == "B6")
+    assert b6.earned is True
+    assert b6.points == 5
+    # 0.79 → 不過
+    td2 = _td(roe_consistency_10y=0.79)
+    b6 = next(b for b in rules_mod.evaluate_bonuses(td2, rules) if b.rule_id == "B6")
+    assert b6.earned is False
+    # None → 不過
+    td3 = _td(roe_consistency_10y=None)
+    b6 = next(b for b in rules_mod.evaluate_bonuses(td3, rules) if b.rule_id == "B6")
+    assert b6.earned is False
+
+
+# ---------- screener: 涵蓋率 / INSUFFICIENT_DATA ----------
+
+def test_screener_insufficient_data_for_etf_like():
+    """ETF / 冷門股: 大量規則 skip → 應判 INSUFFICIENT_DATA 而非 AVOID。"""
+    from unittest.mock import patch
+    from agent import screener
+    # 全空 TickerData (模擬 yfinance 拿不到資料的 ticker)
+    bare = TickerData(ticker="EMPTY", sector=None)
+    with patch("agent.screener.data_loader.load_ticker", return_value=bare):
+        s = screener.score("EMPTY")
+    assert s.bias == "INSUFFICIENT_DATA"
+    # R10 (Berkshire bool) 永遠可評估 → coverage 不會是 0,但會 < 50
+    assert s.coverage_pct < 50
+
+
+def test_screener_normalized_score_high_coverage():
+    """資料齊全 + 多數規則通過: bias 應為 BUY 或 HOLD,base 經 normalize。"""
+    from unittest.mock import patch
+    from agent import screener
+    td = TickerData(
+        ticker="GOODCO", sector="Technology",
+        roe=0.20, gross_margin=0.50, net_margin=0.25, earn_growth=0.15,
+        debt_equity=0.3, fcf_margin=0.20, buyback_yield=0.02,
+        fwd_pe=18, peg=1.2, w52_pos=0.6,
+        berkshire_holds=False, eps_3y_negative=False,
+    )
+    with patch("agent.screener.data_loader.load_ticker", return_value=td):
+        s = screener.score("GOODCO")
+    assert s.bias in ("BUY", "HOLD")
+    assert s.coverage_pct >= 90
+    # 9 條過 + 1 條 R10 不過(沒 BRK 持有) → earned=90, available=100, normalized=90
+    assert s.base >= 80
+
+
+def test_screener_partial_data_above_threshold():
+    """有 6 條規則資料(>=50% coverage): 應給 bias 不 INSUFFICIENT_DATA。"""
+    from unittest.mock import patch
+    from agent import screener
+    td = TickerData(
+        ticker="MIDCO", sector="Technology",
+        roe=0.20, gross_margin=0.40, net_margin=0.15, earn_growth=0.12,
+        debt_equity=0.4, w52_pos=0.5,
+        # fcf_margin / buyback_yield / fwd_pe / peg / berkshire 全缺
+    )
+    with patch("agent.screener.data_loader.load_ticker", return_value=td):
+        s = screener.score("MIDCO")
+    assert s.bias != "INSUFFICIENT_DATA"
+    assert 50 <= s.coverage_pct < 100

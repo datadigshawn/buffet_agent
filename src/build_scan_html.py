@@ -27,15 +27,28 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from agent import verdict as v_mod  # noqa: E402
+from agent.sources import top_movers as _top_movers  # noqa: E402
 
 OUT_DIR = ROOT / "simple-html"
 SCAN_DIR = OUT_DIR / "scan"
+JSON_OUT_DIR = ROOT / "output"
 WATCHLIST_JSON = ROOT / "config" / "watchlist.json"
 # stockTracker CSV — 不存在則 fallback 到 watchlist.json
+def _default_stocktracker_csv() -> Path:
+    candidates = [
+        Path.home() / "autobot" / "stockTracker" / "data" / "latest_prices.csv",
+        Path.home() / "Projects" / "stockTracker" / "data" / "latest_prices.csv",
+    ]
+    for p in candidates:
+        if p.exists():
+            return p
+    return candidates[0]
+
+
 STOCKTRACKER_CSV = Path(
     os.environ.get(
         "BUFFET_STOCKTRACKER_CSV",
-        str(Path.home() / "Projects" / "stockTracker" / "data" / "latest_prices.csv"),
+        str(_default_stocktracker_csv()),
     )
 )
 
@@ -61,6 +74,7 @@ header .meta{font-size:13px;color:var(--muted);}
 .bias-WATCH{background:var(--watch);}
 .bias-AVOID{background:var(--avoid);}
 .bias-OUT_OF_CIRCLE{background:var(--out);}
+.bias-INSUFFICIENT_DATA{background:#7a8a9c;}
 .summary-bar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 24px;}
 .summary-bar span{background:var(--code-bg);padding:6px 12px;border-radius:6px;font-size:13px;}
 table{border-collapse:collapse;width:100%;font-size:14px;}
@@ -165,26 +179,54 @@ DETAIL_HTML_TEMPLATE = """<!DOCTYPE html>
 
 # ---------- Watchlist 載入 ----------
 
-def load_watchlist() -> list[str]:
-    """優先 stockTracker CSV (本機開發) → 退回 config/watchlist.json (CI)。"""
-    tickers: list[str] = []
+def load_watchlist(top_n_movers: int = 50, include_top_movers: bool = True) -> tuple[list[str], dict[str, list[str]]]:
+    """組成當日掃描清單。
+
+    回傳 (tickers, source_map):
+      tickers: 去重後的順序清單 (watchlist 在前,Top movers 在後)
+      source_map: ticker → ["watchlist"|"top_50_volume"|...] 用來追溯來源
+    """
+    source_map: dict[str, list[str]] = {}
+    watchlist_tickers: list[str] = []
+
     if STOCKTRACKER_CSV.exists():
         import csv
         with STOCKTRACKER_CSV.open(encoding="utf-8") as f:
             r = csv.reader(f)
             next(r)
-            tickers = [row[0] for row in r]
+            for row in r:
+                if row:
+                    watchlist_tickers.append(row[0])
+
     if WATCHLIST_JSON.exists():
         cfg = json.loads(WATCHLIST_JSON.read_text(encoding="utf-8"))
         for grp in cfg.get("groups", {}).values():
-            tickers.extend(grp.get("tickers", []))
+            watchlist_tickers.extend(grp.get("tickers", []))
+
     # 去重保序
     seen, out = set(), []
-    for t in tickers:
-        if t not in seen:
+    for t in watchlist_tickers:
+        t = t.upper().strip()
+        if t and t not in seen:
             seen.add(t)
             out.append(t)
-    return out
+            source_map[t] = ["watchlist"]
+
+    # 合併 Top N 成交量
+    if include_top_movers:
+        movers = _top_movers.fetch_top_movers(top_n_movers)
+        for t in movers:
+            t = t.upper().strip()
+            if not t:
+                continue
+            if t in seen:
+                source_map[t].append("top_50_volume")
+            else:
+                seen.add(t)
+                out.append(t)
+                source_map[t] = ["top_50_volume"]
+
+    return out, source_map
 
 
 # ---------- Wikilink 解析 ----------
@@ -227,6 +269,9 @@ def render_summary_row(rank: int, v) -> str:
     if v.bias == "OUT_OF_CIRCLE":
         passed_txt = "—"
         note = s.triggered_disqualifier or ""
+    elif v.bias == "INSUFFICIENT_DATA":
+        passed_txt = "—"
+        note = f"涵蓋率 {s.coverage_pct}% &lt; 50%"
     else:
         passed = sum(1 for r in s.rule_results if r.passed)
         total = len(s.rule_results)
@@ -248,12 +293,13 @@ def render_summary_row(rank: int, v) -> str:
 def render_summary(verdicts: list, timestamp_local: str, rules_version: str) -> str:
     bias_count = Counter(v.bias for v in verdicts)
     badges = []
-    for b in ["BUY", "HOLD", "WATCH", "AVOID", "OUT_OF_CIRCLE"]:
+    for b in ["BUY", "HOLD", "WATCH", "AVOID", "OUT_OF_CIRCLE", "INSUFFICIENT_DATA"]:
         n = bias_count.get(b, 0)
         badges.append(f'<span><span class="bias-badge bias-{b}">{b}</span> {n}</span>')
 
-    # 排序: 先 bias 優先級 (BUY > HOLD > WATCH > AVOID > OUT_OF_CIRCLE), 同 bias 內 score desc
-    bias_order = {"BUY": 0, "HOLD": 1, "WATCH": 2, "AVOID": 3, "OUT_OF_CIRCLE": 4}
+    # 排序: 先 bias 優先級 (BUY > HOLD > WATCH > AVOID > OUT_OF_CIRCLE > INSUFFICIENT_DATA), 同 bias 內 score desc
+    bias_order = {"BUY": 0, "HOLD": 1, "WATCH": 2, "AVOID": 3,
+                  "OUT_OF_CIRCLE": 4, "INSUFFICIENT_DATA": 5}
     sorted_v = sorted(verdicts, key=lambda v: (bias_order[v.bias], -v.score.total))
     rows = "\n".join(render_summary_row(i + 1, v) for i, v in enumerate(sorted_v))
 
@@ -279,18 +325,104 @@ def render_detail(v, timestamp_local: str) -> str:
     )
 
 
+def _verdict_to_json(v, sources: list[str]) -> dict:
+    s = v.score
+    intrinsic_psh = v.intrinsic.intrinsic_per_share if v.intrinsic else None
+    mos = v.intrinsic.margin_of_safety if v.intrinsic else None
+    return {
+        "ticker": v.ticker,
+        "bias": v.bias,
+        "score": s.total,
+        "base": s.base,
+        "raw_base": s.raw_base,
+        "bonus": s.bonus,
+        "coverage_pct": s.coverage_pct,
+        "confidence": v.confidence,
+        "source_groups": sources,
+        "passed_rules": [r.rule_id for r in s.rule_results if r.passed],
+        "failed_rules": [r.rule_id for r in s.rule_results if not r.passed and not r.skipped],
+        "skipped_rules": [r.rule_id for r in s.rule_results if r.skipped],
+        "earned_bonuses": [b.rule_id for b in s.bonuses if b.earned],
+        "triggered_disqualifier": s.triggered_disqualifier,
+        "berkshire_holds": s.data.berkshire_holds if s.data else False,
+        "berkshire_position_pct": s.data.berkshire_position_pct if s.data else None,
+        "current_price": s.data.price if s.data else None,
+        "sector": s.data.sector if s.data else None,
+        "industry_class": s.data.industry_class if s.data else None,
+        "data_source": s.data.source if s.data else None,
+        # DCF (C1)
+        "intrinsic_value_per_share": (
+            round(intrinsic_psh, 2) if intrinsic_psh is not None else None
+        ),
+        "margin_of_safety_pct": (
+            round(mos, 4) if mos is not None else None
+        ),
+        # LLM 定性 (C3) — 含 management_grade / moat_* / in_circle / recommendation
+        "qualitative": v.qualitative.to_dict() if v.qualitative else None,
+        # Top-level convenience field — 戰情室 lobby 卡用
+        "recommendation": (
+            v.qualitative.recommendation
+            if v.qualitative and v.qualitative.recommendation
+            else None
+        ),
+        # Phase D 才會填
+        "alerts": [],
+    }
+
+
+def write_json_output(verdicts, source_map: dict[str, list[str]],
+                      rules_version: str, scan_date: str, scan_time_utc: str) -> Path:
+    """寫 output/daily_YYYY-MM-DD.json + latest.json (給戰情室拉)。"""
+    from collections import Counter
+    bias_count = Counter(v.bias for v in verdicts)
+    payload = {
+        "scan_date": scan_date,
+        "scan_time_utc": scan_time_utc,
+        "rules_version": rules_version,
+        "total_scanned": len(verdicts),
+        "summary": {
+            "BUY": bias_count.get("BUY", 0),
+            "HOLD": bias_count.get("HOLD", 0),
+            "WATCH": bias_count.get("WATCH", 0),
+            "AVOID": bias_count.get("AVOID", 0),
+            "OUT_OF_CIRCLE": bias_count.get("OUT_OF_CIRCLE", 0),
+            "INSUFFICIENT_DATA": bias_count.get("INSUFFICIENT_DATA", 0),
+        },
+        "verdicts": [
+            _verdict_to_json(v, source_map.get(v.ticker, []))
+            for v in sorted(verdicts, key=lambda x: -x.score.total)
+        ],
+    }
+    JSON_OUT_DIR.mkdir(parents=True, exist_ok=True)
+    daily_path = JSON_OUT_DIR / f"daily_{scan_date}.json"
+    latest_path = JSON_OUT_DIR / "latest.json"
+    text = json.dumps(payload, ensure_ascii=False, indent=2)
+    daily_path.write_text(text, encoding="utf-8")
+    latest_path.write_text(text, encoding="utf-8")
+    return daily_path
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None, help="只跑前 N 檔(除錯用)")
     parser.add_argument("--quiet", action="store_true", help="少印 log")
+    parser.add_argument("--top-movers", type=int, default=50,
+                        help="當日成交量 Top N 加入掃描 (0 = 不加)")
     args = parser.parse_args()
 
-    tickers = load_watchlist()
+    tickers, source_map = load_watchlist(
+        top_n_movers=args.top_movers,
+        include_top_movers=args.top_movers > 0,
+    )
     if args.limit:
         tickers = tickers[: args.limit]
+        source_map = {t: source_map[t] for t in tickers if t in source_map}
 
     if not args.quiet:
-        print(f"📊 掃 {len(tickers)} 檔...", flush=True)
+        n_watch = sum(1 for s in source_map.values() if "watchlist" in s)
+        n_movers = sum(1 for s in source_map.values() if "top_50_volume" in s)
+        print(f"📊 掃 {len(tickers)} 檔 (watchlist={n_watch}, top_movers={n_movers})...",
+              flush=True)
 
     verdicts = []
     for i, t in enumerate(tickers, 1):
@@ -306,7 +438,10 @@ def main() -> int:
     rules_data = json.loads((ROOT / "agent" / "rules.json").read_text(encoding="utf-8"))
     rules_version = rules_data.get("version", "?")
 
-    # Asia/Taipei
+    # 時戳
+    now_utc = datetime.now(timezone.utc)
+    scan_date = now_utc.strftime("%Y-%m-%d")
+    scan_time_utc = now_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
     tz = timezone(timedelta(hours=8))
     timestamp_local = datetime.now(tz).strftime("%Y-%m-%d %H:%M %Z")
 
@@ -320,7 +455,10 @@ def main() -> int:
             render_detail(v, timestamp_local), encoding="utf-8"
         )
 
+    json_path = write_json_output(verdicts, source_map, rules_version, scan_date, scan_time_utc)
+
     print(f"✅ 完成 {len(verdicts)} 份報告 → simple-html/scan.html + simple-html/scan/")
+    print(f"📦 JSON contract → {json_path.relative_to(ROOT)} + output/latest.json")
     return 0
 
 

@@ -15,18 +15,44 @@ import csv
 import json
 import logging
 import os
+import random
+import time
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Any
 
+from . import cache as _cache
+
 log = logging.getLogger(__name__)
+
+# yfinance retry/backoff 參數 (環境可調)
+YF_MAX_RETRIES = int(os.environ.get("BUFFET_YF_RETRIES", "3"))
+YF_BACKOFF_BASE = float(os.environ.get("BUFFET_YF_BACKOFF", "2.0"))
 
 # stockTracker 資料路徑 — 不存在則自動 fallback 到 yfinance
 # 可用 BUFFET_STOCKTRACKER_DATA 環境變數 override
+def _default_stocktracker_data() -> Path:
+    """偵測本機 stockTracker data 目錄。
+
+    優先序:
+      1. ~/autobot/stockTracker/data (本機 autobot 佈局)
+      2. ~/Projects/stockTracker/data (legacy 佈局)
+    都不存在就回前者,後續 .exists() 會判 false → fallback 到 yfinance。
+    """
+    candidates = [
+        Path.home() / "autobot" / "stockTracker" / "data",
+        Path.home() / "Projects" / "stockTracker" / "data",
+    ]
+    for p in candidates:
+        if p.exists():
+            return p
+    return candidates[0]
+
+
 STOCKTRACKER_DATA = Path(
     os.environ.get(
         "BUFFET_STOCKTRACKER_DATA",
-        str(Path.home() / "Projects" / "stockTracker" / "data"),
+        str(_default_stocktracker_data()),
     )
 )
 CSV_PATH = STOCKTRACKER_DATA / "latest_prices.csv"
@@ -82,11 +108,34 @@ CUSIP_TO_TICKER = {
 }
 
 
+def classify_industry(sector: str | None, industry: str | None) -> str:
+    """從 sector / industry 字串映射到 buffetAgent 內部分類。
+
+    回傳:"bank" / "insurance" / "utility" / "general"
+
+    這個分類驅動 industry_overrides — Buffett 對銀行/保險/公用事業有不同預期。
+    """
+    sec_l = (sector or "").lower()
+    ind_l = (industry or "").lower()
+    if "insurance" in ind_l or "insurance" in sec_l or "保險" in sec_l:
+        return "insurance"
+    if "bank" in ind_l or ("financial" in sec_l and "bank" in ind_l):
+        return "bank"
+    # 純 industry 是 banks 的也算
+    if ind_l in ("banks—diversified", "banks—regional", "banks - diversified",
+                 "banks - regional", "banks"):
+        return "bank"
+    if "utilit" in sec_l or "utilit" in ind_l or "公用" in sec_l:
+        return "utility"
+    return "general"
+
+
 @dataclass
 class TickerData:
     """規範化後的 ticker 基本面快照。所有比率 0-1 (例 0.15 = 15%)。"""
     ticker: str
     sector: str | None = None
+    industry: str | None = None
     price: float | None = None
     # 獲利能力
     roe: float | None = None
@@ -114,8 +163,15 @@ class TickerData:
     berkshire_value_usd: float | None = None
     berkshire_position_pct: float | None = None  # 占 Berkshire 組合 %
     other_value_investors: list[str] = field(default_factory=list)
+    # SEC 持續性 / bonus 額外欄位 (B1 萃取,B2 注入)
+    roe_consistency_10y: float | None = None   # 過去 10 年 ROE > 15% 比例 (0-1)
+    roic_5y_avg: float | None = None           # B2 用
+    div_growth_streak: int = 0                  # B5 用
+    sec_years_available: int = 0                # SEC 10-K 年數
+    # 行業分類 (B4) — 驅動 industry_overrides
+    industry_class: str = "general"             # general / bank / insurance / utility
     # 來源追蹤
-    source: str = "unknown"   # "csv" / "yfinance" / "csv+yfinance"
+    source: str = "unknown"   # "csv" / "yfinance" / "csv+yfinance" / "+sec"
     missing_fields: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
@@ -157,6 +213,7 @@ def from_csv_row(ticker: str, row: dict[str, str]) -> TickerData:
     return TickerData(
         ticker=ticker,
         sector=row.get("sector") or None,
+        industry=row.get("industry") or None,
         price=_to_float(row.get("price")),
         roe=_to_float(row.get("roe")),
         gross_margin=_to_float(row.get("gross_margin")),
@@ -176,22 +233,46 @@ def from_csv_row(ticker: str, row: dict[str, str]) -> TickerData:
 
 # ---------- yfinance 備援 ----------
 
-def from_yfinance(ticker: str) -> TickerData | None:
-    """yfinance 即時抓取,失敗回 None。"""
+def _fetch_yf_info(ticker: str) -> dict | None:
+    """打 yfinance .info,含 retry/backoff + 當日 cache。"""
+    cached = _cache.get("yf_info", ticker)
+    if cached is not None:
+        return cached if cached else None  # 空 dict = 之前抓失敗,當日不重試
+
     try:
         import yfinance as yf
     except ImportError:
         log.warning("yfinance not installed, cannot fetch %s", ticker)
         return None
 
-    try:
-        t = yf.Ticker(ticker)
-        info = t.info or {}
-    except Exception as e:
-        log.warning("yfinance fetch failed for %s: %s", ticker, e)
-        return None
+    last_err: Exception | None = None
+    for attempt in range(YF_MAX_RETRIES):
+        try:
+            t = yf.Ticker(ticker)
+            info = t.info or {}
+            if info and info.get("regularMarketPrice") is not None:
+                _cache.set_("yf_info", ticker, info)
+                return info
+            # 抓到但無價格,可能 ticker 已下市,當日記空避免重打
+            _cache.set_("yf_info", ticker, {})
+            return None
+        except Exception as e:
+            last_err = e
+            if attempt < YF_MAX_RETRIES - 1:
+                wait = YF_BACKOFF_BASE ** attempt + random.uniform(0, 0.5)
+                log.warning("yfinance %s attempt %d failed (%s); retry in %.1fs",
+                            ticker, attempt + 1, e, wait)
+                time.sleep(wait)
+    log.warning("yfinance fetch failed for %s after %d retries: %s",
+                ticker, YF_MAX_RETRIES, last_err)
+    _cache.set_("yf_info", ticker, {})
+    return None
 
-    if not info or info.get("regularMarketPrice") is None:
+
+def from_yfinance(ticker: str) -> TickerData | None:
+    """yfinance 即時抓取,失敗回 None。"""
+    info = _fetch_yf_info(ticker)
+    if not info:
         return None
 
     # FCF margin
@@ -223,6 +304,7 @@ def from_yfinance(ticker: str) -> TickerData | None:
     return TickerData(
         ticker=ticker,
         sector=info.get("sector"),
+        industry=info.get("industry"),
         price=price,
         roe=info.get("returnOnEquity"),
         gross_margin=info.get("grossMargins"),
@@ -314,10 +396,94 @@ def annotate_13f(td: TickerData) -> TickerData:
     return td
 
 
+# ---------- SEC 整合 ----------
+
+# 環境變數 BUFFET_DISABLE_SEC=1 可關閉 SEC 整合 (例如本機測試 / 速度考量)
+SEC_ENABLED = os.environ.get("BUFFET_DISABLE_SEC", "0") != "1"
+
+
+def merge_sec(td: TickerData) -> TickerData:
+    """把 SEC 真實指標填入 TickerData。
+
+    優先序: SEC 有值 → 覆寫 yfinance/CSV 的對應欄位 (因為更精確)
+            SEC 無值 → 維持原值 (yfinance fallback)
+
+    覆寫的欄位:
+      - debt_equity:      SEC LongTermDebt/Equity (純長期負債,符合 Buffett 定義)
+      - fcf_margin:       SEC 5 年平均 owner earnings margin
+      - buyback_yield:    SEC SharesOutstanding YoY 縮減率
+      - eps_3y_negative:  SEC NetIncome 近 3 年都 < 0
+    新增欄位:
+      - roe_consistency_10y / roic_5y_avg / div_growth_streak / sec_years_available
+    """
+    if not SEC_ENABLED:
+        return td
+    try:
+        from . import sec_metrics
+    except ImportError:
+        return td
+
+    metrics = sec_metrics.extract_buffett_metrics(td.ticker)
+    if metrics["source"] == "no_data":
+        return td
+
+    # 覆寫核心欄位 (SEC 更精確)
+    if metrics["long_term_de"] is not None:
+        td.debt_equity = metrics["long_term_de"]
+    if metrics["owner_earnings_5y"] is not None:
+        td.fcf_margin = metrics["owner_earnings_5y"]
+    if metrics["buyback_yield"] is not None:
+        td.buyback_yield = metrics["buyback_yield"]
+
+    # eps_3y_negative: 從 SEC 近 3 年 NetIncome 算 (取代 yfinance 單期 trailingEps)
+    eps_neg = _sec_3y_eps_negative(td.ticker)
+    if eps_neg is not None:
+        td.eps_3y_negative = eps_neg
+
+    # 新增欄位 (持續性、bonus 用)
+    td.roe_consistency_10y = metrics["roe_consistency_10y"]
+    td.roic_5y_avg = metrics["roic_5y_avg"]
+    td.div_growth_streak = metrics["div_growth_streak"] or 0
+    td.sec_years_available = metrics["years_available"]
+
+    # source 標記
+    td.source = (td.source + "+sec") if td.source not in ("unknown", "empty") else "sec"
+    # missing_fields 動態更新
+    td.missing_fields = [
+        f for f in td.missing_fields
+        if getattr(td, f) is None
+    ]
+    return td
+
+
+def _sec_3y_eps_negative(ticker: str) -> bool | None:
+    """檢查 SEC 近 3 年 NetIncome 是否都 < 0 (D4 用)。沒資料回 None。"""
+    try:
+        from . import sec_metrics
+        from .sources import sec as sec_api
+    except ImportError:
+        return None
+    facts = sec_api.get_facts(ticker)
+    if not facts:
+        return None
+    series = sec_metrics._annual_series(facts, "NetIncome")
+    if len(series) < 3:
+        return None
+    last_3 = series[-3:]
+    return all(v < 0 for _, v in last_3)
+
+
 # ---------- 主入口 ----------
 
 def load_ticker(ticker: str) -> TickerData:
-    """主入口:回傳完整的 TickerData。"""
+    """主入口:回傳完整的 TickerData。
+
+    管線:
+      1. CSV (stockTracker) 或 yfinance 拿基本面
+      2. yfinance 補 CSV 沒抓的欄位 (debt_equity, fcf_margin)
+      3. SEC EDGAR 覆寫 R5/R6/R7 真實值 + 加上持續性指標
+      4. 13F 補 Berkshire / 其他價值投資人持股
+    """
     ticker = ticker.upper().strip()
     csv_data = load_csv()
     if ticker in csv_data:
@@ -325,7 +491,10 @@ def load_ticker(ticker: str) -> TickerData:
     else:
         td = from_yfinance(ticker) or TickerData(ticker=ticker, source="empty")
     td = merge_yfinance(td)
+    td = merge_sec(td)
     td = annotate_13f(td)
+    # B4: 行業分類 (依 sector + industry 字串)
+    td.industry_class = classify_industry(td.sector, td.industry)
     return td
 
 

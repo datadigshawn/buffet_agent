@@ -1,11 +1,16 @@
-name: Weekly Buffett Scan
+name: Daily Buffett Scan
 
 on:
-  # 每週一 22:00 UTC = 美東 17/18:00 (收盤後)
+  # 每天 22:30 UTC = 美東 17:30 / 18:30 (收盤後 30 分,避開 yfinance 高峰)
   schedule:
-    - cron: '0 22 * * 1'
+    - cron: '30 22 * * *'
   # 也允許手動觸發
   workflow_dispatch:
+    inputs:
+      top_movers:
+        description: 'Top N 成交量加入掃描 (0=不加)'
+        default: '50'
+        required: false
 
 permissions:
   contents: write
@@ -13,7 +18,7 @@ permissions:
 jobs:
   scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,17 +34,44 @@ jobs:
           python -m pip install --upgrade pip
           pip install yfinance markdown python-frontmatter
 
+      - name: Cache SEC EDGAR data (CIK map + companyfacts)
+        uses: actions/cache@v4
+        with:
+          path: data/sec_cache
+          # 7-day key — SEC 10-K 一年才幾次,7 天內可重用
+          key: sec-cache-${{ runner.os }}-${{ hashFiles('config/watchlist.json') }}
+          restore-keys: |
+            sec-cache-${{ runner.os }}-
+
+      - name: Verify secrets wiring (no key leak)
+        run: |
+          if [ -n "${{ secrets.OPENROUTER_API_KEY }}" ]; then
+            echo "✅ OPENROUTER_API_KEY secret is set (LLM backend will be active)"
+          else
+            echo "⚠️ OPENROUTER_API_KEY secret NOT set — LLM will fallback to NullBackend"
+          fi
+
       - name: Run Buffett scan
-        run: python src/build_scan_html.py --quiet
+        env:
+          BUFFET_YF_RETRIES: '3'
+          BUFFET_YF_BACKOFF: '2.0'
+          SEC_USER_AGENT: 'buffetAgent contact@datadigshawn.local'
+          # Phase 4-C3 LLM 定性判斷:secret 沒設就 fallback 到 NullBackend
+          BUFFET_LLM_BACKEND: ${{ secrets.OPENROUTER_API_KEY && 'openrouter' || 'none' }}
+          BUFFET_LLM_MODEL: 'minimax/minimax-m2.5'
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python src/build_scan_html.py --quiet \
+            --top-movers ${{ github.event.inputs.top_movers || '50' }}
 
       - name: Commit & push
         run: |
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git add simple-html/scan.html simple-html/scan/
+          git add simple-html/scan.html simple-html/scan/ output/
           if git diff --staged --quiet; then
             echo "No changes — skipping commit"
           else
-            git commit -m "weekly Buffett scan — $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git commit -m "daily Buffett scan — $(date -u +'%Y-%m-%d %H:%M UTC')"
             git push
           fi

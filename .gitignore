@@ -7,3 +7,8 @@ public/
 __pycache__/
 *.pyc
 .pytest_cache/
+.cache/
+venv/
+# SEC companyfacts JSON (each ~4 MB,GH Actions 每天重抓即可)
+data/sec_cache/*.json
+!data/sec_cache/.gitkeep

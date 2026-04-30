@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.buffetagent.notify-warroom</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+
+  <!--
+    流程:
+    1. cd 到 buffetAgent repo
+    2. git pull (拉 GitHub Actions 寫好的 output/latest.json)
+    3. 跑 notify_warroom.py 把摘要寫到 war-room.db lobby
+
+    時點: 台北 07:00 (= UTC 23:00,GitHub Actions cron 22:30 UTC 之後)
+  -->
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>-c</string>
+    <string>cd /Users/shawnclaw/autobot/agent/buffetAgent &amp;&amp; /opt/homebrew/bin/git pull --rebase --autostash 2&gt;&amp;1 || true; /Users/shawnclaw/autobot/agent/buffetAgent/venv/bin/python scripts/notify_warroom.py</string>
+  </array>
+
+  <key>WorkingDirectory</key>
+  <string>/Users/shawnclaw/autobot/agent/buffetAgent</string>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>7</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <false/>
+
+  <key>SoftResourceLimits</key>
+  <dict>
+    <key>NumberOfFiles</key>
+    <integer>4096</integer>
+  </dict>
+
+  <key>StandardOutPath</key>
+  <string>/Users/shawnclaw/autobot/agent/buffetAgent/output/notify_warroom.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/shawnclaw/autobot/agent/buffetAgent/output/notify_warroom.error.log</string>
+</dict>
+</plist>

@@ -73,7 +73,20 @@ def _apply_op(actual: float | bool | None, op: str, threshold: float | bool) -> 
 
 # ---------- 核心規則 ----------
 
-def evaluate_rule(rule: dict, td: TickerData) -> RuleResult:
+def _resolve_threshold(rule: dict, td: TickerData, rules_root: dict | None = None) -> Any:
+    """套用 industry_overrides:若 td.industry_class 在 rules.industry_overrides[<class>][<rule_id>]
+    有 threshold,用該值取代。沒命中回原 threshold。"""
+    if rules_root is None:
+        return rule.get("threshold")
+    ind_class = getattr(td, "industry_class", "general")
+    if ind_class == "general":
+        return rule.get("threshold")
+    overrides = rules_root.get("industry_overrides", {}).get(ind_class, {})
+    rule_override = overrides.get(rule["id"], {})
+    return rule_override.get("threshold", rule.get("threshold"))
+
+
+def evaluate_rule(rule: dict, td: TickerData, rules_root: dict | None = None) -> RuleResult:
     rid = rule["id"]
     name = rule["name"]
     weight = rule["weight"]
@@ -83,12 +96,23 @@ def evaluate_rule(rule: dict, td: TickerData) -> RuleResult:
     if rule.get("op") == "or":
         actual_text = []
         passed = False
+        any_data = False
         for cond in rule["conditions"]:
             v = getattr(td, cond["field"], None)
             actual_text.append(f"{cond['field']}={v}")
-            if v is not None and _apply_op(v, cond["op"], cond["threshold"]):
-                passed = True
-                break
+            if v is not None:
+                any_data = True
+                if _apply_op(v, cond["op"], cond["threshold"]):
+                    passed = True
+                    break
+        # 全部條件都缺資料 → skipped (避免 ETF 之類的 ticker 拿這條當「失敗」)
+        if not any_data:
+            return RuleResult(
+                rule_id=rid, name=name, field=rule["field"], op="or",
+                threshold=0, weight=weight, actual=None,
+                passed=False, points=0, skipped=True,
+                source_concept=source, note="缺值",
+            )
         return RuleResult(
             rule_id=rid, name=name, field=rule["field"], op="or",
             threshold=0, weight=weight, actual=None,
@@ -98,19 +122,24 @@ def evaluate_rule(rule: dict, td: TickerData) -> RuleResult:
 
     field = rule["field"]
     actual = getattr(td, field, None)
+    threshold = _resolve_threshold(rule, td, rules_root)
     if actual is None:
         return RuleResult(
             rule_id=rid, name=name, field=field, op=rule["op"],
-            threshold=rule["threshold"], weight=weight, actual=None,
+            threshold=threshold, weight=weight, actual=None,
             passed=False, points=0, skipped=True,
             source_concept=source, note="缺值",
         )
-    passed = _apply_op(actual, rule["op"], rule["threshold"])
+    passed = _apply_op(actual, rule["op"], threshold)
+    note = ""
+    if threshold != rule.get("threshold"):
+        note = f"industry={td.industry_class} override threshold={threshold}"
     return RuleResult(
         rule_id=rid, name=name, field=field, op=rule["op"],
-        threshold=rule["threshold"], weight=weight, actual=float(actual) if not isinstance(actual, bool) else actual,
+        threshold=threshold, weight=weight,
+        actual=float(actual) if not isinstance(actual, bool) else actual,
         passed=passed, points=weight if passed else 0,
-        source_concept=source,
+        source_concept=source, note=note,
     )
 
 
@@ -174,11 +203,23 @@ def evaluate_bonuses(td: TickerData, rules: dict) -> list[BonusResult]:
             if td.berkshire_position_pct and td.berkshire_position_pct > 0.01:
                 earned = True
 
+        elif rid == "B2":  # ROIC 5y avg > 20%
+            if td.roic_5y_avg is not None and td.roic_5y_avg > 0.20:
+                earned = True
+
         elif rid == "B4":  # 其他價值名家持有
             if td.other_value_investors:
                 earned = True
 
-        # B2/B3/B5 需要額外資料,Phase 3 補
+        elif rid == "B5":  # 連續 10 年股利成長
+            if td.div_growth_streak >= 10:
+                earned = True
+
+        elif rid == "B6":  # ROE 10 年持續性 >= 0.8
+            if td.roe_consistency_10y is not None and td.roe_consistency_10y >= 0.8:
+                earned = True
+
+        # B3 (CEO 持股) 仍未實作 — 需 SEC Form 4
 
         out.append(BonusResult(
             rule_id=rid, name=name, earned=earned,
