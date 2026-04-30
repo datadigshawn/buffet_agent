@@ -1,0 +1,63 @@
+{
+  "as_of": "2026-04-30",
+  "horizons": [
+    30,
+    90,
+    180
+  ],
+  "scan_count": 1,
+  "top_n": 10,
+  "benchmark": "^GSPC",
+  "by_scan_date": {
+    "2026-04-30": {
+      "scan_date": "2026-04-30",
+      "buy_count": 2,
+      "buy_tickers": [
+        "TSM",
+        "NVDA"
+      ],
+      "horizons": {
+        "30": {
+          "horizon_days": 30,
+          "ready": false,
+          "days_elapsed": 0,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        },
+        "90": {
+          "horizon_days": 90,
+          "ready": false,
+          "days_elapsed": 0,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        },
+        "180": {
+          "horizon_days": 180,
+          "ready": false,
+          "days_elapsed": 0,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        }
+      }
+    }
+  },
+  "rolling_summary": {
+    "weeks_with_30d_data": 0,
+    "avg_alpha_30d": null,
+    "avg_alpha_90d": null,
+    "avg_alpha_180d": null,
+    "avg_hit_rate_30d": null,
+    "consecutive_underperforming_weeks": 0,
+    "regression_alert": false,
+    "note": ""
+  }
+}

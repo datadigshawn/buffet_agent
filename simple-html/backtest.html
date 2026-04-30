@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-TW"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>📊 Buffett Agent 回測</title>
+<style>
+:root{--bg:#faf8f5;--fg:#2a2521;--accent:#8b3a2f;--line:#e5e0d4;--pos:#2d7a4f;--neg:#7a2d3a;--pend:#7a652d;}
+@media (prefers-color-scheme: dark){:root{--bg:#1a1816;--fg:#ebe6db;--accent:#d4815a;--line:#3a352e;--pos:#52c285;--neg:#c25268;--pend:#c2a052;}}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Noto Sans TC',-apple-system,sans-serif;line-height:1.6;}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 18px 60px;}
+header{margin-bottom:24px;border-bottom:2px solid var(--accent);padding-bottom:12px;}
+header h1{color:var(--accent);font-size:28px;margin:0;}
+.meta{color:#888;font-size:13px;margin-top:6px;}
+.alert{background:rgba(194,82,104,0.15);border-left:4px solid var(--neg);padding:12px 16px;margin:18px 0;border-radius:0 4px 4px 0;}
+.kpi-row{display:flex;flex-wrap:wrap;gap:14px;margin:20px 0;}
+.kpi{flex:1;min-width:180px;background:rgba(139,58,47,0.06);padding:14px;border-radius:8px;}
+.kpi .label{font-size:12px;color:#888;text-transform:uppercase;}
+.kpi .val{font-size:24px;font-weight:700;margin-top:4px;}
+.kpi .pos{color:var(--pos);} .kpi .neg{color:var(--neg);}
+table{border-collapse:collapse;width:100%;font-size:14px;margin-top:14px;}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;}
+th{background:rgba(139,58,47,0.06);color:var(--accent);font-weight:700;}
+.pos{color:var(--pos);font-weight:600;}
+.neg{color:var(--neg);font-weight:600;}
+.pending{color:var(--pend);font-size:12px;}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:12px;color:#888;}
+a{color:var(--accent);}
+</style></head><body>
+<div class="wrap">
+<header>
+  <h1>📊 Buffett Agent 回測</h1>
+  <div class="meta">As of 2026-04-30 · 歷史掃描 1 次 · top 10 BUY 籃子 vs ^GSPC</div>
+</header>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="label">30d 平均 Alpha</div><div class="val ">—</div></div>
+  <div class="kpi"><div class="label">90d 平均 Alpha</div><div class="val ">—</div></div>
+  <div class="kpi"><div class="label">180d 平均 Alpha</div><div class="val ">—</div></div>
+  <div class="kpi"><div class="label">30d 命中率</div><div class="val">—</div></div>
+</div>
+
+<h2>各次掃描表現</h2>
+<table>
+<thead><tr><th>掃描日</th><th>BUY 數</th><th>30d α</th><th>30d 命中</th><th>90d α</th><th>180d α</th></tr></thead>
+<tbody>
+<tr><td>2026-04-30</td><td>2</td><td><span class="pending">⏳ 0/30</span></td><td>—</td><td><span class="pending">⏳ 0/90</span></td><td><span class="pending">⏳ 0/180</span></td></tr>
+</tbody>
+</table>
+
+<footer>
+🏗️ <a href="https://github.com/datadigshawn/buffet_agent">buffet_agent</a> · 每週日 23:00 UTC 自動更新 ·
+<a href="scan.html">回 Scan</a> · <a href="index.html">知識庫</a>
+</footer>
+</div></body></html>
