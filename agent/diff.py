@@ -9,6 +9,7 @@
   - mos_first_positive:  DCF 安全邊際首次轉正(便宜進場訊號)
   - disqualifier_triggered: 從 BUY/HOLD 跌到 OUT_OF_CIRCLE
   - thesis_broken:       已建立 thesis 的 ticker 條件被違反 (P0-2)
+  - news_alert:          近 7 天新聞 sentiment / 重大事件異常 (P1-3)
 
 不算變動的事(避免噪音):
   - 分數小幅升降(<5 分)但 bias 沒變
@@ -178,6 +179,42 @@ def detect(yesterday: dict | None, today: dict) -> list[Alert]:
     severity_rank = {"high": 0, "medium": 1, "low": 2}
     alerts.sort(key=lambda a: (severity_rank.get(a.severity, 3), a.ticker))
     return alerts
+
+
+def news_alerts_from_verdicts(verdicts_dicts: list[dict]) -> list[Alert]:
+    """從每筆 verdict 的 news 欄位產生 news 級別 alert (P1-3)。
+
+    輸入是 daily_*.json 的 verdicts list (dict 形式)。
+    觸發條件:news.alert_type 不為 null。
+    """
+    out: list[Alert] = []
+    for v in verdicts_dicts:
+        news = (v or {}).get("news")
+        if not news:
+            continue
+        alert_type = news.get("alert_type")
+        if not alert_type:
+            continue
+        ticker = v.get("ticker", "?")
+        sentiment = news.get("sentiment_avg_7d")
+        count = news.get("article_count_7d", 0)
+        flash = news.get("flash_count_7d", 0)
+        # 嚴重度: negative_spike / material_event = high; positive_spike = medium
+        severity = "high" if alert_type != "news_positive_spike" else "medium"
+        if alert_type == "news_negative_spike":
+            label = f"負面新聞集中 (sentiment {sentiment:+.2f},{count} 篇)"
+        elif alert_type == "news_positive_spike":
+            label = f"正面新聞集中 (sentiment {sentiment:+.2f},{count} 篇)"
+        elif alert_type == "material_event":
+            label = f"{flash} 條重要快訊"
+        else:
+            label = alert_type
+        out.append(Alert(
+            ticker=ticker, type="news_alert", severity=severity,
+            summary=f"{ticker}: {label}",
+            today={"news": news},
+        ))
+    return out
 
 
 def thesis_broken_alerts(thesis_statuses: list) -> list[Alert]:

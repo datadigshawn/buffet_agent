@@ -17,7 +17,9 @@ from . import llm as llm_mod
 from . import valuation as valuation_mod
 from . import management as management_mod
 from . import moat as moat_mod
+from . import news_signals as news_mod
 from .sources import sec as sec_api
+from .sources import news as news_src
 
 
 @dataclass
@@ -35,6 +37,7 @@ class Verdict:
     valuation: valuation_mod.EnsembleValuation | None = None
     management: management_mod.ManagementProfile | None = None
     moat: moat_mod.MoatProfile | None = None
+    news: news_mod.NewsSignals | None = None
     qualitative: llm_mod.QualitativeJudgment | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -59,6 +62,7 @@ class Verdict:
             "valuation": self.valuation.to_dict() if self.valuation else None,
             "management": self.management.to_dict() if self.management else None,
             "moat": self.moat.to_dict() if self.moat else None,
+            "news": self.news.to_dict() if self.news else None,
             "qualitative": self.qualitative.to_dict() if self.qualitative else None,
         }
 
@@ -68,7 +72,8 @@ def _build_rationale_md(s: screener.Score, kb: dict,
                         qualitative: llm_mod.QualitativeJudgment | None = None,
                         valuation: valuation_mod.EnsembleValuation | None = None,
                         management: management_mod.ManagementProfile | None = None,
-                        moat: moat_mod.MoatProfile | None = None) -> str:
+                        moat: moat_mod.MoatProfile | None = None,
+                        news: news_mod.NewsSignals | None = None) -> str:
     parts = []
     parts.append(f"# 巴菲特 Agent — {s.ticker}\n")
     parts.append(f"**Bias**: {s.bias}  ·  **Score**: {s.total}/110 (base {s.base} + bonus {s.bonus})\n")
@@ -169,6 +174,40 @@ def _build_rationale_md(s: screener.Score, kb: dict,
             f"- 假設: stage 1 成長 {intrinsic.stage1_growth*100:.1f}%、"
             f"折現率 {intrinsic.discount_rate*100:.1f}%、{intrinsic.note}"
         )
+
+    # P1-3: 新聞訊號區塊
+    if news and news.article_count_7d > 0:
+        trend_label = {
+            "rising": "📈 上升",
+            "falling": "📉 下降",
+            "stable": "➡️ 穩定",
+            "unknown": "?",
+        }.get(news.sentiment_trend, news.sentiment_trend)
+        parts.append(f"\n## 📰 新聞訊號 (近 7 天)\n")
+        parts.append(f"- 文章數: **{news.article_count_7d}** 篇 (含 {news.flash_count_7d} 重要快訊)")
+        if news.sentiment_avg_7d is not None:
+            parts.append(f"- 平均 sentiment: **{news.sentiment_avg_7d:+.2f}** (-1 ~ +1 scale)")
+        parts.append(f"- 情緒趨勢: {trend_label}")
+        if news.sentiment_recent_3d is not None and news.sentiment_older_4d is not None:
+            parts.append(
+                f"  - 近 3 天 {news.sentiment_recent_3d:+.2f} vs 前 4 天 {news.sentiment_older_4d:+.2f}"
+            )
+        if news.top_topics:
+            parts.append(f"- 熱門主題: {', '.join(news.top_topics)}")
+        if news.alert_type:
+            alert_label = {
+                "news_negative_spike": "🔴 負面新聞集中",
+                "news_positive_spike": "🟢 正面新聞集中",
+                "material_event": "⚡ 重要事件 (≥3 重要快訊)",
+            }.get(news.alert_type, news.alert_type)
+            parts.append(f"- ⚠️ 新聞 alert: **{alert_label}**")
+        if news.material_events:
+            parts.append("\n重要事件 (近 7 天):")
+            for ev in news.material_events[:3]:
+                src = ev.get("category") or ev.get("source") or ""
+                sent = ev.get("sentiment")
+                sent_str = f" [{sent:+.1f}]" if sent is not None else ""
+                parts.append(f"  - **{src}**{sent_str} {ev.get('title','')[:80]}")
 
     # P1-2: 護城河結構化評分
     if moat and moat.overall_score > 0:
@@ -329,11 +368,20 @@ def evaluate(ticker: str) -> Verdict:
         except Exception:  # noqa: BLE001
             pass
 
+    # P1-3: 新聞訊號 (近 7 天 sentiment/事件) — 對 BUY/HOLD 才跑(省查詢成本)
+    news = None
+    if s.bias in ("BUY", "HOLD") and news_src.is_available():
+        try:
+            articles = news_src.fetch_recent_news(s.ticker, days=7, max_articles=20)
+            news = news_mod.compute_signals(s.ticker, articles)
+        except Exception:  # noqa: BLE001
+            pass
+
     # LLM 定性判斷:只對 BUY/HOLD 跑 (省成本),C1 階段 backend=none 永遠回空
     qualitative = None
     if s.bias in ("BUY", "HOLD"):
         try:
-            llm_context = _build_llm_context(s, kb, intrinsic, valuation, management, moat)
+            llm_context = _build_llm_context(s, kb, intrinsic, valuation, management, moat, news)
             qualitative = llm_mod.judge(s.ticker, llm_context)
         except Exception:  # noqa: BLE001
             pass
@@ -357,11 +405,12 @@ def evaluate(ticker: str) -> Verdict:
         related_concepts=kb.get("concepts") or [],
         guidebook=kb.get("guidebook"),
         opposing_flags=flags,
-        rationale_md=_build_rationale_md(s, kb, intrinsic, qualitative, valuation, management, moat),
+        rationale_md=_build_rationale_md(s, kb, intrinsic, qualitative, valuation, management, moat, news),
         intrinsic=intrinsic,
         valuation=valuation,
         management=management,
         moat=moat,
+        news=news,
         qualitative=qualitative,
     )
 
@@ -373,6 +422,7 @@ def _build_llm_context(
     valuation: valuation_mod.EnsembleValuation | None = None,
     management: management_mod.ManagementProfile | None = None,
     moat: moat_mod.MoatProfile | None = None,
+    news: news_mod.NewsSignals | None = None,
 ) -> dict:
     """組裝給 LLM backend 的上下文 (C3 才會真用到)。"""
     d = s.data
@@ -397,6 +447,18 @@ def _build_llm_context(
         ),
         "related_concepts": [c.title for c in (kb.get("concepts") or [])],
     }
+    # P1-3: 新聞訊號 + 重大事件清單 (LLM 應引用,不憑空猜)
+    if news and news.article_count_7d > 0:
+        ctx["news"] = {
+            "article_count_7d": news.article_count_7d,
+            "sentiment_avg_7d": news.sentiment_avg_7d,
+            "sentiment_trend": news.sentiment_trend,
+            "top_topics": news.top_topics,
+            "flash_count_7d": news.flash_count_7d,
+            "alert_type": news.alert_type,
+            "material_events": news.material_events[:3],   # LLM 只需要前 3 條
+        }
+
     # P1-2: 護城河結構化評分 (5 類型 + 趨勢)
     if moat:
         ctx["moat"] = {

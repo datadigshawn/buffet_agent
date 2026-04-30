@@ -87,6 +87,10 @@ SYSTEM_PROMPT = """你是巴菲特量化篩選 agent 的定性判斷 LLM。
   · BVPS 5y CAGR > 12% = Buffett 標準級複利機器
   · 留存效率 < 0.8 = 留存被消耗或大量買回 (Berkshire 重倉股例外)
   · 內建分級 A-D 是基於量化資料,LLM 自己的 management_grade 應該對齊或解釋差異
+- 新聞:context 若有 `news` 區塊(近 7 天文章 sentiment + 重大事件)就引用具體事件
+  · sentiment_trend=falling 是警訊;rising 是動能訊號
+  · alert_type=news_negative_spike → 行動建議要加風險提示
+  · 不要憑空講「最近新聞看好/看壞」 — 引用 material_events 裡的實際標題
 - 護城河:context 若有 `moat` 結構化評分(5 類型 × 0-10 分 + 趨勢)就以那為主
   · 整體強度 ≥ 7 = 強;4-7 = 中等;< 4 = 弱
   · trend=widening 是強買進訊號(護城河擴張中)
@@ -161,6 +165,31 @@ def _build_user_prompt(ticker: str, context: dict) -> str:
             parts.append(f"- 每股內在價值: ${iv:.2f}")
         if mos is not None:
             parts.append(f"- 安全邊際: {mos*100:+.1f}% ({'便宜' if mos > 0 else '偏貴'})")
+    # P1-3: 新聞訊號 + 重大事件
+    news = context.get("news")
+    if news and news.get("article_count_7d", 0) > 0:
+        parts.append(f"\n## 近 7 天新聞訊號")
+        parts.append(
+            f"- 文章 {news['article_count_7d']} 篇,"
+            f"其中重要快訊 {news.get('flash_count_7d', 0)} 篇"
+        )
+        if news.get("sentiment_avg_7d") is not None:
+            parts.append(
+                f"- 平均 sentiment: {news['sentiment_avg_7d']:+.2f} "
+                f"({news.get('sentiment_trend','?')})"
+            )
+        if news.get("top_topics"):
+            parts.append(f"- 熱門主題: {', '.join(news['top_topics'])}")
+        if news.get("alert_type"):
+            parts.append(f"- ⚠️ alert: {news['alert_type']}")
+        if news.get("material_events"):
+            parts.append("- 近期重要事件:")
+            for ev in news["material_events"][:3]:
+                title = (ev.get("title") or "")[:80]
+                sent = ev.get("sentiment")
+                sent_str = f" [{sent:+.1f}]" if sent is not None else ""
+                parts.append(f"  · {title}{sent_str}")
+
     # P1-2: 護城河結構化評分 (LLM 應引用 5 類型分數 + 趨勢)
     moat = context.get("moat")
     if moat:

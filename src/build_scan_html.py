@@ -372,6 +372,8 @@ def _verdict_to_json(v, sources: list[str], thesis_state: str | None = None,
         "management": v.management.to_dict() if v.management else None,
         # P1-2: 護城河結構化評分
         "moat": v.moat.to_dict() if v.moat else None,
+        # P1-3: 新聞訊號
+        "news": v.news.to_dict() if v.news else None,
         # LLM 定性 (C3) — 含 management_grade / moat_* / in_circle / recommendation
         "qualitative": v.qualitative.to_dict() if v.qualitative else None,
         # Top-level convenience field — 戰情室 lobby 卡用
@@ -502,10 +504,11 @@ def main() -> int:
     )
     today_payload = json.loads(json_path.read_text(encoding="utf-8"))
 
-    # Phase 5 P0-1:變動偵測 → output/alerts.json (含 thesis_broken)
+    # Phase 5 P0-1:變動偵測 → output/alerts.json (含 thesis_broken + news_alert)
     yesterday_payload = _diff.find_yesterday_scan(JSON_OUT_DIR, scan_date)
     alerts = _diff.detect(yesterday_payload, today_payload)
     alerts.extend(_diff.thesis_broken_alerts(thesis_statuses))
+    alerts.extend(_diff.news_alerts_from_verdicts(today_payload.get("verdicts", [])))
     # 重新排序 (severity)
     severity_rank = {"high": 0, "medium": 1, "low": 2}
     alerts.sort(key=lambda a: (severity_rank.get(a.severity, 3), a.ticker))
