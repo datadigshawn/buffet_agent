@@ -176,6 +176,9 @@ CONCEPT_ALTERNATES: dict[str, list[str]] = {
     "Capex": [
         "PaymentsToAcquirePropertyPlantAndEquipment",
         "PaymentsToAcquireProductiveAssets",
+        "PaymentsToAcquireRealEstate",
+        "PaymentsToAcquireBuildings",
+        "PaymentsToDevelopRealEstateAssets",
     ],
     "LongTermDebt": [
         "LongTermDebt",
@@ -207,6 +210,22 @@ CONCEPT_ALTERNATES: dict[str, list[str]] = {
     "StockRepurchase": [
         "PaymentsForRepurchaseOfCommonStock",
         "TreasuryStockValueAcquiredCostMethod",
+    ],
+    # P2-3 industry-specific
+    "Depreciation": [
+        "DepreciationDepletionAndAmortization",
+        "DepreciationAmortizationAndAccretionNet",
+        "DepreciationAndAmortization",
+        "Depreciation",
+    ],
+    "InterestIncome": [
+        "InterestAndDividendIncomeOperating",
+        "InterestAndDividendIncomeOperatingNet",
+        "InterestIncomeOperating",
+    ],
+    "InterestExpense": [
+        "InterestExpense",
+        "InterestExpenseOperating",
     ],
 }
 

@@ -95,6 +95,11 @@ SYSTEM_PROMPT = """你是巴菲特量化篩選 agent 的定性判斷 LLM。
   · sentiment_trend=falling 是警訊;rising 是動能訊號
   · alert_type=news_negative_spike → 行動建議要加風險提示
   · 不要憑空講「最近新聞看好/看壞」 — 引用 material_events 裡的實際標題
+- 行業特化加分(passed_rules / earned_bonuses 中的 BNK*/UTL*/REIT*):
+  · BNK1/2 = 銀行 ROA / efficiency 達標,反映優質銀行
+  · UTL1 = 公用事業 capex 持續擴張 rate base
+  · REIT1 = REIT FFO margin 達 30%(REIT 版的 owner earnings)
+  · 看到這些通過代表行業專屬指標也亮綠燈,推薦時可以引用
 - 護城河:context 若有 `moat` 結構化評分(5 類型 × 0-10 分 + 趨勢)就以那為主
   · 整體強度 ≥ 7 = 強;4-7 = 中等;< 4 = 弱
   · trend=widening 是強買進訊號(護城河擴張中)

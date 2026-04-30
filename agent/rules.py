@@ -190,6 +190,39 @@ def evaluate_disqualifiers(td: TickerData, rules: dict) -> list[DisqualifierResu
 
 # ---------- 軟性 bonus ----------
 
+def _evaluate_industry_specific(td: TickerData, rules: dict) -> list[BonusResult]:
+    """P2-3:依 td.industry_class 啟用對應 bonus 規則。
+
+    一般 (general) / 保險業 (insurance,目前無專屬規則) → 回空 list。
+    """
+    out: list[BonusResult] = []
+    ind = getattr(td, "industry_class", "general")
+    industry_rules = (rules.get("industry_specific_rules") or {}).get(ind, [])
+    for r in industry_rules:
+        rid = r["id"]
+        name = r["name"]
+        weight = r["weight"]
+        source = r.get("source_concept", f"industry_{ind}")
+        actual = getattr(td, r["field"], None)
+        if actual is None:
+            out.append(BonusResult(
+                rule_id=rid, name=name, earned=False, points=0,
+                source_concept=source,
+            ))
+            continue
+        op = OPS.get(r["op"])
+        try:
+            passed = bool(op and op(float(actual), float(r["threshold"])))
+        except (TypeError, ValueError):
+            passed = False
+        out.append(BonusResult(
+            rule_id=rid, name=name, earned=passed,
+            points=weight if passed else 0,
+            source_concept=source,
+        ))
+    return out
+
+
 def evaluate_bonuses(td: TickerData, rules: dict) -> list[BonusResult]:
     out: list[BonusResult] = []
     for b in rules["soft_bonuses"]:
@@ -225,4 +258,6 @@ def evaluate_bonuses(td: TickerData, rules: dict) -> list[BonusResult]:
             rule_id=rid, name=name, earned=earned,
             points=points if earned else 0, source_concept=source,
         ))
+    # P2-3: 行業專屬 bonus
+    out.extend(_evaluate_industry_specific(td, rules))
     return out

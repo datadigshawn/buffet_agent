@@ -198,6 +198,23 @@
       "rationale": "Buffett 真正看的是 ROE 的持續性,而不是某一年。過去 10 年中 80% 以上達 15% 才算護城河堅實。"
     }
   ],
+  "industry_specific_rules": {
+    "_doc": "P2-3 行業專屬加分項。依 td.industry_class 動態啟用對應的 bonus 規則。每條 weight 與 op 同 core_rules。",
+    "bank": [
+      {"id": "BNK1", "name": "Bank ROA >= 1%", "field": "bank_roa", "op": ">=", "threshold": 0.01, "weight": 5,
+       "rationale": "ROA > 1% 是優質銀行水準 (JPM/USB 級別)"},
+      {"id": "BNK2", "name": "Efficiency ratio < 60%", "field": "efficiency_ratio", "op": "<", "threshold": 0.60, "weight": 3,
+       "rationale": "費用 / 收入 < 60% 反映經營效率,Buffett 偏好"}
+    ],
+    "utility": [
+      {"id": "UTL1", "name": "Capex/Depreciation >= 1.2", "field": "capex_dep_ratio", "op": ">=", "threshold": 1.2, "weight": 5,
+       "rationale": "持續擴張 rate base,Buffett 投資 BHE 看的就是這個"}
+    ],
+    "reit": [
+      {"id": "REIT1", "name": "FFO margin >= 30%", "field": "ffo_margin", "op": ">=", "threshold": 0.30, "weight": 5,
+       "rationale": "REIT 的 owner earnings 等價物;>=30% 是健康水準"}
+    ]
+  },
   "industry_overrides": {
     "_doc": "依 td.industry_class 動態調整規則門檻。值是新的 threshold,只覆寫,weight 不動。Buffett 的銀行/保險/公用事業有不同合理範圍 — 銀行 ROE 8-12%、D/E 高是因存款是負債,不是壞債。",
     "bank": {

@@ -111,9 +111,10 @@ CUSIP_TO_TICKER = {
 def classify_industry(sector: str | None, industry: str | None) -> str:
     """從 sector / industry 字串映射到 buffetAgent 內部分類。
 
-    回傳:"bank" / "insurance" / "utility" / "general"
+    回傳:"bank" / "insurance" / "utility" / "reit" / "general"
 
-    這個分類驅動 industry_overrides — Buffett 對銀行/保險/公用事業有不同預期。
+    這個分類驅動 industry_overrides + industry_specific_rules —
+    Buffett 對銀行/保險/公用事業/REITs 有不同預期。
     """
     sec_l = (sector or "").lower()
     ind_l = (industry or "").lower()
@@ -127,6 +128,9 @@ def classify_industry(sector: str | None, industry: str | None) -> str:
         return "bank"
     if "utilit" in sec_l or "utilit" in ind_l or "公用" in sec_l:
         return "utility"
+    # P2-3: REITs (sector=Real Estate 或 industry 含 reit)
+    if "reit" in ind_l or "real estate" in sec_l or "不動產" in sec_l:
+        return "reit"
     return "general"
 
 
@@ -168,8 +172,13 @@ class TickerData:
     roic_5y_avg: float | None = None           # B2 用
     div_growth_streak: int = 0                  # B5 用
     sec_years_available: int = 0                # SEC 10-K 年數
-    # 行業分類 (B4) — 驅動 industry_overrides
-    industry_class: str = "general"             # general / bank / insurance / utility
+    # 行業分類 (B4 + P2-3) — 驅動 industry_overrides + industry_specific_rules
+    industry_class: str = "general"             # general / bank / insurance / utility / reit
+    # P2-3 行業特化指標
+    bank_roa: float | None = None               # bank: NI/Assets latest
+    efficiency_ratio: float | None = None       # bank: 1 - NetMargin 5y avg
+    capex_dep_ratio: float | None = None        # utility: Capex/Depreciation 5y avg
+    ffo_margin: float | None = None             # reit: (NI + Dep) / Revenue 5y avg
     # 來源追蹤
     source: str = "unknown"   # "csv" / "yfinance" / "csv+yfinance" / "+sec"
     missing_fields: list[str] = field(default_factory=list)
@@ -495,6 +504,17 @@ def load_ticker(ticker: str) -> TickerData:
     td = annotate_13f(td)
     # B4: 行業分類 (依 sector + industry 字串)
     td.industry_class = classify_industry(td.sector, td.industry)
+    # P2-3: 行業專屬指標
+    if SEC_ENABLED and td.industry_class in ("bank", "utility", "reit"):
+        try:
+            from . import industry_metrics
+            ind_m = industry_metrics.evaluate(ticker, td.industry_class)
+            td.bank_roa = ind_m.bank_roa
+            td.efficiency_ratio = ind_m.efficiency_ratio
+            td.capex_dep_ratio = ind_m.capex_dep_ratio
+            td.ffo_margin = ind_m.ffo_margin
+        except Exception:  # noqa: BLE001
+            pass
     return td
 
 
