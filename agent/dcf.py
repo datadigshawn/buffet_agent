@@ -100,14 +100,17 @@ def _owner_earnings_series(facts: dict, n: int = 5,
     return [(y, ocf_d[y] - cap_d[y]) for y in sorted(common)]
 
 
-def _shares_outstanding_latest(facts: dict) -> float | None:
-    """取最新一年 shares outstanding (絕對值,股數)。"""
+def _shares_outstanding_latest(facts: dict, fallback: float | None = None) -> float | None:
+    """取最新一年 shares outstanding (絕對值,股數)。
+
+    SEC 抓不到時(V/MA 多類股結構)用 fallback (通常從 yfinance market_cap / price 推)。
+    """
     series = sec_metrics._annual_series(
         facts, "SharesOutstanding", unit_pref=("shares",)
     )
-    if not series:
-        return None
-    return series[-1][1]
+    if series:
+        return series[-1][1]
+    return fallback
 
 
 def _cagr(values: list[float]) -> float | None:
@@ -123,7 +126,8 @@ def _cagr(values: list[float]) -> float | None:
 
 def estimate(ticker: str, current_price: float | None = None,
              discount_rate: float | None = None,
-             industry_class: str = "general") -> IntrinsicValue | None:
+             industry_class: str = "general",
+             shares_fallback: float | None = None) -> IntrinsicValue | None:
     """主入口:回傳 ticker 的 DCF 估值,缺資料回 None。
 
     Parameters
@@ -132,6 +136,7 @@ def estimate(ticker: str, current_price: float | None = None,
     current_price : 若已知,直接傳入避免重抓 (data_loader 已有)
     discount_rate : 覆寫預設 10% 折現率
     industry_class : 銀行 / 保險業改用 NetIncome 當 OE proxy
+    shares_fallback : SEC 抓不到 SharesOutstanding 時的退路 (通常 yfinance market_cap / price)
     """
     facts = sec_api.get_facts(ticker)
     if not facts:
@@ -173,7 +178,7 @@ def estimate(ticker: str, current_price: float | None = None,
 
     intrinsic_total = pv_stage1 + pv_terminal
 
-    shares = _shares_outstanding_latest(facts)
+    shares = _shares_outstanding_latest(facts, fallback=shares_fallback)
     if not shares or shares <= 0:
         return None
     intrinsic_per_share = intrinsic_total / shares

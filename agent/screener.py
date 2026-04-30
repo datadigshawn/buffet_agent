@@ -64,13 +64,23 @@ def score(ticker: str) -> Score:
     available_weight = sum(r.weight for r in rule_results if not r.skipped)
     coverage_pct = round(available_weight / total_weight * 100)
 
+    # T-2: 外國 issuer 偵測 — yfinance 有資料但 SEC 0 年 (TSM 等 6-K filers)
+    # 這類 ticker 無法跑 DCF/Shiller/OE yield、無 ROE 持續性,Buffett 框架不適用
+    is_foreign_issuer = (
+        td.sec_years_available == 0
+        and td.source != "yfinance"  # 至少嘗試過 SEC
+        and "sec" in (td.source or "")
+        and td.price is not None      # 確實有 ticker (排除完全空)
+    )
+
     # Step 3: 跑加分項
     bonuses = rules_mod.evaluate_bonuses(td, rules)
     bonus = sum(b.points for b in bonuses)
 
     # Step 4: 對映 bias
     # 涵蓋率太低 → INSUFFICIENT_DATA (ETF / 冷門股)
-    if coverage_pct < MIN_COVERAGE_PCT:
+    # 外國 issuer 也走這條:SEC 不適用,Buffett 框架打折扣
+    if coverage_pct < MIN_COVERAGE_PCT or is_foreign_issuer:
         return Score(
             ticker=ticker.upper(),
             bias="INSUFFICIENT_DATA",

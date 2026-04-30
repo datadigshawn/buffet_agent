@@ -12,3 +12,6 @@ venv/
 # SEC companyfacts JSON (each ~4 MB,GH Actions 每天重抓即可)
 data/sec_cache/*.json
 !data/sec_cache/.gitkeep
+# launchd notify log noise — log files don't belong in repo
+output/notify_warroom.log
+output/notify_warroom.error.log

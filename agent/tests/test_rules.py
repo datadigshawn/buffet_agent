@@ -234,6 +234,59 @@ def test_r1_insurance_threshold():
     assert result.threshold == 0.12
 
 
+# ---------- T-2: 外國 issuer 偵測 ----------
+
+def test_foreign_issuer_marked_insufficient_data():
+    """yfinance 有資料、SEC 嘗試但 0 年 → INSUFFICIENT_DATA (TSM 等)。"""
+    from unittest.mock import patch
+    from agent import screener
+    td = TickerData(
+        ticker="TSM", sector="晶片製造",
+        roe=0.30, gross_margin=0.55, net_margin=0.40, earn_growth=0.20,
+        debt_equity=0.2, fwd_pe=22, peg=1.2, w52_pos=0.5,
+        price=200.0, market_cap=1e12,
+        sec_years_available=0,
+        source="csv+yfinance+sec",  # 嘗試過 SEC
+    )
+    with patch("agent.screener.data_loader.load_ticker", return_value=td):
+        s = screener.score("TSM")
+    assert s.bias == "INSUFFICIENT_DATA"
+
+
+def test_us_issuer_with_sec_data_not_marked():
+    """US 有 SEC 資料的不該被當外國 issuer。"""
+    from unittest.mock import patch
+    from agent import screener
+    td = TickerData(
+        ticker="AAPL", sector="Technology",
+        roe=0.30, gross_margin=0.45, net_margin=0.25, earn_growth=0.15,
+        debt_equity=1.0, fcf_margin=0.20, fwd_pe=25, peg=1.5, w52_pos=0.7,
+        price=270.0, market_cap=4e12,
+        sec_years_available=17,
+        source="yfinance+sec",
+    )
+    with patch("agent.screener.data_loader.load_ticker", return_value=td):
+        s = screener.score("AAPL")
+    assert s.bias != "INSUFFICIENT_DATA"
+
+
+def test_no_sec_attempted_not_marked_foreign():
+    """SEC 沒嘗試 (純 yfinance) 不該觸發 foreign issuer 邏輯。"""
+    from unittest.mock import patch
+    from agent import screener
+    td = TickerData(
+        ticker="X", sector="Tech",
+        roe=0.30, gross_margin=0.50, net_margin=0.20, earn_growth=0.10,
+        debt_equity=0.3, w52_pos=0.5, price=100.0,
+        sec_years_available=0,
+        source="yfinance",  # 純 yfinance,沒嘗試 SEC
+    )
+    with patch("agent.screener.data_loader.load_ticker", return_value=td):
+        s = screener.score("X")
+    # 不應該因為 sec_years=0 就誤判 (純 yfinance 路徑可能因 SEC disabled)
+    assert s.bias != "INSUFFICIENT_DATA" or s.coverage_pct < 50
+
+
 def test_b6_roe_consistency_threshold():
     rules = rules_mod.load_rules()
     # 0.8 含 → 過

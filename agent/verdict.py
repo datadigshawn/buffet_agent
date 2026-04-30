@@ -14,6 +14,10 @@ from . import screener
 from . import kb_retriever
 from . import dcf as dcf_mod
 from . import llm as llm_mod
+from . import valuation as valuation_mod
+from . import management as management_mod
+from . import moat as moat_mod
+from .sources import sec as sec_api
 
 
 @dataclass
@@ -28,6 +32,9 @@ class Verdict:
     opposing_flags: list[str]
     rationale_md: str
     intrinsic: dcf_mod.IntrinsicValue | None = None
+    valuation: valuation_mod.EnsembleValuation | None = None
+    management: management_mod.ManagementProfile | None = None
+    moat: moat_mod.MoatProfile | None = None
     qualitative: llm_mod.QualitativeJudgment | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -49,13 +56,19 @@ class Verdict:
             "berkshire_holds": self.score.data.berkshire_holds if self.score.data else False,
             "berkshire_value_usd": self.score.data.berkshire_value_usd if self.score.data else None,
             "intrinsic": self.intrinsic.to_dict() if self.intrinsic else None,
+            "valuation": self.valuation.to_dict() if self.valuation else None,
+            "management": self.management.to_dict() if self.management else None,
+            "moat": self.moat.to_dict() if self.moat else None,
             "qualitative": self.qualitative.to_dict() if self.qualitative else None,
         }
 
 
 def _build_rationale_md(s: screener.Score, kb: dict,
                         intrinsic: dcf_mod.IntrinsicValue | None = None,
-                        qualitative: llm_mod.QualitativeJudgment | None = None) -> str:
+                        qualitative: llm_mod.QualitativeJudgment | None = None,
+                        valuation: valuation_mod.EnsembleValuation | None = None,
+                        management: management_mod.ManagementProfile | None = None,
+                        moat: moat_mod.MoatProfile | None = None) -> str:
     parts = []
     parts.append(f"# 巴菲特 Agent — {s.ticker}\n")
     parts.append(f"**Bias**: {s.bias}  ·  **Score**: {s.total}/110 (base {s.base} + bonus {s.bonus})\n")
@@ -105,8 +118,43 @@ def _build_rationale_md(s: screener.Score, kb: dict,
         for b in earned_bonus:
             parts.append(f"- **{b.rule_id}** {b.name} +{b.points}")
 
-    # DCF 內在價值 (C1)
-    if intrinsic:
+    # P0-3 估值 ensemble (三模型平均)
+    if valuation and valuation.method_count > 0:
+        consensus_label = {
+            "very_cheap": "🟢🟢 極便宜",
+            "cheap": "🟢 便宜",
+            "fair": "🟡 接近合理",
+            "expensive": "🔴 偏貴",
+            "very_expensive": "🔴🔴 嚴重高估",
+            "uncertain": "⚪ 不確定",
+        }.get(valuation.consensus, "⚪ 不確定")
+        parts.append(f"\n## 💰 內在價值估算 (Ensemble × {valuation.method_count} 模型)\n")
+        parts.append(f"- Consensus: **{consensus_label}**")
+        if valuation.intrinsic_low is not None:
+            parts.append(
+                f"- 估值帶: ${valuation.intrinsic_low:.2f} (low) / "
+                f"**${valuation.intrinsic_mid:.2f}** (mid) / "
+                f"${valuation.intrinsic_high:.2f} (high)"
+            )
+        if valuation.current_price:
+            parts.append(f"- 目前股價: ${valuation.current_price:.2f}")
+        if valuation.mos_mid is not None:
+            parts.append(
+                f"- 安全邊際 (mid intrinsic): **{valuation.mos_mid*100:+.1f}%**"
+            )
+        parts.append("\n各模型細節:")
+        for c in valuation.contributors:
+            if c.intrinsic_per_share is not None:
+                parts.append(
+                    f"  - **{c.method}**: ${c.intrinsic_per_share:.2f}"
+                    + (f" (MOS {c.margin_of_safety*100:+.1f}%)"
+                       if c.margin_of_safety is not None else "")
+                    + f" — {c.note}"
+                )
+            else:
+                parts.append(f"  - **{c.method}**: (略過 — {c.note})")
+    elif intrinsic:
+        # Fallback: 沒 ensemble 但有單獨 DCF (相容性)
         parts.append("\n## 💰 內在價值估算 (DCF)\n")
         parts.append(
             f"- 每股內在價值: **${intrinsic.intrinsic_per_share:,.2f}**"
@@ -121,6 +169,67 @@ def _build_rationale_md(s: screener.Score, kb: dict,
             f"- 假設: stage 1 成長 {intrinsic.stage1_growth*100:.1f}%、"
             f"折現率 {intrinsic.discount_rate*100:.1f}%、{intrinsic.note}"
         )
+
+    # P1-2: 護城河結構化評分
+    if moat and moat.overall_score > 0:
+        type_label = {
+            "intangible_assets": "無形資產 (品牌/專利)",
+            "switching_costs": "轉換成本",
+            "network_effects": "網路效應",
+            "cost_advantage": "成本優勢",
+            "efficient_scale": "效率規模",
+        }
+        strength_label = {
+            "strong": "🟢 強",
+            "moderate": "🟡 中等",
+            "weak": "🔴 弱",
+        }.get(moat.overall_strength, moat.overall_strength)
+        trend_label = {
+            "widening": "📈 擴張中",
+            "stable": "➡️ 穩定",
+            "narrowing": "📉 收窄中",
+        }.get(moat.trend, moat.trend)
+
+        parts.append(f"\n## 🏰 護城河結構化評分 (P1-2)\n")
+        parts.append(
+            f"- 整體強度: **{strength_label}** ({moat.overall_score:.1f}/10)"
+        )
+        if moat.dominant_types:
+            dom_str = ", ".join(type_label.get(t, t) for t in moat.dominant_types)
+            parts.append(f"- 主要類型: **{dom_str}**")
+        parts.append(f"- 多年趨勢: {trend_label}")
+        if moat.trend_evidence:
+            parts.append(f"  - {' / '.join(moat.trend_evidence)}")
+        parts.append("\n5 類型分數:")
+        for c in moat.components:
+            parts.append(
+                f"  - **{type_label.get(c.moat_type, c.moat_type)}**: "
+                f"{c.score:.1f}/10 — {c.rationale}"
+            )
+
+    # P1-1: 管理層 capital allocation 評估 — 放 LLM 之前(LLM 會引用這些數據)
+    if management and (management.bvps_cagr_5y is not None or management.ceo_name):
+        parts.append(f"\n## 👔 管理層評估 (Capital Allocation)\n")
+        if management.ceo_name:
+            parts.append(f"- CEO: **{management.ceo_name}** ({management.ceo_title or 'CEO'})")
+        if management.bvps_cagr_5y is not None:
+            parts.append(
+                f"- BVPS 5y CAGR: **{management.bvps_cagr_5y*100:+.1f}%**"
+            )
+        if management.retention_efficiency is not None:
+            parts.append(
+                f"- 留存效率 (equity 成長 / 留存盈餘): **{management.retention_efficiency:.2f}**"
+            )
+        if management.dividend_payout_ratio_5y is not None:
+            parts.append(
+                f"- 5y 平均股利配發率: **{management.dividend_payout_ratio_5y*100:.0f}%**"
+            )
+        if management.grade and management.grade != "?":
+            parts.append(f"- Buffett 風格分級: **{management.grade}**")
+        if management.grade_reasons:
+            parts.append("\n判斷依據:")
+            for r in management.grade_reasons:
+                parts.append(f"  - {r}")
 
     # LLM 定性 (C3) — 在 DCF 之後、Berkshire 之前
     if qualitative and qualitative.is_available:
@@ -184,26 +293,49 @@ def evaluate(ticker: str) -> Verdict:
         if not r.passed and not r.skipped:
             flags.append(f"{r.rule_id}: {r.name}")
 
-    # DCF: 只對非 OUT/INSUFFICIENT 算
+    # 估值 (ensemble: DCF + Shiller PE + OE yield):只對非 OUT/INSUFFICIENT 算
     intrinsic = None
+    valuation = None
+    management = None
     if s.bias not in ("OUT_OF_CIRCLE", "INSUFFICIENT_DATA"):
         try:
             current_price = s.data.price if s.data else None
+            market_cap = s.data.market_cap if s.data else None
             ind_class = s.data.industry_class if s.data else "general"
+            # 既有 DCF (相容性,單獨保留 intrinsic)
             intrinsic = dcf_mod.estimate(
-                s.ticker, current_price=current_price, industry_class=ind_class
+                s.ticker, current_price=current_price, industry_class=ind_class,
+            )
+            # 新 ensemble (含 DCF + Shiller PE + OE yield)
+            valuation = valuation_mod.estimate(
+                s.ticker, current_price=current_price,
+                market_cap=market_cap, industry_class=ind_class,
             )
         except Exception:  # noqa: BLE001
-            # DCF 失敗不阻塞 verdict
+            pass
+        # P1-1: 管理層 capital allocation 評估 (BVPS CAGR、留存效率、grade)
+        try:
+            management = management_mod.evaluate(s.ticker)
+        except Exception:  # noqa: BLE001
+            pass
+
+    # P1-2: 護城河結構化 (5 種類型評分 + 趨勢) — 對所有非 OUT/INSUFFICIENT 都跑
+    moat = None
+    if s.bias not in ("OUT_OF_CIRCLE", "INSUFFICIENT_DATA") and s.data is not None:
+        try:
+            td_dict = s.data.to_dict()
+            facts = sec_api.get_facts(s.ticker)
+            moat = moat_mod.evaluate(td_dict, facts)
+        except Exception:  # noqa: BLE001
             pass
 
     # LLM 定性判斷:只對 BUY/HOLD 跑 (省成本),C1 階段 backend=none 永遠回空
     qualitative = None
     if s.bias in ("BUY", "HOLD"):
         try:
-            llm_context = _build_llm_context(s, kb, intrinsic)
+            llm_context = _build_llm_context(s, kb, intrinsic, valuation, management, moat)
             qualitative = llm_mod.judge(s.ticker, llm_context)
-        except Exception as e:  # noqa: BLE001
+        except Exception:  # noqa: BLE001
             pass
 
     # confidence: 用 coverage 直接驅動 + bias 強度
@@ -225,8 +357,11 @@ def evaluate(ticker: str) -> Verdict:
         related_concepts=kb.get("concepts") or [],
         guidebook=kb.get("guidebook"),
         opposing_flags=flags,
-        rationale_md=_build_rationale_md(s, kb, intrinsic, qualitative),
+        rationale_md=_build_rationale_md(s, kb, intrinsic, qualitative, valuation, management, moat),
         intrinsic=intrinsic,
+        valuation=valuation,
+        management=management,
+        moat=moat,
         qualitative=qualitative,
     )
 
@@ -235,10 +370,13 @@ def _build_llm_context(
     s: screener.Score,
     kb: dict,
     intrinsic: dcf_mod.IntrinsicValue | None,
+    valuation: valuation_mod.EnsembleValuation | None = None,
+    management: management_mod.ManagementProfile | None = None,
+    moat: moat_mod.MoatProfile | None = None,
 ) -> dict:
     """組裝給 LLM backend 的上下文 (C3 才會真用到)。"""
     d = s.data
-    return {
+    ctx = {
         "ticker": s.ticker,
         "sector": d.sector if d else None,
         "industry_class": d.industry_class if d else "general",
@@ -259,3 +397,45 @@ def _build_llm_context(
         ),
         "related_concepts": [c.title for c in (kb.get("concepts") or [])],
     }
+    # P1-2: 護城河結構化評分 (5 類型 + 趨勢)
+    if moat:
+        ctx["moat"] = {
+            "overall_strength": moat.overall_strength,
+            "overall_score": moat.overall_score,
+            "dominant_types": moat.dominant_types,
+            "trend": moat.trend,
+            "trend_evidence": moat.trend_evidence,
+            "components": [
+                {"moat_type": c.moat_type, "score": c.score, "rationale": c.rationale}
+                for c in moat.components
+            ],
+        }
+
+    # P1-1: 管理層 capital allocation 量化評估
+    if management:
+        ctx["management"] = {
+            "ceo_name": management.ceo_name,
+            "ceo_title": management.ceo_title,
+            "bvps_cagr_5y": management.bvps_cagr_5y,
+            "dividend_payout_ratio_5y": management.dividend_payout_ratio_5y,
+            "retention_efficiency": management.retention_efficiency,
+            "grade": management.grade,
+            "grade_reasons": management.grade_reasons,
+        }
+
+    # P0-3: ensemble 三模型結果(讓 LLM 自己權衡,不被單一 DCF 帶偏)
+    if valuation and valuation.method_count > 0:
+        ctx["valuation_ensemble"] = {
+            "method_count": valuation.method_count,
+            "consensus": valuation.consensus,
+            "intrinsic_low": valuation.intrinsic_low,
+            "intrinsic_mid": valuation.intrinsic_mid,
+            "intrinsic_high": valuation.intrinsic_high,
+            "mos_mid": valuation.mos_mid,
+            "contributors": [
+                {"method": c.method, "intrinsic": c.intrinsic_per_share,
+                 "mos": c.margin_of_safety, "note": c.note}
+                for c in valuation.contributors
+            ],
+        }
+    return ctx

@@ -27,6 +27,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from agent import verdict as v_mod  # noqa: E402
+from agent import diff as _diff  # noqa: E402
+from agent import thesis as _thesis  # noqa: E402
+from agent import llm as _llm  # noqa: E402
 from agent.sources import top_movers as _top_movers  # noqa: E402
 
 OUT_DIR = ROOT / "simple-html"
@@ -325,10 +328,16 @@ def render_detail(v, timestamp_local: str) -> str:
     )
 
 
-def _verdict_to_json(v, sources: list[str]) -> dict:
+def _verdict_to_json(v, sources: list[str], thesis_state: str | None = None,
+                     thesis_age: int | None = None) -> dict:
     s = v.score
-    intrinsic_psh = v.intrinsic.intrinsic_per_share if v.intrinsic else None
-    mos = v.intrinsic.margin_of_safety if v.intrinsic else None
+    # 優先用 ensemble 的 mid;沒有 ensemble 退回單一 DCF
+    if v.valuation and v.valuation.intrinsic_mid is not None:
+        intrinsic_psh = v.valuation.intrinsic_mid
+        mos = v.valuation.mos_mid
+    else:
+        intrinsic_psh = v.intrinsic.intrinsic_per_share if v.intrinsic else None
+        mos = v.intrinsic.margin_of_safety if v.intrinsic else None
     return {
         "ticker": v.ticker,
         "bias": v.bias,
@@ -350,13 +359,19 @@ def _verdict_to_json(v, sources: list[str]) -> dict:
         "sector": s.data.sector if s.data else None,
         "industry_class": s.data.industry_class if s.data else None,
         "data_source": s.data.source if s.data else None,
-        # DCF (C1)
+        # DCF (C1) — top level 用 ensemble mid 結果 (若有)
         "intrinsic_value_per_share": (
             round(intrinsic_psh, 2) if intrinsic_psh is not None else None
         ),
         "margin_of_safety_pct": (
             round(mos, 4) if mos is not None else None
         ),
+        # P0-3: 完整 ensemble 細節
+        "valuation": v.valuation.to_dict() if v.valuation else None,
+        # P1-1: 管理層 capital allocation 量化評估
+        "management": v.management.to_dict() if v.management else None,
+        # P1-2: 護城河結構化評分
+        "moat": v.moat.to_dict() if v.moat else None,
         # LLM 定性 (C3) — 含 management_grade / moat_* / in_circle / recommendation
         "qualitative": v.qualitative.to_dict() if v.qualitative else None,
         # Top-level convenience field — 戰情室 lobby 卡用
@@ -365,16 +380,24 @@ def _verdict_to_json(v, sources: list[str]) -> dict:
             if v.qualitative and v.qualitative.recommendation
             else None
         ),
+        # Phase 5 P0-2: thesis state — new / valid / broken / null (沒 thesis)
+        "thesis_state": thesis_state,
+        "thesis_age_days": thesis_age,
         # Phase D 才會填
         "alerts": [],
     }
 
 
 def write_json_output(verdicts, source_map: dict[str, list[str]],
-                      rules_version: str, scan_date: str, scan_time_utc: str) -> Path:
-    """寫 output/daily_YYYY-MM-DD.json + latest.json (給戰情室拉)。"""
+                      rules_version: str, scan_date: str, scan_time_utc: str,
+                      thesis_states: dict[str, tuple[str, int | None]] | None = None) -> Path:
+    """寫 output/daily_YYYY-MM-DD.json + latest.json (給戰情室拉)。
+
+    thesis_states: ticker → (state, age_days)
+    """
     from collections import Counter
     bias_count = Counter(v.bias for v in verdicts)
+    thesis_states = thesis_states or {}
     payload = {
         "scan_date": scan_date,
         "scan_time_utc": scan_time_utc,
@@ -389,7 +412,11 @@ def write_json_output(verdicts, source_map: dict[str, list[str]],
             "INSUFFICIENT_DATA": bias_count.get("INSUFFICIENT_DATA", 0),
         },
         "verdicts": [
-            _verdict_to_json(v, source_map.get(v.ticker, []))
+            _verdict_to_json(
+                v, source_map.get(v.ticker, []),
+                thesis_state=thesis_states.get(v.ticker, (None, None))[0],
+                thesis_age=thesis_states.get(v.ticker, (None, None))[1],
+            )
             for v in sorted(verdicts, key=lambda x: -x.score.total)
         ],
     }
@@ -455,10 +482,49 @@ def main() -> int:
             render_detail(v, timestamp_local), encoding="utf-8"
         )
 
-    json_path = write_json_output(verdicts, source_map, rules_version, scan_date, scan_time_utc)
+    # Phase 5 P0-2:thesis tracking — 先跑 thesis 才能把 state 寫進 JSON
+    # 用簡化 dict 餵 thesis 模組(等下完整 JSON 會 overwrite)
+    pre_payload_verdicts = [_verdict_to_json(v, source_map.get(v.ticker, []))
+                            for v in verdicts]
+    thesis_statuses = _thesis.process_verdicts(
+        pre_payload_verdicts,
+        llm_writer=_llm.write_thesis,  # 沒設 OPENROUTER_API_KEY 會自動 None → fallback template
+    )
+    thesis_state_map: dict[str, tuple[str, int | None]] = {}
+    for st in thesis_statuses:
+        age = st.thesis.thesis_age_days if st.thesis else None
+        thesis_state_map[st.ticker] = (st.state, age)
+
+    # 寫 JSON (含 thesis state)
+    json_path = write_json_output(
+        verdicts, source_map, rules_version, scan_date, scan_time_utc,
+        thesis_states=thesis_state_map,
+    )
+    today_payload = json.loads(json_path.read_text(encoding="utf-8"))
+
+    # Phase 5 P0-1:變動偵測 → output/alerts.json (含 thesis_broken)
+    yesterday_payload = _diff.find_yesterday_scan(JSON_OUT_DIR, scan_date)
+    alerts = _diff.detect(yesterday_payload, today_payload)
+    alerts.extend(_diff.thesis_broken_alerts(thesis_statuses))
+    # 重新排序 (severity)
+    severity_rank = {"high": 0, "medium": 1, "low": 2}
+    alerts.sort(key=lambda a: (severity_rank.get(a.severity, 3), a.ticker))
+    alerts_path = JSON_OUT_DIR / "alerts.json"
+    _diff.write_alerts_json(alerts, alerts_path)
 
     print(f"✅ 完成 {len(verdicts)} 份報告 → simple-html/scan.html + simple-html/scan/")
     print(f"📦 JSON contract → {json_path.relative_to(ROOT)} + output/latest.json")
+    # Thesis 統計
+    state_counts: dict[str, int] = {}
+    for st in thesis_statuses:
+        state_counts[st.state] = state_counts.get(st.state, 0) + 1
+    print(f"📜 Theses: " + ", ".join(f"{k}={v}" for k, v in sorted(state_counts.items())))
+    if alerts:
+        by_sev = ", ".join(f"{k}={v}" for k, v in
+                           sorted(_diff._count_by_severity(alerts).items()))
+        print(f"⚡ Alerts ({len(alerts)}: {by_sev}) → {alerts_path.relative_to(ROOT)}")
+    else:
+        print(f"⚡ No alerts (first run or no changes) → {alerts_path.relative_to(ROOT)}")
     return 0
 
 
