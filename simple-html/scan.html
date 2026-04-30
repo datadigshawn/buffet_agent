@@ -28,6 +28,7 @@ header .meta{font-size:13px;color:var(--muted);}
 .bias-WATCH{background:var(--watch);}
 .bias-AVOID{background:var(--avoid);}
 .bias-OUT_OF_CIRCLE{background:var(--out);}
+.bias-INSUFFICIENT_DATA{background:#7a8a9c;}
 .summary-bar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 24px;}
 .summary-bar span{background:var(--code-bg);padding:6px 12px;border-radius:6px;font-size:13px;}
 table{border-collapse:collapse;width:100%;font-size:14px;}
@@ -63,15 +64,16 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <div class="wrap">
 <header>
 <h1>📊 巴菲特 Scan</h1>
-<div class="meta">最近掃描: 2026-04-29 17:17 UTC+08:00 · 共 83 檔 · 資料源 yfinance + 13F · 規則 v1.0.0</div>
+<div class="meta">最近掃描: 2026-04-30 05:49 UTC+08:00 · 共 15 檔 · 資料源 yfinance + 13F · 規則 v1.0.0</div>
 </header>
 
 <div class="summary-bar">
-<span><span class="bias-badge bias-BUY">BUY</span> 7</span>
-<span><span class="bias-badge bias-HOLD">HOLD</span> 18</span>
-<span><span class="bias-badge bias-WATCH">WATCH</span> 17</span>
-<span><span class="bias-badge bias-AVOID">AVOID</span> 17</span>
-<span><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span> 24</span>
+<span><span class="bias-badge bias-BUY">BUY</span> 2</span>
+<span><span class="bias-badge bias-HOLD">HOLD</span> 2</span>
+<span><span class="bias-badge bias-WATCH">WATCH</span> 3</span>
+<span><span class="bias-badge bias-AVOID">AVOID</span> 0</span>
+<span><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span> 0</span>
+<span><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span> 8</span>
 </div>
 
 <table id="scan-table">
@@ -87,231 +89,42 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <tbody>
 <tr>
 <td>1</td>
-<td class="ticker"><a href="scan/GOOGL.html">GOOGL</a></td>
+<td class="ticker"><a href="scan/NVDA.html">NVDA</a></td>
 <td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">87</td>
-<td><span class="brk-yes">✓</span></td>
-<td>7/10</td>
-<td>未過: R6, R9</td>
+<td class="score">85</td>
+<td><span class="brk-no">—</span></td>
+<td>8/10</td>
+<td>未過: R9, R10</td>
 </tr>
 <tr>
 <td>2</td>
-<td class="ticker"><a href="scan/MSFT.html">MSFT</a></td>
+<td class="ticker"><a href="scan/TSM.html">TSM</a></td>
 <td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">85</td>
+<td class="score">84</td>
 <td><span class="brk-no">—</span></td>
-<td>8/10</td>
-<td>未過: R10</td>
+<td>7/10</td>
+<td>未過: R9, R10</td>
 </tr>
 <tr>
 <td>3</td>
-<td class="ticker"><a href="scan/V.html">V</a></td>
-<td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">85</td>
-<td><span class="brk-yes">✓</span></td>
-<td>8/10</td>
-<td>未過: R5</td>
+<td class="ticker"><a href="scan/ASML.html">ASML</a></td>
+<td><span class="bias-badge bias-HOLD">HOLD</span></td>
+<td class="score">74</td>
+<td><span class="brk-no">—</span></td>
+<td>6/10</td>
+<td>未過: R8, R9</td>
 </tr>
 <tr>
 <td>4</td>
-<td class="ticker"><a href="scan/TSM.html">TSM</a></td>
-<td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">80</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R9, R10</td>
-</tr>
-<tr>
-<td>5</td>
-<td class="ticker"><a href="scan/NVDA.html">NVDA</a></td>
-<td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">80</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R9, R10</td>
-</tr>
-<tr>
-<td>6</td>
-<td class="ticker"><a href="scan/MRVL.html">MRVL</a></td>
-<td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">80</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R9, R10</td>
-</tr>
-<tr>
-<td>7</td>
-<td class="ticker"><a href="scan/MA.html">MA</a></td>
-<td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">80</td>
-<td><span class="brk-yes">✓</span></td>
-<td>8/10</td>
-<td>未過: R5</td>
-</tr>
-<tr>
-<td>8</td>
-<td class="ticker"><a href="scan/ALAB.html">ALAB</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">75</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R8, R10</td>
-</tr>
-<tr>
-<td>9</td>
-<td class="ticker"><a href="scan/CRDO.html">CRDO</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">75</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R8, R10</td>
-</tr>
-<tr>
-<td>10</td>
-<td class="ticker"><a href="scan/NOW.html">NOW</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">75</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R4, R10</td>
-</tr>
-<tr>
-<td>11</td>
-<td class="ticker"><a href="scan/PLTR.html">PLTR</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">75</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R8, R10</td>
-</tr>
-<tr>
-<td>12</td>
-<td class="ticker"><a href="scan/KO.html">KO</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">75</td>
-<td><span class="brk-yes">✓</span></td>
-<td>7/10</td>
-<td>未過: R5, R6</td>
-</tr>
-<tr>
-<td>13</td>
-<td class="ticker"><a href="scan/AXP.html">AXP</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">75</td>
-<td><span class="brk-yes">✓</span></td>
-<td>7/10</td>
-<td>未過: R5</td>
-</tr>
-<tr>
-<td>14</td>
-<td class="ticker"><a href="scan/MCO.html">MCO</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">75</td>
-<td><span class="brk-yes">✓</span></td>
-<td>7/10</td>
-<td>未過: R4, R5</td>
-</tr>
-<tr>
-<td>15</td>
-<td class="ticker"><a href="scan/LRCX.html">LRCX</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">70</td>
-<td><span class="brk-no">—</span></td>
-<td>6/10</td>
-<td>未過: R8, R9</td>
-</tr>
-<tr>
-<td>16</td>
-<td class="ticker"><a href="scan/AMAT.html">AMAT</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">70</td>
-<td><span class="brk-no">—</span></td>
-<td>6/10</td>
-<td>未過: R8, R9</td>
-</tr>
-<tr>
-<td>17</td>
-<td class="ticker"><a href="scan/ANET.html">ANET</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">70</td>
-<td><span class="brk-no">—</span></td>
-<td>6/10</td>
-<td>未過: R8, R9</td>
-</tr>
-<tr>
-<td>18</td>
-<td class="ticker"><a href="scan/MU.html">MU</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">70</td>
-<td><span class="brk-no">—</span></td>
-<td>6/10</td>
-<td>未過: R6, R9</td>
-</tr>
-<tr>
-<td>19</td>
-<td class="ticker"><a href="scan/AAPL.html">AAPL</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">70</td>
-<td><span class="brk-yes">✓</span></td>
-<td>6/10</td>
-<td>未過: R5, R8</td>
-</tr>
-<tr>
-<td>20</td>
 <td class="ticker"><a href="scan/AVGO.html">AVGO</a></td>
 <td><span class="bias-badge bias-HOLD">HOLD</span></td>
 <td class="score">65</td>
 <td><span class="brk-no">—</span></td>
 <td>6/10</td>
-<td>未過: R5, R9</td>
+<td>未過: R5, R7</td>
 </tr>
 <tr>
-<td>21</td>
-<td class="ticker"><a href="scan/WDC.html">WDC</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">65</td>
-<td><span class="brk-no">—</span></td>
-<td>6/10</td>
-<td>未過: R5, R9</td>
-</tr>
-<tr>
-<td>22</td>
-<td class="ticker"><a href="scan/ASML.html">ASML</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">60</td>
-<td><span class="brk-no">—</span></td>
-<td>5/10</td>
-<td>未過: R4, R8</td>
-</tr>
-<tr>
-<td>23</td>
-<td class="ticker"><a href="scan/GEV.html">GEV</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">60</td>
-<td><span class="brk-no">—</span></td>
-<td>5/10</td>
-<td>未過: R2, R8</td>
-</tr>
-<tr>
-<td>24</td>
-<td class="ticker"><a href="scan/ISRG.html">ISRG</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">60</td>
-<td><span class="brk-no">—</span></td>
-<td>6/10</td>
-<td>未過: R8, R10</td>
-</tr>
-<tr>
-<td>25</td>
-<td class="ticker"><a href="scan/LLY.html">LLY</a></td>
-<td><span class="bias-badge bias-HOLD">HOLD</span></td>
-<td class="score">60</td>
-<td><span class="brk-no">—</span></td>
-<td>6/10</td>
-<td>未過: R5, R6</td>
-</tr>
-<tr>
-<td>26</td>
+<td>5</td>
 <td class="ticker"><a href="scan/AMD.html">AMD</a></td>
 <td><span class="bias-badge bias-WATCH">WATCH</span></td>
 <td class="score">55</td>
@@ -320,517 +133,94 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <td>未過: R1, R6</td>
 </tr>
 <tr>
-<td>27</td>
-<td class="ticker"><a href="scan/KLAC.html">KLAC</a></td>
+<td>6</td>
+<td class="ticker"><a href="scan/LRCX.html">LRCX</a></td>
 <td><span class="bias-badge bias-WATCH">WATCH</span></td>
 <td class="score">55</td>
 <td><span class="brk-no">—</span></td>
 <td>5/10</td>
-<td>未過: R5, R8</td>
+<td>未過: R5, R7</td>
 </tr>
 <tr>
-<td>28</td>
-<td class="ticker"><a href="scan/AMZN.html">AMZN</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">55</td>
-<td><span class="brk-no">—</span></td>
-<td>5/10</td>
-<td>未過: R4, R6</td>
-</tr>
-<tr>
-<td>29</td>
-<td class="ticker"><a href="scan/VRT.html">VRT</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">55</td>
-<td><span class="brk-no">—</span></td>
-<td>5/10</td>
-<td>未過: R5, R8</td>
-</tr>
-<tr>
-<td>30</td>
-<td class="ticker"><a href="scan/SCCO.html">SCCO</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">55</td>
-<td><span class="brk-no">—</span></td>
-<td>5/10</td>
-<td>未過: R5, R8</td>
-</tr>
-<tr>
-<td>31</td>
-<td class="ticker"><a href="scan/CVX.html">CVX</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">55</td>
-<td><span class="brk-yes">✓</span></td>
-<td>5/10</td>
-<td>未過: R1, R3</td>
-</tr>
-<tr>
-<td>32</td>
+<td>7</td>
 <td class="ticker"><a href="scan/ARM.html">ARM</a></td>
 <td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">50</td>
+<td class="score">47</td>
 <td><span class="brk-no">—</span></td>
-<td>5/10</td>
+<td>4/10</td>
 <td>未過: R1, R4</td>
 </tr>
 <tr>
-<td>33</td>
-<td class="ticker"><a href="scan/NVO.html">NVO</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">50</td>
-<td><span class="brk-no">—</span></td>
-<td>5/10</td>
-<td>未過: R4, R5</td>
-</tr>
-<tr>
-<td>34</td>
-<td class="ticker"><a href="scan/BAC.html">BAC</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">50</td>
-<td><span class="brk-yes">✓</span></td>
-<td>5/10</td>
-<td>未過: R1, R2</td>
-</tr>
-<tr>
-<td>35</td>
-<td class="ticker"><a href="scan/OXY.html">OXY</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">50</td>
-<td><span class="brk-yes">✓</span></td>
-<td>5/10</td>
-<td>未過: R1, R5</td>
-</tr>
-<tr>
-<td>36</td>
-<td class="ticker"><a href="scan/ETN.html">ETN</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">45</td>
-<td><span class="brk-no">—</span></td>
-<td>4/10</td>
-<td>未過: R5, R6</td>
-</tr>
-<tr>
-<td>37</td>
-<td class="ticker"><a href="scan/CCJ.html">CCJ</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">45</td>
-<td><span class="brk-no">—</span></td>
-<td>4/10</td>
-<td>未過: R1, R6</td>
-</tr>
-<tr>
-<td>38</td>
-<td class="ticker"><a href="scan/FCX.html">FCX</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">45</td>
-<td><span class="brk-no">—</span></td>
-<td>4/10</td>
-<td>未過: R1, R3</td>
-</tr>
-<tr>
-<td>39</td>
-<td class="ticker"><a href="scan/LYSDY.html">LYSDY</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">45</td>
-<td><span class="brk-no">—</span></td>
-<td>4/10</td>
-<td>未過: R1, R6</td>
-</tr>
-<tr>
-<td>40</td>
-<td class="ticker"><a href="scan/NOC.html">NOC</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">40</td>
-<td><span class="brk-no">—</span></td>
-<td>4/10</td>
-<td>未過: R2, R3</td>
-</tr>
-<tr>
-<td>41</td>
-<td class="ticker"><a href="scan/NEE.html">NEE</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">40</td>
-<td><span class="brk-no">—</span></td>
-<td>4/10</td>
-<td>未過: R1, R5</td>
-</tr>
-<tr>
-<td>42</td>
-<td class="ticker"><a href="scan/KR.html">KR</a></td>
-<td><span class="bias-badge bias-WATCH">WATCH</span></td>
-<td class="score">40</td>
-<td><span class="brk-yes">✓</span></td>
-<td>4/10</td>
-<td>未過: R1, R2</td>
-</tr>
-<tr>
-<td>43</td>
-<td class="ticker"><a href="scan/SIRI.html">SIRI</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">35</td>
-<td><span class="brk-yes">✓</span></td>
-<td>4/10</td>
-<td>未過: R1, R3</td>
-</tr>
-<tr>
-<td>44</td>
-<td class="ticker"><a href="scan/EQIX.html">EQIX</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">30</td>
-<td><span class="brk-no">—</span></td>
-<td>3/10</td>
-<td>未過: R1, R5</td>
-</tr>
-<tr>
-<td>45</td>
-<td class="ticker"><a href="scan/KTOS.html">KTOS</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">30</td>
-<td><span class="brk-no">—</span></td>
-<td>3/10</td>
-<td>未過: R1, R2</td>
-</tr>
-<tr>
-<td>46</td>
-<td class="ticker"><a href="scan/CEG.html">CEG</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">30</td>
-<td><span class="brk-no">—</span></td>
-<td>3/10</td>
-<td>未過: R2, R3</td>
-</tr>
-<tr>
-<td>47</td>
-<td class="ticker"><a href="scan/LEU.html">LEU</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">30</td>
-<td><span class="brk-no">—</span></td>
-<td>3/10</td>
-<td>未過: R2, R4</td>
-</tr>
-<tr>
-<td>48</td>
-<td class="ticker"><a href="scan/PSTG.html">PSTG</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">25</td>
-<td><span class="brk-no">—</span></td>
-<td>3/10</td>
-<td>未過: R1, R3</td>
-</tr>
-<tr>
-<td>49</td>
-<td class="ticker"><a href="scan/DLR.html">DLR</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">20</td>
-<td><span class="brk-no">—</span></td>
-<td>2/10</td>
-<td>未過: R1, R4</td>
-</tr>
-<tr>
-<td>50</td>
+<td>8</td>
 <td class="ticker"><a href="scan/GLD.html">GLD</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">5</td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
+<td class="score">10</td>
 <td><span class="brk-no">—</span></td>
-<td>1/10</td>
-<td>未過: R8, R10</td>
+<td>—</td>
+<td>涵蓋率 20% &lt; 50%</td>
 </tr>
 <tr>
-<td>51</td>
+<td>9</td>
 <td class="ticker"><a href="scan/GDX.html">GDX</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">5</td>
 <td><span class="brk-no">—</span></td>
-<td>1/10</td>
-<td>未過: R8, R10</td>
+<td>—</td>
+<td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>52</td>
+<td>10</td>
 <td class="ticker"><a href="scan/PSLV.html">PSLV</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">5</td>
 <td><span class="brk-no">—</span></td>
-<td>1/10</td>
-<td>未過: R8, R10</td>
+<td>—</td>
+<td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>53</td>
-<td class="ticker"><a href="scan/TAIL.html">TAIL</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">5</td>
-<td><span class="brk-no">—</span></td>
-<td>1/10</td>
-<td>未過: R8, R10</td>
-</tr>
-<tr>
-<td>54</td>
+<td>11</td>
 <td class="ticker"><a href="scan/QQQM.html">QQQM</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
 <td><span class="brk-no">—</span></td>
-<td>0/10</td>
-<td>未過: R8, R9</td>
+<td>—</td>
+<td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>55</td>
+<td>12</td>
 <td class="ticker"><a href="scan/VOO.html">VOO</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
 <td><span class="brk-no">—</span></td>
-<td>0/10</td>
-<td>未過: R8, R9</td>
+<td>—</td>
+<td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>56</td>
+<td>13</td>
 <td class="ticker"><a href="scan/RSP.html">RSP</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
 <td><span class="brk-no">—</span></td>
-<td>0/10</td>
-<td>未過: R8, R9</td>
+<td>—</td>
+<td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>57</td>
+<td>14</td>
 <td class="ticker"><a href="scan/EWW.html">EWW</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>0/10</td>
-<td>未過: R8, R9</td>
-</tr>
-<tr>
-<td>58</td>
-<td class="ticker"><a href="scan/RTX.html">RTX</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>0/10</td>
-<td>未過: R1, R2</td>
-</tr>
-<tr>
-<td>59</td>
-<td class="ticker"><a href="scan/PWR.html">PWR</a></td>
-<td><span class="bias-badge bias-AVOID">AVOID</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>0/10</td>
-<td>未過: R1, R2</td>
-</tr>
-<tr>
-<td>60</td>
-<td class="ticker"><a href="scan/ORCL.html">ORCL</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
 <td><span class="brk-no">—</span></td>
 <td>—</td>
-<td>D1: D/E=4.15 > 2.0</td>
+<td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>61</td>
-<td class="ticker"><a href="scan/AVAV.html">AVAV</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
+<td>15</td>
+<td class="ticker"><a href="scan/TAIL.html">TAIL</a></td>
+<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
 <td><span class="brk-no">—</span></td>
 <td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>62</td>
-<td class="ticker"><a href="scan/ONDS.html">ONDS</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>63</td>
-<td class="ticker"><a href="scan/RCAT.html">RCAT</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>64</td>
-<td class="ticker"><a href="scan/LMT.html">LMT</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D1: D/E=2.76 > 2.0</td>
-</tr>
-<tr>
-<td>65</td>
-<td class="ticker"><a href="scan/TSLA.html">TSLA</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D3: ticker=TSLA 在巴菲特能力圈黑名單</td>
-</tr>
-<tr>
-<td>66</td>
-<td class="ticker"><a href="scan/VST.html">VST</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D1: D/E=4.00 > 2.0</td>
-</tr>
-<tr>
-<td>67</td>
-<td class="ticker"><a href="scan/BE.html">BE</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D1: D/E=3.78 > 2.0</td>
-</tr>
-<tr>
-<td>68</td>
-<td class="ticker"><a href="scan/EOSE.html">EOSE</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>69</td>
-<td class="ticker"><a href="scan/SMR.html">SMR</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>70</td>
-<td class="ticker"><a href="scan/OKLO.html">OKLO</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>71</td>
-<td class="ticker"><a href="scan/UUUU.html">UUUU</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>72</td>
-<td class="ticker"><a href="scan/MP.html">MP</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>73</td>
-<td class="ticker"><a href="scan/TEM.html">TEM</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D1: D/E=2.70 > 2.0</td>
-</tr>
-<tr>
-<td>74</td>
-<td class="ticker"><a href="scan/BEAM.html">BEAM</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>75</td>
-<td class="ticker"><a href="scan/IBM.html">IBM</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D1: D/E=2.11 > 2.0</td>
-</tr>
-<tr>
-<td>76</td>
-<td class="ticker"><a href="scan/IONQ.html">IONQ</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D3: ticker=IONQ 在巴菲特能力圈黑名單</td>
-</tr>
-<tr>
-<td>77</td>
-<td class="ticker"><a href="scan/QBTS.html">QBTS</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D3: ticker=QBTS 在巴菲特能力圈黑名單</td>
-</tr>
-<tr>
-<td>78</td>
-<td class="ticker"><a href="scan/KHC.html">KHC</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-yes">✓</span></td>
-<td>—</td>
-<td>D4: 近 3 年 EPS 持續為負</td>
-</tr>
-<tr>
-<td>79</td>
-<td class="ticker"><a href="scan/DVA.html">DVA</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-yes">✓</span></td>
-<td>—</td>
-<td>D1: D/E=11.11 > 5.0</td>
-</tr>
-<tr>
-<td>80</td>
-<td class="ticker"><a href="scan/GME.html">GME</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D3: ticker=GME 在巴菲特能力圈黑名單</td>
-</tr>
-<tr>
-<td>81</td>
-<td class="ticker"><a href="scan/AMC.html">AMC</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D3: ticker=AMC 在巴菲特能力圈黑名單</td>
-</tr>
-<tr>
-<td>82</td>
-<td class="ticker"><a href="scan/COIN.html">COIN</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D3: ticker=COIN 在巴菲特能力圈黑名單</td>
-</tr>
-<tr>
-<td>83</td>
-<td class="ticker"><a href="scan/MSTR.html">MSTR</a></td>
-<td><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>D3: ticker=MSTR 在巴菲特能力圈黑名單</td>
+<td>涵蓋率 15% &lt; 50%</td>
 </tr>
 </tbody>
 </table>
