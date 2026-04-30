@@ -509,6 +509,14 @@ def main() -> int:
     alerts = _diff.detect(yesterday_payload, today_payload)
     alerts.extend(_diff.thesis_broken_alerts(thesis_statuses))
     alerts.extend(_diff.news_alerts_from_verdicts(today_payload.get("verdicts", [])))
+    # P2-2: 讀近期回測結果,連續 underperform 觸發 regression alert
+    backtest_path = JSON_OUT_DIR / "backtest.json"
+    if backtest_path.exists():
+        try:
+            backtest_data = json.loads(backtest_path.read_text(encoding="utf-8"))
+            alerts.extend(_diff.regression_alert_from_backtest(backtest_data))
+        except (json.JSONDecodeError, OSError):
+            pass
     # 重新排序 (severity)
     severity_rank = {"high": 0, "medium": 1, "low": 2}
     alerts.sort(key=lambda a: (severity_rank.get(a.severity, 3), a.ticker))

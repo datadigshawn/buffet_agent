@@ -10,6 +10,7 @@
   - disqualifier_triggered: 從 BUY/HOLD 跌到 OUT_OF_CIRCLE
   - thesis_broken:       已建立 thesis 的 ticker 條件被違反 (P0-2)
   - news_alert:          近 7 天新聞 sentiment / 重大事件異常 (P1-3)
+  - regression_detected:  回測連 N 週 alpha < threshold (P2-2)
 
 不算變動的事(避免噪音):
   - 分數小幅升降(<5 分)但 bias 沒變
@@ -215,6 +216,34 @@ def news_alerts_from_verdicts(verdicts_dicts: list[dict]) -> list[Alert]:
             today={"news": news},
         ))
     return out
+
+
+def regression_alert_from_backtest(backtest_payload: dict | None) -> list[Alert]:
+    """讀 output/backtest.json 的 rolling_summary,觸發時產 regression_detected alert。"""
+    if not backtest_payload:
+        return []
+    summary = backtest_payload.get("rolling_summary") or {}
+    if not summary.get("regression_alert"):
+        return []
+    weeks = summary.get("consecutive_underperforming_weeks", 0)
+    avg_alpha = summary.get("avg_alpha_30d")
+    avg_str = (
+        f"30d 平均 alpha {avg_alpha*100:+.2f}%"
+        if avg_alpha is not None
+        else "30d alpha 連續為負"
+    )
+    return [Alert(
+        ticker="(SYSTEM)",
+        type="regression_detected",
+        severity="high",
+        summary=f"⚠️ 回測 regression:{weeks} 週連續 30d alpha 偏低,{avg_str},需檢視 rules.json",
+        today={
+            "consecutive_underperforming_weeks": weeks,
+            "avg_alpha_30d": avg_alpha,
+            "avg_alpha_90d": summary.get("avg_alpha_90d"),
+            "note": summary.get("note"),
+        },
+    )]
 
 
 def thesis_broken_alerts(thesis_statuses: list) -> list[Alert]:
