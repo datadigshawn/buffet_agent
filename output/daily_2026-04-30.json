@@ -1,0 +1,5152 @@
+{
+  "scan_date": "2026-04-30",
+  "scan_time_utc": "2026-04-30T03:57:10Z",
+  "rules_version": "1.0.0",
+  "total_scanned": 123,
+  "summary": {
+    "BUY": 10,
+    "HOLD": 28,
+    "WATCH": 26,
+    "AVOID": 15,
+    "OUT_OF_CIRCLE": 35,
+    "INSUFFICIENT_DATA": 9
+  },
+  "verdicts": [
+    {
+      "ticker": "MSFT",
+      "bias": "BUY",
+      "score": 93,
+      "base": 85,
+      "raw_base": 85,
+      "bonus": 8,
+      "coverage_pct": 100,
+      "confidence": 95,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2",
+        "B5"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 424.46,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 158.17,
+      "margin_of_safety_pct": -1.6836,
+      "qualitative": {
+        "management_grade": "A",
+        "moat_description": "微軟擁有強大品牌與定價權，Office 365 與 Azure 生態系統形成高度轉換成本，企業軟體市佔率與 GitHub、LinkedIn 網路效應構築寬護城河。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": true,
+        "recommendation": "基本面極佳但股價偏貴，安全邊際為負 168%，建議等待股價回落至 DCF 內在價值 $158 附近再進場，勿追價。",
+        "confidence": 0.85,
+        "reasoning": "管理層資本配置優異，護城河寬廣，訂閱制營收可預測性高，雖屬科技業但商業模式已轉為穩定，適合巴菲特價值投資框架，唯一疑慮是當前股價過高。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "基本面極佳但股價偏貴，安全邊際為負 168%，建議等待股價回落至 DCF 內在價值 $158 附近再進場，勿追價。",
+      "alerts": []
+    },
+    {
+      "ticker": "MA",
+      "bias": "BUY",
+      "score": 90,
+      "base": 90,
+      "raw_base": 90,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 93,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 525.23,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 474.61,
+      "margin_of_safety_pct": -0.1067,
+      "qualitative": {
+        "management_grade": "A",
+        "moat_description": "支付網路具備強大網路效應與轉換成本，用戶與商戶形成正向循環，30.2%的高業主收益Margin顯示極強定價權，護城河寬廣。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": true,
+        "recommendation": "估值偏高(負10.7%安全邊際)，建議觀望或等股價回落至$430以下再評估進場，暫不追價。",
+        "confidence": 0.85,
+        "reasoning": "高Buffett分數(90/110)與強護城河支撐長期投資價值，但當前價格已超過內在價值，不符合巴菲特安全邊際原則。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "估值偏高(負10.7%安全邊際)，建議觀望或等股價回落至$430以下再評估進場，暫不追價。",
+      "alerts": []
+    },
+    {
+      "ticker": "NVDA",
+      "bias": "BUY",
+      "score": 90,
+      "base": 85,
+      "raw_base": 85,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 93,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "failed_rules": [
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 209.25,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "NVIDIA 擁有強大護城河:CUDA 生態系統形成高度轉換成本,技術領先與規模經濟構成持續競爭優勢,AI 晶片領域幾乎壟斷地位。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": false,
+        "recommendation": "雖量化分數極高且護城河強大,但 AI 科技變化快速超出巴菲特能力圈範圍,股價已反映高度成長預期,建議觀望或尋找更穩定的消費/金融標的。",
+        "confidence": 0.35,
+        "reasoning": "管理層技術執行力優秀,但科技股非巴菲特擅長領域,且當前估值偏高,應保守看待。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "雖量化分數極高且護城河強大,但 AI 科技變化快速超出巴菲特能力圈範圍,股價已反映高度成長預期,建議觀望或尋找更穩定的消費/金融標的。",
+      "alerts": []
+    },
+    {
+      "ticker": "LRCX",
+      "bias": "BUY",
+      "score": 90,
+      "base": 80,
+      "raw_base": 80,
+      "bonus": 10,
+      "coverage_pct": 100,
+      "confidence": 93,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R8"
+      ],
+      "failed_rules": [
+        "R7",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2",
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 248.75,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 98.69,
+      "margin_of_safety_pct": -1.5206,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "Lam Research在半導體蝕刻/沉積設備領域具技術領先地位，但設備行業迭代快速、客戶集中，護城河強度中等。",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "安全邊際-152%嚴重負值，股價遠高內在價值$98.69，且屬巴菲特不熟悉之半導體設備業，果斷放棄追蹤。",
+        "confidence": 0.55,
+        "reasoning": "量化分數佳但估值過高，且半導體設備非巴菲特能力圈範圍，安全邊際不足掩蓋所有優點。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "安全邊際-152%嚴重負值，股價遠高內在價值$98.69，且屬巴菲特不熟悉之半導體設備業，果斷放棄追蹤。",
+      "alerts": []
+    },
+    {
+      "ticker": "AMAT",
+      "bias": "BUY",
+      "score": 85,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 10,
+      "coverage_pct": 100,
+      "confidence": 90,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "failed_rules": [
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2",
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 382.59,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 120.45,
+      "margin_of_safety_pct": -2.1763,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "半導體設備龍頭,具規模經濟與技術壁壘,客戶轉換成本高,但行業競爭激烈(Lam/ASML),護城河中等",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "股價相對內在價值偏貴217%,安全邊際不足,建議觀望或等回調至$80以下再評估",
+        "confidence": 0.65,
+        "reasoning": "ROE/Owner earnings數據優異顯示盈利能力強,但高科技設備行業非巴菲特傳統能力圈,且當前估值偏高,應保守對待",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對內在價值偏貴217%,安全邊際不足,建議觀望或等回調至$80以下再評估",
+      "alerts": []
+    },
+    {
+      "ticker": "GOOGL",
+      "bias": "BUY",
+      "score": 85,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 10,
+      "coverage_pct": 100,
+      "confidence": 90,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "failed_rules": [
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2",
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 349.94,
+      "sector": "Communication Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 77.46,
+      "margin_of_safety_pct": -3.5179,
+      "qualitative": {
+        "management_grade": "B+",
+        "moat_description": "全球搜尋引擎壟斷地位、Android 與 YouTube 生態系統形成強大網路效應，廣告業務具顯著規模經濟，品牌定價權強。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": false,
+        "recommendation": "內在價值僅 $77.46，安全邊際為 -351.8%，股價嚴重偏高。建議觀望，等待股價回落至合理區間再評估。",
+        "confidence": 0.7,
+        "reasoning": "護城河極強、管理層資本配置佳，但對巴菲特而言屬能力圈外且估值過離譜，須等市場先生提供合理價格。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "內在價值僅 $77.46，安全邊際為 -351.8%，股價嚴重偏高。建議觀望，等待股價回落至合理區間再評估。",
+      "alerts": []
+    },
+    {
+      "ticker": "V",
+      "bias": "BUY",
+      "score": 84,
+      "base": 74,
+      "raw_base": 70,
+      "bonus": 10,
+      "coverage_pct": 95,
+      "confidence": 87,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R5",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [
+        "B2",
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 334.86,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "A",
+        "moat_description": "Visa 擁有強大網路效應與轉換成本，全球數十億用戶與數千萬商家形成極高進入壁壘，加上品牌定價權與監管特許，護城河寬廣且難以撼動。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": true,
+        "recommendation": "量化分數 84 顯示體質優異，ROE 連續 10 年超 15% 與 57.5% owner earnings margin 驗證護城河實力，建議在股價合理回調時分批布局，長期持有。",
+        "confidence": 0.9,
+        "reasoning": "Visa 符合巴菲特所有核心標準：高護城河、管理層資本配置得當、屬於可預測的金融服務生意、持續創造高股东回报，唯一的謹慎點是 R5、R10 未通過可能涉及估值或槓桿考量。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "量化分數 84 顯示體質優異，ROE 連續 10 年超 15% 與 57.5% owner earnings margin 驗證護城河實力，建議在股價合理回調時分批布局，長期持有。",
+      "alerts": []
+    },
+    {
+      "ticker": "TSM",
+      "bias": "BUY",
+      "score": 84,
+      "base": 84,
+      "raw_base": 80,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 87,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R8"
+      ],
+      "failed_rules": [
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 393.83,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "A",
+        "moat_description": "全球最先進晶圓代工壟斷者，3nm/5nm 技術領先形成極高轉換成本，先發規模優勢難以撼動，護城河極寬",
+        "moat_strength": "strong",
+        "in_circle_of_competence": false,
+        "recommendation": "護城河極強但屬高科技範疇，非巴菲特核心能力圈，若股價距內在價值有 30% 以上安全邊際可適度配置，否則觀望",
+        "confidence": 0.65,
+        "reasoning": "17.6% owner earnings margin 顯示強大經濟商譽，管理層專業誠信，但半導體製程技術波動性較高，非巴菲特傳統偏好的簡單可預測生意",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "護城河極強但屬高科技範疇，非巴菲特核心能力圈，若股價距內在價值有 30% 以上安全邊際可適度配置，否則觀望",
+      "alerts": []
+    },
+    {
+      "ticker": "AXP",
+      "bias": "BUY",
+      "score": 80,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 86,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R5",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 315.65,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": 374.07,
+      "margin_of_safety_pct": 0.1562,
+      "qualitative": {
+        "management_grade": "A",
+        "moat_description": "Amex 擁有強大網路效應——商戶與持卡人形成雙向正循環,加上高端品牌形象與高轉換成本,構成深厚護城河。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": true,
+        "recommendation": "安全邊際 +15.6% 且估值偏低,可考慮在現價布局。作為巴菲特最長情持股,適合長線持有分享複利。",
+        "confidence": 0.9,
+        "reasoning": "AXP 是巴菲特親自抄底並持有近60年的標的,管理層通過時間檢驗,護城河清晰,安全邊際足夠,量化與定性高度共振。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "安全邊際 +15.6% 且估值偏低,可考慮在現價布局。作為巴菲特最長情持股,適合長線持有分享複利。",
+      "alerts": []
+    },
+    {
+      "ticker": "ANET",
+      "bias": "BUY",
+      "score": 80,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 86,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "failed_rules": [
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 168.68,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 12.7,
+      "margin_of_safety_pct": -12.2827,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "雲端網路交換器有技術壁壘和客戶黏著度，但面臨 Cisco 等大廠競爭，護城河相對科技業較窄",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "股價相對內在價值嚴重高估，安全邊際為負，不建議現在買入；若股價回落至 $15 以下再評估",
+        "confidence": 0.7,
+        "reasoning": "量化分數不錯且有 owner earnings 優勢，但科技股屬能力圈外且估值過高，巴菲特不會在此時進場",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對內在價值嚴重高估，安全邊際為負，不建議現在買入；若股價回落至 $15 以下再評估",
+      "alerts": []
+    },
+    {
+      "ticker": "BAC",
+      "bias": "HOLD",
+      "score": 78,
+      "base": 78,
+      "raw_base": 70,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R5",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R2",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R6"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 52.88,
+      "sector": "Financial Services",
+      "industry_class": "bank",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": 54.44,
+      "margin_of_safety_pct": 0.0287,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "銀行業特許經營權帶來存款基礎與分行網路，客戶轉換成本高，具規模經濟；但監管嚴格、競爭激烈，護城河強度中等。",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": true,
+        "recommendation": "股價相對內在價值僅輕微折價，ROE 十年未達 15% 門檻顯示資本配置效率不足，建議觀望或等回測至 50 美元以下再評估加碼。",
+        "confidence": 0.65,
+        "reasoning": "巴菲特親自投資並持續加碼證明其對 BAC 信心，但量化系統給出 HOLD 訊號且安全邊際僅 2.9%，加上 ROE 表現平淡，現價吸引力有限。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對內在價值僅輕微折價，ROE 十年未達 15% 門檻顯示資本配置效率不足，建議觀望或等回測至 50 美元以下再評估加碼。",
+      "alerts": []
+    },
+    {
+      "ticker": "ISRG",
+      "bias": "HOLD",
+      "score": 76,
+      "base": 76,
+      "raw_base": 65,
+      "bonus": 0,
+      "coverage_pct": 85,
+      "confidence": 79,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7",
+        "R9"
+      ],
+      "failed_rules": [
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R5"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 453.83,
+      "sector": "Healthcare",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": 167.14,
+      "margin_of_safety_pct": -1.7153,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "達文西手術機器人擁有專利技術與醫生訓練形成的轉換成本，先發優勢構成強護城河，屬醫療器械特许經營權",
+        "moat_strength": "strong",
+        "in_circle_of_competence": true,
+        "recommendation": "股價相對內在價值溢價171.5%，明顯過貴，耐心等待回調至$100以下再考慮分批布局，目前維持觀望",
+        "confidence": 0.75,
+        "reasoning": "護城河強且在能力圈內，但ROE 10年僅11%達標率偏低，加上當前估值缺乏安全邊際，巴菲特不會在此價位進場",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對內在價值溢價171.5%，明顯過貴，耐心等待回調至$100以下再考慮分批布局，目前維持觀望",
+      "alerts": []
+    },
+    {
+      "ticker": "KO",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 70,
+      "raw_base": 70,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "failed_rules": [
+        "R5",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 78.87,
+      "sector": "Consumer Defensive",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 25.71,
+      "margin_of_safety_pct": -2.0671,
+      "qualitative": {
+        "management_grade": "A",
+        "moat_description": "可口可樂擁有全球最具價值的品牌之一,定價權強、規模經濟顯著、全球分銷網絡構成護城河,特许经营模式確保長期競爭優勢。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": true,
+        "recommendation": "基本面與管理層頂級,但 DCF 內在價值僅 $25.71,當前股價明顯偏高 200% 以上,安全邊際不足。建議觀望或減碼,等待股價回落至 $40 以下再評估回補。",
+        "confidence": 0.85,
+        "reasoning": "經典巴菲特價值投資案例,護城河堅實、管理層優秀,屬能力圈內可預測消費品生意,但當前估值脫離安全邊際,不符合進場條件。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "基本面與管理層頂級,但 DCF 內在價值僅 $25.71,當前股價明顯偏高 200% 以上,安全邊際不足。建議觀望或減碼,等待股價回落至 $40 以下再評估回補。",
+      "alerts": []
+    },
+    {
+      "ticker": "MCO",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 65,
+      "raw_base": 65,
+      "bonus": 10,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R5",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2",
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 460.11,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 234.39,
+      "margin_of_safety_pct": -0.963,
+      "qualitative": {
+        "management_grade": null,
+        "moat_description": null,
+        "moat_strength": null,
+        "in_circle_of_competence": null,
+        "recommendation": null,
+        "confidence": null,
+        "reasoning": "讓我分析 MCO (Moody's Corporation) 這檔股票,用巴菲特投資哲學評估。\n\n**量化數據:**\n- Buffett score: 75/110, bias: HOLD\n- ROE 10年15%比例: 100%\n- 5年平均 owner earnings margin: 30.5%\n- DCF內在價值: $234.39\n- 安全邊際: -96.3% (這意味著股價比內在價值高很多,安全邊際為負)\n\n**巴菲特持有情况:**\n- 2000年起持有,25+年\n- 目前持股約13%\n- 這是巴菲特長期持有的股票,說明他對這家公司有信心\n\n**讓我評估:**\n\n1. **管理層 (",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": "LLM did not return parseable JSON"
+      },
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "ASML",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "failed_rules": [
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 1394.08,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "ASML壟斷全球EUV光刻機技術，晶圓廠無法轉換供應商，形成極強技術與轉換成本護城河。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": false,
+        "recommendation": "護城河極強但屬高科技投機領域，巴菲特明確避開此類公司，建議維持觀望或尋找更符合能力圈的標的。",
+        "confidence": 0.75,
+        "reasoning": "owner earnings margin 24.5% 顯示極強盈利能力，護城河無可匹敵，但高科技屬性與巴菲特「不投看不懂的生意」原則衝突。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "護城河極強但屬高科技投機領域，巴菲特明確避開此類公司，建議維持觀望或尋找更符合能力圈的標的。",
+      "alerts": []
+    },
+    {
+      "ticker": "MRVL",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "failed_rules": [
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 156.57,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 44.87,
+      "margin_of_safety_pct": -2.4894,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "Marvell為半導體設計公司,專攻數據中心/網路/儲存晶片,雖有專利技術壁壘,但半導體業技術迭代快、競爭激烈,護城河相對薄弱且易被顛覆。",
+        "moat_strength": "weak",
+        "in_circle_of_competence": false,
+        "recommendation": "股價相對內在價值嚴重偏高(-248.9%安全邊際),ROE十年達標率僅20%,不符合巴菲特偏好可預測生意的標準,建議觀望不進場。",
+        "confidence": 0.35,
+        "reasoning": "量化分數75分屬中等,ROE長期表現不佳且安全邊際極度負值,半導體業非巴菲特擅長的能力圈,護城河強度不足以支撐當前估值。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對內在價值嚴重偏高(-248.9%安全邊際),ROE十年達標率僅20%,不符合巴菲特偏好可預測生意的標準,建議觀望不進場。",
+      "alerts": []
+    },
+    {
+      "ticker": "ALAB",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R9"
+      ],
+      "failed_rules": [
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 196.85,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "科技產業變化快速，護城河資訊不足且未通過R7、R8、R10規則，難以確認持久競爭優勢",
+        "moat_strength": "weak",
+        "in_circle_of_competence": false,
+        "recommendation": "建議觀望。Buffett score 75分屬中等，科技股非巴菲特擅長領域，缺乏足夠護城河證據支撐",
+        "confidence": 0.35,
+        "reasoning": "ALAB為科技股且未通過R7、R8、R10規則，護城河存疑；ROE僅50%達15%門檻，owner earnings margin 29.4%雖佳但不足以彌補護城河不足",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "建議觀望。Buffett score 75分屬中等，科技股非巴菲特擅長領域，缺乏足夠護城河證據支撐",
+      "alerts": []
+    },
+    {
+      "ticker": "NOW",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R5",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 88.89,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 95.77,
+      "margin_of_safety_pct": 0.0718,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "企業工作流程自動化平台,客戶轉換成本高且具備網路效應,但科技業護城河較不穩固,需持續投入研發維持競爭力",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "股價相對內在價值便宜7.2%,但ROE 15%僅2年達標且屬科技股,非巴菲特能力圈,建議觀望或小部位測試水溫,待更明確的資本配置紀錄再決定",
+        "confidence": 0.45,
+        "reasoning": "量化分數75分屬中等,安全邊際正向但ROE持續性不足,加上科技股屬巴菲特投資禁區,整體符合HOLD偏保守建議",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對內在價值便宜7.2%,但ROE 15%僅2年達標且屬科技股,非巴菲特能力圈,建議觀望或小部位測試水溫,待更明確的資本配置紀錄再決定",
+      "alerts": []
+    },
+    {
+      "ticker": "PLTR",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R9"
+      ],
+      "failed_rules": [
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 137.97,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 12.71,
+      "margin_of_safety_pct": -9.857,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "政府國防合約提供一定特許經營權，數據分析技術有技術壁壘，但面對雲端巨頭激烈競爭，護城河不夠寬廣",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "股價相較內在價值$12.71嚴重高估，安全邊際為-985.7%，建議觀望不追高，等待估值回落至合理區間再評估",
+        "confidence": 0.35,
+        "reasoning": "PLTR 屬高科技 AI/大數據軟體公司，超出巴菲特能力圈範圍，且估值過高、管理層有稀釋問題，不符合巴菲特傳統價值投資標準",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相較內在價值$12.71嚴重高估，安全邊際為-985.7%，建議觀望不追高，等待估值回落至合理區間再評估",
+      "alerts": []
+    },
+    {
+      "ticker": "FCX",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 75,
+      "raw_base": 75,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R6",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 56.93,
+      "sector": "Basic Materials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 34.11,
+      "margin_of_safety_pct": -0.6689,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "全球最大銅礦商之一,擁有龐大資源儲備與規模經濟,礦業進入門檻高,但商品價格波動大削弱護城河穩定性",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "內在價值僅$34.11,股價明顯偏高,安全邊際為負66.9%,建議觀望等待估值回歸合理區間",
+        "confidence": 0.65,
+        "reasoning": "FCX具備規模護城河但屬大宗商品週期股,超出巴菲特擅長的可預測消費壟斷範疇,加上當前估值過高,即使量化分數尚可也不構成買入理由",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "內在價值僅$34.11,股價明顯偏高,安全邊際為負66.9%,建議觀望等待估值回歸合理區間",
+      "alerts": []
+    },
+    {
+      "ticker": "CMG",
+      "bias": "HOLD",
+      "score": 75,
+      "base": 70,
+      "raw_base": 70,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 82,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R5",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 32.99,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 28.98,
+      "margin_of_safety_pct": -0.1382,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "CMG 擁有強大品牌知名度與墨西哥餐飲的特許經營權,在快速休閒餐飲市場定價權適中,供應鏈具規模經濟,但顧客轉換成本低,護城河強度中等。",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": true,
+        "recommendation": "股價相對 DCF 內在價值 $28.98 偏高約 14%,安全邊際不足。建議觀望或等待股價回落至 $30 以下再評估進場,避免追高。",
+        "confidence": 0.7,
+        "reasoning": "CMG 符合巴菲特能力圈(可預測餐飲生意),但 ROE 10年僅 50% 達標,顯示獲利波動;目前股價偏貴,缺乏足夠安全邊際,應保守以對。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對 DCF 內在價值 $28.98 偏高約 14%,安全邊際不足。建議觀望或等待股價回落至 $30 以下再評估進場,避免追高。",
+      "alerts": []
+    },
+    {
+      "ticker": "QCOM",
+      "bias": "HOLD",
+      "score": 73,
+      "base": 65,
+      "raw_base": 65,
+      "bonus": 8,
+      "coverage_pct": 100,
+      "confidence": 81,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R5",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2",
+        "B5"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 156.0,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 222.88,
+      "margin_of_safety_pct": 0.3001,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "QCOM 擁有強大專利組合，授權業務具備類似特許經營權的定價權，Snapdragon 晶片在行動處理器市場有技術壁壘，5G 專利布局提供長期競爭優勢。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": false,
+        "recommendation": "安全邊際達 30% 顯示股價低估，但高通屬高科技產業，景氣波動大且易受地緣政治影響，適合觀望或小部位測試水溫。",
+        "confidence": 0.65,
+        "reasoning": "專利授權護城河堅實、ROE 與 owner earnings 表現優異，但巴菲特向來對半導體產業保持距離，技術變遷快速使長期可預測性降低，須謹慎對待。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "安全邊際達 30% 顯示股價低估，但高通屬高科技產業，景氣波動大且易受地緣政治影響，適合觀望或小部位測試水溫。",
+      "alerts": []
+    },
+    {
+      "ticker": "BTG",
+      "bias": "HOLD",
+      "score": 71,
+      "base": 71,
+      "raw_base": 60,
+      "bonus": 0,
+      "coverage_pct": 85,
+      "confidence": 75,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R5",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4",
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 4.31,
+      "sector": "Basic Materials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "基本材料業通常缺乏持久護城河,僅依賴資源稟賦或規模成本優勢,定價權有限,19.5% 所有權收益邊際屬中等但缺乏結構性競爭壁壘。",
+        "moat_strength": "weak",
+        "in_circle_of_competence": true,
+        "recommendation": "維持觀望,等待更明確的管理層資本配置紀錄與護城河驗證;若股價回落至具安全邊際區間可考慮小部位試單。",
+        "confidence": 0.55,
+        "reasoning": "量化分數71分屬中等,所有權收益邊際19.5%尚可,但基本材料業護城河薄弱且缺乏管理層定性資訊,支撐不了加碼信心。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "維持觀望,等待更明確的管理層資本配置紀錄與護城河驗證;若股價回落至具安全邊際區間可考慮小部位試單。",
+      "alerts": []
+    },
+    {
+      "ticker": "NU",
+      "bias": "HOLD",
+      "score": 71,
+      "base": 71,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 70,
+      "confidence": 71,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R2",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 14.04,
+      "sector": "Financial Services",
+      "industry_class": "bank",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "巴西最大數位銀行,擁有超過8000萬客戶,高轉換成本與網路效應形成護城河,但面臨傳統銀行數位化競爭",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": true,
+        "recommendation": "數位銀行屬巴菲特擅長的金融服務範疇,但高成長科技金融需觀察客戶留存率與獲利能力,可小部位試單,待季報確認成長動能後再加碼",
+        "confidence": 0.65,
+        "reasoning": "護城河來自客戶規模與轉換成本,但獲利穩定性待驗證,71分量化分數顯示體質尚可,建議保守觀望",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "數位銀行屬巴菲特擅長的金融服務範疇,但高成長科技金融需觀察客戶留存率與獲利能力,可小部位試單,待季報確認成長動能後再加碼",
+      "alerts": []
+    },
+    {
+      "ticker": "BBD",
+      "bias": "HOLD",
+      "score": 71,
+      "base": 71,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 70,
+      "confidence": 71,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R2",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R5",
+        "R6",
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 3.77,
+      "sector": "Financial Services",
+      "industry_class": "bank",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "銀行業透過分行網路與存款基礎建立客戶忠誠度,具備特許經營權優勢,但需視利率環境與信用風險管理能力而定",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": true,
+        "recommendation": "建議觀望,待量化分數提升至80分以上且確認R2、R10通過後再行評估。銀行業需特別關注信用風險與利率敏感度",
+        "confidence": 0.5,
+        "reasoning": "量化分數71分屬中等,未通過R2、R10規則顯示仍有疑慮,銀行業雖屬巴菲特能力圈但需更多基本面確認",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "建議觀望,待量化分數提升至80分以上且確認R2、R10通過後再行評估。銀行業需特別關注信用風險與利率敏感度",
+      "alerts": []
+    },
+    {
+      "ticker": "KLAC",
+      "bias": "HOLD",
+      "score": 70,
+      "base": 60,
+      "raw_base": 60,
+      "bonus": 10,
+      "coverage_pct": 100,
+      "confidence": 79,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7"
+      ],
+      "failed_rules": [
+        "R5",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2",
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 1816.21,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 780.28,
+      "margin_of_safety_pct": -1.3276,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "KLAC在半導體製程檢測設備領域具領先地位，技術壁壘高，客戶轉換成本高，但受技術快速迭代影響，護城河強度中等。",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "股價相較內在價值溢價132.8%，安全邊際不足且超出能力圈，建議觀望或等待股價回落至合理區間再評估。",
+        "confidence": 0.65,
+        "reasoning": "ROE與owner earnings margin數據優異顯示營運體質佳，但科技股屬巴菲特能力圈外且當前估值偏高，應保守看待。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相較內在價值溢價132.8%，安全邊際不足且超出能力圈，建議觀望或等待股價回落至合理區間再評估。",
+      "alerts": []
+    },
+    {
+      "ticker": "MU",
+      "bias": "HOLD",
+      "score": 70,
+      "base": 70,
+      "raw_base": 70,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 79,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R8"
+      ],
+      "failed_rules": [
+        "R6",
+        "R7",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 518.46,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 2.98,
+      "margin_of_safety_pct": -172.8738,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "記憶體晶片製造商，具規模經濟但屬大宗商品業務，受景氣循環影響大，護城河不如消費品牌穩固",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "不建議買入。5年平均業主盈餘為負且ROE達標率僅20%，顯示盈利能力不穩定；DCF內在價值僅$2.98但股價嚴重高估，安全邊際為負17287%，建議觀望等待大幅回調",
+        "confidence": 0.85,
+        "reasoning": "記憶體產業非巴菲特擅長領域，業主盈餘為負且估值過高，與巴菲特偏好可預測現金流、稳定高ROE、具長期護城河企業的標準不符",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "不建議買入。5年平均業主盈餘為負且ROE達標率僅20%，顯示盈利能力不穩定；DCF內在價值僅$2.98但股價嚴重高估，安全邊際為負17287%，建議觀望等待大幅回調",
+      "alerts": []
+    },
+    {
+      "ticker": "NEE",
+      "bias": "HOLD",
+      "score": 70,
+      "base": 70,
+      "raw_base": 70,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 79,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R8"
+      ],
+      "failed_rules": [
+        "R6",
+        "R7",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 94.17,
+      "sector": "Utilities",
+      "industry_class": "utility",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 94.58,
+      "margin_of_safety_pct": 0.0043,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "公用事業具政府特許經營權，但ROE十年未達15%且owner earnings margin為-66.2%，顯示資本配置效率低落，護城河實質強度存疑。",
+        "moat_strength": "weak",
+        "in_circle_of_competence": true,
+        "recommendation": "量化分數僅70分，安全邊際僅0.4%且owner earnings為負，不具備足夠安全邊際。建議觀望，等待ROE改善至15%以上或股價出現更大折扣再評估。",
+        "confidence": 0.75,
+        "reasoning": "NEE雖屬巴菲特能力圈內的公用事業，但ROE十年達標率0%與負owner earnings margin顯示生意品質普通，安全邊際不足支撐買入。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "量化分數僅70分，安全邊際僅0.4%且owner earnings為負，不具備足夠安全邊際。建議觀望，等待ROE改善至15%以上或股價出現更大折扣再評估。",
+      "alerts": []
+    },
+    {
+      "ticker": "ABEV",
+      "bias": "HOLD",
+      "score": 68,
+      "base": 68,
+      "raw_base": 65,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 76,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R5",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 2.85,
+      "sector": "Consumer Defensive",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "巴西最大啤酒商,擁有Skol、Brahma、Antarctica等強勢品牌,具當地市場定價權與規模經濟優勢,為典型特許經營生意",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": true,
+        "recommendation": "量化分數68分屬中等偏上,所有權收益利潤率14.2%尚可,建議觀察近期財報確認管理層資本配置效率,若股價回落至安全邊際區間再考慮分批布局",
+        "confidence": 0.65,
+        "reasoning": "護城河明確(品牌+規模),屬能力圈內可預測消費品生意,但量化篩選有3項規則未通過,顯示營運或財務面存在疑慮,需進一步驗證",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "量化分數68分屬中等偏上,所有權收益利潤率14.2%尚可,建議觀察近期財報確認管理層資本配置效率,若股價回落至安全邊際區間再考慮分批布局",
+      "alerts": []
+    },
+    {
+      "ticker": "PFE",
+      "bias": "HOLD",
+      "score": 67,
+      "base": 67,
+      "raw_base": 60,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 74,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R5",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 26.26,
+      "sector": "Healthcare",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 38.09,
+      "margin_of_safety_pct": 0.3105,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "製藥龍頭擁有專利保護與政府特許的護城河,具備規模經濟與研發優勢,但面臨專利懸崖與仿製藥競爭壓力,護城河強度中等。",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": false,
+        "recommendation": "安全邊際達31%具吸引力,但製藥業非巴菲特擅長的能力圈,且未通過R1、R7、R10規則顯示財務穩健性存疑,建議觀望或等待更明確的資本配置改善信號再進場。",
+        "confidence": 0.55,
+        "reasoning": "PFE具備製藥業專利護城河與不錯的owner earnings margin,但巴菲特向來對高技術門檻的醫藥行业保持謹慎,加上未通過多項量化規則,顯示其財務體質或管理層表現有疑慮,整體評估為中等偏保守。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "安全邊際達31%具吸引力,但製藥業非巴菲特擅長的能力圈,且未通過R1、R7、R10規則顯示財務穩健性存疑,建議觀望或等待更明確的資本配置改善信號再進場。",
+      "alerts": []
+    },
+    {
+      "ticker": "AAPL",
+      "bias": "HOLD",
+      "score": 65,
+      "base": 60,
+      "raw_base": 60,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 76,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7"
+      ],
+      "failed_rules": [
+        "R5",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 270.17,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 94.65,
+      "margin_of_safety_pct": -1.8545,
+      "qualitative": {
+        "management_grade": "A",
+        "moat_description": "蘋果擁有全球最強消費電子品牌,定價權極高;iOS/Mac/Apple Watch 生態形成高轉換成本,加上全球供應鏈規模經濟,護城河寬廣。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": true,
+        "recommendation": "DCF 內在價值僅 $94.65,當前股價明顯偏高,安全邊際為負,不建議追價。建議等待股價回落至 $120 以下再評估建倉,專注等待市場先生提供錯誤報價。",
+        "confidence": 0.85,
+        "reasoning": "蘋果是巴菲特破例買入的科技股,證明他認可其消費品屬性和可預測現金流,管理層庫藏股執行得當,護城河強大,但當前估值過高,須等待安全邊際浮現。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "DCF 內在價值僅 $94.65,當前股價明顯偏高,安全邊際為負,不建議追價。建議等待股價回落至 $120 以下再評估建倉,專注等待市場先生提供錯誤報價。",
+      "alerts": []
+    },
+    {
+      "ticker": "AVGO",
+      "bias": "HOLD",
+      "score": 65,
+      "base": 65,
+      "raw_base": 65,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 76,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R8"
+      ],
+      "failed_rules": [
+        "R5",
+        "R7",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 405.45,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 134.99,
+      "margin_of_safety_pct": -2.0035,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "AVGO 在半導體晶片領域擁有極強的規模經濟與客戶轉換成本，尤其是網路與儲存晶片的壟斷地位形成顯著護城河，45.3% 的 owner earnings margin 驗證其經濟商譽與特許經營權。",
+        "moat_strength": "strong",
+        "in_circle_of_competence": false,
+        "recommendation": "股價相對內在價值 $134.99 嚴重偏高，安全邊際為 -200.3%，建議觀望或等待回調至 $600 以下再評估進場。",
+        "confidence": 0.7,
+        "reasoning": "ROE 10年未達15%門檻顯示股本回報波動，加上巴菲特對科技股向來視為能力圈外，即使護城河強勁與owner earnings 極佳，仍須保守對待當前估值。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相對內在價值 $134.99 嚴重偏高，安全邊際為 -200.3%，建議觀望或等待回調至 $600 以下再評估進場。",
+      "alerts": []
+    },
+    {
+      "ticker": "CRDO",
+      "bias": "HOLD",
+      "score": 65,
+      "base": 65,
+      "raw_base": 65,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 76,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R9"
+      ],
+      "failed_rules": [
+        "R6",
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 175.77,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "D",
+        "moat_description": "科技公司無明確護城河,5年業主收益margin為-13.8%顯示經濟商譽為負,無定價權或轉換成本優勢,ROE從未達15%門檻顯示資本配置失效。",
+        "moat_strength": "weak",
+        "in_circle_of_competence": false,
+        "recommendation": "CRDO 業主收益連續5年為負,ROE從未達15%,顯示生意模式不創造價值。股價若無大幅折價不建議買入,應等待財報好轉證據。",
+        "confidence": 0.85,
+        "reasoning": "量化數據顯示該公司不產生正向現金流且ROE表現差,違反巴菲特核心原則—投資能產生現金的企業,即使在科技領域也不符合能力圈標準。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "CRDO 業主收益連續5年為負,ROE從未達15%,顯示生意模式不創造價值。股價若無大幅折價不建議買入,應等待財報好轉證據。",
+      "alerts": []
+    },
+    {
+      "ticker": "CMCSA",
+      "bias": "HOLD",
+      "score": 65,
+      "base": 65,
+      "raw_base": 65,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 76,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R5",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 26.76,
+      "sector": "Communication Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 65.89,
+      "margin_of_safety_pct": 0.5938,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "有線電視基礎設施構成地域性壟斷護城河,NBC環球品牌具內容創作優勢,但串流媒體競爭加劇削弱定價權",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": true,
+        "recommendation": "安全邊際達59%具吸引力,股價明顯低估,但串流業務前景不明,建議等待季報確認內容事業穩健後再進場",
+        "confidence": 0.65,
+        "reasoning": "ROE持續性僅40%略遜,但15.1%業主收益margin顯示核心賺錢能力佳,傳統有線業務仍屬可預測,管理層過往回購紀錄正面,整體符合巴菲特偏好穩健現金流的消費壟斷企業",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "安全邊際達59%具吸引力,股價明顯低估,但串流業務前景不明,建議等待季報確認內容事業穩健後再進場",
+      "alerts": []
+    },
+    {
+      "ticker": "VZ",
+      "bias": "HOLD",
+      "score": 65,
+      "base": 60,
+      "raw_base": 60,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 76,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R5",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B6"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 46.61,
+      "sector": "Communication Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 34.2,
+      "margin_of_safety_pct": -0.3629,
+      "qualitative": {
+        "management_grade": null,
+        "moat_description": null,
+        "moat_strength": null,
+        "in_circle_of_competence": null,
+        "recommendation": null,
+        "confidence": null,
+        "reasoning": null,
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": "json decode: Expecting value: line 179 column 1 (char 979)"
+      },
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "NOC",
+      "bias": "HOLD",
+      "score": 60,
+      "base": 55,
+      "raw_base": 55,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 72,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R2",
+        "R5",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 572.41,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 428.44,
+      "margin_of_safety_pct": -0.336,
+      "qualitative": {
+        "management_grade": "B",
+        "moat_description": "國防承包商具備政府特許經營權，合約門檻高且客戶穩定，長期國防預算需求提供護城河，但易受政治與國防支出波動影響。",
+        "moat_strength": "moderate",
+        "in_circle_of_competence": true,
+        "recommendation": "股價相較內在價值溢價33.6%，安全邊際不足。建議等待股價回落至$300以下再評估建倉，國防產業適合長期觀察但需耐心等待合理價位。",
+        "confidence": 0.7,
+        "reasoning": "NOC具備政府特許經營護城河，屬能力圈內可預測生意，但ROE僅40%年份達15%、安全邊際為負，估值偏高使巴菲特原則下難以給出強烈買入建議。",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "股價相較內在價值溢價33.6%，安全邊際不足。建議等待股價回落至$300以下再評估建倉，國防產業適合長期觀察但需耐心等待合理價位。",
+      "alerts": []
+    },
+    {
+      "ticker": "GEV",
+      "bias": "HOLD",
+      "score": 60,
+      "base": 55,
+      "raw_base": 55,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 72,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R5",
+        "R7"
+      ],
+      "failed_rules": [
+        "R2",
+        "R6",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 1063.11,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "工業股缺乏明顯護城河,ROE 15%僅達成率50%,owner earnings margin 7.3%屬中等,未見品牌定價權或規模經濟優勢",
+        "moat_strength": "weak",
+        "in_circle_of_competence": true,
+        "recommendation": "量化分數60/110且HOLD偏見,ROE達標率僅一半,建議觀望待Q2財報確認資本配置紀錄後再決定,不急於進場",
+        "confidence": 0.45,
+        "reasoning": "通過R1/R3/R4/R5/R7但失敗多項嚴格規則,owner earnings margin 7.3%偏低,護城河弱勢明顯,需更多定性資訊才能提升信心",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "量化分數60/110且HOLD偏見,ROE達標率僅一半,建議觀望待Q2財報確認資本配置紀錄後再決定,不急於進場",
+      "alerts": []
+    },
+    {
+      "ticker": "SCCO",
+      "bias": "HOLD",
+      "score": 60,
+      "base": 60,
+      "raw_base": 60,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 72,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R9"
+      ],
+      "failed_rules": [
+        "R5",
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 168.43,
+      "sector": "Basic Materials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 48.41,
+      "margin_of_safety_pct": -2.4793,
+      "qualitative": {
+        "management_grade": "C",
+        "moat_description": "銅礦開採具規模經濟，但銅為大宗商品無定價權，且商品價格波動大，護城河薄弱",
+        "moat_strength": "weak",
+        "in_circle_of_competence": false,
+        "recommendation": "內在價值僅$48.41但股價嚴重偏高，安全邊際-247.9%顯示極度昂貴，建議觀望等待大幅回調至$50以下再評估",
+        "confidence": 0.75,
+        "reasoning": "SCCO為大宗商品銅礦商，缺乏定價權與強護城河，不符合巴菲特偏好的簡單可預測生意；當前估值偏高，雖ROE與owner earnings表現不錯，但進場時機不佳",
+        "backend": "openrouter",
+        "model": "minimax/minimax-m2.5",
+        "error": null
+      },
+      "recommendation": "內在價值僅$48.41但股價嚴重偏高，安全邊際-247.9%顯示極度昂貴，建議觀望等待大幅回調至$50以下再評估",
+      "alerts": []
+    },
+    {
+      "ticker": "GRAB",
+      "bias": "WATCH",
+      "score": 59,
+      "base": 59,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 85,
+      "confidence": 67,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R5",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4",
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 3.82,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "UMC",
+      "bias": "WATCH",
+      "score": 58,
+      "base": 58,
+      "raw_base": 55,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 69,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R8"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 12.75,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "AMD",
+      "bias": "WATCH",
+      "score": 55,
+      "base": 55,
+      "raw_base": 55,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 68,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R8"
+      ],
+      "failed_rules": [
+        "R1",
+        "R6",
+        "R7",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 337.11,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 69.62,
+      "margin_of_safety_pct": -3.842,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "WDC",
+      "bias": "WATCH",
+      "score": 55,
+      "base": 55,
+      "raw_base": 55,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 68,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R8"
+      ],
+      "failed_rules": [
+        "R5",
+        "R6",
+        "R7",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 412.76,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 14.47,
+      "margin_of_safety_pct": -27.5169,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "T",
+      "bias": "WATCH",
+      "score": 55,
+      "base": 55,
+      "raw_base": 55,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 68,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R5",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 25.75,
+      "sector": "Communication Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 30.69,
+      "margin_of_safety_pct": 0.1611,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "CCJ",
+      "bias": "WATCH",
+      "score": 53,
+      "base": 53,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 66,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R6",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 114.29,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "LYSDY",
+      "bias": "WATCH",
+      "score": 53,
+      "base": 53,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 66,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R6",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 13.74,
+      "sector": "Basic Materials",
+      "industry_class": "general",
+      "data_source": "yfinance",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "NVO",
+      "bias": "WATCH",
+      "score": 53,
+      "base": 53,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 66,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R5",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 40.29,
+      "sector": "Healthcare",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "OXY",
+      "bias": "WATCH",
+      "score": 50,
+      "base": 50,
+      "raw_base": 45,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 62,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R5",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 60.76,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 65.28,
+      "margin_of_safety_pct": 0.0692,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "ARM",
+      "bias": "WATCH",
+      "score": 50,
+      "base": 50,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 65,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R5",
+        "R6",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R4",
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 201.69,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "AMZN",
+      "bias": "WATCH",
+      "score": 50,
+      "base": 50,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 65,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R5"
+      ],
+      "failed_rules": [
+        "R4",
+        "R6",
+        "R7",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 263.04,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 13.64,
+      "margin_of_safety_pct": -18.2784,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "ETN",
+      "bias": "WATCH",
+      "score": 50,
+      "base": 50,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 65,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R7"
+      ],
+      "failed_rules": [
+        "R5",
+        "R6",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 410.77,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 237.31,
+      "margin_of_safety_pct": -0.7309,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "CEG",
+      "bias": "WATCH",
+      "score": 50,
+      "base": 50,
+      "raw_base": 50,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 65,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R5",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 297.0,
+      "sector": "Utilities",
+      "industry_class": "utility",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "BMNR",
+      "bias": "WATCH",
+      "score": 50,
+      "base": 50,
+      "raw_base": 45,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 62,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R5",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 20.66,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "HOOD",
+      "bias": "WATCH",
+      "score": 47,
+      "base": 47,
+      "raw_base": 40,
+      "bonus": 0,
+      "coverage_pct": 85,
+      "confidence": 58,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R9"
+      ],
+      "failed_rules": [
+        "R4",
+        "R5",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R6",
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 71.2,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "OWL",
+      "bias": "WATCH",
+      "score": 47,
+      "base": 47,
+      "raw_base": 45,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 61,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R4",
+        "R6",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R5",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 8.88,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 3932.96,
+      "margin_of_safety_pct": 0.9977,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "IREN",
+      "bias": "WATCH",
+      "score": 47,
+      "base": 47,
+      "raw_base": 40,
+      "bonus": 0,
+      "coverage_pct": 85,
+      "confidence": 58,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R9"
+      ],
+      "failed_rules": [
+        "R5",
+        "R6",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4",
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 42.86,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "DVA",
+      "bias": "WATCH",
+      "score": 45,
+      "base": 40,
+      "raw_base": 40,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 62,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R7",
+        "R8"
+      ],
+      "failed_rules": [
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 151.99,
+      "sector": "Healthcare",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 259.93,
+      "margin_of_safety_pct": 0.4153,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "VRT",
+      "bias": "WATCH",
+      "score": 45,
+      "base": 45,
+      "raw_base": 45,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 62,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4"
+      ],
+      "failed_rules": [
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 306.18,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 66.2,
+      "margin_of_safety_pct": -3.6252,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "SMCI",
+      "bias": "WATCH",
+      "score": 45,
+      "base": 40,
+      "raw_base": 40,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 62,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R4",
+        "R5",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 26.32,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "VALE",
+      "bias": "WATCH",
+      "score": 44,
+      "base": 44,
+      "raw_base": 40,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 58,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R5",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R6",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 15.85,
+      "sector": "Basic Materials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 10.09,
+      "margin_of_safety_pct": -0.5711,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "NVTS",
+      "bias": "WATCH",
+      "score": 44,
+      "base": 44,
+      "raw_base": 40,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 58,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R5",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R6",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 15.48,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "NOK",
+      "bias": "WATCH",
+      "score": 41,
+      "base": 41,
+      "raw_base": 35,
+      "bonus": 0,
+      "coverage_pct": 85,
+      "confidence": 54,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R5",
+        "R8"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R6",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4",
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 12.46,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "CVX",
+      "bias": "WATCH",
+      "score": 40,
+      "base": 40,
+      "raw_base": 40,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 58,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R5",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R6",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 192.22,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 162.25,
+      "margin_of_safety_pct": -0.1847,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "SIRI",
+      "bias": "WATCH",
+      "score": 40,
+      "base": 40,
+      "raw_base": 40,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 58,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R5",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 26.76,
+      "sector": "Communication Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 54.0,
+      "margin_of_safety_pct": 0.5044,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "LEU",
+      "bias": "WATCH",
+      "score": 40,
+      "base": 35,
+      "raw_base": 35,
+      "bonus": 5,
+      "coverage_pct": 100,
+      "confidence": 58,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R1",
+        "R3",
+        "R7",
+        "R9"
+      ],
+      "failed_rules": [
+        "R2",
+        "R4",
+        "R5",
+        "R6",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [
+        "B2"
+      ],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 191.98,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 76.98,
+      "margin_of_safety_pct": -1.4938,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "DLR",
+      "bias": "AVOID",
+      "score": 39,
+      "base": 39,
+      "raw_base": 35,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 54,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R4",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R5",
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R6"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 194.56,
+      "sector": "Real Estate",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": 39.36,
+      "margin_of_safety_pct": -3.9434,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "F",
+      "bias": "AVOID",
+      "score": 39,
+      "base": 39,
+      "raw_base": 35,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 54,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R5",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 12.24,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 33.47,
+      "margin_of_safety_pct": 0.6343,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "OKLO",
+      "bias": "AVOID",
+      "score": 38,
+      "base": 38,
+      "raw_base": 30,
+      "bonus": 0,
+      "coverage_pct": 80,
+      "confidence": 51,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R5",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4",
+        "R6"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 64.98,
+      "sector": "Utilities",
+      "industry_class": "utility",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "SOFI",
+      "bias": "AVOID",
+      "score": 35,
+      "base": 35,
+      "raw_base": 35,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 54,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 15.525,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "EQIX",
+      "bias": "AVOID",
+      "score": 33,
+      "base": 33,
+      "raw_base": 30,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 50,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R3",
+        "R6"
+      ],
+      "failed_rules": [
+        "R1",
+        "R5",
+        "R7",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 1089.07,
+      "sector": "Real Estate",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "KHC",
+      "bias": "AVOID",
+      "score": 30,
+      "base": 30,
+      "raw_base": 30,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 51,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 22.42,
+      "sector": "Consumer Defensive",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 36.47,
+      "margin_of_safety_pct": 0.3852,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "KR",
+      "bias": "AVOID",
+      "score": 30,
+      "base": 30,
+      "raw_base": 30,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 51,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R4",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R5",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 67.1,
+      "sector": "Consumer Defensive",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 63.79,
+      "margin_of_safety_pct": -0.0519,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "KTOS",
+      "bias": "AVOID",
+      "score": 30,
+      "base": 30,
+      "raw_base": 30,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 51,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R4",
+        "R5",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R6",
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 59.56,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "INTC",
+      "bias": "AVOID",
+      "score": 28,
+      "base": 28,
+      "raw_base": 25,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 47,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R2",
+        "R5"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R6",
+        "R7",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 94.75,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "RTX",
+      "bias": "AVOID",
+      "score": 26,
+      "base": 26,
+      "raw_base": 25,
+      "bonus": 0,
+      "coverage_pct": 95,
+      "confidence": 47,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R4",
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R5",
+        "R6",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R7"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 172.79,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "PSTG",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 25,
+      "base": 0,
+      "raw_base": 25,
+      "bonus": 0,
+      "coverage_pct": 40,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R5",
+        "R6"
+      ],
+      "failed_rules": [
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R8",
+        "R9"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": null,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "AAL",
+      "bias": "AVOID",
+      "score": 25,
+      "base": 25,
+      "raw_base": 15,
+      "bonus": 0,
+      "coverage_pct": 60,
+      "confidence": 36,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [
+        "R8",
+        "R9"
+      ],
+      "failed_rules": [
+        "R2",
+        "R3",
+        "R6",
+        "R7",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R4",
+        "R5"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 11.31,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": 8.07,
+      "margin_of_safety_pct": -0.4011,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "MP",
+      "bias": "AVOID",
+      "score": 17,
+      "base": 17,
+      "raw_base": 15,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 39,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R2",
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R3",
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 61.3,
+      "sector": "Basic Materials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "PWR",
+      "bias": "AVOID",
+      "score": 15,
+      "base": 15,
+      "raw_base": 15,
+      "bonus": 0,
+      "coverage_pct": 100,
+      "confidence": 40,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R5"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 628.6,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": 234.9,
+      "margin_of_safety_pct": -1.676,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "GLD",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 10,
+      "base": 0,
+      "raw_base": 10,
+      "bonus": 0,
+      "coverage_pct": 20,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R7",
+        "R9"
+      ],
+      "failed_rules": [
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 417.41,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "UUUU",
+      "bias": "AVOID",
+      "score": 6,
+      "base": 6,
+      "raw_base": 5,
+      "bonus": 0,
+      "coverage_pct": 90,
+      "confidence": 31,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R9"
+      ],
+      "failed_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R4"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 19.58,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "EWW",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 5,
+      "base": 0,
+      "raw_base": 5,
+      "bonus": 0,
+      "coverage_pct": 15,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R9"
+      ],
+      "failed_rules": [
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 75.4,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "GDX",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 5,
+      "base": 0,
+      "raw_base": 5,
+      "bonus": 0,
+      "coverage_pct": 15,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R9"
+      ],
+      "failed_rules": [
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 86.22,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "PSLV",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 5,
+      "base": 0,
+      "raw_base": 5,
+      "bonus": 0,
+      "coverage_pct": 15,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R9"
+      ],
+      "failed_rules": [
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 23.17,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "TAIL",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 5,
+      "base": 0,
+      "raw_base": 5,
+      "bonus": 0,
+      "coverage_pct": 15,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [
+        "R9"
+      ],
+      "failed_rules": [
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 11.005,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "ORCL",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=4.15 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 163.83,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "LMT",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=2.55 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 509.81,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "VST",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=3.34 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 153.79,
+      "sector": "Utilities",
+      "industry_class": "utility",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "BE",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=3.30 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 287.97,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "EOSE",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 6.34,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "SMR",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 11.32,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "AVAV",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 183.5,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "ONDS",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 9.49,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "RCAT",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 11.07,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "TEM",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=2.70 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 50.02,
+      "sector": "Healthcare",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "BEAM",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 29.38,
+      "sector": "Healthcare",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "LLY",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=2.07 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 851.21,
+      "sector": "Healthcare",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "IBM",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=2.52 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 227.1,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "IONQ",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=IONQ 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 42.11,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "QBTS",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=QBTS 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 18.27,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "QQQM",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 15,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 272.39,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "VOO",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 15,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 654.24,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "RSP",
+      "bias": "INSUFFICIENT_DATA",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 15,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R5",
+        "R6",
+        "R7",
+        "R8"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 200.41,
+      "sector": null,
+      "industry_class": "general",
+      "data_source": "csv+yfinance",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "TSLA",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist",
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=TSLA 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 372.8,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "GME",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=GME 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 24.52,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "AMC",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=AMC 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 1.56,
+      "sector": "Communication Services",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "COIN",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=COIN 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 181.73,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "MSTR",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "watchlist"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=MSTR 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 158.19,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "PLUG",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 3.41,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "OPEN",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 5.58,
+      "sector": "Real Estate",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "JOBY",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 8.7,
+      "sector": "Industrials",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "RIG",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 6.96,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "MARA",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D3: ticker=MARA 在巴菲特能力圈黑名單",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 10.72,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "NIO",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=2.46 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 6.39,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "BTE",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 5.14,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "SNAP",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 5.98,
+      "sector": "Communication Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "CRWV",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=6.41 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 114.19,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "VG",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=3.32 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 13.16,
+      "sector": "Energy",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "CCL",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=2.04 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 25.58,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "SBUX",
+      "bias": "AVOID",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 70,
+      "confidence": 21,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7",
+        "R8",
+        "R9",
+        "R10"
+      ],
+      "skipped_rules": [
+        "R1",
+        "R5"
+      ],
+      "earned_bonuses": [],
+      "triggered_disqualifier": null,
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 105.5,
+      "sector": "Consumer Cyclical",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": 39.69,
+      "margin_of_safety_pct": -1.6578,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "WULF",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 20.02,
+      "sector": "Financial Services",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "SOUN",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 7.71,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "AUR",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D4: 近 3 年 EPS 持續為負",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 5.09,
+      "sector": "Technology",
+      "industry_class": "general",
+      "data_source": "yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    },
+    {
+      "ticker": "AGNC",
+      "bias": "OUT_OF_CIRCLE",
+      "score": 0,
+      "base": 0,
+      "raw_base": 0,
+      "bonus": 0,
+      "coverage_pct": 0,
+      "confidence": 0,
+      "source_groups": [
+        "top_50_volume"
+      ],
+      "passed_rules": [],
+      "failed_rules": [],
+      "skipped_rules": [],
+      "earned_bonuses": [],
+      "triggered_disqualifier": "D1: D/E=7.23 > 2.0",
+      "berkshire_holds": false,
+      "berkshire_position_pct": null,
+      "current_price": 10.97,
+      "sector": "Real Estate",
+      "industry_class": "general",
+      "data_source": "csv+yfinance+sec",
+      "intrinsic_value_per_share": null,
+      "margin_of_safety_pct": null,
+      "qualitative": null,
+      "recommendation": null,
+      "alerts": []
+    }
+  ]
+}

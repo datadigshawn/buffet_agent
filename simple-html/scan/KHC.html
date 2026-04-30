@@ -28,6 +28,7 @@ header .meta{font-size:13px;color:var(--muted);}
 .bias-WATCH{background:var(--watch);}
 .bias-AVOID{background:var(--avoid);}
 .bias-OUT_OF_CIRCLE{background:var(--out);}
+.bias-INSUFFICIENT_DATA{background:#7a8a9c;}
 .summary-bar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 24px;}
 .summary-bar span{background:var(--code-bg);padding:6px 12px;border-radius:6px;font-size:13px;}
 table{border-collapse:collapse;width:100%;font-size:14px;}
@@ -62,13 +63,77 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <a class="nav-back" href="../scan.html">← 排行榜</a>
 <div class="wrap">
 <h1>巴菲特 Agent — KHC</h1>
-<p><strong>Bias</strong>: OUT_OF_CIRCLE  ·  <strong>Score</strong>: 0/110 (base 0 + bonus 0)</p>
-<p><strong>Sector</strong>: Consumer Defensive  ·  <strong>資料來源</strong>: yfinance</p>
-<h2>❌ 觸發硬性 disqualifier</h2>
-<p><strong>D4: 近 3 年 EPS 持續為負</strong></p>
-<p>依巴菲特原則,此 ticker 不在能力圈內或結構性風險過高,不予評估。</p>
+<p><strong>Bias</strong>: AVOID  ·  <strong>Score</strong>: 30/110 (base 30 + bonus 0)</p>
+<p><strong>規則涵蓋率</strong>: 100%</p>
+<p><strong>Sector</strong>: Consumer Defensive  ·  <strong>資料來源</strong>: yfinance+sec</p>
+<h2>✅ 通過的規則</h2>
+<ul>
+<li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.3332) ✓ +10 → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
+<li><strong>R7</strong> 回購率 &gt; 0 (actual=0.0092) ✓ +5 → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
+<li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) ✓ +10 → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.1698) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+</ul>
+<h2>❌ 未通過的規則</h2>
+<ul>
+<li><strong>R1</strong> ROE &gt;= 15% (actual=-0.1284) → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
+<li><strong>R3</strong> 淨利率 &gt;= 10% (actual=-0.2344) → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
+<li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=-0.6920) → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
+<li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.5210) → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
+<li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.1113) → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
+<li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
+</ul>
+<h2>💰 內在價值估算 (DCF)</h2>
+<ul>
+<li>每股內在價值: <strong>$36.47</strong></li>
+<li>目前股價: $22.42</li>
+<li>安全邊際: <strong>+38.5%</strong> (🟢 便宜)</li>
+<li>假設: stage 1 成長 2.5%、折現率 10.0%、5y OE avg=3.16B; CAGR=-4.8%</li>
+</ul>
+<h2>📚 公司檔案</h2>
+<p><span class="wikilink-broken">卡夫亨氏(Kraft Heinz, KHC)</span> — <a href="https://buffetagent.netlify.app/03-%E5%85%AC%E5%8F%B8%E6%AA%94%E6%A1%88/%E5%8D%A1%E5%A4%AB%E4%BA%A8%E6%B0%8F.html">線上版本</a></p>
+<blockquote>
+<h2>一句話定位</h2>
+<p><strong>巴菲特晚年最公開檢討的失誤之一</strong>——他公開說「<strong>我們付得太多</strong>」,並承認<strong>對 3G 資本(3G Capital)的成本削減模式判斷錯誤</strong>。</p>
+</blockquote>
+<h2>投資/收購大事年表</h2>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>事件</th>
+<th>對應信件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2013</td>
+<td>BH 與 3G 資本合作收購 H.J. Heinz(總額約 280 億美元)</td>
+<td><a class="wikilink" href="../01-信件/伯克希爾時期_1977-2024/2013-伯克希爾股東信.html">2013-伯克希爾股東信</a></td>
+</tr>
+<tr>
+<td>2015</td>
+<td>Heinz 與 Kraft Foods 合併成 Kraft Heinz</td>
+<td><a class="wikilink" href="../01-信件/伯克希爾時期_1977-2024/2015-伯克希爾股東信.html">2015-伯克希爾股東信</a></td>
+</tr>
+<tr>
+<td>2017</td>
+<td>KHC 試圖收購 U…</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>💡 相關概念</h2>
+<ul>
+<li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>
+<li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
+<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
+</ul>
+<hr>
+<p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-04-29 17:17 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-04-30 11:57 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

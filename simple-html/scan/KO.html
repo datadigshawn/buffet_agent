@@ -28,6 +28,7 @@ header .meta{font-size:13px;color:var(--muted);}
 .bias-WATCH{background:var(--watch);}
 .bias-AVOID{background:var(--avoid);}
 .bias-OUT_OF_CIRCLE{background:var(--out);}
+.bias-INSUFFICIENT_DATA{background:#7a8a9c;}
 .summary-bar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 24px;}
 .summary-bar span{background:var(--code-bg);padding:6px 12px;border-radius:6px;font-size:13px;}
 table{border-collapse:collapse;width:100%;font-size:14px;}
@@ -63,33 +64,47 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <div class="wrap">
 <h1>巴菲特 Agent — KO</h1>
 <p><strong>Bias</strong>: HOLD  ·  <strong>Score</strong>: 75/110 (base 70 + bonus 5)</p>
-<p><strong>Sector</strong>: Consumer Defensive  ·  <strong>資料來源</strong>: yfinance</p>
+<p><strong>規則涵蓋率</strong>: 100%</p>
+<p><strong>Sector</strong>: Consumer Defensive  ·  <strong>資料來源</strong>: yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
 <ul>
 <li><strong>R1</strong> ROE &gt;= 15% (actual=0.4337) ✓ +15 → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
 <li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.6174) ✓ +10 → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
 <li><strong>R3</strong> 淨利率 &gt;= 10% (actual=0.2780) ✓ +10 → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
 <li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=0.1820) ✓ +10 → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
+<li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.1874) ✓ +10 → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
+<li><strong>R7</strong> 回購率 &gt; 0 (actual=0.0016) ✓ +5 → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) ✓ +10 → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.7808) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
-<li><strong>R10</strong> Berkshire 持有 (actual=True) ✓ +10 → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
-<li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=1.2282) → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
-<li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.0651) → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
-</ul>
-<h2>⚠️ 缺值跳過</h2>
-<ul>
-<li><strong>R7</strong> 回購率 &gt; 0 (buyback_yield) — 資料源缺欄位</li>
+<li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=1.3649) → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.8120) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>🎁 加分項</h2>
 <ul>
-<li><strong>B1</strong> Berkshire 重倉 +5</li>
+<li><strong>B6</strong> ROE 10 年持續 &gt;= 15% +5</li>
 </ul>
-<h2>🏛️ Berkshire 持有</h2>
-<p>價值約 <strong>$27.96B</strong>
-(占組合 10.2%)</p>
+<h2>💰 內在價值估算 (DCF)</h2>
+<ul>
+<li>每股內在價值: <strong>$25.71</strong></li>
+<li>目前股價: $78.87</li>
+<li>安全邊際: <strong>-206.7%</strong> (🔴 偏貴)</li>
+<li>假設: stage 1 成長 2.5%、折現率 10.0%、5y OE avg=8.12B; CAGR=-17.2%</li>
+</ul>
+<h2>🧠 定性判斷 (minimax/minimax-m2.5)</h2>
+<ul>
+<li>管理層評分: <strong>A</strong></li>
+<li>護城河強度: <strong>strong</strong></li>
+<li>護城河說明: 可口可樂擁有全球最具價值的品牌之一,定價權強、規模經濟顯著、全球分銷網絡構成護城河,特许经营模式確保長期競爭優勢。</li>
+<li>能力圈: ✅ 在能力圈內</li>
+<li>LLM 信心: 85%</li>
+</ul>
+<h3>💡 行動建議</h3>
+<blockquote>
+<p>基本面與管理層頂級,但 DCF 內在價值僅 $25.71,當前股價明顯偏高 200% 以上,安全邊際不足。建議觀望或減碼,等待股價回落至 $40 以下再評估回補。</p>
+</blockquote>
 <h2>📚 公司檔案</h2>
 <p><span class="wikilink-broken">可口可樂(Coca-Cola, KO)</span> — <a href="https://buffetagent.netlify.app/03-%E5%85%AC%E5%8F%B8%E6%AA%94%E6%A1%88/%E5%8F%AF%E5%8F%A3%E5%8F%AF%E6%A8%82.html">線上版本</a></p>
 <blockquote>
@@ -130,16 +145,16 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 </table>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
+<li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
+<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
 <li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-04-29 17:17 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-04-30 11:57 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>
