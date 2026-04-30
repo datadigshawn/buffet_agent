@@ -24,7 +24,7 @@
   <array>
     <string>/bin/bash</string>
     <string>-c</string>
-    <string>cd /Users/shawnclaw/autobot/agent/buffetAgent &amp;&amp; /opt/homebrew/bin/git pull --rebase --autostash 2&gt;&amp;1 || true; /Users/shawnclaw/autobot/agent/buffetAgent/venv/bin/python scripts/notify_warroom.py</string>
+    <string>cd /Users/shawnclaw/autobot/agent/buffetAgent &amp;&amp; /usr/bin/git pull --rebase --autostash 2&gt;&amp;1 || true; /Users/shawnclaw/autobot/agent/buffetAgent/venv/bin/python scripts/notify_warroom.py</string>
   </array>
 
   <key>WorkingDirectory</key>
