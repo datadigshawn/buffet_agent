@@ -1,36 +1,1016 @@
 {
-  "total": 2,
+  "total": 32,
   "by_type": {
-    "dropped_from_top10": 2
+    "insider_alert": 14,
+    "news_alert": 6,
+    "thesis_broken": 1,
+    "new_top10": 9,
+    "bias_changed": 1,
+    "dropped_from_top10": 1
   },
   "by_severity": {
-    "low": 2
+    "high": 19,
+    "medium": 12,
+    "low": 1
   },
   "alerts": [
     {
+      "ticker": "AAPL",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "AAPL: 內部人賣出 $24.6M (C-level $16.9M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "AAPL",
+          "lookback_days": 60,
+          "transactions_count": 9,
+          "total_sell_value": 24594923.0,
+          "total_buy_value": 0.0,
+          "net_value": -24594923.0,
+          "exec_sell_value": 16934048.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "COOK TIMOTHY D",
+            "position": "Chief Executive Officer",
+            "value": 16512198.0,
+            "date": "2026-04-02"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 1,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "ALAB",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "ALAB: 內部人賣出 $124.0M (C-level $97.6M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "ALAB",
+          "lookback_days": 60,
+          "transactions_count": 9,
+          "total_sell_value": 123987829.0,
+          "total_buy_value": 0.0,
+          "net_value": -123987829.0,
+          "exec_sell_value": 97617039.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "MOHAN JITENDRA",
+            "position": "Chief Executive Officer",
+            "value": 57852785.0,
+            "date": "2026-04-20"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 1,
+          "form_8k_count": 0,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "ANET",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "ANET: 內部人賣出 $235.7M (C-level $234.3M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "ANET",
+          "lookback_days": 60,
+          "transactions_count": 13,
+          "total_sell_value": 235721951.0,
+          "total_buy_value": 0.0,
+          "net_value": -235721951.0,
+          "exec_sell_value": 234313411.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "ULLAL JAYSHREE",
+            "position": "Chief Executive Officer",
+            "value": 75944314.0,
+            "date": "2026-04-22"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 0,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "AVGO",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "AVGO: 內部人賣出 $106.4M (C-level $19.5M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "AVGO",
+          "lookback_days": 60,
+          "transactions_count": 17,
+          "total_sell_value": 106425312.0,
+          "total_buy_value": 0.0,
+          "net_value": -106425312.0,
+          "exec_sell_value": 19452716.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "BRAZEAL MARK DAVID",
+            "position": "Officer",
+            "value": 27061694.0,
+            "date": "2026-03-17"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 5,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "BAC",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "BAC: 內部人賣出 $20.9M (C-level $11.0M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "BAC",
+          "lookback_days": 60,
+          "transactions_count": 7,
+          "total_sell_value": 20946010.0,
+          "total_buy_value": 0.0,
+          "net_value": -20946010.0,
+          "exec_sell_value": 11047768.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "ATHANASIA DEAN C",
+            "position": "President",
+            "value": 6856168.0,
+            "date": "2026-03-03"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 5,
+          "sched_13g_count": 11,
+          "form_8k_count": 1,
+          "recent_13d_dates": [
+            "2026-04-29",
+            "2026-04-06",
+            "2026-03-27",
+            "2026-03-18",
+            "2026-03-12"
+          ]
+        }
+      }
+    },
+    {
+      "ticker": "CRDO",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "CRDO: 內部人賣出 $45.4M (C-level $11.6M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "CRDO",
+          "lookback_days": 60,
+          "transactions_count": 17,
+          "total_sell_value": 45446529.0,
+          "total_buy_value": 0.0,
+          "net_value": -45446529.0,
+          "exec_sell_value": 11552741.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "BRENNAN WILLIAM JOSEPH III",
+            "position": "Chief Executive Officer",
+            "value": 8003802.0,
+            "date": "2026-03-11"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 1,
+          "form_8k_count": 2,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "GOOG",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "GOOG: 內部人賣出 $23.5M (C-level $19.9M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "GOOG",
+          "lookback_days": 60,
+          "transactions_count": 19,
+          "total_sell_value": 23505368.0,
+          "total_buy_value": 0.0,
+          "net_value": -23505368.0,
+          "exec_sell_value": 19866079.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "PICHAI SUNDAR",
+            "position": "Chief Executive Officer",
+            "value": 10006385.0,
+            "date": "2026-03-18"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 4,
+          "form_8k_count": 4,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "KO",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "KO: 內部人賣出 $25.8M (C-level $19.8M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "KO",
+          "lookback_days": 60,
+          "transactions_count": 4,
+          "total_sell_value": 25843889.0,
+          "total_buy_value": 0.0,
+          "net_value": -25843889.0,
+          "exec_sell_value": 19839138.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "QUINCEY JAMES R.",
+            "position": "Chief Executive Officer",
+            "value": 19839138.0,
+            "date": "2026-03-03"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 1,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "LRCX",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "LRCX: 內部人賣出 $13.1M (C-level $11.2M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "LRCX",
+          "lookback_days": 60,
+          "transactions_count": 6,
+          "total_sell_value": 13102807.0,
+          "total_buy_value": 0.0,
+          "net_value": -13102807.0,
+          "exec_sell_value": 11214270.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "BETTINGER DOUGLAS R",
+            "position": "Chief Financial Officer",
+            "value": 11214270.0,
+            "date": "2026-03-04"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 1,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "META",
+      "type": "news_alert",
+      "severity": "high",
+      "summary": "META: 4 條重要快訊",
+      "yesterday": {},
+      "today": {
+        "news": {
+          "ticker": "META",
+          "article_count_7d": 20,
+          "sentiment_avg_7d": -0.18,
+          "sentiment_recent_3d": -0.19,
+          "sentiment_older_4d": 0.0,
+          "sentiment_trend": "stable",
+          "top_topics": [
+            "tech",
+            "ai",
+            "earnings",
+            "macro",
+            "regulation"
+          ],
+          "material_events": [
+            {
+              "title": "国内新闻",
+              "summary_zh": "美伊緊張局勢升級，伊朗威脅海上封鎖等同宣戰；美財長與中國官員通話，中美溝通持續。中國4月PMI 50.3%延續擴張，央行優化黃金進出口管理；Meta擬發債集資250億美元。",
+              "sentiment": 0.1,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-30T15:06:51+00:00",
+              "url": "https://www.jin10.com/#flash-20260430230519466800"
+            },
+            {
+              "title": "Meta Platforms(META.O)CEO：相信用户会为“高端或高算力版本”的目标导向AI功能付费",
+              "summary_zh": "Meta CEO扎克伯格表示，相信用戶會為「高端或高算力版本」的目標導向AI功能付費，顯示公司對AI變現能力充滿信心，此舉有望為Meta帶來新營收來源。",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-29T22:22:10+00:00",
+              "url": "https://www.jin10.com/#flash-20260430062037400800"
+            },
+            {
+              "title": "今日重点关注的财经数据与事件：2026年4月29日 周三",
+              "summary_zh": "2026年4月29日周三重磅事件密集：加拿大央行利率决议、美联储FOMC利率决策、鲍威尔讲话，以及谷歌、微软、亚马逊、Meta等科技巨头财报。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T22:51:14+00:00",
+              "url": "https://www.jin10.com/#flash-20260429065000001800"
+            },
+            {
+              "title": "金十数据整理：每日科技要闻速递（4月25日）",
+              "summary_zh": "AI領域螞蟻、華為發布萬億級模型，谷歌擬400億美元投資Anthropic；Meta與亞馬遜達成數十億美元晶片協議；三星韓國罷工致晶片產量降58%；小鵬、零跑等新能源車加速海外布局。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-25T01:27:59+00:00",
+              "url": "https://www.jin10.com/#flash-20260425092705521800"
+            },
+            {
+              "title": "Meta shares fall on concerns over AI spending, legal scrutiny",
+              "summary_zh": "Meta因AI支出過高引發投資者疑慮，加上面臨法律監管壓力，導致股價下跌。市場擔憂其AI投資回報周期過長，同時監管機構加強審查，令投資人信心不足。",
+              "sentiment": -0.7,
+              "category": "finance",
+              "fetched_at": "2026-05-01T07:48:44+00:00",
+              "url": "https://finance.yahoo.com/sectors/technology/articles/meta-lifts-capital-expenditure-forecast-200527370.html"
+            }
+          ],
+          "flash_count_7d": 4,
+          "alert_type": "material_event"
+        }
+      }
+    },
+    {
+      "ticker": "META",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "META: 內部人賣出 $8.7M (C-level $7.9M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "META",
+          "lookback_days": 60,
+          "transactions_count": 8,
+          "total_sell_value": 8702176.0,
+          "total_buy_value": 0.0,
+          "net_value": -8702176.0,
+          "exec_sell_value": 7948744.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "OLIVAN JAVIER",
+            "position": "Chief Operating Officer",
+            "value": 2936559.0,
+            "date": "2026-04-13"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 1,
+          "form_8k_count": 2,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "MRVL",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "MRVL: 內部人賣出 $25.1M (C-level $8.0M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "MRVL",
+          "lookback_days": 60,
+          "transactions_count": 13,
+          "total_sell_value": 25140663.0,
+          "total_buy_value": 0.0,
+          "net_value": -25140663.0,
+          "exec_sell_value": 7989750.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "BHARATHI SANDEEP",
+            "position": "Officer",
+            "value": 8719372.0,
+            "date": "2026-04-16"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 5,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "type": "news_alert",
+      "severity": "high",
+      "summary": "MSFT: 6 條重要快訊",
+      "yesterday": {},
+      "today": {
+        "news": {
+          "ticker": "MSFT",
+          "article_count_7d": 20,
+          "sentiment_avg_7d": 0.26,
+          "sentiment_recent_3d": 0.24,
+          "sentiment_older_4d": 0.37,
+          "sentiment_trend": "stable",
+          "top_topics": [
+            "tech",
+            "earnings",
+            "ai",
+            "macro",
+            "fed"
+          ],
+          "material_events": [
+            {
+              "title": "微软(MSFT.O)第三季度智能云业务收入达347亿美元",
+              "summary_zh": "微軟第三季智慧雲業務營收達347億美元，優於市場預期，顯示雲端與AI需求持續強勁，帶動整體業績增長，並提升投資人對未來成長的信心。",
+              "sentiment": 1.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-29T20:08:31+00:00",
+              "url": "https://www.jin10.com/#flash-20260430040645178800"
+            },
+            {
+              "title": "OpenAI控制权之争开庭",
+              "summary_zh": "OpenAI控制權之爭升級至法院審理，涉及公司治理與投資者權益的不確定性，可能影響AI產業發展與相關企業股價。",
+              "sentiment": -0.3,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-29T03:58:23+00:00",
+              "url": "https://www.jin10.com/#flash-20260429115733020800"
+            },
+            {
+              "title": "今日重点关注的财经数据与事件：2026年4月29日 周三",
+              "summary_zh": "2026年4月29日周三重磅事件密集：加拿大央行利率决议、美联储FOMC利率决策、鲍威尔讲话，以及谷歌、微软、亚马逊、Meta等科技巨头财报。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T22:51:14+00:00",
+              "url": "https://www.jin10.com/#flash-20260429065000001800"
+            },
+            {
+              "title": "微软：北美地区Copilot故障已解决",
+              "summary_zh": "微軟宣布北美地區Copilot服務故障已完全解決，受影響用戶已恢復正常使用。該故障持續約數小時，微軟未透露具體原因。此事件對微軟股價影響有限，顯示市場對其技術實力仍有信心。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-27T19:28:41+00:00",
+              "url": "https://www.jin10.com/#flash-20260428032700352800"
+            },
+            {
+              "title": "微软：埃森哲正在向其约743,000名员工推广Copilot",
+              "summary_zh": "微軟宣布埃森哲向其約74.3萬名員工推廣Copilot，顯示企業AI應用持續擴大，有助微軟AI產品市佔提升。",
+              "sentiment": 0.6,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-27T18:01:46+00:00",
+              "url": "https://www.jin10.com/#flash-20260428020029897800"
+            }
+          ],
+          "flash_count_7d": 6,
+          "alert_type": "material_event"
+        }
+      }
+    },
+    {
+      "ticker": "MU",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "MU: 內部人賣出 $26.9M (C-level $0.0M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "MU",
+          "lookback_days": 60,
+          "transactions_count": 5,
+          "total_sell_value": 26923907.0,
+          "total_buy_value": 0.0,
+          "net_value": -26923907.0,
+          "exec_sell_value": 0.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "ARNZEN APRIL S",
+            "position": "Officer",
+            "value": 13895762.0,
+            "date": "2026-04-01"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 3,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "NFLX",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "NFLX: 內部人賣出 $43.0M (C-level $2.8M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "NFLX",
+          "lookback_days": 60,
+          "transactions_count": 4,
+          "total_sell_value": 42962205.0,
+          "total_buy_value": 0.0,
+          "net_value": -42962205.0,
+          "exec_sell_value": 2805740.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "HASTINGS REED",
+            "position": "Director",
+            "value": 40156465.0,
+            "date": "2026-04-01"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 2,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
       "ticker": "NVDA",
-      "type": "dropped_from_top10",
-      "severity": "low",
-      "summary": "NVDA 跌出 BUY 前 10 名 (score 84→?)",
+      "type": "news_alert",
+      "severity": "high",
+      "summary": "NVDA: 10 條重要快訊",
+      "yesterday": {},
+      "today": {
+        "news": {
+          "ticker": "NVDA",
+          "article_count_7d": 20,
+          "sentiment_avg_7d": 0.35,
+          "sentiment_recent_3d": 0.35,
+          "sentiment_older_4d": 0.35,
+          "sentiment_trend": "stable",
+          "top_topics": [
+            "ai",
+            "tech",
+            "earnings",
+            "macro",
+            "regulation"
+          ],
+          "material_events": [
+            {
+              "title": "1. Anthropic估值或升至逾9000亿美元超过OpenAI",
+              "summary_zh": "AI領域再現巨額融資傳言，傳Anthropic估值有望突破9000億美元，超越OpenAI，反映市場對AI發展前景高度樂觀，同時監管力度同步加強，中美澳相繼推出AI監管政策與指引。",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-30T03:51:37+00:00",
+              "url": "https://www.jin10.com/#flash-20260430115052739800"
+            },
+            {
+              "title": "1. 中共中央政治局：全面实施“人工智能+”行动，发展智能经济新形态",
+              "summary_zh": "中共中央政治局部署全面實施「人工智能+」行動，推動智能經濟發展；工信部將開展AI+軟件專項行動並批准690項行業標準。我國2025年詞元調用量達21100萬億，日均呈指數級增長。英偉達推新模型並與三星、SK海力士洽談物理AI合作，字節、智譜",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-29T03:59:29+00:00",
+              "url": "https://www.jin10.com/#flash-20260429115755266800"
+            },
+            {
+              "title": "英伟达高层将与三星及SK海力士高管会面，商讨实体人工智能合作事宜",
+              "summary_zh": "英偉達高層將與三星及SK海力士高管會面，討論實體AI合作事宜，涉及AI晶片與半導體供應鏈策略結盟。",
+              "sentiment": 0.3,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-29T03:00:33+00:00",
+              "url": "https://www.jin10.com/#flash-20260429105832212800"
+            },
+            {
+              "title": "金十数据整理：每日科技要闻速递（4月29日）",
+              "summary_zh": "今日科技要聞包括：谷歌退出美軍无人机蜂群竞标，立讯精密与比亚迪Q1财报一增一减，英伟达发布新AI模型效率提升9倍，工信部将开展AI+软件专项行动，广东推动星箭低成本量产。",
+              "sentiment": 0.1,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T23:23:55+00:00",
+              "url": "https://www.jin10.com/#flash-20260429072219970800"
+            },
+            {
+              "title": "广东：推进RISC-V、端侧AI、光芯片、智能传感器、存算一体等前沿和关键芯片研发",
+              "summary_zh": "廣東省發布政策文件，提出推進RISC-V架構、端側AI、光子晶片、智慧感測器及存算一體等前沿與關鍵晶片研發，目標強化半導體自主可控能力，扶持相關產業鏈發展。",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T02:32:43+00:00",
+              "url": "https://www.jin10.com/#flash-20260428103127959800"
+            }
+          ],
+          "flash_count_7d": 10,
+          "alert_type": "material_event"
+        }
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "NVDA: 內部人賣出 $163.7M (C-level $11.0M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "NVDA",
+          "lookback_days": 60,
+          "transactions_count": 13,
+          "total_sell_value": 163747347.0,
+          "total_buy_value": 0.0,
+          "net_value": -163747347.0,
+          "exec_sell_value": 10956706.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "PURI AJAY K",
+            "position": "Officer",
+            "value": 54756044.0,
+            "date": "2026-03-10"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 2,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
+      "ticker": "TSM",
+      "type": "thesis_broken",
+      "severity": "high",
+      "summary": "TSM: 投資 thesis 條件被違反 — bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降",
+      "yesterday": {},
+      "today": {
+        "thesis_age_days": 1,
+        "broken_conditions": [
+          "bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降"
+        ],
+        "first_buy_date": "2026-04-30",
+        "score_at_buy": 84
+      }
+    },
+    {
+      "ticker": "V",
+      "type": "news_alert",
+      "severity": "high",
+      "summary": "V: 18 條重要快訊",
+      "yesterday": {},
+      "today": {
+        "news": {
+          "ticker": "V",
+          "article_count_7d": 20,
+          "sentiment_avg_7d": 0.18,
+          "sentiment_recent_3d": 0.26,
+          "sentiment_older_4d": 0.15,
+          "sentiment_trend": "stable",
+          "top_topics": [
+            "ai",
+            "tech",
+            "macro",
+            "regulation",
+            "geopolitics"
+          ],
+          "material_events": [
+            {
+              "title": "能源情报集团记者阿蒙娜•巴克尔：我对欧佩克了解的一件事就是，这个组织不断演变",
+              "summary_zh": "能源情報集團記者阿蒙娜·巴克爾指出，歐佩克組織持續演變，政策靈活性增強，可能對全球能源市場供需格局產生深遠影響，值得關注其後續動向。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-30T04:35:07+00:00",
+              "url": "https://www.jin10.com/#flash-20260430123342370800"
+            },
+            {
+              "title": "1. Anthropic估值或升至逾9000亿美元超过OpenAI",
+              "summary_zh": "AI領域再現巨額融資傳言，傳Anthropic估值有望突破9000億美元，超越OpenAI，反映市場對AI發展前景高度樂觀，同時監管力度同步加強，中美澳相繼推出AI監管政策與指引。",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-30T03:51:37+00:00",
+              "url": "https://www.jin10.com/#flash-20260430115052739800"
+            },
+            {
+              "title": "1. 中共中央政治局：全面实施“人工智能+”行动，发展智能经济新形态",
+              "summary_zh": "中共中央政治局部署全面實施「人工智能+」行動，推動智能經濟發展；工信部將開展AI+軟件專項行動並批准690項行業標準。我國2025年詞元調用量達21100萬億，日均呈指數級增長。英偉達推新模型並與三星、SK海力士洽談物理AI合作，字節、智譜",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-29T03:59:29+00:00",
+              "url": "https://www.jin10.com/#flash-20260429115755266800"
+            },
+            {
+              "title": "英伟达高层将与三星及SK海力士高管会面，商讨实体人工智能合作事宜",
+              "summary_zh": "英偉達高層將與三星及SK海力士高管會面，討論實體AI合作事宜，涉及AI晶片與半導體供應鏈策略結盟。",
+              "sentiment": 0.3,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-29T03:00:33+00:00",
+              "url": "https://www.jin10.com/#flash-20260429105832212800"
+            },
+            {
+              "title": "金十数据整理：每日科技要闻速递（4月29日）",
+              "summary_zh": "今日科技要聞包括：谷歌退出美軍无人机蜂群竞标，立讯精密与比亚迪Q1财报一增一减，英伟达发布新AI模型效率提升9倍，工信部将开展AI+软件专项行动，广东推动星箭低成本量产。",
+              "sentiment": 0.1,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T23:23:55+00:00",
+              "url": "https://www.jin10.com/#flash-20260429072219970800"
+            }
+          ],
+          "flash_count_7d": 18,
+          "alert_type": "material_event"
+        }
+      }
+    },
+    {
+      "ticker": "AXP",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "AXP 新進 BUY 前 10 名 (score 95)",
+      "yesterday": {},
+      "today": {
+        "score": 95,
+        "rank": 5,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "BAC",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "BAC 新進 BUY 前 10 名 (score 94)",
+      "yesterday": {},
+      "today": {
+        "score": 94,
+        "rank": 6,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "GOOG",
+      "type": "news_alert",
+      "severity": "medium",
+      "summary": "GOOG: 正面新聞集中 (sentiment +0.35,20 篇)",
+      "yesterday": {},
+      "today": {
+        "news": {
+          "ticker": "GOOG",
+          "article_count_7d": 20,
+          "sentiment_avg_7d": 0.35,
+          "sentiment_recent_3d": 0.37,
+          "sentiment_older_4d": 0.0,
+          "sentiment_trend": "rising",
+          "top_topics": [
+            "tech",
+            "earnings",
+            "ai",
+            "macro",
+            "crypto"
+          ],
+          "material_events": [
+            {
+              "title": "1. Anthropic估值或升至逾9000亿美元超过OpenAI",
+              "summary_zh": "AI領域再現巨額融資傳言，傳Anthropic估值有望突破9000億美元，超越OpenAI，反映市場對AI發展前景高度樂觀，同時監管力度同步加強，中美澳相繼推出AI監管政策與指引。",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-30T03:51:37+00:00",
+              "url": "https://www.jin10.com/#flash-20260430115052739800"
+            },
+            {
+              "title": "金十数据整理：每日科技要闻速递（4月29日）",
+              "summary_zh": "今日科技要聞包括：谷歌退出美軍无人机蜂群竞标，立讯精密与比亚迪Q1财报一增一减，英伟达发布新AI模型效率提升9倍，工信部将开展AI+软件专项行动，广东推动星箭低成本量产。",
+              "sentiment": 0.1,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T23:23:55+00:00",
+              "url": "https://www.jin10.com/#flash-20260429072219970800"
+            },
+            {
+              "title": "今日重点关注的财经数据与事件：2026年4月29日 周三",
+              "summary_zh": "2026年4月29日周三重磅事件密集：加拿大央行利率决议、美联储FOMC利率决策、鲍威尔讲话，以及谷歌、微软、亚马逊、Meta等科技巨头财报。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T22:51:14+00:00",
+              "url": "https://www.jin10.com/#flash-20260429065000001800"
+            },
+            {
+              "title": "金十数据整理：每日科技要闻速递（4月25日）",
+              "summary_zh": "AI領域螞蟻、華為發布萬億級模型，谷歌擬400億美元投資Anthropic；Meta與亞馬遜達成數十億美元晶片協議；三星韓國罷工致晶片產量降58%；小鵬、零跑等新能源車加速海外布局。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-25T01:27:59+00:00",
+              "url": "https://www.jin10.com/#flash-20260425092705521800"
+            },
+            {
+              "title": "Unprecedented AI Spending Is Rewriting Big Tech’s Earnings Season Playbook",
+              "summary_zh": "AI 支出飆升重塑科技巨頭財報格局，企業砸重金布局 AI 基礎設施與模型開發，市場看好長期成長動能，但短期獲利壓力引發觀望。",
+              "sentiment": 0.3,
+              "category": "ticker_news",
+              "fetched_at": "2026-05-01T07:00:36+00:00",
+              "url": "https://finance.yahoo.com/m/61aa9e9a-1ba6-39bb-a4a2-1df81f18d72d/unprecedented-ai-spending-is.html"
+            }
+          ],
+          "flash_count_7d": 4,
+          "alert_type": "news_positive_spike"
+        }
+      }
+    },
+    {
+      "ticker": "GOOGL",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "GOOGL 新進 BUY 前 10 名 (score 102)",
+      "yesterday": {},
+      "today": {
+        "score": 102,
+        "rank": 1,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "GOOGL",
+      "type": "news_alert",
+      "severity": "medium",
+      "summary": "GOOGL: 正面新聞集中 (sentiment +0.36,20 篇)",
+      "yesterday": {},
+      "today": {
+        "news": {
+          "ticker": "GOOGL",
+          "article_count_7d": 20,
+          "sentiment_avg_7d": 0.36,
+          "sentiment_recent_3d": 0.38,
+          "sentiment_older_4d": 0.0,
+          "sentiment_trend": "rising",
+          "top_topics": [
+            "tech",
+            "earnings",
+            "ai",
+            "macro",
+            "regulation"
+          ],
+          "material_events": [
+            {
+              "title": "1. Anthropic估值或升至逾9000亿美元超过OpenAI",
+              "summary_zh": "AI領域再現巨額融資傳言，傳Anthropic估值有望突破9000億美元，超越OpenAI，反映市場對AI發展前景高度樂觀，同時監管力度同步加強，中美澳相繼推出AI監管政策與指引。",
+              "sentiment": 0.5,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-30T03:51:37+00:00",
+              "url": "https://www.jin10.com/#flash-20260430115052739800"
+            },
+            {
+              "title": "金十数据整理：每日科技要闻速递（4月29日）",
+              "summary_zh": "今日科技要聞包括：谷歌退出美軍无人机蜂群竞标，立讯精密与比亚迪Q1财报一增一减，英伟达发布新AI模型效率提升9倍，工信部将开展AI+软件专项行动，广东推动星箭低成本量产。",
+              "sentiment": 0.1,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T23:23:55+00:00",
+              "url": "https://www.jin10.com/#flash-20260429072219970800"
+            },
+            {
+              "title": "今日重点关注的财经数据与事件：2026年4月29日 周三",
+              "summary_zh": "2026年4月29日周三重磅事件密集：加拿大央行利率决议、美联储FOMC利率决策、鲍威尔讲话，以及谷歌、微软、亚马逊、Meta等科技巨头财报。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-28T22:51:14+00:00",
+              "url": "https://www.jin10.com/#flash-20260429065000001800"
+            },
+            {
+              "title": "金十数据整理：每日科技要闻速递（4月25日）",
+              "summary_zh": "AI領域螞蟻、華為發布萬億級模型，谷歌擬400億美元投資Anthropic；Meta與亞馬遜達成數十億美元晶片協議；三星韓國罷工致晶片產量降58%；小鵬、零跑等新能源車加速海外布局。",
+              "sentiment": 0.0,
+              "category": "flash_cn",
+              "fetched_at": "2026-04-25T01:27:59+00:00",
+              "url": "https://www.jin10.com/#flash-20260425092705521800"
+            },
+            {
+              "title": "Unprecedented AI Spending Is Rewriting Big Tech’s Earnings Season Playbook",
+              "summary_zh": "AI 支出飆升重塑科技巨頭財報格局，企業砸重金布局 AI 基礎設施與模型開發，市場看好長期成長動能，但短期獲利壓力引發觀望。",
+              "sentiment": 0.3,
+              "category": "ticker_news",
+              "fetched_at": "2026-05-01T07:00:36+00:00",
+              "url": "https://finance.yahoo.com/m/61aa9e9a-1ba6-39bb-a4a2-1df81f18d72d/unprecedented-ai-spending-is.html"
+            }
+          ],
+          "flash_count_7d": 4,
+          "alert_type": "news_positive_spike"
+        }
+      }
+    },
+    {
+      "ticker": "KO",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "KO 新進 BUY 前 10 名 (score 90)",
+      "yesterday": {},
+      "today": {
+        "score": 90,
+        "rank": 9,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "MA",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "MA 新進 BUY 前 10 名 (score 100)",
+      "yesterday": {},
+      "today": {
+        "score": 100,
+        "rank": 3,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "MCO",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "MCO 新進 BUY 前 10 名 (score 90)",
+      "yesterday": {},
+      "today": {
+        "score": 90,
+        "rank": 10,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "META",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "META 新進 BUY 前 10 名 (score 102)",
+      "yesterday": {},
+      "today": {
+        "score": 102,
+        "rank": 2,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "MSFT 新進 BUY 前 10 名 (score 93)",
+      "yesterday": {},
+      "today": {
+        "score": 93,
+        "rank": 7,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "TSM",
+      "type": "bias_changed",
+      "severity": "medium",
+      "summary": "TSM: BUY ↓ INSUFFICIENT_DATA (score 84→80)",
       "yesterday": {
+        "bias": "BUY",
         "score": 84
       },
       "today": {
-        "score": null,
-        "bias": null
+        "bias": "INSUFFICIENT_DATA",
+        "score": 80,
+        "recommendation": null
+      }
+    },
+    {
+      "ticker": "V",
+      "type": "new_top10",
+      "severity": "medium",
+      "summary": "V 新進 BUY 前 10 名 (score 99)",
+      "yesterday": {},
+      "today": {
+        "score": 99,
+        "rank": 4,
+        "recommendation": null
       }
     },
     {
       "ticker": "TSM",
       "type": "dropped_from_top10",
       "severity": "low",
-      "summary": "TSM 跌出 BUY 前 10 名 (score 84→?)",
+      "summary": "TSM 跌出 BUY 前 10 名 (score 84→80)",
       "yesterday": {
         "score": 84
       },
       "today": {
-        "score": null,
-        "bias": null
+        "score": 80,
+        "bias": "INSUFFICIENT_DATA"
       }
     }
   ]

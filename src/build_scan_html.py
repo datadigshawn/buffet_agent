@@ -35,6 +35,8 @@ from agent.sources import top_movers as _top_movers  # noqa: E402
 OUT_DIR = ROOT / "simple-html"
 SCAN_DIR = OUT_DIR / "scan"
 JSON_OUT_DIR = ROOT / "output"
+DEBUG_OUT_DIR = OUT_DIR / "debug-scan"
+DEBUG_JSON_OUT_DIR = JSON_OUT_DIR / "debug"
 WATCHLIST_JSON = ROOT / "config" / "watchlist.json"
 # stockTracker CSV — 不存在則 fallback 到 watchlist.json
 def _default_stocktracker_csv() -> Path:
@@ -422,7 +424,10 @@ def _verdict_to_json(v, sources: list[str], thesis_state: str | None = None,
 
 def write_json_output(verdicts, source_map: dict[str, list[str]],
                       rules_version: str, scan_date: str, scan_time_utc: str,
-                      thesis_states: dict[str, tuple[str, int | None]] | None = None) -> Path:
+                      thesis_states: dict[str, tuple[str, int | None]] | None = None,
+                      output_dir: Path = JSON_OUT_DIR,
+                      write_latest: bool = True,
+                      daily_name: str | None = None) -> Path:
     """寫 output/daily_YYYY-MM-DD.json + latest.json (給戰情室拉)。
 
     thesis_states: ticker → (state, age_days)
@@ -452,12 +457,13 @@ def write_json_output(verdicts, source_map: dict[str, list[str]],
             for v in sorted(verdicts, key=lambda x: -x.score.total)
         ],
     }
-    JSON_OUT_DIR.mkdir(parents=True, exist_ok=True)
-    daily_path = JSON_OUT_DIR / f"daily_{scan_date}.json"
-    latest_path = JSON_OUT_DIR / "latest.json"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    daily_path = output_dir / (daily_name or f"daily_{scan_date}.json")
     text = json.dumps(payload, ensure_ascii=False, indent=2)
     daily_path.write_text(text, encoding="utf-8")
-    latest_path.write_text(text, encoding="utf-8")
+    if write_latest:
+        latest_path = output_dir / "latest.json"
+        latest_path.write_text(text, encoding="utf-8")
     return daily_path
 
 
@@ -476,12 +482,16 @@ def main() -> int:
     if args.limit:
         tickers = tickers[: args.limit]
         source_map = {t: source_map[t] for t in tickers if t in source_map}
+    is_debug_run = args.limit is not None
 
     if not args.quiet:
         n_watch = sum(1 for s in source_map.values() if "watchlist" in s)
         n_movers = sum(1 for s in source_map.values() if "top_50_volume" in s)
-        print(f"📊 掃 {len(tickers)} 檔 (watchlist={n_watch}, top_movers={n_movers})...",
-              flush=True)
+        mode = f"debug --limit {args.limit}" if is_debug_run else "production"
+        print(
+            f"📊 掃 {len(tickers)} 檔 ({mode}; watchlist={n_watch}, top_movers={n_movers})...",
+            flush=True,
+        )
 
     verdicts = []
     for i, t in enumerate(tickers, 1):
@@ -504,69 +514,94 @@ def main() -> int:
     tz = timezone(timedelta(hours=8))
     timestamp_local = datetime.now(tz).strftime("%Y-%m-%d %H:%M %Z")
 
-    # 寫檔
-    SCAN_DIR.mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "scan.html").write_text(
+    # 寫 HTML。--limit 是除錯模式,不可覆蓋正式 scan.html / scan/。
+    html_out_dir = DEBUG_OUT_DIR if is_debug_run else OUT_DIR
+    detail_dir = html_out_dir / "scan"
+    detail_dir.mkdir(parents=True, exist_ok=True)
+    summary_name = "scan.html"
+    (html_out_dir / summary_name).write_text(
         render_summary(verdicts, timestamp_local, rules_version), encoding="utf-8"
     )
     for v in verdicts:
-        (SCAN_DIR / f"{v.ticker}.html").write_text(
+        (detail_dir / f"{v.ticker}.html").write_text(
             render_detail(v, timestamp_local), encoding="utf-8"
         )
 
-    # Phase 5 P0-2:thesis tracking — 先跑 thesis 才能把 state 寫進 JSON
-    # 用簡化 dict 餵 thesis 模組(等下完整 JSON 會 overwrite)
-    pre_payload_verdicts = [_verdict_to_json(v, source_map.get(v.ticker, []))
-                            for v in verdicts]
-    thesis_statuses = _thesis.process_verdicts(
-        pre_payload_verdicts,
-        llm_writer=_llm.write_thesis,  # 沒設 OPENROUTER_API_KEY 會自動 None → fallback template
-    )
     thesis_state_map: dict[str, tuple[str, int | None]] = {}
-    for st in thesis_statuses:
-        age = st.thesis.thesis_age_days if st.thesis else None
-        thesis_state_map[st.ticker] = (st.state, age)
+    thesis_statuses = []
+    if not is_debug_run:
+        # Phase 5 P0-2:thesis tracking — 先跑 thesis 才能把 state 寫進 JSON。
+        # Debug run 不寫正式 thesis,避免 --limit 測試污染投資論文狀態。
+        pre_payload_verdicts = [_verdict_to_json(v, source_map.get(v.ticker, []))
+                                for v in verdicts]
+        thesis_statuses = _thesis.process_verdicts(
+            pre_payload_verdicts,
+            llm_writer=_llm.write_thesis,  # 沒設 OPENROUTER_API_KEY 會自動 None → fallback template
+        )
+        for st in thesis_statuses:
+            age = st.thesis.thesis_age_days if st.thesis else None
+            thesis_state_map[st.ticker] = (st.state, age)
 
-    # 寫 JSON (含 thesis state)
+    # 寫 JSON (正式模式含 thesis state; debug 模式寫 output/debug,不覆蓋 latest.json)
     json_path = write_json_output(
         verdicts, source_map, rules_version, scan_date, scan_time_utc,
         thesis_states=thesis_state_map,
+        output_dir=DEBUG_JSON_OUT_DIR if is_debug_run else JSON_OUT_DIR,
+        write_latest=not is_debug_run,
+        daily_name=(
+            f"daily_{scan_date}_limit_{args.limit}.json"
+            if is_debug_run
+            else None
+        ),
     )
     today_payload = json.loads(json_path.read_text(encoding="utf-8"))
 
-    # Phase 5 P0-1:變動偵測 → output/alerts.json (含 thesis_broken + news_alert)
-    yesterday_payload = _diff.find_yesterday_scan(JSON_OUT_DIR, scan_date)
-    alerts = _diff.detect(yesterday_payload, today_payload)
-    alerts.extend(_diff.thesis_broken_alerts(thesis_statuses))
-    alerts.extend(_diff.news_alerts_from_verdicts(today_payload.get("verdicts", [])))
-    alerts.extend(_diff.insider_alerts_from_verdicts(today_payload.get("verdicts", [])))
-    # P2-2: 讀近期回測結果,連續 underperform 觸發 regression alert
-    backtest_path = JSON_OUT_DIR / "backtest.json"
-    if backtest_path.exists():
-        try:
-            backtest_data = json.loads(backtest_path.read_text(encoding="utf-8"))
-            alerts.extend(_diff.regression_alert_from_backtest(backtest_data))
-        except (json.JSONDecodeError, OSError):
-            pass
-    # 重新排序 (severity)
-    severity_rank = {"high": 0, "medium": 1, "low": 2}
-    alerts.sort(key=lambda a: (severity_rank.get(a.severity, 3), a.ticker))
-    alerts_path = JSON_OUT_DIR / "alerts.json"
-    _diff.write_alerts_json(alerts, alerts_path)
+    alerts = []
+    if not is_debug_run:
+        # Phase 5 P0-1:變動偵測 → output/alerts.json (含 thesis_broken + news_alert)
+        yesterday_payload = _diff.find_yesterday_scan(JSON_OUT_DIR, scan_date)
+        alerts = _diff.detect(yesterday_payload, today_payload)
+        alerts.extend(_diff.thesis_broken_alerts(thesis_statuses))
+        alerts.extend(_diff.news_alerts_from_verdicts(today_payload.get("verdicts", [])))
+        alerts.extend(_diff.insider_alerts_from_verdicts(today_payload.get("verdicts", [])))
+        # P2-2: 讀近期回測結果,連續 underperform 觸發 regression alert
+        backtest_path = JSON_OUT_DIR / "backtest.json"
+        if backtest_path.exists():
+            try:
+                backtest_data = json.loads(backtest_path.read_text(encoding="utf-8"))
+                alerts.extend(_diff.regression_alert_from_backtest(backtest_data))
+            except (json.JSONDecodeError, OSError):
+                pass
+        # 重新排序 (severity)
+        severity_rank = {"high": 0, "medium": 1, "low": 2}
+        alerts.sort(key=lambda a: (severity_rank.get(a.severity, 3), a.ticker))
+        alerts_path = JSON_OUT_DIR / "alerts.json"
+        _diff.write_alerts_json(alerts, alerts_path)
 
-    print(f"✅ 完成 {len(verdicts)} 份報告 → simple-html/scan.html + simple-html/scan/")
-    print(f"📦 JSON contract → {json_path.relative_to(ROOT)} + output/latest.json")
+    if is_debug_run:
+        print(
+            f"✅ Debug 完成 {len(verdicts)} 份報告 → "
+            f"{(html_out_dir / summary_name).relative_to(ROOT)} + {detail_dir.relative_to(ROOT)}/"
+        )
+        print(f"📦 Debug JSON → {json_path.relative_to(ROOT)} (未覆蓋 output/latest.json)")
+    else:
+        print(f"✅ 完成 {len(verdicts)} 份報告 → simple-html/scan.html + simple-html/scan/")
+        print(f"📦 JSON contract → {json_path.relative_to(ROOT)} + output/latest.json")
     # Thesis 統計
     state_counts: dict[str, int] = {}
     for st in thesis_statuses:
         state_counts[st.state] = state_counts.get(st.state, 0) + 1
-    print(f"📜 Theses: " + ", ".join(f"{k}={v}" for k, v in sorted(state_counts.items())))
-    if alerts:
-        by_sev = ", ".join(f"{k}={v}" for k, v in
-                           sorted(_diff._count_by_severity(alerts).items()))
-        print(f"⚡ Alerts ({len(alerts)}: {by_sev}) → {alerts_path.relative_to(ROOT)}")
+    if is_debug_run:
+        print("📜 Theses: skipped in debug mode")
+        print("⚡ Alerts: skipped in debug mode")
     else:
-        print(f"⚡ No alerts (first run or no changes) → {alerts_path.relative_to(ROOT)}")
+        print(f"📜 Theses: " + ", ".join(f"{k}={v}" for k, v in sorted(state_counts.items())))
+        if alerts:
+            by_sev = ", ".join(f"{k}={v}" for k, v in
+                               sorted(_diff._count_by_severity(alerts).items()))
+            print(f"⚡ Alerts ({len(alerts)}: {by_sev}) → {alerts_path.relative_to(ROOT)}")
+        else:
+            print(f"⚡ No alerts (first run or no changes) → {alerts_path.relative_to(ROOT)}")
     return 0
 
 

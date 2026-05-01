@@ -15,3 +15,6 @@ data/sec_cache/*.json
 # launchd notify log noise — log files don't belong in repo
 output/notify_warroom.log
 output/notify_warroom.error.log
+# --limit debug scan artifacts
+output/debug/
+simple-html/debug-scan/

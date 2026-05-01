@@ -30,9 +30,11 @@
     "berkshire_holds": false,
     "industry_class": "general"
   },
-  "last_verified_date": "2026-04-30",
-  "last_verified_status": "valid",
-  "broken_conditions": [],
-  "thesis_age_days": 0,
+  "last_verified_date": "2026-05-01",
+  "last_verified_status": "broken",
+  "broken_conditions": [
+    "bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降"
+  ],
+  "thesis_age_days": 1,
   "written_by": "default"
 }

@@ -30,12 +30,9 @@
     "berkshire_holds": false,
     "industry_class": "general"
   },
-  "last_verified_date": "2026-04-30",
-  "last_verified_status": "broken",
-  "broken_conditions": [
-    "score >= 60 (現在 = 0) — 量化分數不可跌到 HOLD 以下",
-    "bias != OUT_OF_CIRCLE (現在 = OUT_OF_CIRCLE) — 不可觸發硬性 disqualifier"
-  ],
-  "thesis_age_days": 0,
+  "last_verified_date": "2026-05-01",
+  "last_verified_status": "valid",
+  "broken_conditions": [],
+  "thesis_age_days": 1,
   "written_by": "default"
 }

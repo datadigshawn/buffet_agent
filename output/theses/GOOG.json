@@ -1,0 +1,40 @@
+{
+  "ticker": "GOOG",
+  "first_buy_date": "2026-05-01",
+  "bias_at_buy": "BUY",
+  "score_at_buy": 85,
+  "thesis_text": "GOOG 在 2026-05-01 首次拿到 BUY 評分 85/110。通過規則: R1, R2, R3, R4, R5。加分項: B2, B6。覆蓋率 100%。持有理由維持有效的條件:量化分數不下滑、未觸發 disqualifier、關鍵持續性指標不衰退、Berkshire 持股(若有)維持。",
+  "required_conditions": [
+    {
+      "metric": "score",
+      "op": ">=",
+      "value": 60,
+      "description": "量化分數不可跌到 HOLD 以下"
+    },
+    {
+      "metric": "bias",
+      "op": "!=",
+      "value": "OUT_OF_CIRCLE",
+      "description": "不可觸發硬性 disqualifier"
+    },
+    {
+      "metric": "bias",
+      "op": "!=",
+      "value": "INSUFFICIENT_DATA",
+      "description": "資料完整度不可下降"
+    }
+  ],
+  "key_metrics_at_buy": {
+    "score": 85,
+    "coverage_pct": 100,
+    "berkshire_holds": false,
+    "intrinsic_value_per_share": 77.46,
+    "margin_of_safety_pct": -3.931,
+    "industry_class": "general"
+  },
+  "last_verified_date": "2026-05-01",
+  "last_verified_status": "valid",
+  "broken_conditions": [],
+  "thesis_age_days": 0,
+  "written_by": "default"
+}

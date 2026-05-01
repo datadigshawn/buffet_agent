@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#8b3a2f" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1816" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="apple-touch-icon" href="../icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="巴菲特">
+<title>ANET | 巴菲特 Scan</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap');
+:root{--bg:#faf8f5;--fg:#2a2521;--muted:#6c6258;--accent:#8b3a2f;--accent-2:#b87333;--line:#e5e0d4;--highlight:rgba(184,115,51,0.15);--code-bg:#f0ece3;--buy:#2d7a4f;--hold:#7a652d;--watch:#7a4f2d;--avoid:#7a2d3a;--out:#555;}
+@media (prefers-color-scheme: dark){:root{--bg:#1a1816;--fg:#ebe6db;--muted:#a09787;--accent:#d4815a;--accent-2:#e0a070;--line:#3a352e;--highlight:rgba(212,129,90,0.18);--code-bg:#2a2521;--buy:#52c285;--hold:#c2a052;--watch:#c27a52;--avoid:#c25268;--out:#888;}}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'Noto Sans TC',-apple-system,sans-serif;line-height:1.6;font-size:16px;}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 18px 60px;}
+header{margin-bottom:24px;border-bottom:2px solid var(--accent);padding-bottom:12px;}
+header h1{font-family:'Noto Serif TC',serif;font-size:28px;margin:0 0 6px;color:var(--accent);}
+header .meta{font-size:13px;color:var(--muted);}
+.bias-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-weight:700;font-size:12px;color:#fff;}
+.bias-BUY{background:var(--buy);}
+.bias-HOLD{background:var(--hold);}
+.bias-WATCH{background:var(--watch);}
+.bias-AVOID{background:var(--avoid);}
+.bias-OUT_OF_CIRCLE{background:var(--out);}
+.bias-INSUFFICIENT_DATA{background:#7a8a9c;}
+.summary-bar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 24px;}
+.summary-bar span{background:var(--code-bg);padding:6px 12px;border-radius:6px;font-size:13px;}
+table{border-collapse:collapse;width:100%;font-size:14px;}
+th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top;}
+th{background:var(--code-bg);color:var(--accent);font-weight:700;font-family:'Noto Serif TC',serif;cursor:pointer;user-select:none;}
+th:hover{background:var(--highlight);}
+tr:hover td{background:var(--highlight);}
+td.score{font-variant-numeric:tabular-nums;font-weight:700;}
+td.ticker a{color:var(--accent);text-decoration:none;font-weight:700;}
+td.ticker a:hover{text-decoration:underline;}
+.brk-yes{color:var(--accent);font-size:18px;}
+.brk-no{color:var(--muted);}
+a.back{color:var(--muted);text-decoration:none;font-size:13px;}
+a.back:hover{color:var(--accent);}
+.wikilink{color:var(--accent);background:var(--highlight);padding:2px 4px;border-radius:3px;text-decoration:none;}
+.wikilink:hover{background:var(--accent-2);color:var(--bg);}
+.wikilink-broken{color:var(--muted);text-decoration:line-through;}
+h1,h2,h3{font-family:'Noto Serif TC',serif;line-height:1.4;}
+h2{color:var(--accent);font-size:22px;margin-top:1.6em;}
+h3{color:var(--accent-2);font-size:18px;}
+blockquote{border-left:4px solid var(--accent-2);background:var(--highlight);padding:10px 14px;margin:14px 0;border-radius:0 4px 4px 0;}
+code{background:var(--code-bg);padding:2px 6px;border-radius:3px;font-size:0.92em;}
+ul,ol{padding-left:24px;}
+li{margin:4px 0;}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-align:center;font-size:12px;color:var(--muted);}
+@media (max-width:768px){.wrap{padding:16px 12px;}table{font-size:12px;}th,td{padding:6px 4px;}}
+/* mobile drawer (re-use site convention) */
+.nav-back{position:fixed;top:12px;left:12px;z-index:120;background:var(--accent);color:var(--bg);padding:6px 12px;border-radius:8px;text-decoration:none;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+/* 跨站導覽:右上 4 icon (scan / backtest / KB / 戰情室) */
+.site-nav{position:fixed;top:12px;right:12px;z-index:130;display:flex;gap:6px;
+  background:rgba(250,248,245,0.92);border:1px solid var(--line);border-radius:8px;
+  padding:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);}
+@media (prefers-color-scheme:dark){.site-nav{background:rgba(26,24,22,0.92);}}
+.site-nav a{font-size:18px;padding:4px 9px;text-decoration:none;border-radius:5px;
+  color:var(--fg);transition:all .15s;line-height:1.2;}
+.site-nav a:hover{background:var(--accent);color:var(--bg);}
+.site-nav a[aria-current="page"]{background:var(--accent);color:var(--bg);}
+@media (max-width:768px){.site-nav{top:8px;right:8px;padding:3px;gap:3px;}
+  .site-nav a{font-size:16px;padding:3px 6px;}}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="網站導覽">
+<a href="https://buffetagent.netlify.app/scan.html" aria-current="page" title="📊 Scan 排行榜">📊</a>
+<a href="https://buffetagent.netlify.app/backtest.html"  title="📈 回測報告">📈</a>
+<a href="https://buffetagent.netlify.app/index.html"  title="📚 巴菲特知識庫">📚</a>
+<a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
+  title="💬 戰情室 (新分頁開啟)">💬</a>
+</nav>
+<a class="nav-back" href="../scan.html">← 排行榜</a>
+<div class="wrap">
+<h1>巴菲特 Agent — ANET</h1>
+<p><strong>Bias</strong>: BUY  ·  <strong>Score</strong>: 80/110 (base 75 + bonus 5)</p>
+<p><strong>規則涵蓋率</strong>: 100%</p>
+<p><strong>Sector</strong>: AI傳輸  ·  <strong>資料來源</strong>: csv+yfinance+sec</p>
+<h2>✅ 通過的規則</h2>
+<ul>
+<li><strong>R1</strong> ROE &gt;= 15% (actual=0.3140) ✓ +15 → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
+<li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.6406) ✓ +10 → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
+<li><strong>R3</strong> 淨利率 &gt;= 10% (actual=0.3899) ✓ +10 → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
+<li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=0.1910) ✓ +10 → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
+<li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.0000) ✓ +15 → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
+<li><strong>R6</strong> FCF margin &gt;= 15% (actual=1.2595) ✓ +10 → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
+<li><strong>R7</strong> 回購率 &gt; 0 (actual=0.0038) ✓ +5 → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
+</ul>
+<h2>❌ 未通過的規則</h2>
+<ul>
+<li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=1.0160) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
+</ul>
+<h2>🎁 加分項</h2>
+<ul>
+<li><strong>B2</strong> ROIC &gt; 20% 連續 5 年 +5</li>
+</ul>
+<h2>💰 內在價值估算 (Ensemble × 3 模型)</h2>
+<ul>
+<li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
+<li>估值帶: $3.57 (low) / <strong>$12.70</strong> (mid) / $64.19 (high)</li>
+<li>目前股價: $166.85</li>
+<li>安全邊際 (mid intrinsic): <strong>-1213.9%</strong></li>
+</ul>
+<p>各模型細節:
+  - <strong>dcf_two_stage</strong>: $12.70 (MOS -1213.9%) — 5y OE avg=0.47B; CAGR=51.3%
+  - <strong>shiller_pe</strong>: $64.19 (MOS -159.9%) — 5y avg EPS=$3.78 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $3.57 (MOS -4571.8%) — 5y OE/MarketCap yield=0.22% vs fair yield=10.4%</p>
+<h2>🤵 Insider 交易訊號 (近 60 天)</h2>
+<ul>
+<li>交易筆數: 13 (賣出 $235.7M / 買入 $0.0M)</li>
+<li>C-level 賣出: <strong>$234.3M</strong></li>
+<li>最大賣家: <strong>ULLAL JAYSHREE</strong> (Chief Executive Officer) $75.94M @ 2026-04-22</li>
+<li>13G filings (5%+ 被動機構): 2 筆</li>
+<li>⚠️ Insider alert: <strong>🔴 內部人大量賣出</strong></li>
+</ul>
+<h2>📰 新聞訊號 (近 7 天)</h2>
+<ul>
+<li>文章數: <strong>9</strong> 篇 (含 0 重要快訊)</li>
+<li>平均 sentiment: <strong>+0.31</strong> (-1 ~ +1 scale)</li>
+<li>情緒趨勢: 📉 下降</li>
+<li>近 3 天 +0.06 vs 前 4 天 +0.62</li>
+<li>熱門主題: tech, ai, earnings, geopolitics</li>
+</ul>
+<p>重要事件 (近 7 天):
+  - <strong>finance</strong> [+0.0] ANET Earnings Play: Using Puts to Get Paid While You Wait
+  - <strong>finance</strong> [+0.5] Plug Into Arista Stock Via A Cash-Secured Put To Switch On An 82% Return
+  - <strong>ticker_news</strong> [+0.6] 5 big analyst AI moves: Palo Alto and Reddit get fresh Buy calls, AMD upgraded</p>
+<h2>🏰 護城河結構化評分 (P1-2)</h2>
+<ul>
+<li>整體強度: <strong>🟢 強</strong> (7.2/10)</li>
+<li>主要類型: <strong>網路效應, 無形資產 (品牌/專利)</strong></li>
+<li>多年趨勢: 📈 擴張中</li>
+<li>近 5 年平均 ROE 26.9% / 前 5 年平均 ROE 6.8% / 變化 +296%</li>
+</ul>
+<p>5 類型分數:
+  - <strong>無形資產 (品牌/專利)</strong>: 6.0/10 — 毛利率 64% (強品牌定價權); 淨利率 39%
+  - <strong>轉換成本</strong>: 5.0/10 — ROIC 5y avg 27%; OE margin 126% (轉換成本變現)
+  - <strong>網路效應</strong>: 8.0/10 — 營收成長 29% (用戶基數加速); 高毛利 (64%) + 成長共存; ROIC 27% (邊際成本低)
+  - <strong>成本優勢</strong>: 4.0/10 — 市值百億等級規模; 毛利率 64%
+  - <strong>效率規模</strong>: 0.0/10 — 非適用行業</p>
+<h2>👔 管理層評估 (Capital Allocation)</h2>
+<ul>
+<li>CEO: <strong>Ms. Jayshree V. Ullal</strong> (CEO &amp; Chairperson)</li>
+<li>BVPS 5y CAGR: <strong>-25.7%</strong></li>
+<li>留存效率 (equity 成長 / 留存盈餘): <strong>0.85</strong></li>
+<li>Buffett 風格分級: <strong>D</strong></li>
+</ul>
+<p>判斷依據:
+  - BVPS 5y CAGR -25.7% (帳面價值縮水,警訊)
+  - 留存效率 0.85 (合格)</p>
+<h2>💡 相關概念</h2>
+<ul>
+<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
+<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
+<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
+<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
+</ul>
+<hr>
+<p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
+<footer>
+資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+</footer>
+</div>
+</body>
+</html>
