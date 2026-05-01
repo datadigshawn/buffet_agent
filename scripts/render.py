@@ -46,6 +46,18 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:'N
 .sidebar a{display:block;color:var(--muted);text-decoration:none;padding:2px 0;font-size:12px;line-height:1.5;}
 .sidebar a:hover{color:var(--accent);}
 .sidebar a.current{color:var(--accent);font-weight:700;}
+/* 折疊式分類:用 HTML5 <details> 元素,native 無 JS;預設收起 */
+.sidebar details.sidebar-group{margin-bottom:2px;}
+.sidebar details.sidebar-group summary{font-family:'Noto Serif TC',serif;font-size:14px;
+  margin:10px 0 4px;color:var(--accent);cursor:pointer;list-style:none;
+  position:relative;padding-left:16px;user-select:none;font-weight:600;}
+.sidebar details.sidebar-group summary::-webkit-details-marker{display:none;}
+.sidebar details.sidebar-group summary::before{content:'▶';position:absolute;
+  left:0;top:50%;transform:translateY(-50%);font-size:9px;color:var(--muted);
+  transition:transform 0.15s ease;}
+.sidebar details[open] > summary::before{transform:translateY(-50%) rotate(90deg);color:var(--accent);}
+.sidebar details.sidebar-group summary:hover{color:var(--accent-2);}
+.sidebar-children{padding-left:8px;padding-top:2px;border-left:1px dashed var(--line);margin-left:4px;}
 main{min-width:0;}
 .breadcrumb{font-size:13px;color:var(--muted);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--line);}
 .breadcrumb a{color:var(--muted);text-decoration:none;}
@@ -259,11 +271,16 @@ def sidebar_html(pages: list[Page], current: Page) -> str:
         items = groups.get(dir_path, [])
         if not items:
             continue
-        parts.append(f"<h3>{label}</h3>")
+        # P5 sidebar 折疊:每個分類用 <details>,預設收起 (無 open 屬性)
+        parts.append('<details class="sidebar-group">')
+        parts.append(f'<summary>{label}</summary>')
+        parts.append('<div class="sidebar-children">')
         for p in items:
             href = relhref(current, p)
             cls = ' class="current"' if p.slug == current.slug and p.rel == current.rel else ""
             parts.append(f'<a href="{href}"{cls}>{p.slug}</a>')
+        parts.append('</div>')
+        parts.append('</details>')
     return "".join(parts)
 
 
