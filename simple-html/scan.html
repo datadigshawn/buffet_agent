@@ -57,23 +57,42 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 @media (max-width:768px){.wrap{padding:16px 12px;}table{font-size:12px;}th,td{padding:6px 4px;}}
 /* mobile drawer (re-use site convention) */
 .nav-back{position:fixed;top:12px;left:12px;z-index:120;background:var(--accent);color:var(--bg);padding:6px 12px;border-radius:8px;text-decoration:none;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+/* 跨站導覽:右上 4 icon (scan / backtest / KB / 戰情室) */
+.site-nav{position:fixed;top:12px;right:12px;z-index:130;display:flex;gap:6px;
+  background:rgba(250,248,245,0.92);border:1px solid var(--line);border-radius:8px;
+  padding:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);}
+@media (prefers-color-scheme:dark){.site-nav{background:rgba(26,24,22,0.92);}}
+.site-nav a{font-size:18px;padding:4px 9px;text-decoration:none;border-radius:5px;
+  color:var(--fg);transition:all .15s;line-height:1.2;}
+.site-nav a:hover{background:var(--accent);color:var(--bg);}
+.site-nav a[aria-current="page"]{background:var(--accent);color:var(--bg);}
+@media (max-width:768px){.site-nav{top:8px;right:8px;padding:3px;gap:3px;}
+  .site-nav a{font-size:16px;padding:3px 6px;}}
 </style>
 </head>
 <body>
+<nav class="site-nav" aria-label="網站導覽">
+<a href="https://buffetagent.netlify.app/scan.html" aria-current="page" title="📊 Scan 排行榜">📊</a>
+<a href="https://buffetagent.netlify.app/backtest.html"  title="📈 回測報告">📈</a>
+<a href="https://buffetagent.netlify.app/index.html"  title="📚 巴菲特知識庫">📚</a>
+<a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
+  title="💬 戰情室 (新分頁開啟)">💬</a>
+</nav>
 <a class="nav-back" href="index.html">← 知識庫</a>
 <div class="wrap">
 <header>
 <h1>📊 巴菲特 Scan</h1>
-<div class="meta">最近掃描: 2026-04-30 14:18 UTC+08:00 · 共 10 檔 · 資料源 yfinance + 13F · 規則 v1.0.0</div>
+<div class="meta">最近掃描: 2026-05-01 09:18 UTC+08:00 · 共 3 檔 · 資料源 yfinance + 13F · 規則 v1.0.0</div>
 </header>
 
 <div class="summary-bar">
-<span><span class="bias-badge bias-BUY">BUY</span> 2</span>
+<span><span class="bias-badge bias-BUY">BUY</span> 0</span>
 <span><span class="bias-badge bias-HOLD">HOLD</span> 0</span>
 <span><span class="bias-badge bias-WATCH">WATCH</span> 0</span>
 <span><span class="bias-badge bias-AVOID">AVOID</span> 0</span>
 <span><span class="bias-badge bias-OUT_OF_CIRCLE">OUT_OF_CIRCLE</span> 0</span>
-<span><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span> 8</span>
+<span><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span> 3</span>
 </div>
 
 <table id="scan-table">
@@ -89,51 +108,6 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <tbody>
 <tr>
 <td>1</td>
-<td class="ticker"><a href="scan/TSM.html">TSM</a></td>
-<td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">84</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R9, R10</td>
-</tr>
-<tr>
-<td>2</td>
-<td class="ticker"><a href="scan/NVDA.html">NVDA</a></td>
-<td><span class="bias-badge bias-BUY">BUY</span></td>
-<td class="score">84</td>
-<td><span class="brk-no">—</span></td>
-<td>7/10</td>
-<td>未過: R9, R10</td>
-</tr>
-<tr>
-<td>3</td>
-<td class="ticker"><a href="scan/GLD.html">GLD</a></td>
-<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
-<td class="score">5</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>涵蓋率 15% &lt; 50%</td>
-</tr>
-<tr>
-<td>4</td>
-<td class="ticker"><a href="scan/GDX.html">GDX</a></td>
-<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
-<td class="score">5</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>涵蓋率 15% &lt; 50%</td>
-</tr>
-<tr>
-<td>5</td>
-<td class="ticker"><a href="scan/PSLV.html">PSLV</a></td>
-<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
-<td class="score">5</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>涵蓋率 15% &lt; 50%</td>
-</tr>
-<tr>
-<td>6</td>
 <td class="ticker"><a href="scan/QQQM.html">QQQM</a></td>
 <td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
@@ -142,7 +116,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>7</td>
+<td>2</td>
 <td class="ticker"><a href="scan/VOO.html">VOO</a></td>
 <td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
@@ -151,26 +125,8 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <td>涵蓋率 15% &lt; 50%</td>
 </tr>
 <tr>
-<td>8</td>
+<td>3</td>
 <td class="ticker"><a href="scan/RSP.html">RSP</a></td>
-<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>涵蓋率 15% &lt; 50%</td>
-</tr>
-<tr>
-<td>9</td>
-<td class="ticker"><a href="scan/EWW.html">EWW</a></td>
-<td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
-<td class="score">0</td>
-<td><span class="brk-no">—</span></td>
-<td>—</td>
-<td>涵蓋率 15% &lt; 50%</td>
-</tr>
-<tr>
-<td>10</td>
-<td class="ticker"><a href="scan/TAIL.html">TAIL</a></td>
 <td><span class="bias-badge bias-INSUFFICIENT_DATA">INSUFFICIENT_DATA</span></td>
 <td class="score">0</td>
 <td><span class="brk-no">—</span></td>

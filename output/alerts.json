@@ -1,6 +1,37 @@
 {
-  "total": 0,
-  "by_type": {},
-  "by_severity": {},
-  "alerts": []
+  "total": 2,
+  "by_type": {
+    "dropped_from_top10": 2
+  },
+  "by_severity": {
+    "low": 2
+  },
+  "alerts": [
+    {
+      "ticker": "NVDA",
+      "type": "dropped_from_top10",
+      "severity": "low",
+      "summary": "NVDA 跌出 BUY 前 10 名 (score 84→?)",
+      "yesterday": {
+        "score": 84
+      },
+      "today": {
+        "score": null,
+        "bias": null
+      }
+    },
+    {
+      "ticker": "TSM",
+      "type": "dropped_from_top10",
+      "severity": "low",
+      "summary": "TSM 跌出 BUY 前 10 名 (score 84→?)",
+      "yesterday": {
+        "score": 84
+      },
+      "today": {
+        "score": null,
+        "bias": null
+      }
+    }
+  ]
 }

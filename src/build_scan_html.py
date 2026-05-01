@@ -106,7 +106,29 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 @media (max-width:768px){.wrap{padding:16px 12px;}table{font-size:12px;}th,td{padding:6px 4px;}}
 /* mobile drawer (re-use site convention) */
 .nav-back{position:fixed;top:12px;left:12px;z-index:120;background:var(--accent);color:var(--bg);padding:6px 12px;border-radius:8px;text-decoration:none;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.25);}
+/* 跨站導覽:右上 4 icon (scan / backtest / KB / 戰情室) */
+.site-nav{position:fixed;top:12px;right:12px;z-index:130;display:flex;gap:6px;
+  background:rgba(250,248,245,0.92);border:1px solid var(--line);border-radius:8px;
+  padding:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);}
+@media (prefers-color-scheme:dark){.site-nav{background:rgba(26,24,22,0.92);}}
+.site-nav a{font-size:18px;padding:4px 9px;text-decoration:none;border-radius:5px;
+  color:var(--fg);transition:all .15s;line-height:1.2;}
+.site-nav a:hover{background:var(--accent);color:var(--bg);}
+.site-nav a[aria-current="page"]{background:var(--accent);color:var(--bg);}
+@media (max-width:768px){.site-nav{top:8px;right:8px;padding:3px;gap:3px;}
+  .site-nav a{font-size:16px;padding:3px 6px;}}
 """
+
+# 跨站導覽 — 在 SUMMARY / DETAIL / KB / backtest 頁面共用
+# {scan_curr} {bt_curr} {kb_curr} 由各頁面填入 'aria-current="page"' 或空字串
+SITE_NAV_HTML = """<nav class="site-nav" aria-label="網站導覽">
+<a href="https://buffetagent.netlify.app/scan.html" {scan_curr} title="📊 Scan 排行榜">📊</a>
+<a href="https://buffetagent.netlify.app/backtest.html" {bt_curr} title="📈 回測報告">📈</a>
+<a href="https://buffetagent.netlify.app/index.html" {kb_curr} title="📚 巴菲特知識庫">📚</a>
+<a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
+  title="💬 戰情室 (新分頁開啟)">💬</a>
+</nav>"""
 
 PWA_HEAD = """<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -127,6 +149,7 @@ SUMMARY_HTML_TEMPLATE = """<!DOCTYPE html>
 <style>{css}</style>
 </head>
 <body>
+{site_nav}
 <a class="nav-back" href="index.html">← 知識庫</a>
 <div class="wrap">
 <header>
@@ -169,6 +192,7 @@ DETAIL_HTML_TEMPLATE = """<!DOCTYPE html>
 <style>{css}</style>
 </head>
 <body>
+{site_nav}
 <a class="nav-back" href="../scan.html">← 排行榜</a>
 <div class="wrap">
 {body_html}
@@ -309,6 +333,8 @@ def render_summary(verdicts: list, timestamp_local: str, rules_version: str) -> 
     return SUMMARY_HTML_TEMPLATE.format(
         pwa=PWA_HEAD.format(prefix=""),
         css=THEME_CSS,
+        site_nav=SITE_NAV_HTML.format(
+            scan_curr='aria-current="page"', bt_curr="", kb_curr=""),
         timestamp_local=timestamp_local,
         total=len(verdicts),
         rules_version=rules_version,
@@ -322,6 +348,8 @@ def render_detail(v, timestamp_local: str) -> str:
     return DETAIL_HTML_TEMPLATE.format(
         pwa=PWA_HEAD.format(prefix="../"),
         css=THEME_CSS,
+        site_nav=SITE_NAV_HTML.format(
+            scan_curr='aria-current="page"', bt_curr="", kb_curr=""),
         ticker=v.ticker,
         body_html=body_html,
         timestamp_local=timestamp_local,

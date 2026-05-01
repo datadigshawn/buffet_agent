@@ -162,7 +162,24 @@ th{{background:rgba(139,58,47,0.06);color:var(--accent);font-weight:700;}}
 .pending{{color:var(--pend);font-size:12px;}}
 footer{{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);text-align:center;font-size:12px;color:#888;}}
 a{{color:var(--accent);}}
+.site-nav{{position:fixed;top:12px;right:12px;z-index:130;display:flex;gap:6px;
+  background:rgba(250,248,245,0.92);border:1px solid var(--line);border-radius:8px;
+  padding:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);backdrop-filter:blur(6px);}}
+@media (prefers-color-scheme:dark){{.site-nav{{background:rgba(26,24,22,0.92);}}}}
+.site-nav a{{font-size:18px;padding:4px 9px;text-decoration:none;border-radius:5px;
+  color:var(--fg);transition:all .15s;line-height:1.2;}}
+.site-nav a:hover{{background:var(--accent);color:var(--bg);}}
+.site-nav a[aria-current="page"]{{background:var(--accent);color:var(--bg);}}
+@media (max-width:768px){{.site-nav{{top:8px;right:8px;padding:3px;gap:3px;}}
+  .site-nav a{{font-size:16px;padding:3px 6px;}}}}
 </style></head><body>
+<nav class="site-nav" aria-label="網站導覽">
+<a href="https://buffetagent.netlify.app/scan.html" title="📊 Scan 排行榜">📊</a>
+<a href="https://buffetagent.netlify.app/backtest.html" aria-current="page" title="📈 回測報告">📈</a>
+<a href="https://buffetagent.netlify.app/index.html" title="📚 巴菲特知識庫">📚</a>
+<a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
+  title="💬 戰情室 (新分頁開啟)">💬</a>
+</nav>
 <div class="wrap">
 <header>
   <h1>📊 Buffett Agent 回測</h1>

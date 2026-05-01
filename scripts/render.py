@@ -95,6 +95,21 @@ footer a{color:var(--muted);}
 .nav-backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:100;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
 .nav-toggle:checked ~ .nav-backdrop{opacity:1;pointer-events:auto;}
 body.nav-open{overflow:hidden;}
+}
+/* 跨站導覽:右上 4 icon (scan / backtest / KB / 戰情室);桌面右上,行動裝置避開 burger */
+.site-nav{position:fixed;top:12px;right:12px;z-index:130;display:flex;gap:6px;
+  background:rgba(250,248,245,0.92);border:1px solid var(--line);border-radius:8px;
+  padding:4px;box-shadow:0 2px 8px rgba(0,0,0,0.15);backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);}
+@media (prefers-color-scheme:dark){.site-nav{background:rgba(26,24,22,0.92);}}
+.site-nav a{font-size:18px;padding:4px 9px;text-decoration:none;border-radius:5px;
+  color:var(--fg);transition:all .15s;line-height:1.2;}
+.site-nav a:hover{background:var(--accent);color:var(--bg);}
+.site-nav a[aria-current="page"]{background:var(--accent);color:var(--bg);}
+@media (max-width:768px){
+  /* 行動裝置:burger 在 right:12px,site-nav 移到 right:68px 避免重疊 */
+  .site-nav{top:12px;right:68px;padding:3px;gap:3px;}
+  .site-nav a{font-size:16px;padding:3px 6px;}
 }"""
 
 PWA_TAGS = """<!-- PWA -->
@@ -120,6 +135,13 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </style>
 </head>
 <body>
+<nav class="site-nav" aria-label="網站導覽">
+<a href="https://buffetagent.netlify.app/scan.html" title="📊 Scan 排行榜">📊</a>
+<a href="https://buffetagent.netlify.app/backtest.html" title="📈 回測報告">📈</a>
+<a href="https://buffetagent.netlify.app/index.html" aria-current="page" title="📚 巴菲特知識庫">📚</a>
+<a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
+  title="💬 戰情室 (新分頁開啟)">💬</a>
+</nav>
 <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="切換導覽">
 <label for="nav-toggle" class="nav-toggle-btn" aria-label="開關導覽"></label>
 <label for="nav-toggle" class="nav-backdrop" aria-hidden="true"></label>
