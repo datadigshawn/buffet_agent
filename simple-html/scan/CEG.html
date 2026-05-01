@@ -84,14 +84,14 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <h1>巴菲特 Agent — CEG</h1>
 <p><strong>Bias</strong>: WATCH  ·  <strong>Score</strong>: 50/110 (base 50 + bonus 0)</p>
 <p><strong>規則涵蓋率</strong>: 100%</p>
-<p><strong>Sector</strong>: 核能  ·  <strong>資料來源</strong>: csv+yfinance+sec</p>
+<p><strong>Sector</strong>: Utilities  ·  <strong>資料來源</strong>: yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
 <ul>
 <li><strong>R1</strong> ROE &gt;= 15% (actual=0.1636) ✓ +15 → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
 <li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.4984) ✓ +15 → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
 <li><strong>R7</strong> 回購率 &gt; 0 (actual=0.0032) ✓ +5 → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) ✓ +10 → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.4430) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.3875) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
@@ -105,16 +105,17 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
 <li>估值帶: $102.17 (low) / <strong>$102.17</strong> (mid) / $102.17 (high)</li>
-<li>目前股價: $287.56</li>
-<li>安全邊際 (mid intrinsic): <strong>-181.4%</strong></li>
+<li>目前股價: $307.81</li>
+<li>安全邊際 (mid intrinsic): <strong>-201.3%</strong></li>
 </ul>
 <p>各模型細節:
   - <strong>dcf_two_stage</strong>: (略過 — DCF 計算不出)
-  - <strong>shiller_pe</strong>: $102.17 (MOS -181.4%) — 5y avg EPS=$6.01 × fair PE 17
+  - <strong>shiller_pe</strong>: $102.17 (MOS -201.3%) — 5y avg EPS=$6.01 × fair PE 17
   - <strong>owner_earnings_yield</strong>: (略過 — 5y 平均 OE 為負 (-3.88B))</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
-<li>整體強度: <strong>🔴 弱</strong> (1.6/10)</li>
+<li>整體強度: <strong>🟡 中等</strong> (5.0/10)</li>
+<li>主要類型: <strong>效率規模</strong></li>
 <li>多年趨勢: ➡️ 穩定</li>
 <li>年度資料不足 (4 年,需要 ≥ 8)</li>
 </ul>
@@ -123,7 +124,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
   - <strong>轉換成本</strong>: 0.0/10 — 資料不足
   - <strong>網路效應</strong>: 1.0/10 — 資料不足或無顯著訊號
   - <strong>成本優勢</strong>: 2.0/10 — 市值百億等級規模
-  - <strong>效率規模</strong>: 0.0/10 — 非適用行業</p>
+  - <strong>效率規模</strong>: 7.0/10 — 公用事業 (監管特許); 監管行業 ROE 16% 達標; 規模門檻已過</p>
 <h2>👔 管理層評估 (Capital Allocation)</h2>
 <ul>
 <li>CEO: <strong>Mr. Joseph  Dominguez</strong> (President, CEO &amp; Director)</li>
@@ -132,16 +133,16 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 </ul>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
 <li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
+<li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
 <li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-02 07:38 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

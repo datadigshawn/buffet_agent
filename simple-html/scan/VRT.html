@@ -84,13 +84,13 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <h1>巴菲特 Agent — VRT</h1>
 <p><strong>Bias</strong>: WATCH  ·  <strong>Score</strong>: 45/110 (base 45 + bonus 0)</p>
 <p><strong>規則涵蓋率</strong>: 100%</p>
-<p><strong>Sector</strong>: 電力基建  ·  <strong>資料來源</strong>: csv+yfinance+sec</p>
+<p><strong>Sector</strong>: Industrials  ·  <strong>資料來源</strong>: yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
 <ul>
-<li><strong>R1</strong> ROE &gt;= 15% (actual=0.4181) ✓ +15 → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
-<li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.3632) ✓ +10 → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
-<li><strong>R3</strong> 淨利率 &gt;= 10% (actual=0.1303) ✓ +10 → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
-<li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=1.9950) ✓ +10 → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
+<li><strong>R1</strong> ROE &gt;= 15% (actual=0.4510) ✓ +15 → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
+<li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.3715) ✓ +10 → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
+<li><strong>R3</strong> 淨利率 &gt;= 10% (actual=0.1437) ✓ +10 → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
+<li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=1.3570) ✓ +10 → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
@@ -98,20 +98,20 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.0849) → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
 <li><strong>R7</strong> 回購率 &gt; 0 (actual=-0.0049) → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=1.0080) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9848) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 <li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>💰 內在價值估算 (Ensemble × 3 模型)</h2>
 <ul>
 <li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
 <li>估值帶: $18.62 (low) / <strong>$22.14</strong> (mid) / $66.20 (high)</li>
-<li>目前股價: $314.41</li>
-<li>安全邊際 (mid intrinsic): <strong>-1319.9%</strong></li>
+<li>目前股價: $328.31</li>
+<li>安全邊際 (mid intrinsic): <strong>-1382.6%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $66.20 (MOS -375.0%) — 5y OE avg=0.74B; CAGR=92.6%
-  - <strong>shiller_pe</strong>: $22.14 (MOS -1319.9%) — 5y avg EPS=$1.30 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $18.62 (MOS -1588.9%) — 5y OE/MarketCap yield=0.62% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $66.20 (MOS -396.0%) — 5y OE avg=0.74B; CAGR=92.6%
+  - <strong>shiller_pe</strong>: $22.14 (MOS -1382.6%) — 5y avg EPS=$1.30 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $18.62 (MOS -1663.5%) — 5y OE/MarketCap yield=0.59% vs fair yield=10.4%</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
 <li>整體強度: <strong>🟡 中等</strong> (4.0/10)</li>
@@ -120,10 +120,10 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li>ROE 計算失敗</li>
 </ul>
 <p>5 類型分數:
-  - <strong>無形資產 (品牌/專利)</strong>: 2.0/10 — 毛利率 36%
+  - <strong>無形資產 (品牌/專利)</strong>: 2.0/10 — 毛利率 37%
   - <strong>轉換成本</strong>: 1.0/10 — 資料不足
-  - <strong>網路效應</strong>: 4.0/10 — 營收成長 23% (用戶基數加速)
-  - <strong>成本優勢</strong>: 4.0/10 — 市值百億等級規模; 毛利率 36%
+  - <strong>網路效應</strong>: 4.0/10 — 營收成長 30% (用戶基數加速)
+  - <strong>成本優勢</strong>: 4.0/10 — 市值百億等級規模; 毛利率 37%
   - <strong>效率規模</strong>: 0.0/10 — 非適用行業</p>
 <h2>👔 管理層評估 (Capital Allocation)</h2>
 <ul>
@@ -136,16 +136,16 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
   - 留存效率 1.73 (高效複利)</p>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
 <li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
+<li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
 <li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-02 07:38 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

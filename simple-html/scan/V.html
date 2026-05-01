@@ -82,7 +82,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <a class="nav-back" href="../scan.html">← 排行榜</a>
 <div class="wrap">
 <h1>巴菲特 Agent — V</h1>
-<p><strong>Bias</strong>: BUY  ·  <strong>Score</strong>: 99/110 (base 84 + bonus 15)</p>
+<p><strong>Bias</strong>: BUY  ·  <strong>Score</strong>: 84/110 (base 74 + bonus 10)</p>
 <p><strong>規則涵蓋率</strong>: 95%</p>
 <p><strong>Sector</strong>: Financial Services  ·  <strong>資料來源</strong>: yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
@@ -93,12 +93,12 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=0.3550) ✓ +10 → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
 <li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.5751) ✓ +10 → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) ✓ +10 → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.4405) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
-<li><strong>R10</strong> Berkshire 持有 (actual=True) ✓ +10 → <span class="wikilink-broken">ground truth</span></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.4183) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
 <li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.5581) → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
+<li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>⚠️ 缺值跳過</h2>
 <ul>
@@ -106,7 +106,6 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 </ul>
 <h2>🎁 加分項</h2>
 <ul>
-<li><strong>B1</strong> Berkshire 重倉 +5</li>
 <li><strong>B2</strong> ROIC &gt; 20% 連續 5 年 +5</li>
 <li><strong>B6</strong> ROE 10 年持續 &gt;= 15% +5</li>
 </ul>
@@ -114,33 +113,22 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
 <li>估值帶: $93.40 (low) / <strong>$150.79</strong> (mid) / $236.87 (high)</li>
-<li>目前股價: $329.84</li>
-<li>安全邊際 (mid intrinsic): <strong>-118.7%</strong></li>
+<li>目前股價: $328.03</li>
+<li>安全邊際 (mid intrinsic): <strong>-117.5%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $236.87 (MOS -39.3%) — 5y OE avg=18.47B; CAGR=10.4%
-  - <strong>shiller_pe</strong>: $150.79 (MOS -118.7%) — shares fallback (1902M) 5y avg EPS=$8.87 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $93.40 (MOS -253.1%) — 5y OE/MarketCap yield=2.95% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $236.87 (MOS -38.5%) — 5y OE avg=18.47B; CAGR=10.4%
+  - <strong>shiller_pe</strong>: $150.79 (MOS -117.5%) — shares fallback (1902M) 5y avg EPS=$8.87 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $93.40 (MOS -251.2%) — 5y OE/MarketCap yield=2.96% vs fair yield=10.4%</p>
 <h2>🤵 Insider 交易訊號 (近 60 天)</h2>
 <ul>
-<li>交易筆數: 1 (賣出 $0.2M / 買入 $0.0M)</li>
-<li>最大賣家: <strong>CARNEY LLOYD A</strong> (Director) $0.20M @ 2026-03-11</li>
+<li>交易筆數: 3 (賣出 $10.9M / 買入 $0.0M)</li>
+<li>C-level 賣出: <strong>$10.7M</strong></li>
+<li>最大賣家: <strong>MCINERNEY RYAN</strong> (Chief Executive Officer) $10.70M @ 2026-04-29</li>
 <li>13G filings (5%+ 被動機構): 2 筆</li>
 <li>8-K 重大事件公告: 1 筆</li>
+<li>⚠️ Insider alert: <strong>🔴 內部人大量賣出</strong></li>
 </ul>
-<h2>📰 新聞訊號 (近 7 天)</h2>
-<ul>
-<li>文章數: <strong>20</strong> 篇 (含 18 重要快訊)</li>
-<li>平均 sentiment: <strong>+0.18</strong> (-1 ~ +1 scale)</li>
-<li>情緒趨勢: ➡️ 穩定</li>
-<li>近 3 天 +0.26 vs 前 4 天 +0.15</li>
-<li>熱門主題: ai, tech, macro, regulation, geopolitics</li>
-<li>⚠️ 新聞 alert: <strong>⚡ 重要事件 (≥3 重要快訊)</strong></li>
-</ul>
-<p>重要事件 (近 7 天):
-  - <strong>flash_cn</strong> [+0.0] 能源情报集团记者阿蒙娜•巴克尔：我对欧佩克了解的一件事就是，这个组织不断演变
-  - <strong>flash_cn</strong> [+0.5] 1. Anthropic估值或升至逾9000亿美元超过OpenAI
-  - <strong>flash_cn</strong> [+0.5] 1. 中共中央政治局：全面实施“人工智能+”行动，发展智能经济新形态</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
 <li>整體強度: <strong>🟢 強</strong> (9.0/10)</li>
@@ -164,21 +152,18 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <p>判斷依據:
   - 留存效率 0.03 (留存被消耗或大量買回)
   - 股利配發 22% (健康)</p>
-<h2>🏛️ Berkshire 持有</h2>
-<p>價值約 <strong>$2.91B</strong>
-(占組合 1.1%)</p>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
 <li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
+<li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
 <li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-02 07:38 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

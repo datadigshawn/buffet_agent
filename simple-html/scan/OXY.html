@@ -82,7 +82,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <a class="nav-back" href="../scan.html">← 排行榜</a>
 <div class="wrap">
 <h1>巴菲特 Agent — OXY</h1>
-<p><strong>Bias</strong>: HOLD  ·  <strong>Score</strong>: 66/110 (base 61 + bonus 5)</p>
+<p><strong>Bias</strong>: WATCH  ·  <strong>Score</strong>: 50/110 (base 50 + bonus 0)</p>
 <p><strong>規則涵蓋率</strong>: 90%</p>
 <p><strong>Sector</strong>: Energy  ·  <strong>資料來源</strong>: yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
@@ -91,50 +91,30 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li><strong>R3</strong> 淨利率 &gt;= 10% (actual=0.1077) ✓ +10 → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
 <li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.1878) ✓ +10 → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) ✓ +10 → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.7609) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
-<li><strong>R10</strong> Berkshire 持有 (actual=True) ✓ +10 → <span class="wikilink-broken">ground truth</span></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.6958) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
 <li><strong>R1</strong> ROE &gt;= 15% (actual=0.0593) → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
 <li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.5846) → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
 <li><strong>R7</strong> 回購率 &gt; 0 (actual=-0.0507) → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
+<li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>⚠️ 缺值跳過</h2>
 <ul>
 <li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (earn_growth) — 資料源缺欄位</li>
 </ul>
-<h2>🎁 加分項</h2>
-<ul>
-<li><strong>B1</strong> Berkshire 重倉 +5</li>
-</ul>
 <h2>💰 內在價值估算 (Ensemble × 2 模型)</h2>
 <ul>
 <li>Consensus: <strong>🟡 接近合理</strong></li>
 <li>估值帶: $45.93 (low) / <strong>$55.60</strong> (mid) / $65.28 (high)</li>
-<li>目前股價: $60.58</li>
-<li>安全邊際 (mid intrinsic): <strong>-9.0%</strong></li>
+<li>目前股價: $58.71</li>
+<li>安全邊際 (mid intrinsic): <strong>-5.6%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $65.28 (MOS +7.2%) — 5y OE avg=4.71B; CAGR=-14.2%
+  - <strong>dcf_two_stage</strong>: $65.28 (MOS +10.1%) — 5y OE avg=4.71B; CAGR=-14.2%
   - <strong>shiller_pe</strong>: (略過 — 5y avg EPS 為負 (-1.08))
-  - <strong>owner_earnings_yield</strong>: $45.93 (MOS -31.9%) — 5y OE/MarketCap yield=7.84% vs fair yield=10.4%</p>
-<h2>🤵 Insider 交易訊號 (近 60 天)</h2>
-<ul>
-<li>交易筆數: 1 (賣出 $0.0M / 買入 $0.0M)</li>
-<li>13G filings (5%+ 被動機構): 2 筆</li>
-<li>8-K 重大事件公告: 2 筆</li>
-</ul>
-<h2>📰 新聞訊號 (近 7 天)</h2>
-<ul>
-<li>文章數: <strong>5</strong> 篇 (含 0 重要快訊)</li>
-<li>平均 sentiment: <strong>+0.42</strong> (-1 ~ +1 scale)</li>
-<li>情緒趨勢: ➡️ 穩定</li>
-<li>近 3 天 +0.40 vs 前 4 天 +0.43</li>
-<li>熱門主題: earnings, macro, geopolitics, war, energy</li>
-</ul>
-<p>重要事件 (近 7 天):
-  - <strong>ticker_news</strong> [+0.6] Q4 Earnings Outperformers: Occidental Petroleum (NYSE:OXY) And The Rest Of The D</p>
+  - <strong>owner_earnings_yield</strong>: $45.93 (MOS -27.8%) — 5y OE/MarketCap yield=8.09% vs fair yield=10.4%</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
 <li>整體強度: <strong>🟡 中等</strong> (5.2/10)</li>
@@ -160,9 +140,6 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
   - BVPS 5y CAGR 2.5% (慢)
   - 留存效率 0.50 (留存被消耗或大量買回)
   - 股利配發 211% 偏高 (內部投資不足?)</p>
-<h2>🏛️ Berkshire 持有</h2>
-<p>價值約 <strong>$10.89B</strong>
-(占組合 4.0%)</p>
 <h2>📚 公司檔案</h2>
 <p><span class="wikilink-broken">西方石油(Occidental Petroleum, OXY)</span> — <a href="https://buffetagent.netlify.app/03-%E5%85%AC%E5%8F%B8%E6%AA%94%E6%A1%88/%E8%A5%BF%E6%96%B9%E7%9F%B3%E6%B2%B9.html">線上版本</a></p>
 <blockquote>
@@ -198,16 +175,16 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 </table>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
 <li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
+<li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
 <li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-02 07:38 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

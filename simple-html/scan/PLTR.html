@@ -84,7 +84,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <h1>巴菲特 Agent — PLTR</h1>
 <p><strong>Bias</strong>: HOLD  ·  <strong>Score</strong>: 75/110 (base 75 + bonus 0)</p>
 <p><strong>規則涵蓋率</strong>: 100%</p>
-<p><strong>Sector</strong>: AI國防  ·  <strong>資料來源</strong>: csv+yfinance+sec</p>
+<p><strong>Sector</strong>: Technology  ·  <strong>資料來源</strong>: yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
 <ul>
 <li><strong>R1</strong> ROE &gt;= 15% (actual=0.2598) ✓ +15 → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
@@ -93,7 +93,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=6.4760) ✓ +10 → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
 <li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.0306) ✓ +15 → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
 <li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.2971) ✓ +10 → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.4790) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.3792) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
@@ -105,31 +105,19 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
 <li>估值帶: $1.83 (low) / <strong>$3.57</strong> (mid) / $12.71 (high)</li>
-<li>目前股價: $145.89</li>
-<li>安全邊際 (mid intrinsic): <strong>-3982.1%</strong></li>
+<li>目前股價: $144.07</li>
+<li>安全邊際 (mid intrinsic): <strong>-3931.2%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $12.71 (MOS -1048.0%) — 5y OE avg=0.89B; CAGR=59.9%
-  - <strong>shiller_pe</strong>: $1.83 (MOS -7877.4%) — 5y avg EPS=$0.11 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $3.57 (MOS -3982.1%) — 5y OE/MarketCap yield=0.25% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $12.71 (MOS -1033.7%) — 5y OE avg=0.89B; CAGR=59.9%
+  - <strong>shiller_pe</strong>: $1.83 (MOS -7777.8%) — 5y avg EPS=$0.11 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $3.57 (MOS -3931.2%) — 5y OE/MarketCap yield=0.26% vs fair yield=10.4%</p>
 <h2>🤵 Insider 交易訊號 (近 60 天)</h2>
 <ul>
 <li>交易筆數: 3 (賣出 $4.7M / 買入 $0.0M)</li>
 <li>最大賣家: <strong>MOORE ALEXANDER D</strong> (Director) $2.44M @ 2026-03-16</li>
 <li>13G filings (5%+ 被動機構): 2 筆</li>
 </ul>
-<h2>📰 新聞訊號 (近 7 天)</h2>
-<ul>
-<li>文章數: <strong>20</strong> 篇 (含 0 重要快訊)</li>
-<li>平均 sentiment: <strong>+0.03</strong> (-1 ~ +1 scale)</li>
-<li>情緒趨勢: ➡️ 穩定</li>
-<li>近 3 天 -0.02 vs 前 4 天 +0.16</li>
-<li>熱門主題: tech, ai, earnings, geopolitics, regulation</li>
-</ul>
-<p>重要事件 (近 7 天):
-  - <strong>finance</strong> [-0.3] Palantir Stock Is Down 24% YTD. Can Q1 Earnings Spark a Turnaround in PLTR?
-  - <strong>ticker_news</strong> [+0.0] Is Michael Burry Still Bearish on Palantir? Here’s What He Has to Say
-  - <strong>ticker_news</strong> [+0.5] Alphabet Q1 Earnings Call Highlights</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
 <li>整體強度: <strong>🟡 中等</strong> (6.0/10)</li>
@@ -148,18 +136,30 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li>CEO: <strong>Mr. Joseph Todd Lonsdale</strong> (Co-Founder)</li>
 <li>Buffett 風格分級: <strong>C</strong></li>
 </ul>
+<h2>🧠 定性判斷 (minimax/minimax-m2.5)</h2>
+<ul>
+<li>管理層評分: <strong>C</strong></li>
+<li>護城河強度: <strong>moderate</strong></li>
+<li>護城河說明: 資料平台護城河適中，毛利率82%與淨利率36%反映定價權，但僅4年數據驗證不足，網路效應與無形資產支撐中等強度</li>
+<li>能力圈: ⚠️ 能力圈外</li>
+<li>LLM 信心: 25%</li>
+</ul>
+<h3>💡 行動建議</h3>
+<blockquote>
+<p>估值極度昂貴，共識very_expensive，安全邊際-3931%，內部人持續賣出無買入，建議觀望或避開</p>
+</blockquote>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
 <li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
+<li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
 <li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-02 07:38 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

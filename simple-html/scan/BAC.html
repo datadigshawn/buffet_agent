@@ -82,7 +82,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <a class="nav-back" href="../scan.html">← 排行榜</a>
 <div class="wrap">
 <h1>巴菲特 Agent — BAC</h1>
-<p><strong>Bias</strong>: BUY  ·  <strong>Score</strong>: 94/110 (base 89 + bonus 5)</p>
+<p><strong>Bias</strong>: HOLD  ·  <strong>Score</strong>: 78/110 (base 78 + bonus 0)</p>
 <p><strong>規則涵蓋率</strong>: 90%</p>
 <p><strong>Sector</strong>: Financial Services  ·  <strong>資料來源</strong>: csv+yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
@@ -93,32 +93,28 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=1.0481) ✓ +15 → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
 <li><strong>R7</strong> 回購率 &gt; 0 (actual=0.0523) ✓ +5 → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) ✓ +10 → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.7593) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
-<li><strong>R10</strong> Berkshire 持有 (actual=True) ✓ +10 → <span class="wikilink-broken">ground truth</span></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.7463) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
 <li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.0000) → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
+<li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>⚠️ 缺值跳過</h2>
 <ul>
 <li><strong>R6</strong> FCF margin &gt;= 15% (fcf_margin) — 資料源缺欄位</li>
 </ul>
-<h2>🎁 加分項</h2>
-<ul>
-<li><strong>B1</strong> Berkshire 重倉 +5</li>
-</ul>
 <h2>💰 內在價值估算 (Ensemble × 3 模型)</h2>
 <ul>
 <li>Consensus: <strong>🟡 接近合理</strong></li>
 <li>估值帶: $38.30 (low) / <strong>$54.44</strong> (mid) / $63.08 (high)</li>
-<li>目前股價: $53.46</li>
-<li>安全邊際 (mid intrinsic): <strong>+1.8%</strong></li>
+<li>目前股價: $53.24</li>
+<li>安全邊際 (mid intrinsic): <strong>+2.2%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $54.44 (MOS +1.8%) — 5y OE avg=28.73B; CAGR=-1.2%
-  - <strong>shiller_pe</strong>: $63.08 (MOS +15.3%) — 5y avg EPS=$3.71 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $38.30 (MOS -39.6%) — 5y OE/MarketCap yield=7.54% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $54.44 (MOS +2.2%) — 5y OE avg=28.73B; CAGR=-1.2%
+  - <strong>shiller_pe</strong>: $63.08 (MOS +15.6%) — 5y avg EPS=$3.71 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $38.30 (MOS -39.0%) — 5y OE/MarketCap yield=7.57% vs fair yield=10.4%</p>
 <h2>🤵 Insider 交易訊號 (近 60 天)</h2>
 <ul>
 <li>交易筆數: 7 (賣出 $20.9M / 買入 $0.0M)</li>
@@ -129,18 +125,6 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li>8-K 重大事件公告: 1 筆</li>
 <li>⚠️ Insider alert: <strong>🔴 內部人大量賣出</strong></li>
 </ul>
-<h2>📰 新聞訊號 (近 7 天)</h2>
-<ul>
-<li>文章數: <strong>11</strong> 篇 (含 1 重要快訊)</li>
-<li>平均 sentiment: <strong>+0.23</strong> (-1 ~ +1 scale)</li>
-<li>情緒趨勢: 📈 上升</li>
-<li>近 3 天 +0.33 vs 前 4 天 +0.10</li>
-<li>熱門主題: earnings, macro, tech, m&amp;a, finance</li>
-</ul>
-<p>重要事件 (近 7 天):
-  - <strong>flash_cn</strong> [+0.0] 特朗普在最新披露文件中报告了3月的大量债券购买
-  - <strong>finance</strong> [+0.5] Blue-chip dividend stock pays Warren Buffett $580M in annual dividends
-  - <strong>ticker_news</strong> [+0.0] Citi leads power M&amp;A advisory market by value in Q1 2026</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
 <li>整體強度: <strong>🟡 中等</strong> (4.0/10)</li>
@@ -166,9 +150,18 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
   - BVPS 5y CAGR 5.9% (慢)
   - 留存效率 0.21 (留存被消耗或大量買回)
   - 股利配發 54% (健康)</p>
-<h2>🏛️ Berkshire 持有</h2>
-<p>價值約 <strong>$28.45B</strong>
-(占組合 10.4%)</p>
+<h2>🧠 定性判斷 (minimax/minimax-m2.5)</h2>
+<ul>
+<li>管理層評分: <strong>C</strong></li>
+<li>護城河強度: <strong>moderate</strong></li>
+<li>護城河說明: 監管門檻支撐規模經濟，成本優勢來自千億美元市值與 5.2% 買回率。ROE 從 8.2% 升至 10.0%，護城河正在擴寬中。</li>
+<li>能力圈: ✅ 在能力圈內</li>
+<li>LLM 信心: 55%</li>
+</ul>
+<h3>💡 行動建議</h3>
+<blockquote>
+<p>內部人拋售警訊明顯，總裁 Dean 賣 690 萬美元加上 5 筆 13D 活躍機構介入，需進一步研究動機。估值合理但安全邊際僅 2.2% 偏低，建議觀望等待更好的進場點。</p>
+</blockquote>
 <h2>📚 公司檔案</h2>
 <p><span class="wikilink-broken">美國銀行(Bank of America, BAC)</span> — <a href="https://buffetagent.netlify.app/03-%E5%85%AC%E5%8F%B8%E6%AA%94%E6%A1%88/%E7%BE%8E%E5%9C%8B%E9%8A%80%E8%A1%8C.html">線上版本</a></p>
 <blockquote>
@@ -205,16 +198,16 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <h1>…</h1>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
 <li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
+<li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
 <li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-02 07:38 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>
