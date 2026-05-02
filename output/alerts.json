@@ -1,16 +1,13 @@
 {
-  "total": 35,
+  "total": 25,
   "by_type": {
     "thesis_broken": 9,
     "insider_alert": 15,
-    "new_top10": 9,
-    "bias_changed": 1,
-    "dropped_from_top10": 1
+    "bias_changed": 1
   },
   "by_severity": {
     "high": 24,
-    "medium": 10,
-    "low": 1
+    "medium": 1
   },
   "alerts": [
     {
@@ -20,7 +17,7 @@
       "summary": "AAPL: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -91,6 +88,37 @@
       }
     },
     {
+      "ticker": "AMZN",
+      "type": "insider_alert",
+      "severity": "high",
+      "summary": "AMZN: 內部人賣出 $14.1M (C-level $7.9M)",
+      "yesterday": {},
+      "today": {
+        "insider": {
+          "ticker": "AMZN",
+          "lookback_days": 60,
+          "transactions_count": 4,
+          "total_sell_value": 14138740.0,
+          "total_buy_value": 0.0,
+          "net_value": -14138740.0,
+          "exec_sell_value": 7905000.0,
+          "exec_buy_value": 0.0,
+          "top_seller": {
+            "name": "JASSY ANDREW R.",
+            "position": "Chief Executive Officer",
+            "value": 7905000.0,
+            "date": "2026-04-17"
+          },
+          "top_buyer": null,
+          "alert_type": "insider_selling_spike",
+          "sched_13d_count": 0,
+          "sched_13g_count": 2,
+          "form_8k_count": 5,
+          "recent_13d_dates": []
+        }
+      }
+    },
+    {
       "ticker": "ANET",
       "type": "insider_alert",
       "severity": "high",
@@ -147,7 +175,7 @@
           "alert_type": "insider_selling_spike",
           "sched_13d_count": 0,
           "sched_13g_count": 2,
-          "form_8k_count": 5,
+          "form_8k_count": 4,
           "recent_13d_dates": []
         }
       }
@@ -159,7 +187,7 @@
       "summary": "AXP: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -174,7 +202,7 @@
       "summary": "BAC: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -186,26 +214,26 @@
       "ticker": "BAC",
       "type": "insider_alert",
       "severity": "high",
-      "summary": "BAC: 內部人賣出 $20.9M (C-level $11.0M)",
+      "summary": "BAC: 13D 活躍機構介入 × 5",
       "yesterday": {},
       "today": {
         "insider": {
           "ticker": "BAC",
           "lookback_days": 60,
-          "transactions_count": 7,
-          "total_sell_value": 20946010.0,
+          "transactions_count": 6,
+          "total_sell_value": 14089842.0,
           "total_buy_value": 0.0,
-          "net_value": -20946010.0,
-          "exec_sell_value": 11047768.0,
+          "net_value": -14089842.0,
+          "exec_sell_value": 4191600.0,
           "exec_buy_value": 0.0,
           "top_seller": {
-            "name": "ATHANASIA DEAN C",
-            "position": "President",
-            "value": 6856168.0,
-            "date": "2026-03-03"
+            "name": "MENSAH BERNARD AMPONSAH",
+            "position": "Officer",
+            "value": 4412642.0,
+            "date": "2026-03-12"
           },
           "top_buyer": null,
-          "alert_type": "insider_selling_spike",
+          "alert_type": "activist_filing",
           "sched_13d_count": 5,
           "sched_13g_count": 11,
           "form_8k_count": 1,
@@ -245,7 +273,7 @@
           "alert_type": "insider_selling_spike",
           "sched_13d_count": 0,
           "sched_13g_count": 1,
-          "form_8k_count": 2,
+          "form_8k_count": 1,
           "recent_13d_dates": []
         }
       }
@@ -254,16 +282,16 @@
       "ticker": "GOOG",
       "type": "insider_alert",
       "severity": "high",
-      "summary": "GOOG: 內部人賣出 $23.5M (C-level $19.9M)",
+      "summary": "GOOG: 內部人賣出 $23.2M (C-level $19.9M)",
       "yesterday": {},
       "today": {
         "insider": {
           "ticker": "GOOG",
           "lookback_days": 60,
-          "transactions_count": 21,
-          "total_sell_value": 23505368.0,
+          "transactions_count": 20,
+          "total_sell_value": 23220778.0,
           "total_buy_value": 0.0,
-          "net_value": -23505368.0,
+          "net_value": -23220778.0,
           "exec_sell_value": 19866079.0,
           "exec_buy_value": 0.0,
           "top_seller": {
@@ -288,7 +316,7 @@
       "summary": "GOOGL: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -303,43 +331,12 @@
       "summary": "KO: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
         "first_buy_date": "2026-05-01",
         "score_at_buy": 90
-      }
-    },
-    {
-      "ticker": "KO",
-      "type": "insider_alert",
-      "severity": "high",
-      "summary": "KO: 內部人賣出 $25.8M (C-level $19.8M)",
-      "yesterday": {},
-      "today": {
-        "insider": {
-          "ticker": "KO",
-          "lookback_days": 60,
-          "transactions_count": 4,
-          "total_sell_value": 25843889.0,
-          "total_buy_value": 0.0,
-          "net_value": -25843889.0,
-          "exec_sell_value": 19839138.0,
-          "exec_buy_value": 0.0,
-          "top_seller": {
-            "name": "QUINCEY JAMES R.",
-            "position": "Chief Executive Officer",
-            "value": 19839138.0,
-            "date": "2026-03-03"
-          },
-          "top_buyer": null,
-          "alert_type": "insider_selling_spike",
-          "sched_13d_count": 0,
-          "sched_13g_count": 2,
-          "form_8k_count": 2,
-          "recent_13d_dates": []
-        }
       }
     },
     {
@@ -380,7 +377,7 @@
       "summary": "MA: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -395,7 +392,7 @@
       "summary": "MCO: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -567,7 +564,7 @@
       "summary": "TSM: 投資 thesis 條件被違反 — bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降"
         ],
@@ -582,7 +579,7 @@
       "summary": "V: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 0,
+        "thesis_age_days": 1,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -622,139 +619,18 @@
       }
     },
     {
-      "ticker": "AMAT",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "AMAT 新進 BUY 前 10 名 (score 85)",
-      "yesterday": {},
-      "today": {
-        "score": 85,
-        "rank": 4,
-        "recommendation": "共識估值極度昂貴(安全邊際-223%),護城河雖強但價格已充分反映,建議觀望等待大幅回調至mid估值以下再評估進場"
-      }
-    },
-    {
-      "ticker": "AXP",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "AXP 新進 BUY 前 10 名 (score 80)",
-      "yesterday": {},
-      "today": {
-        "score": 80,
-        "rank": 9,
-        "recommendation": "估值昂貴共識明確，安全邊際-47.2%表示現價已高估。護城河擴張趨勢正面但不足以彌補估值劣勢，觀望等待回調至$180以下再評估。"
-      }
-    },
-    {
-      "ticker": "GOOG",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "GOOG 新進 BUY 前 10 名 (score 85)",
-      "yesterday": {},
-      "today": {
-        "score": 85,
-        "rank": 6,
-        "recommendation": "估值極度昂貴共識(安全邊際-394.8%)且3模型差距達9倍,CEO與高層大幅賣出$23.5M(買入為零),BVPS 5年CAGR暴跌-36.4%,管理層資本配置紀錄惡劣。建議避開,等待估值合理與內部人買入訊號出現。"
-      }
-    },
-    {
-      "ticker": "GOOGL",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "GOOGL 新進 BUY 前 10 名 (score 85)",
-      "yesterday": {},
-      "today": {
-        "score": 85,
-        "rank": 5,
-        "recommendation": "估值昂貴且管理層資本配置紀錄差(BVPS 5年CAGR -36.4%、留存效率0.45),雖護城河強但價格缺乏安全邊際,建議觀望或避開。"
-      }
-    },
-    {
-      "ticker": "KO",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "KO 新進 BUY 前 10 名 (score 80)",
-      "yesterday": {},
-      "today": {
-        "score": 80,
-        "rank": 8,
-        "recommendation": "估值極度昂貴(共識very_expensive，安全邊際-205%)，CEO近60天賣出19.8M美元屬內部人賣出警訊，雖護城河強勁但缺乏安全邊際，不建議買進。"
-      }
-    },
-    {
-      "ticker": "LRCX",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "LRCX 新進 BUY 前 10 名 (score 80)",
-      "yesterday": {},
-      "today": {
-        "score": 80,
-        "rank": 10,
-        "recommendation": "估值極度昂貴(共識安全邊際-160%)，CFO大額賣出$11.2M屬內部人拋售警訊，管理層BVPS五年CAGR-26%顯示資本配置失當，應減碼或觀望"
-      }
-    },
-    {
-      "ticker": "MA",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "MA 新進 BUY 前 10 名 (score 90)",
-      "yesterday": {},
-      "today": {
-        "score": 90,
-        "rank": 2,
-        "recommendation": "估值極度昂貴 (共識 very_expensive，安全邊際 -271%)，三模型差距過大 (67~474) 顯示不確定性高，暫不建議買入"
-      }
-    },
-    {
-      "ticker": "MSFT",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "MSFT 新進 BUY 前 10 名 (score 93)",
-      "yesterday": {},
-      "today": {
-        "score": 93,
-        "rank": 1,
-        "recommendation": "共識估值very_expensive，安全邊際-162%顯示嚴重高估，耐心等待股價回落至mid估值$158以下再進場，現階段不建議追價"
-      }
-    },
-    {
-      "ticker": "TSM",
+      "ticker": "AMZN",
       "type": "bias_changed",
       "severity": "medium",
-      "summary": "TSM: BUY ↓ INSUFFICIENT_DATA (score 84→80)",
+      "summary": "AMZN: WATCH ↑ HOLD (score 50→60)",
       "yesterday": {
-        "bias": "BUY",
-        "score": 84
+        "bias": "WATCH",
+        "score": 50
       },
       "today": {
-        "bias": "INSUFFICIENT_DATA",
-        "score": 80,
-        "recommendation": null
-      }
-    },
-    {
-      "ticker": "V",
-      "type": "new_top10",
-      "severity": "medium",
-      "summary": "V 新進 BUY 前 10 名 (score 84)",
-      "yesterday": {},
-      "today": {
-        "score": 84,
-        "rank": 7,
-        "recommendation": null
-      }
-    },
-    {
-      "ticker": "TSM",
-      "type": "dropped_from_top10",
-      "severity": "low",
-      "summary": "TSM 跌出 BUY 前 10 名 (score 84→80)",
-      "yesterday": {
-        "score": 84
-      },
-      "today": {
-        "score": 80,
-        "bias": "INSUFFICIENT_DATA"
+        "bias": "HOLD",
+        "score": 60,
+        "recommendation": "估值極度昂貴(mid安全邊際-1866%)且3模型共識very_expensive，CEO大規模賣股$7.9M屬黃旗訊號，暫不建議追高"
       }
     }
   ]
