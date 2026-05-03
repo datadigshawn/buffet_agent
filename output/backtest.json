@@ -1,11 +1,11 @@
 {
-  "as_of": "2026-05-01",
+  "as_of": "2026-05-03",
   "horizons": [
     30,
     90,
     180
   ],
-  "scan_count": 2,
+  "scan_count": 4,
   "top_n": 10,
   "benchmark": "^GSPC",
   "by_scan_date": {
@@ -15,6 +15,102 @@
       "buy_tickers": [
         "TSM",
         "NVDA"
+      ],
+      "horizons": {
+        "30": {
+          "horizon_days": 30,
+          "ready": false,
+          "days_elapsed": 3,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        },
+        "90": {
+          "horizon_days": 90,
+          "ready": false,
+          "days_elapsed": 3,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        },
+        "180": {
+          "horizon_days": 180,
+          "ready": false,
+          "days_elapsed": 3,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        }
+      }
+    },
+    "2026-05-01": {
+      "scan_date": "2026-05-01",
+      "buy_count": 10,
+      "buy_tickers": [
+        "MSFT",
+        "MA",
+        "NVDA",
+        "AMAT",
+        "GOOGL",
+        "GOOG",
+        "V",
+        "KO",
+        "AXP",
+        "LRCX"
+      ],
+      "horizons": {
+        "30": {
+          "horizon_days": 30,
+          "ready": false,
+          "days_elapsed": 2,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        },
+        "90": {
+          "horizon_days": 90,
+          "ready": false,
+          "days_elapsed": 2,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        },
+        "180": {
+          "horizon_days": 180,
+          "ready": false,
+          "days_elapsed": 2,
+          "basket_return": null,
+          "benchmark_return": null,
+          "alpha": null,
+          "hit_rate": null,
+          "constituents": []
+        }
+      }
+    },
+    "2026-05-02": {
+      "scan_date": "2026-05-02",
+      "buy_count": 10,
+      "buy_tickers": [
+        "MSFT",
+        "MA",
+        "NVDA",
+        "AMAT",
+        "GOOGL",
+        "GOOG",
+        "V",
+        "KO",
+        "AXP",
+        "LRCX"
       ],
       "horizons": {
         "30": {
@@ -49,10 +145,21 @@
         }
       }
     },
-    "2026-05-01": {
-      "scan_date": "2026-05-01",
-      "buy_count": 0,
-      "buy_tickers": [],
+    "2026-05-03": {
+      "scan_date": "2026-05-03",
+      "buy_count": 10,
+      "buy_tickers": [
+        "MSFT",
+        "MA",
+        "NVDA",
+        "AMAT",
+        "GOOGL",
+        "GOOG",
+        "V",
+        "KO",
+        "AXP",
+        "LRCX"
+      ],
       "horizons": {
         "30": {
           "horizon_days": 30,
