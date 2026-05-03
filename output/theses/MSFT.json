@@ -32,9 +32,9 @@
     "margin_of_safety_pct": -1.6432,
     "industry_class": "general"
   },
-  "last_verified_date": "2026-05-02",
+  "last_verified_date": "2026-05-03",
   "last_verified_status": "valid",
   "broken_conditions": [],
-  "thesis_age_days": 1,
+  "thesis_age_days": 2,
   "written_by": "default"
 }

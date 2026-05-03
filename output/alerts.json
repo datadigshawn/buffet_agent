@@ -1,13 +1,11 @@
 {
-  "total": 25,
+  "total": 23,
   "by_type": {
     "thesis_broken": 9,
-    "insider_alert": 15,
-    "bias_changed": 1
+    "insider_alert": 14
   },
   "by_severity": {
-    "high": 24,
-    "medium": 1
+    "high": 23
   },
   "alerts": [
     {
@@ -17,7 +15,7 @@
       "summary": "AAPL: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -187,7 +185,7 @@
       "summary": "AXP: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -202,7 +200,7 @@
       "summary": "BAC: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -220,11 +218,11 @@
         "insider": {
           "ticker": "BAC",
           "lookback_days": 60,
-          "transactions_count": 6,
-          "total_sell_value": 14089842.0,
+          "transactions_count": 5,
+          "total_sell_value": 9898242.0,
           "total_buy_value": 0.0,
-          "net_value": -14089842.0,
-          "exec_sell_value": 4191600.0,
+          "net_value": -9898242.0,
+          "exec_sell_value": 0.0,
           "exec_buy_value": 0.0,
           "top_seller": {
             "name": "MENSAH BERNARD AMPONSAH",
@@ -282,17 +280,17 @@
       "ticker": "GOOG",
       "type": "insider_alert",
       "severity": "high",
-      "summary": "GOOG: 內部人賣出 $23.2M (C-level $19.9M)",
+      "summary": "GOOG: 內部人賣出 $13.4M (C-level $10.0M)",
       "yesterday": {},
       "today": {
         "insider": {
           "ticker": "GOOG",
           "lookback_days": 60,
-          "transactions_count": 20,
-          "total_sell_value": 23220778.0,
+          "transactions_count": 19,
+          "total_sell_value": 13361084.0,
           "total_buy_value": 0.0,
-          "net_value": -23220778.0,
-          "exec_sell_value": 19866079.0,
+          "net_value": -13361084.0,
+          "exec_sell_value": 10006385.0,
           "exec_buy_value": 0.0,
           "top_seller": {
             "name": "PICHAI SUNDAR",
@@ -316,7 +314,7 @@
       "summary": "GOOGL: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -331,43 +329,12 @@
       "summary": "KO: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
         "first_buy_date": "2026-05-01",
         "score_at_buy": 90
-      }
-    },
-    {
-      "ticker": "LRCX",
-      "type": "insider_alert",
-      "severity": "high",
-      "summary": "LRCX: 內部人賣出 $13.1M (C-level $11.2M)",
-      "yesterday": {},
-      "today": {
-        "insider": {
-          "ticker": "LRCX",
-          "lookback_days": 60,
-          "transactions_count": 6,
-          "total_sell_value": 13102807.0,
-          "total_buy_value": 0.0,
-          "net_value": -13102807.0,
-          "exec_sell_value": 11214270.0,
-          "exec_buy_value": 0.0,
-          "top_seller": {
-            "name": "BETTINGER DOUGLAS R",
-            "position": "Chief Financial Officer",
-            "value": 11214270.0,
-            "date": "2026-03-04"
-          },
-          "top_buyer": null,
-          "alert_type": "insider_selling_spike",
-          "sched_13d_count": 0,
-          "sched_13g_count": 2,
-          "form_8k_count": 1,
-          "recent_13d_dates": []
-        }
       }
     },
     {
@@ -377,7 +344,7 @@
       "summary": "MA: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -392,7 +359,7 @@
       "summary": "MCO: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -488,7 +455,7 @@
           "alert_type": "activist_filing",
           "sched_13d_count": 1,
           "sched_13g_count": 2,
-          "form_8k_count": 4,
+          "form_8k_count": 3,
           "recent_13d_dates": [
             "2026-03-10"
           ]
@@ -564,7 +531,7 @@
       "summary": "TSM: 投資 thesis 條件被違反 — bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 2,
+        "thesis_age_days": 3,
         "broken_conditions": [
           "bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降"
         ],
@@ -579,7 +546,7 @@
       "summary": "V: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 1,
+        "thesis_age_days": 2,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -616,21 +583,6 @@
           "form_8k_count": 1,
           "recent_13d_dates": []
         }
-      }
-    },
-    {
-      "ticker": "AMZN",
-      "type": "bias_changed",
-      "severity": "medium",
-      "summary": "AMZN: WATCH ↑ HOLD (score 50→60)",
-      "yesterday": {
-        "bias": "WATCH",
-        "score": 50
-      },
-      "today": {
-        "bias": "HOLD",
-        "score": 60,
-        "recommendation": "估值極度昂貴(mid安全邊際-1866%)且3模型共識very_expensive，CEO大規模賣股$7.9M屬黃旗訊號，暫不建議追高"
       }
     }
   ]
