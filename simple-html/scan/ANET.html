@@ -98,7 +98,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <h2>❌ 未通過的規則</h2>
 <ul>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9268) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9260) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 <li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>🎁 加分項</h2>
@@ -109,13 +109,13 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
 <li>估值帶: $3.57 (low) / <strong>$12.70</strong> (mid) / $64.19 (high)</li>
-<li>目前股價: $172.70</li>
-<li>安全邊際 (mid intrinsic): <strong>-1259.9%</strong></li>
+<li>目前股價: $172.62</li>
+<li>安全邊際 (mid intrinsic): <strong>-1259.3%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $12.70 (MOS -1259.9%) — 5y OE avg=0.47B; CAGR=51.3%
-  - <strong>shiller_pe</strong>: $64.19 (MOS -169.0%) — 5y avg EPS=$3.78 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $3.57 (MOS -4735.6%) — 5y OE/MarketCap yield=0.21% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $12.70 (MOS -1259.3%) — 5y OE avg=0.47B; CAGR=51.3%
+  - <strong>shiller_pe</strong>: $64.19 (MOS -168.9%) — 5y avg EPS=$3.78 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $3.57 (MOS -4733.4%) — 5y OE/MarketCap yield=0.21% vs fair yield=10.4%</p>
 <h2>🤵 Insider 交易訊號 (近 60 天)</h2>
 <ul>
 <li>交易筆數: 13 (賣出 $235.7M / 買入 $0.0M)</li>
@@ -151,26 +151,26 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>管理層評分: <strong>D</strong></li>
 <li>護城河強度: <strong>strong</strong></li>
-<li>護城河說明: Arista 擁有網路效應與無形資產護城河，毛利率 64%、淨利率 39%，ROIC 27%，護城河強度 7.2/10 且持續擴張中</li>
+<li>護城河說明: 網路效應極強(8/10)，無形資產支撐64%高毛利率，ROE從6.8%飙升至26.9%顯示護城河正在擴寬，屬於strong等級但位於科技業非巴菲特能力圈</li>
 <li>能力圈: ⚠️ 能力圈外</li>
-<li>LLM 信心: 85%</li>
+<li>LLM 信心: 90%</li>
 </ul>
 <h3>💡 行動建議</h3>
 <blockquote>
-<p>估值嚴重偏高 (mid $12.70 vs 股價遠高於此)，安全邊際為 -1259%，加上 CEO 與 C-level 大量賣出 (近 $235M)，建議觀望不追高</p>
+<p>內部人拋售$235M、CEO賣$75.9M是強烈警訊；股價相較內在價值貴逾10倍，安全邊際為負1259%；即使護城河強勁，仍建議避開或大幅降低信心</p>
 </blockquote>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
 <li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>
-<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
 <li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
+<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-04 07:27 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-05 07:37 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

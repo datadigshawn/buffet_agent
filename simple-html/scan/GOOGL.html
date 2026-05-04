@@ -98,7 +98,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <h2>❌ 未通過的規則</h2>
 <ul>
 <li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9955) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9828) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 <li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>🎁 加分項</h2>
@@ -110,13 +110,13 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
 <li>估值帶: $54.50 (low) / <strong>$77.46</strong> (mid) / $491.49 (high)</li>
-<li>目前股價: $385.69</li>
-<li>安全邊際 (mid intrinsic): <strong>-397.9%</strong></li>
+<li>目前股價: $383.25</li>
+<li>安全邊際 (mid intrinsic): <strong>-394.8%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $77.46 (MOS -397.9%) — 5y OE avg=68.51B; CAGR=2.3%
-  - <strong>shiller_pe</strong>: $491.49 (MOS +21.5%) — 5y avg EPS=$28.91 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $54.50 (MOS -607.7%) — 5y OE/MarketCap yield=1.47% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $77.46 (MOS -394.8%) — 5y OE avg=68.51B; CAGR=2.3%
+  - <strong>shiller_pe</strong>: $491.49 (MOS +22.0%) — 5y avg EPS=$28.91 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $54.50 (MOS -603.3%) — 5y OE/MarketCap yield=1.48% vs fair yield=10.4%</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
 <li>整體強度: <strong>🟢 強</strong> (8.6/10)</li>
@@ -145,26 +145,26 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>管理層評分: <strong>D</strong></li>
 <li>護城河強度: <strong>strong</strong></li>
-<li>護城河說明: Google 擁有強大無形資產(品牌定價權、毛利率60%)與網路效應(搜尋/YouTube/Android 生態)，護城河持續擴寬，ROE 從前5年15%升至近5年28.5%，是頂級特許經營權。</li>
-<li>能力圈: ⚠️ 能力圈外</li>
-<li>LLM 信心: 15%</li>
+<li>護城河說明: Google 擁有強大無形資產(品牌、定價權)與網路效應(用戶基數加速),護城河持續擴寬,ROE 從前5年15%升至近5年28.5%,整體強度8.6/10 屬強護城河。</li>
+<li>能力圈: ✅ 在能力圈內</li>
+<li>LLM 信心: 90%</li>
 </ul>
 <h3>💡 行動建議</h3>
 <blockquote>
-<p>估值極度昂貴，共識 very_expensive，安全邊際 -397.9%。BVPS 5年CAGR -36.4% 代表帳面價值縮水，管理層資本配置紀錄差。建議觀望或不買。</p>
+<p>估值嚴重偏高共識為 very_expensive,安全邊際 -394.8% 完全不符合 Buffett 標準,管理層 BVPS 5年CAGR -36.4% 顯示帳面價值縮水,建議觀望不進場。</p>
 </blockquote>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
 <li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>
-<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
 <li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
+<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-04 07:27 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-05 07:37 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>
