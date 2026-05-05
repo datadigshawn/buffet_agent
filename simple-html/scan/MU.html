@@ -98,20 +98,20 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li><strong>R6</strong> FCF margin &gt;= 15% (actual=-0.0310) → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
 <li><strong>R7</strong> 回購率 &gt; 0 (actual=-0.0117) → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9683) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9799) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 <li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>💰 內在價值估算 (Ensemble × 3 模型)</h2>
 <ul>
 <li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
 <li>估值帶: $2.10 (low) / <strong>$2.98</strong> (mid) / $55.01 (high)</li>
-<li>目前股價: $576.45</li>
-<li>安全邊際 (mid intrinsic): <strong>-19232.2%</strong></li>
+<li>目前股價: $640.20</li>
+<li>安全邊際 (mid intrinsic): <strong>-21370.1%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $2.98 (MOS -19232.2%) — 5y OE avg=0.24B; CAGR=-9.1%
-  - <strong>shiller_pe</strong>: $55.01 (MOS -948.0%) — 5y avg EPS=$3.24 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $2.10 (MOS -27377.5%) — 5y OE/MarketCap yield=0.04% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $2.98 (MOS -21370.1%) — 5y OE avg=0.24B; CAGR=-9.1%
+  - <strong>shiller_pe</strong>: $55.01 (MOS -1063.9%) — 5y avg EPS=$3.24 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $2.10 (MOS -30416.2%) — 5y OE/MarketCap yield=0.03% vs fair yield=10.4%</p>
 <h2>🤵 Insider 交易訊號 (近 60 天)</h2>
 <ul>
 <li>交易筆數: 5 (賣出 $26.9M / 買入 $0.0M)</li>
@@ -148,26 +148,26 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>管理層評分: <strong>C</strong></li>
 <li>護城河強度: <strong>moderate</strong></li>
-<li>護城河說明: 記憶體產業護城河中等，享有58%高毛利率定價權，用戶基數196%營收成長動能，但成本優勢僅4分，整體強度6分且趨勢擴張中。</li>
+<li>護城河說明: 記憶體產業龍頭,58%毛利率與41%淨利率顯示強定價權,護城河 moderate 且持續擴寬,但 5y owner earnings margin 為 -3.1% 是核心問題</li>
 <li>能力圈: ⚠️ 能力圈外</li>
 <li>LLM 信心: 85%</li>
 </ul>
 <h3>💡 行動建議</h3>
 <blockquote>
-<p>內部人60天賣出$26.9M且零買入，5年平均owner earnings margin為-3.1%為致命傷，估值共識very_expensive，安全邊際-19232%，建議規避。</p>
+<p>估值極度昂貴 (mid $2.98 vs 現價遠高於此),內部人 60 天賣出 $26.9M 無買入,owner earnings 為負,建議觀望或減碼,等待估值修復</p>
 </blockquote>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>
-<li><span class="wikilink-broken">槓桿與借貸(Leverage and Debt)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E6%A7%93%E6%A1%BF%E8%88%87%E5%80%9F%E8%B2%B8.html">線上</a></li>
-<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
-<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
+<li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>
+<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
+<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-05 07:37 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-06 07:37 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

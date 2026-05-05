@@ -97,7 +97,7 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=-0.1520) → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
 <li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=1.3943) → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
 <li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.0805) → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9977) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9435) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 <li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
 <h2>⚠️ 缺值跳過</h2>
@@ -108,13 +108,13 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 <ul>
 <li>Consensus: <strong>🟢 便宜</strong></li>
 <li>估值帶: $17.67 (low) / <strong>$23.13</strong> (mid) / $25.12 (high)</li>
-<li>目前股價: $20.19</li>
-<li>安全邊際 (mid intrinsic): <strong>+12.7%</strong></li>
+<li>目前股價: $20.39</li>
+<li>安全邊際 (mid intrinsic): <strong>+11.9%</strong></li>
 </ul>
 <p>各模型細節:
-  - <strong>dcf_two_stage</strong>: $25.12 (MOS +19.6%) — 5y OE avg=6.32B; CAGR=-17.6%
-  - <strong>shiller_pe</strong>: $23.13 (MOS +12.7%) — shares fallback (3440M) 5y avg EPS=$1.36 × fair PE 17
-  - <strong>owner_earnings_yield</strong>: $17.67 (MOS -14.2%) — 5y OE/MarketCap yield=9.10% vs fair yield=10.4%</p>
+  - <strong>dcf_two_stage</strong>: $25.12 (MOS +18.8%) — 5y OE avg=6.32B; CAGR=-17.6%
+  - <strong>shiller_pe</strong>: $23.13 (MOS +11.9%) — shares fallback (3440M) 5y avg EPS=$1.36 × fair PE 17
+  - <strong>owner_earnings_yield</strong>: $17.67 (MOS -15.4%) — 5y OE/MarketCap yield=9.01% vs fair yield=10.4%</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
 <li>整體強度: <strong>🔴 弱</strong> (2.8/10)</li>
@@ -138,16 +138,16 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
   - 留存效率 0.75 (留存被消耗或大量買回)</p>
 <h2>💡 相關概念</h2>
 <ul>
-<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
-<li><span class="wikilink-broken">特許經營權(Franchise)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%89%B9%E8%A8%B1%E7%B6%93%E7%87%9F%E6%AC%8A.html">線上</a></li>
-<li><span class="wikilink-broken">股票回購(Stock Buybacks)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E7%A5%A8%E5%9B%9E%E8%B3%BC.html">線上</a></li>
-<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
 <li><span class="wikilink-broken">股東收益(Owner Earnings)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%82%A1%E6%9D%B1%E6%94%B6%E7%9B%8A.html">線上</a></li>
+<li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>
+<li><span class="wikilink-broken">安全邊際(Margin of Safety)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%AE%89%E5%85%A8%E9%82%8A%E9%9A%9B.html">線上</a></li>
+<li><span class="wikilink-broken">護城河(Economic Moat)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E8%AD%B7%E5%9F%8E%E6%B2%B3.html">線上</a></li>
+<li><span class="wikilink-broken">市場先生(Mr. Market)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B8%82%E5%A0%B4%E5%85%88%E7%94%9F.html">線上</a></li>
 </ul>
 <hr>
 <p>參閱完整邏輯: <a class="wikilink" href="../02-投資概念/巴菲特交易邏輯總綱.html">巴菲特交易邏輯總綱</a> · <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E4%BA%A4%E6%98%93%E9%82%8F%E8%BC%AF%E7%B8%BD%E7%B6%B1.html">線上版</a></p>
 <footer>
-資料時點: 2026-05-01 16:07 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
+資料時點: 2026-05-06 07:37 UTC+08:00 · <a href="../scan.html">回 scan</a> · <a href="../index.html">知識庫首頁</a>
 </footer>
 </div>
 </body>

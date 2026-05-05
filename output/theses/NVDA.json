@@ -30,9 +30,9 @@
     "berkshire_holds": false,
     "industry_class": "general"
   },
-  "last_verified_date": "2026-05-04",
+  "last_verified_date": "2026-05-05",
   "last_verified_status": "valid",
   "broken_conditions": [],
-  "thesis_age_days": 4,
+  "thesis_age_days": 5,
   "written_by": "default"
 }

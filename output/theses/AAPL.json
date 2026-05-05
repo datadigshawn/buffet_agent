@@ -38,11 +38,11 @@
     "margin_of_safety_pct": -1.867,
     "industry_class": "general"
   },
-  "last_verified_date": "2026-05-04",
+  "last_verified_date": "2026-05-05",
   "last_verified_status": "broken",
   "broken_conditions": [
     "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
   ],
-  "thesis_age_days": 3,
+  "thesis_age_days": 4,
   "written_by": "default"
 }
