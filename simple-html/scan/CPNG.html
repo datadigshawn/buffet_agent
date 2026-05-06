@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="巴菲特">
-<title>GEV | 巴菲特 Scan</title>
+<title>CPNG | 巴菲特 Scan</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap');
 :root{--bg:#faf8f5;--fg:#2a2521;--muted:#6c6258;--accent:#8b3a2f;--accent-2:#b87333;--line:#e5e0d4;--highlight:rgba(184,115,51,0.15);--code-bg:#f0ece3;--buy:#2d7a4f;--hold:#7a652d;--watch:#7a4f2d;--avoid:#7a2d3a;--out:#555;}
@@ -81,67 +81,57 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 </nav>
 <a class="nav-back" href="../scan.html">← 排行榜</a>
 <div class="wrap">
-<h1>巴菲特 Agent — GEV</h1>
-<p><strong>Bias</strong>: HOLD  ·  <strong>Score</strong>: 60/110 (base 55 + bonus 5)</p>
-<p><strong>規則涵蓋率</strong>: 100%</p>
-<p><strong>Sector</strong>: Industrials  ·  <strong>資料來源</strong>: yfinance+sec</p>
+<h1>巴菲特 Agent — CPNG</h1>
+<p><strong>Bias</strong>: AVOID  ·  <strong>Score</strong>: 33/110 (base 33 + bonus 0)</p>
+<p><strong>規則涵蓋率</strong>: 90%</p>
+<p><strong>Sector</strong>: Consumer Cyclical  ·  <strong>資料來源</strong>: yfinance+sec</p>
 <h2>✅ 通過的規則</h2>
 <ul>
-<li><strong>R1</strong> ROE &gt;= 15% (actual=0.7571) ✓ +15 → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
-<li><strong>R3</strong> 淨利率 &gt;= 10% (actual=0.2381) ✓ +10 → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
-<li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (actual=18.1650) ✓ +10 → <a class="wikilink" href="../02-投資概念/複利.html">複利</a></li>
-<li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.2492) ✓ +15 → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
-<li><strong>R7</strong> 回購率 &gt; 0 (actual=0.0230) ✓ +5 → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
+<li><strong>R5</strong> Debt/Equity &lt; 0.5 (actual=0.1402) ✓ +15 → <a class="wikilink" href="../02-投資概念/槓桿與借貸.html">槓桿與借貸</a></li>
+<li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) ✓ +10 → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
+<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.0663) ✓ +5 → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
 </ul>
 <h2>❌ 未通過的規則</h2>
 <ul>
-<li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.2028) → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
-<li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.0731) → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
-<li><strong>R8</strong> 估值合理 (PE &lt; 25 OR PEG &lt; 1.5) → <a class="wikilink" href="../02-投資概念/安全邊際.html">安全邊際</a></li>
-<li><strong>R9</strong> 不在 52 週高點 (w52_pos &lt; 0.80) (actual=0.9208) → <a class="wikilink" href="../02-投資概念/市場先生.html">市場先生</a></li>
+<li><strong>R1</strong> ROE &gt;= 15% (actual=0.0486) → <a class="wikilink" href="../02-投資概念/經濟商譽.html">經濟商譽</a></li>
+<li><strong>R2</strong> 毛利率 &gt;= 30% (actual=0.2937) → <a class="wikilink" href="../02-投資概念/特許經營權.html">特許經營權</a></li>
+<li><strong>R3</strong> 淨利率 &gt;= 10% (actual=0.0060) → <a class="wikilink" href="../02-投資概念/護城河.html">護城河</a></li>
+<li><strong>R6</strong> FCF margin &gt;= 15% (actual=0.0098) → <a class="wikilink" href="../02-投資概念/股東收益.html">股東收益</a></li>
+<li><strong>R7</strong> 回購率 &gt; 0 (actual=-0.0159) → <a class="wikilink" href="../02-投資概念/股票回購.html">股票回購</a></li>
 <li><strong>R10</strong> Berkshire 持有 (actual=0.0000) → <span class="wikilink-broken">ground truth</span></li>
 </ul>
-<h2>🎁 加分項</h2>
+<h2>⚠️ 缺值跳過</h2>
 <ul>
-<li><strong>B2</strong> ROIC &gt; 20% 連續 5 年 +5</li>
+<li><strong>R4</strong> EPS 5 年成長 &gt;= 10% 年化 (earn_growth) — 資料源缺欄位</li>
 </ul>
-<h2>🤵 Insider 交易訊號 (近 60 天)</h2>
+<h2>💰 內在價值估算 (Ensemble × 2 模型)</h2>
 <ul>
-<li>交易筆數: 2 (賣出 $0.0M / 買入 $0.0M)</li>
-<li>13G filings (5%+ 被動機構): 3 筆</li>
-<li>8-K 重大事件公告: 1 筆</li>
+<li>Consensus: <strong>🔴🔴 嚴重高估</strong></li>
+<li>估值帶: $2.01 (low) / <strong>$2.44</strong> (mid) / $2.86 (high)</li>
+<li>目前股價: $17.89</li>
+<li>安全邊際 (mid intrinsic): <strong>-634.0%</strong></li>
 </ul>
+<p>各模型細節:
+  - <strong>dcf_two_stage</strong>: $2.86 (MOS -525.2%) — 5y OE avg=0.39B; no CAGR
+  - <strong>shiller_pe</strong>: (略過 — 5y avg EPS 為負 (-0.04))
+  - <strong>owner_earnings_yield</strong>: $2.01 (MOS -788.6%) — 5y OE/MarketCap yield=1.21% vs fair yield=10.4%</p>
 <h2>🏰 護城河結構化評分 (P1-2)</h2>
 <ul>
-<li>整體強度: <strong>🟡 中等</strong> (4.8/10)</li>
-<li>主要類型: <strong>網路效應, 轉換成本</strong></li>
+<li>整體強度: <strong>🔴 弱</strong> (0.6/10)</li>
 <li>多年趨勢: ➡️ 穩定</li>
 <li>年度資料不足 (2 年,需要 ≥ 8)</li>
 </ul>
 <p>5 類型分數:
-  - <strong>無形資產 (品牌/專利)</strong>: 2.0/10 — 淨利率 24%
-  - <strong>轉換成本</strong>: 3.0/10 — ROIC 5y avg 27%
-  - <strong>網路效應</strong>: 6.0/10 — 營收成長 16% (用戶基數加速); ROIC 27% (邊際成本低)
-  - <strong>成本優勢</strong>: 2.0/10 — 市值百億等級規模
+  - <strong>無形資產 (品牌/專利)</strong>: 0.0/10 — 資料不足
+  - <strong>轉換成本</strong>: 0.0/10 — 資料不足
+  - <strong>網路效應</strong>: 0.0/10 — 資料不足或無顯著訊號
+  - <strong>成本優勢</strong>: 1.0/10 — 資料不足
   - <strong>效率規模</strong>: 0.0/10 — 非適用行業</p>
 <h2>👔 管理層評估 (Capital Allocation)</h2>
 <ul>
-<li>CEO: <strong>Mr. Scott L. Strazik</strong> (CEO, President &amp; Director)</li>
-<li>5y 平均股利配發率: <strong>6%</strong></li>
+<li>CEO: <strong>Mr. Bom Suk  Kim</strong> (Founder, CEO &amp; Chairman)</li>
 <li>Buffett 風格分級: <strong>C</strong></li>
 </ul>
-<h2>🧠 定性判斷 (minimax/minimax-m2.5)</h2>
-<ul>
-<li>管理層評分: <strong>C</strong></li>
-<li>護城河強度: <strong>moderate</strong></li>
-<li>護城河說明: 網路效應中等(6.0/10)、轉換成本偏弱(3.0/10)，護城河整體 moderate 4.8/10，ROIC 27% 顯示資本效率佳但缺乏強結構性保護</li>
-<li>能力圈: ✅ 在能力圈內</li>
-<li>LLM 信心: 55%</li>
-</ul>
-<h3>💡 行動建議</h3>
-<blockquote>
-<p>Buffett score 60/110 且護城河 moderate，HOLD 立場合理。ROE 僅 50% 年份達 15%，owner earnings margin 7.3% 偏低，靜待更佳切入點</p>
-</blockquote>
 <h2>💡 相關概念</h2>
 <ul>
 <li><span class="wikilink-broken">經濟商譽(Economic Goodwill)</span> — <a href="https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E7%B6%93%E6%BF%9F%E5%95%86%E8%AD%BD.html">線上</a></li>

@@ -1,15 +1,17 @@
 {
-  "total": 25,
+  "total": 28,
   "by_type": {
     "thesis_broken": 9,
     "insider_alert": 14,
+    "mos_first_positive": 1,
     "new_top10": 1,
-    "dropped_from_top10": 1
+    "bias_changed": 1,
+    "dropped_from_top10": 2
   },
   "by_severity": {
-    "high": 23,
-    "medium": 1,
-    "low": 1
+    "high": 24,
+    "medium": 2,
+    "low": 2
   },
   "alerts": [
     {
@@ -19,7 +21,7 @@
       "summary": "AAPL: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -93,16 +95,16 @@
       "ticker": "AMZN",
       "type": "insider_alert",
       "severity": "high",
-      "summary": "AMZN: 內部人賣出 $15.2M (C-level $7.9M)",
+      "summary": "AMZN: 內部人賣出 $23.0M (C-level $7.9M)",
       "yesterday": {},
       "today": {
         "insider": {
           "ticker": "AMZN",
           "lookback_days": 60,
-          "transactions_count": 5,
-          "total_sell_value": 15150552.0,
+          "transactions_count": 6,
+          "total_sell_value": 22978702.0,
           "total_buy_value": 0.0,
-          "net_value": -15150552.0,
+          "net_value": -22978702.0,
           "exec_sell_value": 7905000.0,
           "exec_buy_value": 0.0,
           "top_seller": {
@@ -189,7 +191,7 @@
       "summary": "AXP: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -237,7 +239,7 @@
       "summary": "BAC: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -270,8 +272,8 @@
           "top_buyer": null,
           "alert_type": "activist_filing",
           "sched_13d_count": 6,
-          "sched_13g_count": 11,
-          "form_8k_count": 1,
+          "sched_13g_count": 10,
+          "form_8k_count": 2,
           "recent_13d_dates": [
             "2026-05-04",
             "2026-04-29",
@@ -286,16 +288,16 @@
       "ticker": "CRDO",
       "type": "insider_alert",
       "severity": "high",
-      "summary": "CRDO: 內部人賣出 $45.4M (C-level $11.6M)",
+      "summary": "CRDO: 內部人賣出 $50.4M (C-level $11.6M)",
       "yesterday": {},
       "today": {
         "insider": {
           "ticker": "CRDO",
           "lookback_days": 60,
-          "transactions_count": 17,
-          "total_sell_value": 45446529.0,
+          "transactions_count": 18,
+          "total_sell_value": 50368641.0,
           "total_buy_value": 0.0,
-          "net_value": -45446529.0,
+          "net_value": -50368641.0,
           "exec_sell_value": 11552741.0,
           "exec_buy_value": 0.0,
           "top_seller": {
@@ -320,7 +322,7 @@
       "summary": "GOOGL: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -335,7 +337,7 @@
       "summary": "KO: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -350,7 +352,7 @@
       "summary": "MA: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -365,7 +367,7 @@
       "summary": "MCO: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -408,23 +410,23 @@
       "ticker": "MU",
       "type": "insider_alert",
       "severity": "high",
-      "summary": "MU: 內部人賣出 $26.9M (C-level $0.0M)",
+      "summary": "MU: 內部人賣出 $52.4M (C-level $21.5M)",
       "yesterday": {},
       "today": {
         "insider": {
           "ticker": "MU",
           "lookback_days": 60,
-          "transactions_count": 5,
-          "total_sell_value": 26923907.0,
+          "transactions_count": 7,
+          "total_sell_value": 52435669.0,
           "total_buy_value": 0.0,
-          "net_value": -26923907.0,
-          "exec_sell_value": 0.0,
+          "net_value": -52435669.0,
+          "exec_sell_value": 21450555.0,
           "exec_buy_value": 0.0,
           "top_seller": {
-            "name": "ARNZEN APRIL S",
-            "position": "Officer",
-            "value": 13895762.0,
-            "date": "2026-04-01"
+            "name": "MEHROTRA SANJAY",
+            "position": "Chief Executive Officer",
+            "value": 21450555.0,
+            "date": "2026-05-01"
           },
           "top_buyer": null,
           "alert_type": "insider_selling_spike",
@@ -472,17 +474,17 @@
       "ticker": "NFLX",
       "type": "insider_alert",
       "severity": "high",
-      "summary": "NFLX: 內部人賣出 $43.0M (C-level $2.8M)",
+      "summary": "NFLX: 內部人賣出 $83.8M (C-level $5.2M)",
       "yesterday": {},
       "today": {
         "insider": {
           "ticker": "NFLX",
           "lookback_days": 60,
-          "transactions_count": 4,
-          "total_sell_value": 42962205.0,
+          "transactions_count": 10,
+          "total_sell_value": 83825791.0,
           "total_buy_value": 0.0,
-          "net_value": -42962205.0,
-          "exec_sell_value": 2805740.0,
+          "net_value": -83825791.0,
+          "exec_sell_value": 5208367.0,
           "exec_buy_value": 0.0,
           "top_seller": {
             "name": "HASTINGS REED",
@@ -525,9 +527,23 @@
           "alert_type": "insider_selling_spike",
           "sched_13d_count": 0,
           "sched_13g_count": 2,
-          "form_8k_count": 2,
+          "form_8k_count": 1,
           "recent_13d_dates": []
         }
+      }
+    },
+    {
+      "ticker": "OXY",
+      "type": "mos_first_positive",
+      "severity": "high",
+      "summary": "OXY DCF 安全邊際首次轉正 (-6.7% → +0.9%)",
+      "yesterday": {
+        "mos": -0.0672
+      },
+      "today": {
+        "mos": 0.0087,
+        "score": 50,
+        "recommendation": null
       }
     },
     {
@@ -537,7 +553,7 @@
       "summary": "TSM: 投資 thesis 條件被違反 — bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 5,
+        "thesis_age_days": 6,
         "broken_conditions": [
           "bias != INSUFFICIENT_DATA (現在 = INSUFFICIENT_DATA) — 資料完整度不可下降"
         ],
@@ -552,7 +568,7 @@
       "summary": "V: 投資 thesis 條件被違反 — berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)",
       "yesterday": {},
       "today": {
-        "thesis_age_days": 4,
+        "thesis_age_days": 5,
         "broken_conditions": [
           "berkshire_holds == True (現在 = False) — Berkshire 持有狀態不可變化 (賣出 = 重大訊號)"
         ],
@@ -592,28 +608,56 @@
       }
     },
     {
-      "ticker": "QCOM",
+      "ticker": "ANET",
       "type": "new_top10",
       "severity": "medium",
-      "summary": "QCOM 新進 BUY 前 10 名 (score 83)",
+      "summary": "ANET 新進 BUY 前 10 名 (score 85)",
       "yesterday": {},
       "today": {
-        "score": 83,
-        "rank": 7,
-        "recommendation": "CEO 與高層近60天賣出$2.5M 且估值昂貴(mid 安全邊際-36%),建議觀望或等股價回落至$100以下再評估進場"
+        "score": 85,
+        "rank": 5,
+        "recommendation": "估值極度昂貴 (安全邊際-1058%)、CEO與高層大量賣出$235M、帳面價值5年縮水25.7%，應避開或大幅降低信心"
       }
     },
     {
-      "ticker": "ANET",
+      "ticker": "KO",
+      "type": "bias_changed",
+      "severity": "medium",
+      "summary": "KO: BUY ↓ HOLD (score 80→75)",
+      "yesterday": {
+        "bias": "BUY",
+        "score": 80
+      },
+      "today": {
+        "bias": "HOLD",
+        "score": 75,
+        "recommendation": "基本面極佳但估值嚴重偏高，共識評估very_expensive、安全邊際-208%，建議觀望等待合理價位(25美元以下)再進場。"
+      }
+    },
+    {
+      "ticker": "KO",
       "type": "dropped_from_top10",
       "severity": "low",
-      "summary": "ANET 跌出 BUY 前 10 名 (score 80→80)",
+      "summary": "KO 跌出 BUY 前 10 名 (score 80→75)",
       "yesterday": {
         "score": 80
       },
       "today": {
-        "score": 80,
-        "bias": "BUY"
+        "score": 75,
+        "bias": "HOLD"
+      }
+    },
+    {
+      "ticker": "QCOM",
+      "type": "dropped_from_top10",
+      "severity": "low",
+      "summary": "QCOM 跌出 BUY 前 10 名 (score 83→?)",
+      "yesterday": {
+        "score": 83
+      },
+      "today": {
+        "score": null,
+        "bias": null
       }
     }
   ]
