@@ -31,6 +31,7 @@ from agent import diff as _diff  # noqa: E402
 from agent import thesis as _thesis  # noqa: E402
 from agent import llm as _llm  # noqa: E402
 from agent.sources import top_movers as _top_movers  # noqa: E402
+from site_config import public_url  # noqa: E402
 
 OUT_DIR = ROOT / "simple-html"
 SCAN_DIR = OUT_DIR / "scan"
@@ -38,24 +39,18 @@ JSON_OUT_DIR = ROOT / "output"
 DEBUG_OUT_DIR = OUT_DIR / "debug-scan"
 DEBUG_JSON_OUT_DIR = JSON_OUT_DIR / "debug"
 WATCHLIST_JSON = ROOT / "config" / "watchlist.json"
-# stockTracker CSV — 不存在則 fallback 到 watchlist.json
-def _default_stocktracker_csv() -> Path:
-    candidates = [
-        Path.home() / "autobot" / "stockTracker" / "data" / "latest_prices.csv",
-        Path.home() / "Projects" / "stockTracker" / "data" / "latest_prices.csv",
-    ]
-    for p in candidates:
-        if p.exists():
-            return p
-    return candidates[0]
 
-
-STOCKTRACKER_CSV = Path(
-    os.environ.get(
-        "BUFFET_STOCKTRACKER_CSV",
-        str(_default_stocktracker_csv()),
-    )
-)
+# stockTracker portfolio is the canonical watchlist source. Cross-repo import
+# (Mac mini layout). watchlist.json holds only buffetAgent's *own* additions:
+# Berkshire 13F core + validation反例.
+import sys as _sys
+_STOCKTRACKER_SRC = Path("/Users/shawnclaw/autobot/stockTracker/src")
+if str(_STOCKTRACKER_SRC) not in _sys.path:
+    _sys.path.insert(0, str(_STOCKTRACKER_SRC))
+try:
+    from watchlist_export import load_portfolio_tickers as _load_stocktracker_tickers
+except ImportError:
+    _load_stocktracker_tickers = None  # graceful: own groups still scan
 
 WIKILINK_RE = re.compile(r"\[\[([^\[\]]+?)\]\]")
 
@@ -125,9 +120,9 @@ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);text-al
 # 跨站導覽 — 在 SUMMARY / DETAIL / KB / backtest 頁面共用
 # {scan_curr} {bt_curr} {kb_curr} 由各頁面填入 'aria-current="page"' 或空字串
 SITE_NAV_HTML = """<nav class="site-nav" aria-label="網站導覽">
-<a href="https://buffetagent.netlify.app/scan.html" {scan_curr} title="📊 Scan 排行榜">📊</a>
-<a href="https://buffetagent.netlify.app/backtest.html" {bt_curr} title="📈 回測報告">📈</a>
-<a href="https://buffetagent.netlify.app/index.html" {kb_curr} title="📚 巴菲特知識庫">📚</a>
+<a href="{scan_url}" {scan_curr} title="📊 Scan 排行榜">📊</a>
+<a href="{backtest_url}" {bt_curr} title="📈 回測報告">📈</a>
+<a href="{kb_url}" {kb_curr} title="📚 巴菲特知識庫">📚</a>
 <a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
   title="💬 戰情室 (新分頁開啟)">💬</a>
 </nav>"""
@@ -211,6 +206,11 @@ DETAIL_HTML_TEMPLATE = """<!DOCTYPE html>
 def load_watchlist(top_n_movers: int = 50, include_top_movers: bool = True) -> tuple[list[str], dict[str, list[str]]]:
     """組成當日掃描清單。
 
+    Sources (union, dedup later):
+      1. stockTracker portfolio.json — your real holdings (canonical)
+      2. config/watchlist.json own groups — Berkshire 13F + validation 反例
+      3. Top N volume movers (optional)
+
     回傳 (tickers, source_map):
       tickers: 去重後的順序清單 (watchlist 在前,Top movers 在後)
       source_map: ticker → ["watchlist"|"top_50_volume"|...] 用來追溯來源
@@ -218,15 +218,14 @@ def load_watchlist(top_n_movers: int = 50, include_top_movers: bool = True) -> t
     source_map: dict[str, list[str]] = {}
     watchlist_tickers: list[str] = []
 
-    if STOCKTRACKER_CSV.exists():
-        import csv
-        with STOCKTRACKER_CSV.open(encoding="utf-8") as f:
-            r = csv.reader(f)
-            next(r)
-            for row in r:
-                if row:
-                    watchlist_tickers.append(row[0])
+    # 1. stockTracker portfolio (canonical source)
+    if _load_stocktracker_tickers is not None:
+        try:
+            watchlist_tickers.extend(_load_stocktracker_tickers())
+        except FileNotFoundError as e:
+            print(f"⚠️ stockTracker portfolio missing, skipping: {e}")
 
+    # 2. buffetAgent's own groups
     if WATCHLIST_JSON.exists():
         cfg = json.loads(WATCHLIST_JSON.read_text(encoding="utf-8"))
         for grp in cfg.get("groups", {}).values():
@@ -336,6 +335,9 @@ def render_summary(verdicts: list, timestamp_local: str, rules_version: str) -> 
         pwa=PWA_HEAD.format(prefix=""),
         css=THEME_CSS,
         site_nav=SITE_NAV_HTML.format(
+            scan_url=public_url("scan.html"),
+            backtest_url=public_url("backtest.html"),
+            kb_url=public_url("index.html"),
             scan_curr='aria-current="page"', bt_curr="", kb_curr=""),
         timestamp_local=timestamp_local,
         total=len(verdicts),
@@ -351,6 +353,9 @@ def render_detail(v, timestamp_local: str) -> str:
         pwa=PWA_HEAD.format(prefix="../"),
         css=THEME_CSS,
         site_nav=SITE_NAV_HTML.format(
+            scan_url=public_url("scan.html"),
+            backtest_url=public_url("backtest.html"),
+            kb_url=public_url("index.html"),
             scan_curr='aria-current="page"', bt_curr="", kb_curr=""),
         ticker=v.ticker,
         body_html=body_html,
