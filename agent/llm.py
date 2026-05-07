@@ -24,6 +24,8 @@ import urllib.request
 from dataclasses import dataclass, field
 from typing import Any, Protocol
 
+from site_config import public_base_url
+
 log = logging.getLogger(__name__)
 
 
@@ -333,7 +335,7 @@ class OpenRouterBackend:
             headers={
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json",
-                "HTTP-Referer": "https://buffetagent.netlify.app",
+                "HTTP-Referer": public_base_url(),
                 "X-Title": "buffetAgent",
             },
             method="POST",
@@ -464,7 +466,7 @@ def write_thesis(ticker: str, verdict: dict) -> str | None:
         headers={
             "Authorization": f"Bearer {backend.api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://buffetagent.netlify.app",
+            "HTTP-Referer": public_base_url(),
             "X-Title": "buffetAgent",
         },
         method="POST",

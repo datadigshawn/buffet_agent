@@ -4,9 +4,9 @@
 
 | 用途 | 連結 |
 |---|---|
-| 📚 知識庫首頁（180 節點） | <https://buffetagent.netlify.app/> |
-| 📊 Buffett Scan 排行榜 | <https://buffetagent.netlify.app/scan.html> |
-| 🍎 個股範例 | <https://buffetagent.netlify.app/scan/AAPL.html> |
+| 📚 知識庫首頁（180 節點） | <https://buffetagent.shawny-project42.com/> |
+| 📊 Buffett Scan 排行榜 | <https://buffetagent.shawny-project42.com/scan.html> |
+| 🍎 個股範例 | <https://buffetagent.shawny-project42.com/scan/AAPL.html> |
 
 ---
 
@@ -25,7 +25,8 @@
 buffet_agent/
 ├── README.md                       本文件
 ├── DEPLOY.md                       原始部署選項說明
-├── netlify.toml                    Netlify 部署設定
+├── app.py                          Mac mini WSGI static site service
+├── site_config.py                  Public URL config (BUFFET_PUBLIC_BASE_URL)
 ├── update.sh                       一鍵渲染 + 預覽 + push
 │
 ├── content/                        📝 Obsidian markdown source（180 個 .md）
@@ -37,7 +38,7 @@ buffet_agent/
 │   ├── 05-模板/                    Obsidian templates
 │   └── index.md                    首頁 markdown source
 │
-├── simple-html/                    🌐 Netlify publish 目錄（render.py 產出）
+├── simple-html/                    🌐 Mac mini publish 目錄（render.py 產出）
 │   ├── index.html                  首頁含 📊 Buffett Scan 入口
 │   ├── manifest.webmanifest        PWA manifest
 │   ├── icon.svg                    巴菲特紅 + 「巴」字 logo
@@ -64,14 +65,20 @@ buffet_agent/
 │
 ├── scripts/                        🛠️ 知識庫渲染相關
 │   ├── render.py                   content/*.md → simple-html/*.html（含 wikilink 解析）
+│   ├── run_daily_scan_macmini.sh   Mac mini daily scan + war-room notify
+│   ├── run_weekly_backtest_macmini.sh
 │   ├── inject_pwa.py               一次性注入 PWA tags
 │   ├── inject_mobile_nav.py        一次性注入手機抽屜
-│   └── requirements.txt            markdown / python-frontmatter
+│   └── requirements.txt            markdown / python-frontmatter / gunicorn
+│
+├── deploy/
+│   ├── launchd/                    Mac mini site / scan / backtest jobs
+│   └── cloudflared/                Cloudflare Tunnel ingress snippet
 │
 ├── quartz-config-files/            （備用）若日後改用 Quartz 部署
 │
 └── .github/workflows/
-    └── buffet-scan.yml             📅 每週一 22:00 UTC + 手動觸發
+    └── buffet-scan.yml             手動備援 runner
 ```
 
 ---
@@ -81,7 +88,7 @@ buffet_agent/
 ### A. 我想看股票評分（最常用）
 
 ```
-打開 https://buffetagent.netlify.app/scan
+打開 https://buffetagent.shawny-project42.com/scan.html
 ```
 
 或在手機加到主畫面變 PWA。
@@ -97,15 +104,14 @@ cd ~/Projects/agentS/buffet_agent
 
 ### C. 我加新 ticker 到 watchlist
 
-編 `config/watchlist.json` → push → 下週一 cron 自動含進去。  
+編 `config/watchlist.json` → Mac mini 下一次 daily scan 自動含進去。  
 要立刻看：
 
 ```bash
-/Users/apple/miniforge3/bin/python3 src/build_scan_html.py
-git add simple-html/scan* && git commit -m "manual rescan" && git push
+scripts/run_daily_scan_macmini.sh
 ```
 
-或在 GitHub Actions 網頁手動 dispatch。
+或在 GitHub Actions 網頁手動 dispatch 作為備援。
 
 ### D. 我修改規則
 
@@ -141,25 +147,29 @@ git add simple-html/scan* && git commit -m "manual rescan" && git push
                        Verdict (markdown rationale + JSON)
 ```
 
-10 條核心規則 + 4 條 disqualifier 詳見 `agent/rules.json` 與 [`巴菲特量化篩選清單`](https://buffetagent.netlify.app/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E9%87%8F%E5%8C%96%E7%AF%A9%E9%81%B8%E6%B8%85%E5%96%AE.html)。
+10 條核心規則 + 4 條 disqualifier 詳見 `agent/rules.json` 與 [`巴菲特量化篩選清單`](https://buffetagent.shawny-project42.com/02-%E6%8A%95%E8%B3%87%E6%A6%82%E5%BF%B5/%E5%B7%B4%E8%8F%B2%E7%89%B9%E9%87%8F%E5%8C%96%E7%AF%A9%E9%81%B8%E6%B8%85%E5%96%AE.html)。
 
 ---
 
 ## 📅 自動化排程
 
-```yaml
-# .github/workflows/buffet-scan.yml
-on:
-  schedule:
-    - cron: '0 22 * * 1'    # 週一 22:00 UTC = 美東 17/18:00（收盤後）
-  workflow_dispatch:         # 也可手動
+```text
+Mac mini launchd:
+  com.buffetagent.site      常駐 serve simple-html/ on 127.0.0.1:8087
+  com.buffetagent.scan      Tue-Sat 06:30 台北 daily scan + war-room notify
+  com.buffetagent.backtest  Mon 07:00 台北 weekly backtest
+
+Cloudflare Tunnel:
+  buffetagent.shawny-project42.com -> http://localhost:8087
 ```
 
 每次跑：
-1. `pip install yfinance markdown python-frontmatter`
-2. `python src/build_scan_html.py`
-3. `git add simple-html/scan*` + commit + push
-4. Netlify 自動重新部署
+1. `scripts/run_daily_scan_macmini.sh`
+2. `src/build_scan_html.py` 更新 `simple-html/scan*` + `output/*.json`
+3. `scripts/notify_warroom.py` 寫入 `war-room.db` lobby
+4. Cloudflare Tunnel 對外提供最新靜態站
+
+GitHub Actions 目前保留 `workflow_dispatch`，只作手動備援。
 
 ---
 
@@ -181,10 +191,11 @@ on:
 
 | 階段 | 狀態 |
 |---|---|
-| Phase 0：知識庫 + Netlify + PWA | ✅ |
+| Phase 0：知識庫 + PWA | ✅ |
 | Phase 1：交易邏輯總綱 + 量化篩選清單 + 定性檢查清單 | ✅ |
 | Phase 2：BuffettAgent module + CLI + tests | ✅ |
 | Option C：自動化 weekly scan | ✅ |
+| Mac mini 部署：Cloudflare Tunnel + launchd | ✅ |
 | Phase 3：接入 [warRoom 戰情室](../warRoom_shawnY06) | ⬜ |
 
 詳見 Obsidian vault：`30_Investment/Projects/buffetAgent/_changelog/CHANGELOG.md`。
@@ -194,9 +205,9 @@ on:
 ## 🔧 環境
 
 - Python 3.12+（用 `/Users/apple/miniforge3/bin/python3`，**不**用系統 `python3`）
-- 套件：`yfinance markdown python-frontmatter pytest`
-- 部署：Netlify（auto-deploy on push）
-- CI：GitHub Actions
+- 套件：`yfinance markdown python-frontmatter pytest gunicorn`
+- 部署：Mac mini launchd + Cloudflare Tunnel
+- CI：GitHub Actions（手動備援）
 
 ---
 

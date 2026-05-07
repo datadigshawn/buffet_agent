@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# 一鍵更新流程:從 content/ 重新渲染 → 預覽 → push 觸發 Netlify 重新部署
+# 一鍵更新流程:從 content/ 重新渲染 → 預覽 → push
+# Mac mini / Cloudflare Tunnel 會直接 serve simple-html/ 的最新內容。
 #
 # Python 解析優先序:
 #   1. $PYTHON 環境變數 (例 PYTHON=/path/to/python ./update.sh)
@@ -53,5 +54,5 @@ if git diff --cached --quiet; then
 else
   git commit -m "Update site: regenerate from content/"
   git push
-  echo "✅ 已推送, Netlify 會在 ~30 秒後完成重新部署"
+  echo "✅ 已推送；Mac mini 會 serve simple-html/，GitHub 只作版本備份"
 fi

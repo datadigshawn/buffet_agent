@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from agent import backtest  # noqa: E402
+from site_config import public_url  # noqa: E402
 
 OUT_DIR = ROOT / "output"
 HTML_OUT = ROOT / "simple-html" / "backtest.html"
@@ -93,7 +94,7 @@ def format_summary(payload: dict) -> str:
 
 
 def render_html(payload: dict) -> str:
-    """Netlify 公開頁:simple-html/backtest.html。"""
+    """Public backtest page: simple-html/backtest.html."""
     s = payload["rolling_summary"]
     by_date = payload.get("by_scan_date", {})
     sorted_dates = sorted(by_date.keys(), reverse=True)
@@ -174,9 +175,9 @@ a{{color:var(--accent);}}
   .site-nav a{{font-size:16px;padding:3px 6px;}}}}
 </style></head><body>
 <nav class="site-nav" aria-label="網站導覽">
-<a href="https://buffetagent.netlify.app/scan.html" title="📊 Scan 排行榜">📊</a>
-<a href="https://buffetagent.netlify.app/backtest.html" aria-current="page" title="📈 回測報告">📈</a>
-<a href="https://buffetagent.netlify.app/index.html" title="📚 巴菲特知識庫">📚</a>
+<a href="{public_url('scan.html')}" title="📊 Scan 排行榜">📊</a>
+<a href="{public_url('backtest.html')}" aria-current="page" title="📈 回測報告">📈</a>
+<a href="{public_url('index.html')}" title="📚 巴菲特知識庫">📚</a>
 <a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
   title="💬 戰情室 (新分頁開啟)">💬</a>
 </nav>

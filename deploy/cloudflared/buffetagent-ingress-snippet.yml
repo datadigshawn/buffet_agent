@@ -1,0 +1,4 @@
+# Add this rule before the final http_status:404 catch-all in ~/.cloudflared/config.yml
+- hostname: buffetagent.shawny-project42.com
+  service: http://localhost:8087
+

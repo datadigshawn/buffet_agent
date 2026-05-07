@@ -11,6 +11,8 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+from site_config import public_file_url
+
 # 知識庫路徑
 KB_ROOT = Path(__file__).resolve().parent.parent / "content"
 
@@ -57,10 +59,9 @@ class KBNode:
 
     @property
     def online_url(self) -> str:
-        """Netlify 上對應 URL。"""
-        from urllib.parse import quote
+        """Public site URL for this KB node."""
         rel = self.path.replace(".md", ".html")
-        return f"https://buffetagent.netlify.app/{quote(rel)}"
+        return public_file_url(rel)
 
 
 def _read_excerpt(path: Path, max_chars: int = 300) -> tuple[str, str]:

@@ -11,7 +11,7 @@
 5. 滾動聚合:近 N 週 BUY 籃子的 1m alpha 平均
 6. Regression detection:連 3 週 1m alpha < -5% → 觸發 regression alert
 
-輸出 output/backtest.json,Netlify backtest.html 視覺化。
+輸出 output/backtest.json,public backtest.html 視覺化。
 
 設計原則:
 - 不依賴歷史掃描數量(可從少量開始,逐週累積)

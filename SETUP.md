@@ -129,7 +129,7 @@ git commit -m "what you changed"
 git push
 ```
 
-Netlify 30 秒後自動部署 → 在手機看 <https://buffetagent.netlify.app>
+Mac mini 會透過 Cloudflare Tunnel serve 最新 `simple-html/` → 在手機看 <https://buffetagent.shawny-project42.com>
 
 ---
 
@@ -165,9 +165,15 @@ python -m agent AAPL
 
 換時段重試。也可改抓特定 ticker 而非全 watchlist。
 
-### Netlify 沒重新部署
+### Mac mini 網站沒更新
 
-去 <https://app.netlify.com> 看 build log。多半是 push 沒成功 → `git status` 確認。
+先確認 local service 與 tunnel：
+
+```bash
+curl http://127.0.0.1:8087/api/health
+curl https://buffetagent.shawny-project42.com/api/health
+tail output/site.error.log
+```
 
 ### 完整 runbook
 
@@ -178,5 +184,6 @@ python -m agent AAPL
 ## 相關文件
 
 - `README.md` — 專案總覽
-- `DEPLOY.md` — 原始部署選項
+- `deploy/launchd/README.md` — Mac mini launchd + Cloudflare Tunnel 部署
+- `DEPLOY.md` — Mac mini / Cloudflare Tunnel 部署說明
 - Obsidian vault `30_Investment/Projects/buffetAgent/` — 完整專案文件

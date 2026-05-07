@@ -16,6 +16,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+
+from site_config import public_url  # noqa: E402
+
 LATEST_JSON = REPO_ROOT / "output" / "latest.json"
 ALERTS_JSON = REPO_ROOT / "output" / "alerts.json"
 WARROOM_DB = Path(
@@ -100,7 +104,7 @@ def format_lobby_message(scan: dict) -> str:
     if broken_theses:
         parts.append(f"💔 thesis broken: {', '.join(v['ticker'] for v in broken_theses[:5])}")
 
-    parts.append("→ scan: https://buffetagent.netlify.app/scan.html")
+    parts.append(f"→ scan: {public_url('scan.html')}")
     return "\n".join(parts)
 
 

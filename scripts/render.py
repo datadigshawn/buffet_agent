@@ -14,6 +14,7 @@ import argparse
 import os
 import re
 import shutil
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -21,6 +22,10 @@ import frontmatter
 import markdown as md_lib
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from site_config import public_url  # noqa: E402
+
 SRC = ROOT / "content"
 DEFAULT_DST = ROOT / "simple-html"
 SKIP_DIRS = {"05-模板"}
@@ -148,9 +153,9 @@ PAGE_TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
 <nav class="site-nav" aria-label="網站導覽">
-<a href="https://buffetagent.netlify.app/scan.html" title="📊 Scan 排行榜">📊</a>
-<a href="https://buffetagent.netlify.app/backtest.html" title="📈 回測報告">📈</a>
-<a href="https://buffetagent.netlify.app/index.html" aria-current="page" title="📚 巴菲特知識庫">📚</a>
+<a href="{scan_url}" title="📊 Scan 排行榜">📊</a>
+<a href="{backtest_url}" title="📈 回測報告">📈</a>
+<a href="{kb_url}" aria-current="page" title="📚 巴菲特知識庫">📚</a>
 <a href="https://war-room.shawny-project42.com/chat" target="_blank" rel="noopener"
   title="💬 戰情室 (新分頁開啟)">💬</a>
 </nav>
@@ -312,6 +317,9 @@ def render_page(page: Page, pages: list[Page], idx, backlinks) -> str:
         pwa=PWA_TAGS.format(prefix=prefix),
         title=page.title,
         css=CSS,
+        scan_url=public_url("scan.html"),
+        backtest_url=public_url("backtest.html"),
+        kb_url=public_url("index.html"),
         sidebar=sidebar_html(pages, page),
         breadcrumb=breadcrumb_html(page),
         body=html_body,
