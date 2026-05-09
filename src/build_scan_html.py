@@ -40,12 +40,17 @@ DEBUG_OUT_DIR = OUT_DIR / "debug-scan"
 DEBUG_JSON_OUT_DIR = JSON_OUT_DIR / "debug"
 WATCHLIST_JSON = ROOT / "config" / "watchlist.json"
 
-# stockTracker portfolio is the canonical watchlist source. Cross-repo import
-# (Mac mini layout). watchlist.json holds only buffetAgent's *own* additions:
-# Berkshire 13F core + validation反例.
+# stockTracker portfolio is the canonical watchlist source. Cross-repo import.
+# watchlist.json holds only buffetAgent's *own* additions: Berkshire 13F core + 反例.
+# 預設 ~/autobot/stockTracker，可由 STOCKTRACKER_PATH 環境變數覆蓋（搬家時免改 code）
+import os as _os
 import sys as _sys
-_STOCKTRACKER_SRC = Path("/Users/shawnclaw/autobot/stockTracker/src")
-if str(_STOCKTRACKER_SRC) not in _sys.path:
+_STOCKTRACKER_ROOT = Path(_os.environ.get(
+    "STOCKTRACKER_PATH",
+    str(Path.home() / "autobot" / "stockTracker"),
+))
+_STOCKTRACKER_SRC = _STOCKTRACKER_ROOT / "src"
+if _STOCKTRACKER_SRC.is_dir() and str(_STOCKTRACKER_SRC) not in _sys.path:
     _sys.path.insert(0, str(_STOCKTRACKER_SRC))
 try:
     from watchlist_export import load_portfolio_tickers as _load_stocktracker_tickers
