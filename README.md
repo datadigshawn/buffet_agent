@@ -66,7 +66,7 @@ buffet_agent/
 ├── scripts/                        🛠️ 知識庫渲染相關
 │   ├── render.py                   content/*.md → simple-html/*.html（含 wikilink 解析）
 │   ├── run_daily_scan_macmini.sh   Mac mini daily scan + war-room notify
-│   ├── run_weekly_backtest_macmini.sh
+│   ├── run_daily_backtest_macmini.sh
 │   ├── inject_pwa.py               一次性注入 PWA tags
 │   ├── inject_mobile_nav.py        一次性注入手機抽屜
 │   └── requirements.txt            markdown / python-frontmatter / gunicorn

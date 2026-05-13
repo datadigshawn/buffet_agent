@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Mac mini weekly Buffett backtest.
+# Mac mini daily Buffett backtest.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

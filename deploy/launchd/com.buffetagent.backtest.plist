@@ -15,16 +15,14 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/shawnclaw/autobot/agent/buffetAgent/scripts/run_weekly_backtest_macmini.sh</string>
+    <string>/Users/shawnclaw/autobot/investing/agent/buffetAgent/scripts/run_daily_backtest_macmini.sh</string>
   </array>
 
   <key>WorkingDirectory</key>
-  <string>/Users/shawnclaw/autobot/agent/buffetAgent</string>
+  <string>/Users/shawnclaw/autobot/investing/agent/buffetAgent</string>
 
   <key>StartCalendarInterval</key>
   <dict>
-    <key>Weekday</key>
-    <integer>1</integer>
     <key>Hour</key>
     <integer>7</integer>
     <key>Minute</key>
@@ -41,9 +39,9 @@
   </dict>
 
   <key>StandardOutPath</key>
-  <string>/Users/shawnclaw/autobot/agent/buffetAgent/output/backtest.launchd.log</string>
+  <string>/Users/shawnclaw/autobot/investing/agent/buffetAgent/output/backtest.launchd.log</string>
   <key>StandardErrorPath</key>
-  <string>/Users/shawnclaw/autobot/agent/buffetAgent/output/backtest.launchd.error.log</string>
+  <string>/Users/shawnclaw/autobot/investing/agent/buffetAgent/output/backtest.launchd.error.log</string>
 </dict>
 </plist>
 

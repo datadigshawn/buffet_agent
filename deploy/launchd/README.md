@@ -21,7 +21,7 @@
 ## 1. 準備 venv
 
 ```bash
-cd /Users/shawnclaw/autobot/agent/buffetAgent
+cd /Users/shawnclaw/autobot/investing/agent/buffetAgent
 [[ -d venv ]] || python3 -m venv venv
 ./venv/bin/pip install -q -r scripts/requirements.txt
 ```
@@ -39,7 +39,7 @@ SEC_USER_AGENT=buffetAgent contact@datadigshawn.local
 ## 2. 本機驗證
 
 ```bash
-cd /Users/shawnclaw/autobot/agent/buffetAgent
+cd /Users/shawnclaw/autobot/investing/agent/buffetAgent
 venv/bin/python app.py --host 127.0.0.1 --port 8087
 curl http://127.0.0.1:8087/api/health
 curl -I http://127.0.0.1:8087/manifest.webmanifest
@@ -48,8 +48,8 @@ curl -I http://127.0.0.1:8087/manifest.webmanifest
 ## 3. 安裝 launchd jobs
 
 ```bash
-cd /Users/shawnclaw/autobot/agent/buffetAgent
-chmod +x scripts/run_daily_scan_macmini.sh scripts/run_weekly_backtest_macmini.sh
+cd /Users/shawnclaw/autobot/investing/agent/buffetAgent
+chmod +x scripts/run_daily_scan_macmini.sh scripts/run_daily_backtest_macmini.sh
 
 cp deploy/launchd/com.buffetagent.site.plist ~/Library/LaunchAgents/
 cp deploy/launchd/com.buffetagent.scan.plist ~/Library/LaunchAgents/
@@ -93,9 +93,9 @@ launchctl kickstart -k gui/$(id -u)/com.buffetagent.backtest
 也可以不經 launchd：
 
 ```bash
-cd /Users/shawnclaw/autobot/agent/buffetAgent
+cd /Users/shawnclaw/autobot/investing/agent/buffetAgent
 scripts/run_daily_scan_macmini.sh
-scripts/run_weekly_backtest_macmini.sh
+scripts/run_daily_backtest_macmini.sh
 ```
 
 ## 6. 停用舊 notify-only job
@@ -122,6 +122,6 @@ tail -f output/backtest.launchd.error.log
 確認 war-room lobby：
 
 ```bash
-sqlite3 /Users/shawnclaw/autobot/war-room/data/war-room.db \
+sqlite3 /Users/shawnclaw/autobot/investing/war-room/data/war-room.db \
   "SELECT created_at, role, substr(content,1,100) FROM lobby WHERE role LIKE 'buffett%' ORDER BY id DESC LIMIT 5;"
 ```
