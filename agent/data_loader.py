@@ -34,14 +34,11 @@ YF_BACKOFF_BASE = float(os.environ.get("BUFFET_YF_BACKOFF", "2.0"))
 def _default_stocktracker_data() -> Path:
     """偵測本機 stockTracker data 目錄。
 
-    優先序:
-      1. ~/autobot/stockTracker/data (本機 autobot 佈局)
-      2. ~/Projects/stockTracker/data (legacy 佈局)
-    都不存在就回前者,後續 .exists() 會判 false → fallback 到 yfinance。
+    2026-05-10 autobot reorg 後固定位置: ~/autobot/investing/stocks/stockTracker/data
+    不存在則 .exists() 判 false,後續 fallback 到 yfinance。
     """
     candidates = [
-        Path.home() / "autobot" / "stockTracker" / "data",
-        Path.home() / "Projects" / "stockTracker" / "data",
+        Path.home() / "autobot" / "investing" / "stocks" / "stockTracker" / "data",
     ]
     for p in candidates:
         if p.exists():
@@ -55,7 +52,9 @@ STOCKTRACKER_DATA = Path(
         str(_default_stocktracker_data()),
     )
 )
-CSV_PATH = STOCKTRACKER_DATA / "latest_prices.csv"
+# 2026-07-12 起改讀 prices_shared.csv：stockTracker 轉多人架構後 latest_prices.csv
+# 成孤兒檔（停在 6/14），排程實際寫的是 prices_shared.csv（估值欄位相同）
+CSV_PATH = STOCKTRACKER_DATA / "prices_shared.csv"
 F13F_PATH = STOCKTRACKER_DATA / "funds_13f.json"
 
 # 行業黑名單(D3 能力圈外) — sector 級別
