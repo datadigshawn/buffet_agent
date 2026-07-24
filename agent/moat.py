@@ -53,6 +53,11 @@ class MoatProfile:
     dominant_types: list[str] = field(default_factory=list)   # top 2
     trend: str = "stable"                 # widening / stable / narrowing
     trend_evidence: list[str] = field(default_factory=list)
+    # P6: franchise/EPV 財務驗證 (Greenwald: 只有 ROIC > 資本成本的部分是特許經營價值)
+    franchise_signal: str = "unknown"     # verified / stable / eroding / destroying / unknown
+    franchise_evidence: list[str] = field(default_factory=list)
+    epv_ic_ratio: float | None = None     # 最新一年 真ROIC/coc;>1 有特許經營價值
+    roic_true_5y: float | None = None     # 影子指標 (A/B 對比 B2 的 ROE 粗算)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -62,6 +67,10 @@ class MoatProfile:
             "dominant_types": self.dominant_types,
             "trend": self.trend,
             "trend_evidence": self.trend_evidence,
+            "franchise_signal": self.franchise_signal,
+            "franchise_evidence": self.franchise_evidence,
+            "epv_ic_ratio": round(self.epv_ic_ratio, 2) if self.epv_ic_ratio is not None else None,
+            "roic_true_5y": round(self.roic_true_5y, 4) if self.roic_true_5y is not None else None,
         }
 
 
@@ -283,6 +292,52 @@ def analyze_trend(facts: dict | None) -> tuple[str, list[str]]:
     return "stable", evidence
 
 
+def analyze_franchise(facts: dict | None, coc: float = 0.10) -> tuple[str, list[str], float | None, float | None]:
+    """P6: EPV/投入資本的財務驗證 (借鑑 Greenwald 三要素法)。
+
+    ratio = 真ROIC / coc = (NOPAT/coc) / IC = EPV企業價值 ÷ 投入資本。
+    >1 → 有特許經營價值;<1 → 資本回報低於資本成本 (毀滅價值)。
+    重點看**多年趨勢**:單年高多是景氣;比值持續下滑 + IC 膨脹 = 資本堆積回報未現 (ORCL 型)。
+
+    回傳 (signal, evidence, latest_ratio, roic_true_5y):
+      verified   — ratio ≥ 2 且近 5 年穩定 (max/min < 2)
+      stable     — ratio ≥ 1,無明顯惡化
+      eroding    — ratio 3 年降幅 ≥ 40%
+      destroying — 最新 ratio < 1
+      unknown    — 資料不足
+    """
+    if not facts:
+        return "unknown", ["缺 SEC 資料"], None, None
+    series = sec_metrics.roic_true_series(facts)
+    if len(series) < 3:
+        return "unknown", [f"真 ROIC 年度資料不足 ({len(series)} 年,需 ≥ 3)"], None, None
+
+    ratios = [(y, r / coc) for y, r in series]
+    latest_y, latest = ratios[-1]
+    roic_5y = sec_metrics.roic_true_5y_avg(facts)
+    evidence = [
+        f"EPV/投入資本 (真ROIC/{coc:.0%}) 最新 FY{latest_y}: {latest:.2f}x",
+        "近年序列: " + ", ".join(f"FY{y} {v:.2f}x" for y, v in ratios[-5:]),
+    ]
+
+    if latest < 1.0:
+        evidence.append("最新比值 < 1 → 資本回報低於資本成本,增長在毀滅價值")
+        return "destroying", evidence, latest, roic_5y
+
+    if len(ratios) >= 4:
+        three_ago = ratios[-4][1]
+        if three_ago > 0 and (latest - three_ago) / three_ago <= -0.40:
+            evidence.append(f"3 年降幅 {((latest - three_ago) / three_ago):.0%} → 資本堆積但回報未現")
+            return "eroding", evidence, latest, roic_5y
+
+    recent5 = [v for _, v in ratios[-5:]]
+    if latest >= 2.0 and len(recent5) >= 5 and min(recent5) > 0 and max(recent5) / min(recent5) < 2.0:
+        evidence.append("比值 ≥ 2 且多年穩定 → 特許經營價值獲財務驗證")
+        return "verified", evidence, latest, roic_5y
+
+    return "stable", evidence, latest, roic_5y
+
+
 # ---------- 整合 ----------
 
 def evaluate(td_data: dict, facts: dict | None = None) -> MoatProfile:
@@ -318,6 +373,12 @@ def evaluate(td_data: dict, facts: dict | None = None) -> MoatProfile:
 
     trend, evidence = analyze_trend(facts)
 
+    # P6: franchise 財務驗證;destroying 時把 trend 壓到 narrowing (定量否決定性)
+    fr_signal, fr_evidence, epv_ratio, roic_true = analyze_franchise(facts)
+    if fr_signal == "destroying" and trend != "narrowing":
+        trend = "narrowing"
+        evidence.append("(franchise 驗證 destroying → trend 下修為 narrowing)")
+
     return MoatProfile(
         components=components,
         overall_score=overall_score,
@@ -325,4 +386,8 @@ def evaluate(td_data: dict, facts: dict | None = None) -> MoatProfile:
         dominant_types=dominant,
         trend=trend,
         trend_evidence=evidence,
+        franchise_signal=fr_signal,
+        franchise_evidence=fr_evidence,
+        epv_ic_ratio=epv_ratio,
+        roic_true_5y=roic_true,
     )

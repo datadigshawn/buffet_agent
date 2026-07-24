@@ -168,6 +168,122 @@ def roic_5y_avg(facts_json: dict, n: int = 5) -> float | None:
     return _avg(rocs)
 
 
+# ---------- P6: franchise/EPV 專用抽取器 ----------
+# 不共用 _annual_series:companyfacts 的 fy/fp 是「申報期」不是「事實所屬期」
+# (FY2026 10-K 的 FY2024/25 比較期資料全標 fy=2026, fp=FY),且 get_concept_units
+# 的 first-match 在公司中途換 tag 時會斷代。此處按事實的 end 日期鍵定年份、
+# 跨別名逐年合併,並可用後期申報的比較期資料回填缺年。B2/R5 沿用舊路徑不受影響。
+
+_P6_TAGS: dict[str, list[str]] = {
+    "op_income": ["OperatingIncomeLoss"],
+    "income_tax": ["IncomeTaxExpenseBenefit"],
+    "net_income": ["NetIncomeLoss"],
+    "equity": [
+        "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+        "StockholdersEquity",
+    ],
+    "lt_debt": [
+        "LongTermDebt", "LongTermDebtNoncurrent", "LongTermNotesPayable",
+        # ASU 租賃準則後部分公司 (KO FY2025+) 改用含租賃義務的合併 tag
+        "LongTermDebtAndCapitalLeaseObligations",
+    ],
+    "st_debt": [
+        "DebtCurrent", "NotesPayableCurrent", "LongTermDebtCurrent",
+        "LongTermDebtAndCapitalLeaseObligationsCurrent", "ShortTermBorrowings",
+    ],
+    "cash": ["CashAndCashEquivalentsAtCarryingValue"],
+}
+
+
+def _series_by_end(facts_json: dict, tags: list[str], flow: bool) -> dict[int, float]:
+    """{end年: value}。flow=True 要求 duration ≈ 1 年;False 取 instant (無 start)。
+
+    同年多筆取 filed 最新;跨 tag 依 tags 順序,後面的 tag 只回填缺年。
+    instant (資產負債表) 限 10-K 系 form,擋掉 10-Q 季末餘額按 end 年混入。
+    """
+    from datetime import date
+    gaap = (facts_json or {}).get("facts", {}).get("us-gaap", {})
+    out: dict[int, tuple[str, float]] = {}   # year -> (filed, val)
+    for rank, tag in enumerate(tags):
+        units = gaap.get(tag, {}).get("units", {})
+        for f in units.get("USD", []):
+            start, end = f.get("start"), f.get("end")
+            if not end or f.get("val") is None:
+                continue
+            if flow:
+                if not start:
+                    continue
+                try:
+                    dur = (date.fromisoformat(end) - date.fromisoformat(start)).days
+                except ValueError:
+                    continue
+                if not 330 <= dur <= 380:
+                    continue
+            else:
+                if start:
+                    continue
+                if not (f.get("form") or "").startswith("10-K"):
+                    continue
+            year = int(end[:4])
+            filed = f.get("filed") or ""
+            prior = out.get(year)
+            # 首選 tag 覆蓋一切;次選 tag 只補缺年
+            if prior is None or (rank == 0 and filed > prior[0]):
+                if prior is not None and rank > 0:
+                    continue
+                out[year] = (filed, float(f["val"]))
+    return {y: v for y, (_, v) in out.items()}
+
+
+def roic_true_series(facts_json: dict, n: int = 8) -> list[tuple[int, float]]:
+    """真 ROIC 年度序列:NOPAT / 投入資本。與 B2 的 ROE 粗算並行 (A/B 對比用)。
+
+    NOPAT_t = OperatingIncome_t × (1 − 有效稅率_t)
+      有效稅率 = IncomeTax / (NetIncome + IncomeTax),夾在 [0, 0.35];缺項用 0.21。
+      缺 OperatingIncome 的年份跳過 (不退回 NetIncome,避免混口徑)。
+    IC_t = TotalEquity_t + LongTermDebt_t + ShortTermDebt_t − Cash_t
+      短債/現金缺項視為 0;IC ≤ 0 的年份跳過 (回購扭曲權益時 ROE 無意義,這正是本口徑的價值)。
+    """
+    op = _series_by_end(facts_json, _P6_TAGS["op_income"], flow=True)
+    if not op:
+        return []
+    tax = _series_by_end(facts_json, _P6_TAGS["income_tax"], flow=True)
+    ni = _series_by_end(facts_json, _P6_TAGS["net_income"], flow=True)
+    eq = _series_by_end(facts_json, _P6_TAGS["equity"], flow=False)
+    ltd = _series_by_end(facts_json, _P6_TAGS["lt_debt"], flow=False)
+    std = _series_by_end(facts_json, _P6_TAGS["st_debt"], flow=False)
+    cash = _series_by_end(facts_json, _P6_TAGS["cash"], flow=False)
+    out: list[tuple[int, float]] = []
+    for y in sorted(op):
+        if y not in eq:
+            continue
+        # 覆蓋斷裂防呆:前一年有債務資料、今年兩者皆缺 → 多半是公司換 tag,
+        # 算出來的 IC 會低估、ROIC 虛高,寧缺勿錯 (KO FY2025 換租賃合併 tag 即此型)。
+        if ltd.get(y) is None and std.get(y) is None and (
+            ltd.get(y - 1) is not None or std.get(y - 1) is not None
+        ):
+            continue
+        t, n_i = tax.get(y), ni.get(y)
+        if t is not None and n_i is not None and (n_i + t) > 0:
+            rate = min(max(t / (n_i + t), 0.0), 0.35)
+        else:
+            rate = 0.21
+        nopat = op[y] * (1 - rate)
+        ic = eq[y] + ltd.get(y, 0.0) + std.get(y, 0.0) - cash.get(y, 0.0)
+        if ic <= 0:
+            continue
+        out.append((y, nopat / ic))
+    return out[-n:]
+
+
+def roic_true_5y_avg(facts_json: dict, n: int = 5) -> float | None:
+    """影子指標:真 ROIC 近 N 年平均。落檔進 latest.json 供日後 A/B 對比回測。"""
+    series = roic_true_series(facts_json)
+    if not series:
+        return None
+    return _avg([v for _, v in series[-n:]])
+
+
 def dividend_growth_streak(facts_json: dict) -> int:
     """B5:CommonStockDividendsPerShareDeclared 連續成長年數 (從最新往回看)。"""
     series = _annual_series(facts_json, "DividendsPerShare", unit_pref=("USD/shares",))
