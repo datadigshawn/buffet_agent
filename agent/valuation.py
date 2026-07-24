@@ -70,6 +70,12 @@ class EnsembleValuation:
     mos_high: float | None = None     # 最樂觀 (用 high intrinsic)
     consensus: str = "uncertain"      # very_cheap / cheap / fair / expensive / very_expensive / uncertain
     method_count: int = 0
+    # P6-D: 預註冊標定 (借鑑 equity-research skill valuation-methods.md §8)
+    # 與 consensus 不同軸:consensus 看 mos_mid 單點,標定看現價落在 [low, high] 區間
+    # 的哪一帶 (±15% 緩衝帶承認區間本身不精確),並疊上不確定性等級映射動作。
+    calibration_label: str | None = None   # significantly_undervalued/undervalued/fair/overvalued/significantly_overvalued
+    uncertainty_tier: str | None = None    # low_mid / high (method_count 與區間離散度自評)
+    suggested_action: str | None = None    # buy / accumulate / trial_or_wait / watch / reduce_or_avoid / avoid
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -82,6 +88,9 @@ class EnsembleValuation:
             "mos_high": _round(self.mos_high, 4),
             "consensus": self.consensus,
             "method_count": self.method_count,
+            "calibration_label": self.calibration_label,
+            "uncertainty_tier": self.uncertainty_tier,
+            "suggested_action": self.suggested_action,
             "contributors": [c.to_dict() for c in self.contributors],
         }
 
@@ -242,6 +251,45 @@ def _classify_consensus(mos_mid: float | None) -> str:
     return "very_expensive"
 
 
+# ---------- P6-D: 預註冊標定規則 (兩次跑同樣數字必得同樣標籤,不許臨場發揮) ----------
+
+def calibrate_label(price: float, lo: float, hi: float) -> str:
+    """現價 P vs 區間 [L, H],±15% 緩衝帶。"""
+    if price < lo * 0.50:
+        return "significantly_undervalued"
+    if price < lo * 0.85:
+        return "undervalued"
+    if price <= hi * 1.15:
+        return "fair"
+    if price <= hi * 1.50:
+        return "overvalued"
+    return "significantly_overvalued"
+
+
+# 動作矩陣:標籤 × 不確定性 → 動作。治理否決項不在此層 (verdict 的 disqualifier 已處理)。
+_ACTION_MATRIX: dict[tuple[str, str], str] = {
+    ("significantly_undervalued", "low_mid"): "buy",
+    ("significantly_undervalued", "high"): "accumulate",   # 且 P<0.70L 才首建,由使用端把關
+    ("undervalued", "low_mid"): "buy",
+    ("undervalued", "high"): "trial_or_wait",
+    ("fair", "low_mid"): "watch",
+    ("fair", "high"): "watch",
+    ("overvalued", "low_mid"): "reduce_or_avoid",
+    ("overvalued", "high"): "avoid",
+    ("significantly_overvalued", "low_mid"): "avoid",
+    ("significantly_overvalued", "high"): "avoid",
+}
+
+
+def _uncertainty_tier(method_count: int, lo: float | None, hi: float | None) -> str:
+    """自評不確定性:方法數不足或區間離散度大 → high。"""
+    if method_count < 2:
+        return "high"
+    if lo and hi and lo > 0 and hi / lo > 2.5:
+        return "high"
+    return "low_mid"
+
+
 def estimate(
     ticker: str,
     current_price: float | None,
@@ -296,4 +344,13 @@ def estimate(
             out.mos_high = (out.intrinsic_high - current_price) / out.intrinsic_high
 
     out.consensus = _classify_consensus(out.mos_mid)
+
+    # P6-D: 標定 + 動作 (需要現價與有效區間)
+    if current_price and current_price > 0 and out.intrinsic_low and out.intrinsic_high \
+            and out.intrinsic_low > 0:
+        out.calibration_label = calibrate_label(
+            current_price, out.intrinsic_low, out.intrinsic_high)
+        out.uncertainty_tier = _uncertainty_tier(
+            out.method_count, out.intrinsic_low, out.intrinsic_high)
+        out.suggested_action = _ACTION_MATRIX[(out.calibration_label, out.uncertainty_tier)]
     return out
