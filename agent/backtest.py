@@ -21,6 +21,7 @@
 """
 from __future__ import annotations
 
+import datetime as _dt
 import json
 import logging
 import os
@@ -258,29 +259,31 @@ def aggregate(scan_results: list[ScanBacktest]) -> RollingSummary:
     if hit_30:
         summary.avg_hit_rate_30d = round(statistics.mean(hit_30), 4)
 
-    # Regression detection: 取最近 N 週 1m alpha
-    sorted_by_date = sorted(
-        scan_results, key=lambda s: s.scan_date, reverse=True,
-    )
-    recent_alpha_30 = []
-    for s in sorted_by_date:
+    # Regression detection:按「ISO 週」分組取週平均 30d alpha。
+    # 2026-08-03 修(同日 rayAgent 同款修法):原版取「最近 3 筆掃描」——週度設計,
+    # 2026-05-13 改每日掃描後 3 筆=3 個相鄰交易日(30d 窗口重疊 ~93%),同段行情
+    # 數三次即誤報「連 3 週」。現以最近 REGRESSION_LOOKBACK_WEEKS 個「有成熟資料
+    # 的 ISO 週」週平均皆 < 閾值才觸發。
+    weekly: dict[str, list[float]] = {}
+    for s in scan_results:
         if 30 in s.horizons and s.horizons[30].alpha is not None:
-            recent_alpha_30.append(s.horizons[30].alpha)
-        if len(recent_alpha_30) >= REGRESSION_LOOKBACK_WEEKS:
-            break
-    if len(recent_alpha_30) >= REGRESSION_LOOKBACK_WEEKS:
+            y, w, _ = _dt.date.fromisoformat(s.scan_date).isocalendar()
+            weekly.setdefault(f"{y}-W{w:02d}", []).append(s.horizons[30].alpha)
+    week_means = [(wk, statistics.mean(v)) for wk, v in sorted(weekly.items(), reverse=True)]
+    if len(week_means) >= REGRESSION_LOOKBACK_WEEKS:
         consec = 0
-        for a in recent_alpha_30:
-            if a < REGRESSION_ALPHA_THRESHOLD:
+        for _, mean_a in week_means:
+            if mean_a < REGRESSION_ALPHA_THRESHOLD:
                 consec += 1
             else:
                 break
         summary.consecutive_underperforming_weeks = consec
         if consec >= REGRESSION_LOOKBACK_WEEKS:
             summary.regression_alert = True
+            worst = ", ".join(f"{wk} {a*100:+.1f}%" for wk, a in week_means[:consec])
             summary.note = (
-                f"⚠️ Regression alert:近 {consec} 週 30 天 alpha 連續 < "
-                f"{REGRESSION_ALPHA_THRESHOLD*100:.0f}%,需要檢視 rules.json"
+                f"⚠️ Regression alert:近 {consec} 週的週平均 30 天 alpha 連續 < "
+                f"{REGRESSION_ALPHA_THRESHOLD*100:.0f}% ({worst}),需要檢視 rules.json"
             )
 
     return summary
