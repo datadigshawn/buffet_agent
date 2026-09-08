@@ -1,67 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-  <key>Label</key>
-  <string>com.buffetagent.site</string>
-
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>PATH</key>
-    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
-    <key>BUFFET_PUBLIC_BASE_URL</key>
-    <string>https://buffetagent.shawny-project42.com</string>
-  </dict>
-
-  <key>ProgramArguments</key>
-  <array>
-    <string>/Users/shawnclaw/autobot/agent/buffetAgent/venv/bin/gunicorn</string>
-    <string>--bind</string>
-    <string>127.0.0.1:8087</string>
-    <string>--workers</string>
-    <string>1</string>
-    <string>--threads</string>
-    <string>4</string>
-    <string>--timeout</string>
-    <string>120</string>
-    <string>--graceful-timeout</string>
-    <string>30</string>
-    <string>--access-logfile</string>
-    <string>-</string>
-    <string>--error-logfile</string>
-    <string>-</string>
-    <string>--chdir</string>
-    <string>/Users/shawnclaw/autobot/agent/buffetAgent</string>
-    <string>app:app</string>
-  </array>
-
-  <key>WorkingDirectory</key>
-  <string>/Users/shawnclaw/autobot/agent/buffetAgent</string>
-
-  <key>RunAtLoad</key>
-  <true/>
-
-  <key>KeepAlive</key>
-  <true/>
-
-  <key>ThrottleInterval</key>
-  <integer>10</integer>
-
-  <key>SoftResourceLimits</key>
-  <dict>
-    <key>NumberOfFiles</key>
-    <integer>4096</integer>
-  </dict>
-  <key>HardResourceLimits</key>
-  <dict>
-    <key>NumberOfFiles</key>
-    <integer>8192</integer>
-  </dict>
-
-  <key>StandardOutPath</key>
-  <string>/Users/shawnclaw/autobot/agent/buffetAgent/output/site.log</string>
-  <key>StandardErrorPath</key>
-  <string>/Users/shawnclaw/autobot/agent/buffetAgent/output/site.error.log</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>BUFFET_PUBLIC_BASE_URL</key>
+		<string>https://buffetagent.shawny-project42.com</string>
+		<key>PATH</key>
+		<string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+	</dict>
+	<key>HardResourceLimits</key>
+	<dict>
+		<key>NumberOfFiles</key>
+		<integer>8192</integer>
+	</dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>com.buffetagent.site</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Users/shawnclaw/autobot/investing/agent/buffetAgent/venv/bin/gunicorn</string>
+		<string>--bind</string>
+		<string>127.0.0.1:8087</string>
+		<string>--workers</string>
+		<string>1</string>
+		<string>--threads</string>
+		<string>4</string>
+		<string>--timeout</string>
+		<string>120</string>
+		<string>--graceful-timeout</string>
+		<string>30</string>
+		<string>--access-logfile</string>
+		<string>-</string>
+		<string>--error-logfile</string>
+		<string>-</string>
+		<string>--chdir</string>
+		<string>/Users/shawnclaw/autobot/investing/agent/buffetAgent</string>
+		<string>app:app</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>SoftResourceLimits</key>
+	<dict>
+		<key>NumberOfFiles</key>
+		<integer>4096</integer>
+	</dict>
+	<key>StandardErrorPath</key>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.buffetagent.site.err.log</string>
+	<key>StandardOutPath</key>
+	<string>/Users/shawnclaw/Library/Logs/autobot/com.buffetagent.site.out.log</string>
+	<key>ThrottleInterval</key>
+	<integer>10</integer>
+	<key>WorkingDirectory</key>
+	<string>/Users/shawnclaw/autobot/investing/agent/buffetAgent</string>
 </dict>
 </plist>
